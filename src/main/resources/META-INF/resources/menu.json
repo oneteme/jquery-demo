@@ -1,0 +1,397 @@
+[
+	{
+		"title": "Getting started",
+		"items":[
+			{
+				"title":"Setup JQuery in your project",
+				"tutorial":"setup.md"
+			}
+		]
+	},
+	{
+		"title": "SELECT",
+		"view": "customers",
+		"column": "customer,contact,postal_code",
+		"filter": "",
+		"definition": "To fetch certain columns in JQuery all you need is to write down the columns you need seperated by a ','",
+		"syntax": "column1,column2,column3,..."
+	},
+	{
+		"title": "GROUP BY",
+		"view": "customers",
+		"column": "id.count:COUNT,country",
+		"filter": "",
+		"definition": "GROUP BY: A SQL clause that groups rows in a database table based on one or more columns, allowing for the aggregation of data (e.g., summing, counting, or averaging) within each group. For example, if you have a sales database and want to find the total sales per region, you would use GROUP BY to group the sales data by region and then calculate the total for each group.",
+		"syntax": "Aggregate(ex : sum,count,avg,...),col1,col2"
+	},
+	{
+		"title": "HAVING",
+		"view": "customers",
+		"column": "id.count:COUNT,country",
+		"filter": "COUNT.gt=5",
+		"definition": "The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.",
+		"syntax": "Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
+	},
+	{
+		"title": "JOIN",
+		"view": "orders",
+		"column": "order.id,customer.customer,order.start",
+		"filter": "order.customer_id=customer.id",
+		"definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
+		"syntax": "table1.col1,table1.col2,table2.col1&table1.table2ID=table2.id",
+		"tutorial":"test.md",
+		"items":[
+			{
+				"title": "INNER JOIN",
+				"view": "orders",
+				"filter": "join=\"customer\"",
+				"tutorial":"inner_join.md"
+			}
+		]
+	},
+	{
+		"title": "AS",
+		"view": "customers",
+		"column": "id:ID,customer:CustomerName",
+		"definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
+		"syntax": "col:new_col_name"
+	},
+	{
+		"title": "LIMIT",
+		"view": "customers",
+		"filter":"limit=5",
+		"definition": "The LIMIT clause is to be used in an SQL query to specify the maximum number of results that one wishes to obtain. This clause is often associated with an OFFSET, that is to say to perform an offset on the result set. These 2 clauses allow for example to carry out pagination systems (example: retrieve the 10 articles of page 4).",
+		"syntax": "&limit=number"
+	},
+	{
+		"title": "ORDER",
+		"view": "products",
+		"filter":"order=price.asc",
+		"column": "price",
+		"definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
+		"syntax": "&order=column.ASC/DESC By default it's ASC"
+	},
+	{
+		"title": "Functions",
+		"items": [
+			{
+				"title": "DATE",
+				"items": 
+				[
+					{
+						"title": "Year",
+						"view": "employees",
+						"column": "start,start.year:Year",
+						"definition": "Extract the year from the date",
+						"syntax": "column.year"
+					},
+					{
+						"title": "Month",
+						"view": "employees",
+						"column": "start,start.month:Month",
+						"definition": "Extract the month from the date",
+						"syntax": "column.month"
+					},
+					{
+						"title": "Day",
+						"view": "employees",
+						"column": "start,start.day:Day",
+						"definition": "Extract the day from the date",
+						"syntax": "column.day"
+					},
+					{
+						"title": "YearMonth",
+						"view": "employees",
+						"column": "start,start.yearMonth:yearMonth",
+						"definition": "Extract the yearMonth from the date YYYY-MM",
+						"syntax": "column.yearMonth"
+					},
+					{
+						"title": "MonthDay",
+						"view": "employees",
+						"column": "start,start.monthDay:monthDay",
+						"definition": "Extract the monthDay from the date MM-DD",
+						"syntax": "column.monthDay"
+					},
+					{
+						"title": "Timestamp",
+						"view": "employees",
+						"column": "ctimestamp:CurrentTimestamp",
+						"definition": "Get the current timestamp",
+						"syntax": "ctimestamp"
+					}
+				]
+			},
+			{
+				"title": "CAST",
+				"items": [
+					{
+						"title": "VARCHAR",
+						"view": "products",
+						"column": "price,price.varchar(2):PriceToVarchar",
+						"definition": "Changes column type to VARCHAR",
+						"syntax": "column.varchar(size)"
+					},
+					{
+						"title": "DATE",
+						"view": "orders",
+						"column": "ctimestamp.date:TimestampToDate",
+						"definition": "Converts column type to DATE (column should be of type timestamp)",
+						"syntax": "column.date"
+					},
+					{
+						"title": "INTEGER",
+						"view": "products",
+						"column": "price,price.integer:PriceToInteger",
+						"definition": "Converts column type to INTEGER",
+						"syntax": "column.integer"
+					}
+				]
+			},
+			{
+				"title": "Aggregate",
+				"items": [
+					{
+						"title": "AVG",
+						"view": "products",
+						"column": "price.avg:avg",
+						"filter": "",
+						"definition": "The AVG() function returns the average value of a numeric column.",
+						"syntax": "column1,column2,column3,..."
+					},
+					{
+						"title": "COUNT",
+						"view": "products",
+						"column": "id.count:COUNT",
+						"filter": "",
+						"definition": "The COUNT() function returns the number of rows that matches a specified criterion.",
+						"syntax": "column.count"
+					},
+					{
+						"title": "SUM",
+						"view": "details",
+						"column": "quantity.sum:SUM",
+						"filter": "",
+						"definition": "The SUM() function returns the total sum of a numeric column.",
+						"syntax": "column.sum"
+					},
+					{
+						"title": "MIN",
+						"view": "products",
+						"column": "price.min:SmallestPrice",
+						"filter": "",
+						"definition": "The MIN() function returns the smallest value of the selected column",
+						"syntax": "column.min"
+					},
+					{
+						"title": "MAX",
+						"view": "products",
+						"column": "price.max:LargestPrice",
+						"filter": "",
+						"definition": "The MAX() function returns the largest value of the selected column.",
+						"syntax": "column.max"
+					}
+				]
+			},
+			{
+				"title": "Numeric",
+				"items": [
+					{
+						"title": "Truncate",
+						"view": "products",
+						"column": "price:ActualPrice,price.trunc:TruncatedPrice",
+						"filter": "",
+						"definition": "Truncates a number to a specified number of decimal places without rounding.",
+						"syntax": "column.trunc"
+					},
+					{
+						"title": "ABS",
+						"view": "products",
+						"column": "price.abs:ABS",
+						"filter": "",
+						"definition": "ABS(): Returns the absolute value of a number.",
+						"syntax": "column.abs"
+					},
+					{
+						"title": "Ceiling",
+						"view": "products",
+						"column": "price:ActualPrice,price.ceil:CeiledPrice",
+						"filter": "",
+						"definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
+						"syntax": "column.ceil"
+					},
+					{
+						"title": "Floor",
+						"view": "products",
+						"column": "price:ActualPrice,price.floor:FlooredPrice",
+						"filter": "",
+						"definition": "FLOOR(): Rounds a number down to the nearest integer",
+						"syntax": "column.floor"
+					},
+					{
+						"title": "SQRT(Square root)",
+						"view": "products",
+						"column": "price:ActualPrice,price.sqrt:SqrtPrice",
+						"filter": "",
+						"definition": "SQRT(): Returns the square root of a number",
+						"syntax": "column.sqrt"
+					},
+
+					{
+						"title": "MOD",
+						"view": "products",
+						"column": "price,price.mod(10):MODPrice",
+						"filter": "",
+						"definition": "MOD(): Returns the remainder of a division operation",
+						"syntax": "column.mod(value)"
+					}
+				]
+			},
+			{
+				"title": "String",
+				"items": [
+					{
+						"title": "Length",
+						"view": "customers",
+						"column": "customer,customer.length:NbrOfCharacters",
+						"filter": "",
+						"definition": "Returns the length of a string",
+						"syntax": "column.length"
+					},
+					{
+						"title": "UpperCase",
+						"view": "customers",
+						"column": "customer,customer.upper:UpperCaseCustomer",
+						"filter": "",
+						"definition": "UPPER(): Converts a string to uppercase.",
+						"syntax": "column.upper / upper(text)"
+					},
+					{
+						"title": "LowerCase",
+						"view": "customers",
+						"column": "customer,customer.lower:LowerCaseCustomer",
+						"filter": "",
+						"definition": "LOWER(): Converts a string to lowercase.",
+						"syntax": "column.lower / lower(text)"
+					},
+					{
+						"title": "LEFT",
+						"view": "customers",
+						"column": "country,country.left(3):Left,count:COUNT",
+						"filter": "",
+						"definition": "In SQL, the LEFT() function returns the desired number of characters from the first characters of a string. This function will voluntarily truncate the input text to the desired length.",
+						"syntax": "column.left(number) / left(text,number)"
+					},
+					{
+						"title": "RIGHT",
+						"view": "customers",
+						"column": "country,country.right(3):Right,count:COUNT",
+						"filter": "",
+						"definition": "In SQL language, the RIGHT() function allows you to extract the end of a string by defining the desired length. The function allows you to truncate a string starting from the end, by the desired number of characters.",
+						"syntax": "column.right(number) / right(text,number)"
+					},
+					{
+						"title": "SubString",
+						"view": "customers",
+						"column": "customer,customer.substring(0,4):FirstFourCharacters",
+						"filter": "",
+						"definition": "SUBSTRING(): Extracts a substring from a string.",
+						"syntax": "column.substring(start,end)"
+					},
+					{
+						"title": "Trim",
+						"view": "customers",
+						"column": "trim(\"            HELLO                             WORLD                       \"):trim",
+						"filter": "",
+						"definition": "In SQL language, the TRIM() function allows you to remove characters at the beginning and end of a string. Most often, the TRIM() function allows you to remove invisible characters, i.e. characters such as space, tab, line break or even carriage return. Such a function can be useful to save space in a database or to display data properly.",
+						"syntax": "column.trim() / trim(text)"
+					},
+					{
+						"title": "LTrim",
+						"view": "customers",
+						"column": "ltrim(\"            HELLO                             WORLD                       \"):ltrim",
+						"filter": "",
+						"definition": "In SQL, the LTRIM() function is used to remove characters from the beginning of a string. The most common use of LTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
+						"syntax": "column.ltrim() / ltrim(text)"
+					}
+				]
+			}
+		]
+	},
+	{
+		"title": "Comparators",
+		"items": [
+			{
+				"title": "equal (=)",
+				"view": "products",
+				"filter": "price=18",
+				"definition": "column is equal to value.",
+				"syntax": "column=value"
+			},
+			{
+				"title": "Greater Than (>)",
+				"view": "products",
+				"filter": "price.gt=30",
+				"definition": "column is greater than value",
+				"syntax": "column.gt=value"
+			},
+			{
+				"title": "Lower Than (<)",
+				"view": "products",
+				"filter": "price.lt=30",
+				"definition": "column is lower than value",
+				"syntax": "column.lt=value"
+			},
+			{
+				"title": "Greater equal (>=)",
+				"view": "products",
+				"filter": "price.ge=30",
+				"definition": "column is greater or equal to value",
+				"syntax": "column.ge=value"
+			},
+			{
+				"title": "Lower equal (<=)",
+				"view": "products",
+				"filter": "price.le=30",
+				"definition": "column is lower or equal to value",
+				"syntax": "column.le=value"
+			},
+			{
+				"title": "Not equal (<>)",
+				"view": "products",
+				"filter": "price.not=30",
+				"definition": "column is not equal to value",
+				"syntax": "column.not=value"
+			},
+			{
+				"title": "Lower Than (<)",
+				"view": "products",
+				"filter": "price.lt=30",
+				"definition": "column is lower than value",
+				"syntax": "column.lt=value"
+			},
+			{
+				"title": "IN",
+				"view": "products",
+				"filter": "price=10,20,30",
+				"definition": "TRUE if the operand is equal to any value in a list of expressions",
+				"syntax": "column=val1,val2,val3,..."
+			},
+			{
+				"title": "Not IN",
+				"view": "products",
+				"filter": "price.not=10,20,30",
+				"definition": "TRUE if the operand is not equal to any value in a list of expressions",
+				"syntax": "column.not=val1,val2,val3,..."
+			},
+			{
+				"title": "LIKE",
+				"view": "customers",
+				"column": "customer,contact,address,city,postal_code,country",
+				"filter": "customer.like=a%",
+				"definition": "LIKE: A SQL operator used to search for a specified pattern within a column. It supports wildcard characters to facilitate pattern matching<br><br>For example:<br><br>SELECT * FROM employees WHERE name LIKE 'J%';<br>This would find all employees whose names start with the letter 'J'.",
+				"syntax": "col1,col2&col2.like=a%"
+			}
+		]
+	}
+]
