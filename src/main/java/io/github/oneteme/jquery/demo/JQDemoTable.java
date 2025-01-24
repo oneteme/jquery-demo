@@ -1,8 +1,11 @@
 package io.github.oneteme.jquery.demo;
 
+import static org.usf.jquery.core.ViewJoin.innerJoin;
+
 import java.util.function.Function;
 
 import org.usf.jquery.core.DBFilter;
+import org.usf.jquery.core.ViewJoin;
 import org.usf.jquery.web.ColumnDecorator;
 import org.usf.jquery.web.CriteriaBuilder;
 import org.usf.jquery.web.JoinBuilder;
@@ -16,27 +19,26 @@ public enum JQDemoTable implements ViewDecorator {
 	SHIPPER(DataConstants::shippersColumns),
 	CATEGORY(DataConstants::categoriesColumns),
 	SUPPLIER(DataConstants::suppliersColumns),
-	ORDER(DataConstants::ordersColumns,DataConstants::orderJoin),
+	ORDER(DataConstants::ordersColumns),
 	PRODUCT(DataConstants::productsColumns),
 	ORDER_DETAIL(DataConstants::ordersDetailsColumns),
-	EMPLOYEE(DataConstants::employeesColumns),
-	;
+	EMPLOYEE(DataConstants::employeesColumns),;
 
 	private final Function<JQDemoColumn, String> colMap;
-	private final Function<String, JoinBuilder> joins;
-	
-	private JQDemoTable(Function<JQDemoColumn, String> colMap) {
-		this.colMap = colMap;
-		this.joins = null;
-	}
-	
+//	private final Function<String, JoinBuilder> joins;
+
+//	private JQDemoTable(Function<JQDemoColumn, String> colMap) {
+//		this.colMap = colMap;
+////		this.joins = null;
+//	}
+
 	@Override
 	public String identity() {
 		return name().toLowerCase();
 	}
 
 	@Override
-	public CriteriaBuilder<DBFilter> criteria(String name) { //TODO split
+	public CriteriaBuilder<DBFilter> criteria(String name) { // TODO split
 		return ViewDecorator.super.criteria(name);
 	}
 
@@ -44,9 +46,23 @@ public enum JQDemoTable implements ViewDecorator {
 	public String columnName(ColumnDecorator cd) {
 		return colMap.apply((JQDemoColumn) cd);
 	}
+
 	@Override
 	public JoinBuilder join(String name) {
-		return joins == null ? ViewDecorator.super.join(name) : joins.apply(name);
+		if (ORDER == this && "innercustomer".equals(name)) {
+			return () -> new ViewJoin[] { ViewJoin.innerJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+		}
+		if (ORDER == this && "leftcustomer".equals(name)) {
+			return () -> new ViewJoin[] { ViewJoin.leftJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+		}
+		if (ORDER == this && "rightcustomer".equals(name)) {
+			return () -> new ViewJoin[] { ViewJoin.rightJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+		}
+		return ViewDecorator.super.join(name);
+//		return joins == null ? ViewDecorator.super.join(name) : joins.apply(name);
 	}
 
 }

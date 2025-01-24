@@ -53,27 +53,29 @@ $(document).ready(function () {
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
     $(".definition-display .example-title").html($(e.currentTarget).html());
+    let view = $(e.currentTarget).attr("data-view");
+    let columns = $(e.currentTarget).attr("data-column");
+    let filters = $(e.currentTarget).attr("data-filter");
     if ($(e.currentTarget).attr("data-tutorial")) {
       loadTutorial($(e.currentTarget).attr("data-tutorial"));
+      if (view || columns || filters) {
+        $(".definition-element.try_it").show();
+      }
     } else {
       $(".definition-element").show();
       $(".definition-element.tutorial").hide();
-      let view = $(e.currentTarget).attr("data-view");
-      let columns = $(e.currentTarget).attr("data-column");
-      let filters = $(e.currentTarget).attr("data-filter");
       let definition = $(e.currentTarget).attr("data-definition");
       let syntax = $(e.currentTarget).attr("data-syntax");
       console.log("view : ", view);
       console.log("columns : ", columns);
-      $("#jq-table").val(view);
-      $("#jq-columns").val(columns);
-      $("#jq-filters").val(filters);
       $("#defintion-text-container p").html(definition);
       $("#syntax-text-container p").html(syntax);
-      
       $(".definition-display .definition .description").html(definition);
       $(".definition-display .syntax .description").html(syntax);
     }
+    $("#jq-table").val(view);
+    $("#jq-columns").val(columns);
+    $("#jq-filters").val(filters);
     fetchJQData();
     introNextStep();
   });
