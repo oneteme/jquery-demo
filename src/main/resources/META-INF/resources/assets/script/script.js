@@ -53,9 +53,11 @@ $(document).ready(function () {
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
     $(".definition-display .example-title").html($(e.currentTarget).html());
-    let view = $(e.currentTarget).attr("data-view");
-    let columns = $(e.currentTarget).attr("data-column");
-    let filters = $(e.currentTarget).attr("data-filter");
+    let view = $(e.currentTarget).attr("data-view"),
+      columns = $(e.currentTarget).attr("data-column"),
+      filters = $(e.currentTarget).attr("data-filter"),
+      next = $(e.currentTarget).attr("data-next"),
+      prev = $(e.currentTarget).attr("data-prev");
     if ($(e.currentTarget).attr("data-tutorial")) {
       loadTutorial($(e.currentTarget).attr("data-tutorial"));
       if (view || columns || filters) {
@@ -64,6 +66,7 @@ $(document).ready(function () {
     } else {
       $(".definition-element").show();
       $(".definition-element.tutorial").hide();
+      $(".definition-element.move_tuto").hide();
       let definition = $(e.currentTarget).attr("data-definition");
       let syntax = $(e.currentTarget).attr("data-syntax");
       console.log("view : ", view);
@@ -72,6 +75,27 @@ $(document).ready(function () {
       $("#syntax-text-container p").html(syntax);
       $(".definition-display .definition .description").html(definition);
       $(".definition-display .syntax .description").html(syntax);
+    }
+    if (next || prev) {
+      $(".tuto_btn_container").hide();
+      console.log("next exists!!");
+      $(".definition-element.move_tuto").show();
+      if (next) {
+        $(".tuto_btn_container.btn-next").show();
+        $(".tuto_btn_container.btn-next span:first").html(next);
+        $(".tuto_btn_container.btn-next").attr(
+          "data-example",
+          next.toLowerCase()
+        );
+      }
+      if (prev) {
+        $(".tuto_btn_container.btn-prev").show();
+        $(".tuto_btn_container.btn-prev span:first").html(prev);
+        $(".tuto_btn_container.btn-prev").attr(
+          "data-example",
+          prev.toLowerCase()
+        );
+      }
     }
     $("#jq-table").val(view);
     $("#jq-columns").val(columns);
@@ -138,6 +162,10 @@ $(document).ready(function () {
   });
   $(".definition-element .show-demo").on("click", (e) => {
     introNextStep();
+  });
+  $(".tuto_btn_container").on("click", (e) => {
+    let example = $(e.currentTarget).attr("data-example");
+    $(".jq-example[data-learn='" + example + "']").click();
   });
 });
 //**************** FUNCTIONS ****************/
@@ -409,6 +437,7 @@ function createNavbar(data, element = $(".navbar-nav")) {
       );
       createNavbar(nav_element.items, $(".sub-nav:last"));
     } else {
+      console.log("nabar key is : ", key);
       setupNavItem(nav_element, element);
     }
   });
@@ -423,10 +452,11 @@ function loadNavbar() {
     });
 }
 function setupNavItem(navItem, divElement) {
-  let navFields = {
-    class: "nav-item jq-example",
-  };
-  let title = navItem.title;
+  let title = navItem.title,
+    navFields = {
+      class: "nav-item jq-example",
+      "data-learn": title.toLowerCase(),
+    };
   delete navItem.title;
   $.each(navItem, (key, value) => {
     navFields["data-" + key] = value;

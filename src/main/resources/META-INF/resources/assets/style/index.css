@@ -100,9 +100,9 @@ header {
   font-weight: 700;
 }
 .highlighted_code li {
-    color: white;
-    font-size: 16px;
-    font-weight: 400;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
 }
 .highlighted_code code {
   font-size: 20px;
@@ -274,6 +274,23 @@ header {
 }
 
 /* ALIGNED ROW */
+/* FLEX GAPS */
+.gap_8 {
+  gap: 8px;
+}
+
+.gap_12 {
+  gap: 12px;
+}
+
+.gap_16 {
+  gap: 16px;
+}
+
+.gap_20 {
+  gap: 20px;
+}
+/* FLEX GAPS */
 
 /* SETTINGS CONTAINERS */
 .definition-display {
@@ -365,7 +382,25 @@ header {
   /* overflow: hidden; */
   position: relative;
 }
-
+.tuto_btn_container {
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: solid 2px white;
+  background-color: transparent;
+  width: fit-content;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+.tuto_btn_container:hover {
+  /* border: 0; */
+  background-color: #cddb28d1;
+}
+.tuto_buttons {
+  display: flex;
+  justify-content: space-between;
+}
 /*** CONTAINERS ***/
 
 /*** NAVBAR  ***/
