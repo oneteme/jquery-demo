@@ -97,6 +97,7 @@ $(document).ready(function () {
         );
       }
     }
+    $(".content").animate({ scrollTop: 0 }, 10);
     $("#jq-table").val(view);
     $("#jq-columns").val(columns);
     $("#jq-filters").val(filters);
@@ -373,7 +374,6 @@ function createSettings(data) {
         "data-count": elemCount,
       })
     );
-    console.log("count : ", elemCount);
     $.each(val.items, (key, val) => {
       let elemClass = val.class,
         gridDiv = $(".grid-options[data-count='" + elemCount + "'");
@@ -384,7 +384,6 @@ function createSettings(data) {
         })
       );
       for (let index = 0; index < elemCount; index++) {
-        console.log("adding element and index is : ", index);
         gridDiv
           .find(".option-box:last")
           .append($("<div>", { class: "display-grid-box" }));
@@ -437,10 +436,47 @@ function createNavbar(data, element = $(".navbar-nav")) {
       );
       createNavbar(nav_element.items, $(".sub-nav:last"));
     } else {
-      console.log("nabar key is : ", key);
-      setupNavItem(nav_element, element);
+      // console.log("navbar key is : ", key);
+      if (key + 1 < data.length) {
+        console.log(
+          "element : ",
+          nav_element.title,
+          " has next element : ",
+          data[key + 1].title
+        );
+      } else {
+        console.log(
+          "element : ",
+          nav_element.title,
+          "does not have next element"
+        );
+      }
+      let seperatedTutoArr = setupNext(data, key);
+      console.log(
+        "current element : ",
+        nav_element.title,
+        "next element is : ",
+        seperatedTutoArr[0],
+        "previous element is : ",
+        seperatedTutoArr[1]
+      );
+      setupNavItem(
+        nav_element,
+        element,
+        seperatedTutoArr[0],
+        seperatedTutoArr[1]
+      );
     }
   });
+}
+function setupNext(arr, key) {
+  let next =
+      key + 1 < arr.length && !("items" in arr[key + 1])
+        ? arr[key + 1].title
+        : null,
+    prev =
+      key - 1 >= 0 && !("items" in arr[key - 1]) ? arr[key - 1].title : null;
+  return [next, prev];
 }
 function loadNavbar() {
   $(".navbar-nav").empty();
@@ -451,15 +487,19 @@ function loadNavbar() {
       createNavbar(data);
     });
 }
-function setupNavItem(navItem, divElement) {
+function setupNavItem(navItem, divElement, next, prev) {
   let title = navItem.title,
     navFields = {
       class: "nav-item jq-example",
       "data-learn": title.toLowerCase(),
+      "data-next": next,
+      "data-prev": prev,
     };
-  delete navItem.title;
+  // delete navItem.title;
   $.each(navItem, (key, value) => {
-    navFields["data-" + key] = value;
+    if (key != "title") {
+      navFields["data-" + key] = value;
+    }
   });
   $(divElement).append($("<li>", navFields).html(title));
 }

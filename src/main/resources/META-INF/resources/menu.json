@@ -4,8 +4,27 @@
     "items": [
       {
         "title": "Setup JQuery in your project",
-        "tutorial": "setup.md",
-        "next":"select"
+        "tutorial": "setup/setup.md"
+      },
+      {
+        "title": "Create JQuery Columns",
+        "tutorial": "setup/columns.md"
+      },
+      {
+        "title": "Create DATA CONSTANTS",
+        "tutorial": "setup/data_constants.md"
+      },
+      {
+        "title": "Create JQuery Tables",
+        "tutorial": "setup/setup.md"
+      },
+      {
+        "title": "WebMvc configuration",
+        "tutorial": "setup/setup.md"
+      },
+      {
+        "title": "Controllers setup",
+        "tutorial": "setup/setup.md"
       }
     ]
   },
