@@ -519,7 +519,7 @@ function toggleNavBar(animationTime = 100) {
   }); // duration in milliseconds
 }
 function fetchJQData() {
-  let table = $("#jq-table").val() + "?";
+  let table = $("#jq-table").val() ? $("#jq-table").val() + "?" : null;
   let columns = $("#jq-columns").val();
   let filters = $("#jq-filters").val();
   let fetchLink =
@@ -527,19 +527,22 @@ function fetchJQData() {
     table +
     (columns ? "column=" + columns : "") +
     (filters ? "&" + filters : "");
-  $("#jquery-link").html("JQuery link : " + fetchLink);
-  $("#jquery-link").show();
-  console.log("link to fetch : ", fetchLink);
-  fetch(fetchLink)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      $("#sql-display").html(data.query);
-      displayTableResults(data.result);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-    });
+  if (table) {
+    $("#jquery-link").html(fetchLink);
+    $("#jquery-link").show();
+    console.log("link to fetch : ", fetchLink);
+    fetch(fetchLink)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        $("#sql-code").html(sqlFormatter.format(data.query));
+        hljs.highlightAll();
+        displayTableResults(data.result);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }
 }
 function displayTableResults(data) {
   clearTable();
@@ -585,10 +588,10 @@ function loadTutorial(fileName) {
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
   $.get("tutorials/" + fileName, function (data) {
-    console.log("markdown data : ", data);
+    // console.log("markdown data : ", data);
     // Convert Markdown to HTML
     var htmlContent = marked.parse(data);
-
+    console.log("htmlcontent : ", htmlContent);
     // Insert the HTML into the div
     $(".highlighted_code").html(htmlContent);
 

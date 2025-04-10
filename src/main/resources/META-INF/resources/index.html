@@ -39,6 +39,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="./assets/script/script.js"></script>
+
+    <!-- SQL FORMATTER -->
+    <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
   </head>
 
   <body>
@@ -171,23 +174,28 @@
                 type="submit"
                 value="Execute"
               />
-
-              <span id="jquery-link"></span>
+              <div class="jq-link-display">
+                <label for="jquery-link" class="fw-semibold white_text"
+                  >JQuery link</label
+                >
+                <pre><code id="jquery-link" class="language-html"></code></pre>
+              </div>
             </form>
           </div>
 
-          <div class="col-sm-6" style="width: 100%; min-width: 324px">
-            <label for="sql-display" class="fw-semibold white_text"
+          <div id="sql-display" class="col-sm-6" style="width: 100%; min-width: 324px">
+            <label for="sql-code" class="fw-semibold white_text"
               >SQL Query</label
             >
-            <textarea
+            <pre><code id="sql-code" class="language-sql"></code></pre>
+            <!-- <textarea
               id="sql-display"
               class="form-control"
               name="showsql"
               readonly
               style="resize: none; max-height: 200px; height: 100%"
               placeholder="Query in SQL"
-            ></textarea>
+            ></textarea> -->
           </div>
           <div class="results-container" style="display: none">
             <div class="table-wrapper">
@@ -236,7 +244,7 @@
             >
           </div>
         </div>
-        <div class="definition-element move_tuto" style="position: relative;">
+        <div class="definition-element move_tuto" style="position: relative">
           <h2 class="title white_text">What's Next?</h2>
           <div class="tuto_buttons">
             <div class="tuto_btn_container btn-prev">

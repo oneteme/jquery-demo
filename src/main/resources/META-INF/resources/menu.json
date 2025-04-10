@@ -16,15 +16,15 @@
       },
       {
         "title": "Create JQuery Tables",
-        "tutorial": "setup/setup.md"
+        "tutorial": "setup/tables.md"
       },
       {
         "title": "WebMvc configuration",
-        "tutorial": "setup/setup.md"
+        "tutorial": "setup/webmvc.md"
       },
       {
         "title": "Controllers setup",
-        "tutorial": "setup/setup.md"
+        "tutorial": "setup/Controllers.md"
       }
     ]
   },
@@ -356,65 +356,66 @@
       {
         "title": "equal (=)",
         "view": "products",
-        "filter": "price=18",
+        "column":"price:Equal_30",
+        "filter": "price=30",
         "definition": "column is equal to value.",
         "syntax": "column=value"
       },
       {
         "title": "Greater Than (>)",
         "view": "products",
-        "filter": "price.gt=30",
+        "column":"price:GreaterThan_30",
+        "filter": "price.gt=30&order=price",
         "definition": "column is greater than value",
         "syntax": "column.gt=value"
       },
       {
         "title": "Lower Than (<)",
         "view": "products",
-        "filter": "price.lt=30",
+        "column":"price:LowerThan_30",
+        "filter": "price.lt=30&order=price",
         "definition": "column is lower than value",
         "syntax": "column.lt=value"
       },
       {
         "title": "Greater equal (>=)",
         "view": "products",
-        "filter": "price.ge=30",
+        "column":"price:GreaterEqual_30",
+        "filter": "price.ge=30&order=price",
         "definition": "column is greater or equal to value",
         "syntax": "column.ge=value"
       },
       {
         "title": "Lower equal (<=)",
         "view": "products",
-        "filter": "price.le=30",
+        "column":"price:LowerEqual_30",
+        "filter": "price.le=30&order=price",
         "definition": "column is lower or equal to value",
         "syntax": "column.le=value"
       },
       {
         "title": "Not equal (<>)",
         "view": "products",
-        "filter": "price.ne=30",
+        "column":"price:PriceNotEqualTo_30",
+        "filter": "price.ne=30&order=price",
         "definition": "column is not equal to value",
         "syntax": "column.ne=value"
       },
       {
-        "title": "Lower Than (<)",
-        "view": "products",
-        "filter": "price.lt=30",
-        "definition": "column is lower than value",
-        "syntax": "column.lt=value"
-      },
-      {
         "title": "IN",
         "view": "products",
-        "filter": "price=10,20,30",
+        "column":"price:PriceEqualTo_10_20_30_40_50",
+        "filter": "price=10,20,30,40,50&order=price",
         "definition": "TRUE if the operand is equal to any value in a list of expressions",
         "syntax": "column=val1,val2,val3,..."
       },
       {
         "title": "Not IN",
         "view": "products",
-        "filter": "price.ne=10,20,30",
+        "column":"price:PriceNotEqualTo_10_20_30_40_50",
+        "filter": "price.notIn=10,20,30,40,50&order=price",
         "definition": "TRUE if the operand is not equal to any value in a list of expressions",
-        "syntax": "column.ne=val1,val2,val3,..."
+        "syntax": "column.notIn=val1,val2,val3,..."
       },
       {
         "title": "LIKE",

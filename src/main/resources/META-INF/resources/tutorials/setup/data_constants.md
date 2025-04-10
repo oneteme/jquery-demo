@@ -55,29 +55,7 @@ public final class DataConstants {
 		};
 	}
 
-	static String suppliersColumns(JQDemoColumn column) {
-		return switch (column) {
-		//... Suppliers columns
-		};
-	}
-
-	static String ordersColumns(JQDemoColumn column) {
-		return switch (column) {
-		//... Orders columns
-		};
-	}
-
-	static String productsColumns(JQDemoColumn column) {
-		return switch (column) {
-		//... Products columns
-		};
-	}
-
-	static String ordersDetailsColumns(JQDemoColumn column) {
-		return switch (column) {
-		//... Order Details columns
-		};
-	}
+	//... DO THE SAME FOR THE REST OF THE TABLES
 }
 
 // DataConstants.java
