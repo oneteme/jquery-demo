@@ -178,7 +178,8 @@ function introNextStep() {
 }
 function setupIntro() {
   // *** DIVS TO SHOW/HIDE FOR TUTORIAL
-  $("#jquery-link").hide();
+  $(".jq-link-display").hide();
+  $("#sql-display").hide();
   clearTable();
   $(".definition-container").hide();
   $("#jq-columns").val("");
@@ -529,13 +530,15 @@ function fetchJQData() {
     (filters ? "&" + filters : "");
   if (table) {
     $("#jquery-link").html(fetchLink);
-    $("#jquery-link").show();
+    $(".jq-link-display").show();
     console.log("link to fetch : ", fetchLink);
     fetch(fetchLink)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         $("#sql-code").html(sqlFormatter.format(data.query));
+        $("#sql-display").show();
+
         hljs.highlightAll();
         displayTableResults(data.result);
       })
