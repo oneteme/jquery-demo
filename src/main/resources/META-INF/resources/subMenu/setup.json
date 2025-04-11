@@ -1,0 +1,26 @@
+[
+    {
+      "title": "Setup JQuery in your project",
+      "tutorial": "setup/setup.md"
+    },
+    {
+      "title": "Create JQuery Columns",
+      "tutorial": "setup/columns.md"
+    },
+    {
+      "title": "Create DATA CONSTANTS",
+      "tutorial": "setup/data_constants.md"
+    },
+    {
+      "title": "Create JQuery Tables",
+      "tutorial": "setup/tables.md"
+    },
+    {
+      "title": "WebMvc configuration",
+      "tutorial": "setup/webmvc.md"
+    },
+    {
+      "title": "Controllers setup",
+      "tutorial": "setup/Controllers.md"
+    }
+  ]

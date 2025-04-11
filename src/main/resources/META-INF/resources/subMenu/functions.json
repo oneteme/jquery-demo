@@ -1,0 +1,22 @@
+[
+    {
+      "title": "DATE",
+      "items": "functions/date.json"
+    },
+    {
+      "title": "CAST",
+      "items": "functions/cast.json"
+    },
+    {
+      "title": "Aggregate",
+      "items": "functions/aggregate.json"
+    },
+    {
+      "title": "Numeric",
+      "items": "functions/numeric.json"
+    },
+    {
+      "title": "String",
+      "items": "functions/string.json"
+    }
+  ]

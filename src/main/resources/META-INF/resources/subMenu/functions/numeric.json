@@ -1,0 +1,59 @@
+[
+    {
+      "title": "Truncate",
+      "view": "products",
+      "column": "price:ActualPrice,price.trunc:TruncatedPrice,price.trunc(1):DecimalTruncatedPrice",
+      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
+      "definition": "Truncates a number to a specified number of decimal places without rounding.",
+      "syntax": "column.trunc(optionalValue)/trunc(column,optionalValue)"
+    },
+    {
+      "title": "ABS",
+      "view": "products",
+      "column": "price.abs:ABS,abs(-65):NegativeABS",
+      "filter": "limit=1",
+      "definition": "ABS(): Returns the absolute value of a number.",
+      "syntax": "column.abs"
+    },
+    {
+      "title": "Ceiling",
+      "view": "products",
+      "column": "price:ActualPrice,price.ceil:CeiledPrice",
+      "filter": "",
+      "definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
+      "syntax": "column.ceil"
+    },
+    {
+      "title": "FLOOR",
+      "view": "products",
+      "column": "price:ActualPrice,price.floor:FlooredPrice",
+      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
+      "definition": "FLOOR(): Rounds a number down to the nearest integer",
+      "syntax": "column.floor"
+    },
+    {
+      "title": "ROUND",
+      "view": "products",
+      "column": "price:ActualPrice,price.round(1):DecimalRoundedPrice,price.round:RoundedPrice",
+      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
+      "definition": "ROUND(): Rounds to decimal places",
+      "syntax": "column.round(optionalValue)/round(column,optionalValue)"
+    },
+    {
+      "title": "SQRT(Square root)",
+      "view": "products",
+      "column": "price:ActualPrice,price.sqrt:SqrtPrice",
+      "filter": "",
+      "definition": "SQRT(): Returns the square root of a number",
+      "syntax": "column.sqrt"
+    },
+
+    {
+      "title": "MOD",
+      "view": "products",
+      "column": "price,price.mod(10):MODPrice",
+      "filter": "",
+      "definition": "MOD(): Returns the remainder of a division operation",
+      "syntax": "column.mod(value)"
+    }
+  ]

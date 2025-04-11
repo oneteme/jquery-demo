@@ -42,10 +42,24 @@ $(document).ready(function () {
     toggleNavBar();
     introNextStep();
   });
-  $(document).on("click", ".parent_title", (e) => {
+  $(document).on("click", ".parent_title[isloaded='true']", (e) => {
+    console.log("clicked on a loaded menu");
     if (!$(event.target).closest(".jq-example").length) {
       toggleNavSubElements(e);
     }
+  });
+  $(document).on("click", ".parent_title[isloaded='false']", (e) => {
+    console.log("clicked on a unloaded menu");
+    let subMenuFile = $(e.currentTarget).attr("sub-menu"),
+      title = $(e.currentTarget).find("span:first").html();
+    fetch("subMenu/" + subMenuFile)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        createNavbar(data, $(".sub-nav[data-title='" + title + "']"));
+        $(e.currentTarget).attr("isloaded", true);
+        toggleNavSubElements(e);
+      });
   });
   $(document).on("click", ".jq-example", (e) => {
     console.log("click test");
@@ -421,46 +435,65 @@ function hideNavBar(element = $("#jq-show-examples")) {
   toggleNavBar();
 }
 function createNavbar(data, element = $(".navbar-nav")) {
+  console.log("createNavBar => data : ", data);
   $.each(data, (key, nav_element) => {
     if ("items" in nav_element) {
       element.append(
-        $("<div>", { class: "parent-element" }).append(
-          $("<div>", { class: "parent_title" }).append(
+        $("<div>", {
+          class: "parent-element",
+        }).append(
+          $("<div>", {
+            class: "parent_title",
+            isloaded: false,
+            "sub-menu": nav_element.items,
+          }).append(
             $("<span>").html(nav_element.title),
             $("<img>", {
               class: "nav-accordion accordion",
               src: "/assets/images/accordion.svg",
             })
           ),
-          $("<div>", { class: "sub-nav", style: "display:none;" })
+          $("<div>", {
+            class: "sub-nav",
+            "data-title": nav_element.title,
+            style: "display:none;",
+          })
         )
       );
-      createNavbar(nav_element.items, $(".sub-nav:last"));
+      // fetch("subMenu/" + nav_element.items)
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     createNavbar(
+      //       data,
+      //       $(".sub-nav[data-title='" + nav_element.title + "']")
+      //     );
+      //   });
     } else {
       // console.log("navbar key is : ", key);
-      if (key + 1 < data.length) {
-        console.log(
-          "element : ",
-          nav_element.title,
-          " has next element : ",
-          data[key + 1].title
-        );
-      } else {
-        console.log(
-          "element : ",
-          nav_element.title,
-          "does not have next element"
-        );
-      }
+      // if (key + 1 < data.length) {
+      //   console.log(
+      //     "element : ",
+      //     nav_element.title,
+      //     " has next element : ",
+      //     data[key + 1].title
+      //   );
+      // } else {
+      //   console.log(
+      //     "element : ",
+      //     nav_element.title,
+      //     "does not have next element"
+      //   );
+      // }
       let seperatedTutoArr = setupNext(data, key);
-      console.log(
-        "current element : ",
-        nav_element.title,
-        "next element is : ",
-        seperatedTutoArr[0],
-        "previous element is : ",
-        seperatedTutoArr[1]
-      );
+      // console.log(
+      //   "current element : ",
+      //   nav_element.title,
+      //   "next element is : ",
+      //   seperatedTutoArr[0],
+      //   "previous element is : ",
+      //   seperatedTutoArr[1]
+      // );
       setupNavItem(
         nav_element,
         element,

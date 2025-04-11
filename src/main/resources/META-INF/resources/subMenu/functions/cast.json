@@ -1,0 +1,23 @@
+[
+    {
+      "title": "VARCHAR",
+      "view": "products",
+      "column": "price,price.varchar(2):PriceToVarchar",
+      "definition": "Changes column type to VARCHAR",
+      "syntax": "column.varchar(size)"
+    },
+    {
+      "title": "DATE",
+      "view": "orders",
+      "column": "ctimestamp.date:TimestampToDate",
+      "definition": "Converts column type to DATE (column should be of type timestamp)",
+      "syntax": "column.date"
+    },
+    {
+      "title": "INTEGER",
+      "view": "products",
+      "column": "price,price.integer:PriceToInteger",
+      "definition": "Converts column type to INTEGER",
+      "syntax": "column.integer"
+    }
+  ]
