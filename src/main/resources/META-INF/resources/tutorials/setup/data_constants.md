@@ -2,9 +2,9 @@
 
 Create a "DataConstants" class in which we will:
 - Link our JQuery columns with actual column names from the database
-- create join functions
-- create criteria functions
-- create operationColumns
+- Create join functions
+- Create criteria functions
+- Create operationColumns
 
 2. Link JQuery columns to real columns
 

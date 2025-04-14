@@ -182,7 +182,7 @@ header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 32px;
+  gap: 16px;
 }
 
 .settings-content div {

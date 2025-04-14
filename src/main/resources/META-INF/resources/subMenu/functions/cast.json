@@ -4,20 +4,20 @@
       "view": "products",
       "column": "price,price.varchar(2):PriceToVarchar",
       "definition": "Changes column type to VARCHAR",
-      "syntax": "column.varchar(size)"
+      "syntax": "column.varchar(size) / varchar(column,size)"
     },
     {
       "title": "DATE",
       "view": "orders",
-      "column": "ctimestamp.date:TimestampToDate",
-      "definition": "Converts column type to DATE (column should be of type timestamp)",
-      "syntax": "column.date"
+      "column": "ctimestamp.date:TimestampToDate,date(\"2025-12-08\"):date",
+      "definition": "Converts column type to DATE (column should be of type TIMESTAMP or VARCHAR)",
+      "syntax": "column.date / date(value/column)"
     },
     {
       "title": "INTEGER",
       "view": "products",
       "column": "price,price.integer:PriceToInteger",
       "definition": "Converts column type to INTEGER",
-      "syntax": "column.integer"
+      "syntax": "column.integer / integer(column)"
     }
   ]

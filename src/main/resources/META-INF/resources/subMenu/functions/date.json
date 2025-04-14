@@ -1,38 +1,11 @@
 [
   {
-    "title": "Year",
-    "view": "employees",
-    "column": "start,start.year:Year",
-    "definition": "Extract the year from the date",
-    "syntax": "column.year"
+    "title": "Temporal",
+    "items": "functions/date/temporal.json"
   },
   {
-    "title": "Month",
-    "view": "employees",
-    "column": "start,start.month:Month",
-    "definition": "Extract the month from the date",
-    "syntax": "column.month"
-  },
-  {
-    "title": "Day",
-    "view": "employees",
-    "column": "start,start.day:Day",
-    "definition": "Extract the day from the date",
-    "syntax": "column.day"
-  },
-  {
-    "title": "YearMonth",
-    "view": "employees",
-    "column": "start,start.yearMonth:yearMonth",
-    "definition": "Extract the yearMonth from the date YYYY-MM",
-    "syntax": "column.yearMonth"
-  },
-  {
-    "title": "MonthDay",
-    "view": "employees",
-    "column": "start,start.monthDay:monthDay",
-    "definition": "Extract the monthDay from the date MM-DD",
-    "syntax": "column.monthDay"
+    "title": "Combined",
+    "items": "functions/date/combined.json"
   },
   {
     "title": "Timestamp",

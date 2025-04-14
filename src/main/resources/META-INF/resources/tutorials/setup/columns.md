@@ -1,6 +1,6 @@
-1. Create columns interface
+1. Create columns enum
 
-Lets create our columns interface which we will call "JQDemoColumn"
+Lets create our columns ENUM which is a "ColumnDecorator" and will call it "JQDemoColumn"
  ```java
 //JQDemoColumn.java
 
@@ -12,9 +12,9 @@ public enum JQDemoColumn implements ColumnDecorator {
 //JQDemoColumn.java
  ```
 
-2. Add the columns to the interface
+2. Add the columns to the enum
 
-In this interface we are going to add the JQuery columns and these column names are gonna be used on our queries instead of the real column names
+In this enum we are going to add the JQuery columns and these column names are gonna be used on our queries instead of the real column names
 
  ```java
 //JQDemoColumn.java
@@ -28,10 +28,6 @@ public enum JQDemoColumn implements ColumnDecorator {
 	TABLE_NAME("table_name"),
 	CUSTOMER("customer"),
 	CONTACT("contact"),
-	ADDRESS("address"),
-	CITY("city"),
-	POSTAL_CODE("postal_code"),
-	COUNTRY("country"),
 	//... Other columns
 	;
 }

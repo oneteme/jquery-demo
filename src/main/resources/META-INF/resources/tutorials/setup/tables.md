@@ -1,6 +1,6 @@
 1. Create Table
 
-Let's create our tables interface which we will call "JQDemoTable"
+Let's create our tables ENUM which is a "ViewDecorator" and we will call it "JQDemoTable"
 ```java
 // JQDemoTable.java
 
@@ -11,7 +11,7 @@ public enum JQDemoTable implements ViewDecorator {
 
 // JQDemoTable.java
 ```
-We add the tables to the interface and we link the tables to their columns using the functions we created in "DataConstants"
+We add the tables to the enum and we link the tables to their columns using the functions we created in "DataConstants"
 
 ```java
 // JQDemoTable.java

@@ -1,5 +1,9 @@
 [
     {
+      "title": "Operators",
+      "items": "functions/operators/operators.json"
+    },
+    {
       "title": "DATE",
       "items": "functions/date.json"
     },
