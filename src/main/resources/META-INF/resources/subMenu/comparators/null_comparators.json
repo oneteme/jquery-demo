@@ -1,0 +1,16 @@
+[
+  {
+    "title": "NULL Comparator",
+    "view": "customers",
+    "filter": "country.isNull",
+    "definition": "IS NULL is used to check if a value is missing or empty (it has no value).",
+    "syntax": "column.isNull"
+  },
+  {
+    "title": "NOT NULL Comparator",
+    "view": "customers",
+    "filter": "country.notNull",
+    "definition": "NOT NULL is used to check if a value exists (it's not missing).",
+    "syntax": "column.notNull"
+  }
+]
