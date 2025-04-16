@@ -35,7 +35,7 @@
 	<dependency>
 			<groupId>io.github.oneteme</groupId>
 			<artifactId>jquery</artifactId>
-			<version>4.0.1</version>
+			<version>4.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
