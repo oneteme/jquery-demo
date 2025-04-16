@@ -1,72 +1,10 @@
 [
   {
-    "title": "Year",
-    "view": "employees",
-    "column": "start,start.year:Year",
-    "definition": "Extract the year from the date",
-    "syntax": "column.year"
+    "title": "Dates",
+    "items":"functions/date/days.json"
   },
   {
-    "title": "Month",
-    "view": "employees",
-    "column": "start,start.month:Month",
-    "definition": "Extract the month from the date",
-    "syntax": "column.month"
-  },
-  {
-    "title": "Day",
-    "view": "employees",
-    "column": "start,start.day:Day",
-    "definition": "Extract the day from the date",
-    "syntax": "column.day"
-  },
-  {
-    "title": "Week",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.yearWeek:yearWeek",
-    "definition": "Extract the week from the date",
-    "syntax": "column.week / week(column)"
-  },
-  {
-    "title": "Day of week (dow)",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.dow:Day_of_week",
-    "definition": "Extract the day of week from the date",
-    "syntax": "column.dow / dow(column)"
-  },
-  {
-    "title": "Day of year (doy)",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.doy:Day_of_year",
-    "definition": "Extract the day of year from the date",
-    "syntax": "column.doy / doy(column)"
-  },
-  {
-    "title": "Hour",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.hour:Hours",
-    "definition": "Extract the hours from the TimeStamp",
-    "syntax": "column.hour / hour(column)"
-  },
-  {
-    "title": "Minute",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.minute:Minutes",
-    "definition": "Extract the minutes from the TimeStamp",
-    "syntax": "column.minute / minute(column)"
-  },
-  {
-    "title": "Second",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.second:Seconds",
-    "definition": "Extract the seconds from the TimeStamp",
-    "syntax": "column.second / second(column)"
-  },
-  {
-    "title": "Epoch",
-    "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.epoch:epoch",
-    "definition": "Get the date/TimeStamp in millisecond since 01 January 1970",
-    "syntax": "column.epoch / epoch(column)"
+    "title": "Time",
+    "items":"functions/date/time.json"
   }
 ]

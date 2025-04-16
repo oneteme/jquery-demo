@@ -29,16 +29,6 @@
     "syntax": "Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
   },
   {
-    "title": "JOIN",
-    "view": "orders",
-    "column": "order.id,customer.customer,order.start",
-    "filter": "order.customer_id=customer.id",
-    "definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
-    "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id",
-    "tutorial": "test.md",
-    "items": "join.json"
-  },
-  {
     "title": "AS",
     "view": "customers",
     "column": "id:ID,customer:CustomerName",
@@ -59,6 +49,24 @@
     "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
     "syntax": "&order=column.ASC/DESC By default it's ASC"
+  },
+  {
+    "title": "JOIN",
+    "view": "orders",
+    "column": "order.id,customer.customer,order.start",
+    "filter": "order.customer_id=customer.id",
+    "definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
+    "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id",
+    "tutorial": "test.md",
+    "items": "join.json"
+  },
+  {
+    "title": "Operators",
+    "items": "functions/operators/operators.json"
+  },
+  {
+    "title": "CONSTANTS",
+    "items": "constants.json"
   },
   {
     "title": "Functions",

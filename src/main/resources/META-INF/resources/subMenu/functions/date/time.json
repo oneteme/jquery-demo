@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Hour",
+        "view": "employees",
+        "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.hour:Hours",
+        "definition": "Extract the hours from the TimeStamp",
+        "syntax": "column.hour / hour(column)"
+      },
+      {
+        "title": "Minute",
+        "view": "employees",
+        "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.minute:Minutes",
+        "definition": "Extract the minutes from the TimeStamp",
+        "syntax": "column.minute / minute(column)"
+      },
+      {
+        "title": "Second",
+        "view": "employees",
+        "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.second:Seconds",
+        "definition": "Extract the seconds from the TimeStamp",
+        "syntax": "column.second / second(column)"
+      },
+      {
+        "title": "Epoch",
+        "view": "employees",
+        "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.epoch:epoch",
+        "definition": "Get the date/TimeStamp in millisecond since 01 January 1970",
+        "syntax": "column.epoch / epoch(column)"
+      }
+]

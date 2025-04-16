@@ -1,4 +1,4 @@
-1. Add the join to your table Interface
+1. Add the join to your table Enum
 
 In the join function of your table you can add the join you need this way.
 

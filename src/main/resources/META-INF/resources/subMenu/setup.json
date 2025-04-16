@@ -16,6 +16,10 @@
       "tutorial": "setup/tables.md"
     },
     {
+      "title": "Create JQuery Databases",
+      "tutorial": "setup/databases.md"
+    },
+    {
       "title": "WebMvc configuration",
       "tutorial": "setup/webmvc.md"
     },

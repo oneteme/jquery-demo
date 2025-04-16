@@ -19,5 +19,19 @@
       "column": "price,price.integer:PriceToInteger",
       "definition": "Converts column type to INTEGER",
       "syntax": "column.integer / integer(column)"
+    },
+    {
+      "title": "BIG INTEGER",
+      "view": "products",
+      "column": "price,price.bigint:PriceToBigint",
+      "definition": "Converts column type to BIG INTEGER",
+      "syntax": "column.bigint / bigint(column)"
+    },
+    {
+      "title": "DECIMAL",
+      "view": "products",
+      "column": "price,price.decimal:PriceToDecimal",
+      "definition": "Converts column type to DECIMAL",
+      "syntax": "column.decimal / decimal(column)"
     }
   ]

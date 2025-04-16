@@ -34,9 +34,9 @@ public final class DataConstants {
 // DBDataConstants.java
 ```
 
-3. Create JQuery Database Interface
+3. Create JQuery Database Enum
 
-Now let's create our JQuery database Interface which will do the link between our databases and JQuery Databases and we add our databases.
+Now let's create our JQuery database Enum which will do the link between our databases and JQuery Databases and we add our databases.
 
 ```java
 // JQDatabase.java

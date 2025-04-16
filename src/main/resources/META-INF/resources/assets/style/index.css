@@ -407,11 +407,11 @@ header {
 .navbar-container {
   overflow-y: auto;
   background-color: #121e27;
-  padding: 16px;
+  padding: 8px;
   /* padding-top: 60px; */
   display: none;
   width: 100%;
-  max-width: 348px;
+  max-width: 360px;
   height: 0;
 }
 

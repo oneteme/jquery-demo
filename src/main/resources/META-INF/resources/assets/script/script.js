@@ -307,8 +307,8 @@ function setupIntro() {
         }, // step 14
         {
           title: "JQuery Examples",
-          element: ".navbar-container",
-          intro: "Choose an example to try it out!",
+          element: ".jq-example[data-learn='select']",
+          intro: "Choose the \"SELECT\" Example for starters",
         }, // step 15
         {
           disableInteraction: true,

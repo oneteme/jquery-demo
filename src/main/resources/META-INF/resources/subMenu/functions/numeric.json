@@ -1,6 +1,6 @@
 [
     {
-      "title": "Truncate",
+      "title": "TRUNC",
       "view": "products",
       "column": "price:ActualPrice,price.trunc:TruncatedPrice,price.trunc(1):DecimalTruncatedPrice",
       "filter": "ActualPrice=21.35,23.25,17.45,62.5",
@@ -16,7 +16,7 @@
       "syntax": "column.abs"
     },
     {
-      "title": "Ceiling",
+      "title": "CEIL",
       "view": "products",
       "column": "price:ActualPrice,price.ceil:CeiledPrice",
       "filter": "",
