@@ -116,5 +116,5 @@
     "filter": "customer.contentLike=ue",
     "definition": "Matches any string that does not contain the specified 'pattern' in it",
     "syntax": "col2.notLike=pattern"
-  },
+  }
 ]
