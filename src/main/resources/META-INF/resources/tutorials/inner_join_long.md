@@ -1,4 +1,4 @@
-1. Add the join to your table Interface
+1. Add the join to your table Enum
 
 Add to your constructor a joins of type Function<String, JoinBuilder> and then add the join function
 ```java

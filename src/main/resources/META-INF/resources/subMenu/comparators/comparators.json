@@ -1,0 +1,120 @@
+[
+  {
+    "title": "equal (=)",
+    "view": "products",
+    "column": "price:Equal_30",
+    "filter": "price=30&price.eq(30)",
+    "definition": "column is equal to value.",
+    "syntax": "column=value/column.eq(value)"
+  },
+  {
+    "title": "Greater Than (>)",
+    "view": "products",
+    "column": "price:GreaterThan_30",
+    "filter": "price.gt=30&order=price",
+    "definition": "column is greater than value",
+    "syntax": "column.gt=value"
+  },
+  {
+    "title": "Lower Than (<)",
+    "view": "products",
+    "column": "price:LowerThan_30",
+    "filter": "price.lt=30&order=price",
+    "definition": "column is lower than value",
+    "syntax": "column.lt=value"
+  },
+  {
+    "title": "Greater equal (>=)",
+    "view": "products",
+    "column": "price:GreaterEqual_30",
+    "filter": "price.ge=30&order=price",
+    "definition": "column is greater or equal to value",
+    "syntax": "column.ge=value"
+  },
+  {
+    "title": "Lower equal (<=)",
+    "view": "products",
+    "column": "price:LowerEqual_30",
+    "filter": "price.le=30&order=price",
+    "definition": "column is lower or equal to value",
+    "syntax": "column.le=value"
+  },
+  {
+    "title": "Not equal (<>)",
+    "view": "products",
+    "column": "price:PriceNotEqualTo_30",
+    "filter": "price.ne=30&order=price",
+    "definition": "column is not equal to value",
+    "syntax": "column.ne=value"
+  },
+  {
+    "title": "NULL Comparator",
+    "view": "customers",
+    "filter": "country.isNull",
+    "definition": "IS NULL is used to check if a value is missing or empty (it has no value).",
+    "syntax": "column.isNull"
+  },
+  {
+    "title": "NOT NULL Comparator",
+    "view": "customers",
+    "filter": "country.notNull",
+    "definition": "NOT NULL is used to check if a value exists (it's not missing).",
+    "syntax": "column.notNull"
+  },
+  {
+    "title": "IN",
+    "view": "products",
+    "column": "price:PriceEqualTo_10_20_30_40_50",
+    "filter": "price=10,20,30,40,50&order=price",
+    "definition": "TRUE if the operand is equal to any value in a list of expressions",
+    "syntax": "column=val1,val2,val3,..."
+  },
+  {
+    "title": "Not IN",
+    "view": "products",
+    "column": "price:PriceNotEqualTo_10_20_30_40_50",
+    "filter": "price.notIn=10,20,30,40,50&order=price",
+    "definition": "TRUE if the operand is not equal to any value in a list of expressions",
+    "syntax": "column.notIn=val1,val2,val3,..."
+  },
+  {
+    "title": "BETWEEN",
+    "view": "products",
+    "column": "price:PriceBetween_10_20",
+    "filter": "price.between=10,20&order=price",
+    "definition": "BETWEEN is used to filter the result set within a specific range of values. It includes the boundary values.",
+    "syntax": "column.between=val1,val2"
+  },
+  {
+    "title": "CONTENT LIKE (%pattern%)",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.contentLike=ue",
+    "definition": "Matches any string that contains the specified 'pattern' anywhere within it.",
+    "syntax": "col2.contentLike=pattern"
+  },
+  {
+    "title": "START LIKE (pattern%)",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.startsLike=Qu",
+    "definition": "Matches any string that starts with the specified pattern.",
+    "syntax": "col2.startsLike=pattern"
+  },
+  {
+    "title": "ENDS LIKE (%pattern)",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.endsLike=en",
+    "definition": "Matches any string that ends with the specified pattern.",
+    "syntax": "col2.endsLike=pattern"
+  },
+  {
+    "title": "NOT LIKE",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.contentLike=ue",
+    "definition": "Matches any string that does not contain the specified 'pattern' in it",
+    "syntax": "col2.notLike=pattern"
+  }
+]

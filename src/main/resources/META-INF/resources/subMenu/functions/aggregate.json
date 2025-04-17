@@ -1,0 +1,42 @@
+[
+    {
+      "title": "AVG",
+      "view": "products",
+      "column": "price.avg:avg",
+      "filter": "",
+      "definition": "The AVG() function returns the average value of a numeric column.",
+      "syntax": "column1,column2,column3,..."
+    },
+    {
+      "title": "COUNT",
+      "view": "products",
+      "column": "id.count:COUNT",
+      "filter": "",
+      "definition": "The COUNT() function returns the number of rows that matches a specified criterion.",
+      "syntax": "column.count"
+    },
+    {
+      "title": "SUM",
+      "view": "details",
+      "column": "quantity.sum:SUM",
+      "filter": "",
+      "definition": "The SUM() function returns the total sum of a numeric column.",
+      "syntax": "column.sum"
+    },
+    {
+      "title": "MIN",
+      "view": "products",
+      "column": "price.min:SmallestPrice",
+      "filter": "",
+      "definition": "The MIN() function returns the smallest value of the selected column",
+      "syntax": "column.min"
+    },
+    {
+      "title": "MAX",
+      "view": "products",
+      "column": "price.max:LargestPrice",
+      "filter": "",
+      "definition": "The MAX() function returns the largest value of the selected column.",
+      "syntax": "column.max"
+    }
+  ]

@@ -42,10 +42,24 @@ $(document).ready(function () {
     toggleNavBar();
     introNextStep();
   });
-  $(document).on("click", ".parent_title", (e) => {
+  $(document).on("click", ".parent_title[isloaded='true']", (e) => {
+    console.log("clicked on a loaded menu");
     if (!$(event.target).closest(".jq-example").length) {
       toggleNavSubElements(e);
     }
+  });
+  $(document).on("click", ".parent_title[isloaded='false']", (e) => {
+    console.log("clicked on a unloaded menu");
+    let subMenuFile = $(e.currentTarget).attr("sub-menu"),
+      title = $(e.currentTarget).find("span:first").html();
+    fetch("subMenu/" + subMenuFile)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        createNavbar(data, $(".sub-nav[data-title='" + title + "']"));
+        $(e.currentTarget).attr("isloaded", true);
+        toggleNavSubElements(e);
+      });
   });
   $(document).on("click", ".jq-example", (e) => {
     console.log("click test");
@@ -53,27 +67,54 @@ $(document).ready(function () {
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
     $(".definition-display .example-title").html($(e.currentTarget).html());
+    let view = $(e.currentTarget).attr("data-view"),
+      columns = $(e.currentTarget).attr("data-column"),
+      filters = $(e.currentTarget).attr("data-filter"),
+      next = $(e.currentTarget).attr("data-next"),
+      prev = $(e.currentTarget).attr("data-prev");
     if ($(e.currentTarget).attr("data-tutorial")) {
       loadTutorial($(e.currentTarget).attr("data-tutorial"));
+      if (view || columns || filters) {
+        $(".definition-element.try_it").show();
+      }
     } else {
       $(".definition-element").show();
       $(".definition-element.tutorial").hide();
-      let view = $(e.currentTarget).attr("data-view");
-      let columns = $(e.currentTarget).attr("data-column");
-      let filters = $(e.currentTarget).attr("data-filter");
+      $(".definition-element.move_tuto").hide();
       let definition = $(e.currentTarget).attr("data-definition");
       let syntax = $(e.currentTarget).attr("data-syntax");
       console.log("view : ", view);
       console.log("columns : ", columns);
-      $("#jq-table").val(view);
-      $("#jq-columns").val(columns);
-      $("#jq-filters").val(filters);
       $("#defintion-text-container p").html(definition);
       $("#syntax-text-container p").html(syntax);
-      
       $(".definition-display .definition .description").html(definition);
       $(".definition-display .syntax .description").html(syntax);
     }
+    if (next || prev) {
+      $(".tuto_btn_container").hide();
+      console.log("next exists!!");
+      $(".definition-element.move_tuto").show();
+      if (next) {
+        $(".tuto_btn_container.btn-next").show();
+        $(".tuto_btn_container.btn-next span:first").html(next);
+        $(".tuto_btn_container.btn-next").attr(
+          "data-example",
+          next.toLowerCase()
+        );
+      }
+      if (prev) {
+        $(".tuto_btn_container.btn-prev").show();
+        $(".tuto_btn_container.btn-prev span:first").html(prev);
+        $(".tuto_btn_container.btn-prev").attr(
+          "data-example",
+          prev.toLowerCase()
+        );
+      }
+    }
+    $(".content").animate({ scrollTop: 0 }, 10);
+    $("#jq-table").val(view);
+    $("#jq-columns").val(columns);
+    $("#jq-filters").val(filters);
     fetchJQData();
     introNextStep();
   });
@@ -137,6 +178,10 @@ $(document).ready(function () {
   $(".definition-element .show-demo").on("click", (e) => {
     introNextStep();
   });
+  $(".tuto_btn_container").on("click", (e) => {
+    let example = $(e.currentTarget).attr("data-example");
+    $(".jq-example[data-learn='" + example + "']").click();
+  });
 });
 //**************** FUNCTIONS ****************/
 function introNextStep() {
@@ -147,7 +192,8 @@ function introNextStep() {
 }
 function setupIntro() {
   // *** DIVS TO SHOW/HIDE FOR TUTORIAL
-  $("#jquery-link").hide();
+  $(".jq-link-display").hide();
+  $("#sql-display").hide();
   clearTable();
   $(".definition-container").hide();
   $("#jq-columns").val("");
@@ -261,8 +307,8 @@ function setupIntro() {
         }, // step 14
         {
           title: "JQuery Examples",
-          element: ".navbar-container",
-          intro: "Choose an example to try it out!",
+          element: ".jq-example[data-learn='select']",
+          intro: "Choose the \"SELECT\" Example for starters",
         }, // step 15
         {
           disableInteraction: true,
@@ -343,7 +389,6 @@ function createSettings(data) {
         "data-count": elemCount,
       })
     );
-    console.log("count : ", elemCount);
     $.each(val.items, (key, val) => {
       let elemClass = val.class,
         gridDiv = $(".grid-options[data-count='" + elemCount + "'");
@@ -354,7 +399,6 @@ function createSettings(data) {
         })
       );
       for (let index = 0; index < elemCount; index++) {
-        console.log("adding element and index is : ", index);
         gridDiv
           .find(".option-box:last")
           .append($("<div>", { class: "display-grid-box" }));
@@ -391,25 +435,82 @@ function hideNavBar(element = $("#jq-show-examples")) {
   toggleNavBar();
 }
 function createNavbar(data, element = $(".navbar-nav")) {
+  console.log("createNavBar => data : ", data);
   $.each(data, (key, nav_element) => {
     if ("items" in nav_element) {
       element.append(
-        $("<div>", { class: "parent-element" }).append(
-          $("<div>", { class: "parent_title" }).append(
+        $("<div>", {
+          class: "parent-element",
+        }).append(
+          $("<div>", {
+            class: "parent_title",
+            isloaded: false,
+            "sub-menu": nav_element.items,
+          }).append(
             $("<span>").html(nav_element.title),
             $("<img>", {
               class: "nav-accordion accordion",
               src: "/assets/images/accordion.svg",
             })
           ),
-          $("<div>", { class: "sub-nav", style: "display:none;" })
+          $("<div>", {
+            class: "sub-nav",
+            "data-title": nav_element.title,
+            style: "display:none;",
+          })
         )
       );
-      createNavbar(nav_element.items, $(".sub-nav:last"));
+      // fetch("subMenu/" + nav_element.items)
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     createNavbar(
+      //       data,
+      //       $(".sub-nav[data-title='" + nav_element.title + "']")
+      //     );
+      //   });
     } else {
-      setupNavItem(nav_element, element);
+      // console.log("navbar key is : ", key);
+      // if (key + 1 < data.length) {
+      //   console.log(
+      //     "element : ",
+      //     nav_element.title,
+      //     " has next element : ",
+      //     data[key + 1].title
+      //   );
+      // } else {
+      //   console.log(
+      //     "element : ",
+      //     nav_element.title,
+      //     "does not have next element"
+      //   );
+      // }
+      let seperatedTutoArr = setupNext(data, key);
+      // console.log(
+      //   "current element : ",
+      //   nav_element.title,
+      //   "next element is : ",
+      //   seperatedTutoArr[0],
+      //   "previous element is : ",
+      //   seperatedTutoArr[1]
+      // );
+      setupNavItem(
+        nav_element,
+        element,
+        seperatedTutoArr[0],
+        seperatedTutoArr[1]
+      );
     }
   });
+}
+function setupNext(arr, key) {
+  let next =
+      key + 1 < arr.length && !("items" in arr[key + 1])
+        ? arr[key + 1].title
+        : null,
+    prev =
+      key - 1 >= 0 && !("items" in arr[key - 1]) ? arr[key - 1].title : null;
+  return [next, prev];
 }
 function loadNavbar() {
   $(".navbar-nav").empty();
@@ -420,14 +521,19 @@ function loadNavbar() {
       createNavbar(data);
     });
 }
-function setupNavItem(navItem, divElement) {
-  let navFields = {
-    class: "nav-item jq-example",
-  };
-  let title = navItem.title;
-  delete navItem.title;
+function setupNavItem(navItem, divElement, next, prev) {
+  let title = navItem.title,
+    navFields = {
+      class: "nav-item jq-example",
+      "data-learn": title.toLowerCase(),
+      "data-next": next,
+      "data-prev": prev,
+    };
+  // delete navItem.title;
   $.each(navItem, (key, value) => {
-    navFields["data-" + key] = value;
+    if (key != "title") {
+      navFields["data-" + key] = value;
+    }
   });
   $(divElement).append($("<li>", navFields).html(title));
 }
@@ -447,7 +553,7 @@ function toggleNavBar(animationTime = 100) {
   }); // duration in milliseconds
 }
 function fetchJQData() {
-  let table = $("#jq-table").val() + "?";
+  let table = $("#jq-table").val() ? $("#jq-table").val() + "?" : null;
   let columns = $("#jq-columns").val();
   let filters = $("#jq-filters").val();
   let fetchLink =
@@ -455,19 +561,24 @@ function fetchJQData() {
     table +
     (columns ? "column=" + columns : "") +
     (filters ? "&" + filters : "");
-  $("#jquery-link").html("JQuery link : " + fetchLink);
-  $("#jquery-link").show();
-  console.log("link to fetch : ", fetchLink);
-  fetch(fetchLink)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      $("#sql-display").html(data.query);
-      displayTableResults(data.result);
-    })
-    .catch((error) => {
-      console.error("Error fetching data: ", error);
-    });
+  if (table) {
+    $("#jquery-link").html(fetchLink);
+    $(".jq-link-display").show();
+    console.log("link to fetch : ", fetchLink);
+    fetch(fetchLink)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        $("#sql-code").html(sqlFormatter.format(data.query));
+        $("#sql-display").show();
+
+        hljs.highlightAll();
+        displayTableResults(data.result);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }
 }
 function displayTableResults(data) {
   clearTable();
@@ -513,10 +624,10 @@ function loadTutorial(fileName) {
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
   $.get("tutorials/" + fileName, function (data) {
-    console.log("markdown data : ", data);
+    // console.log("markdown data : ", data);
     // Convert Markdown to HTML
     var htmlContent = marked.parse(data);
-
+    console.log("htmlcontent : ", htmlContent);
     // Insert the HTML into the div
     $(".highlighted_code").html(htmlContent);
 

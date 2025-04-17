@@ -39,6 +39,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="./assets/script/script.js"></script>
+
+    <!-- SQL FORMATTER -->
+    <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
   </head>
 
   <body>
@@ -114,7 +117,7 @@
         <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
         <div class="settings-content">
-          <div class="form-container p-3 p-md-4 rounded-3 upper-col">
+          <div class="form-container p-3 p-md-3 rounded-3 upper-col">
             <form id="query-form" class="form-content">
               <div class="col-sm-6 table_input_container">
                 <label for="jq-table" class="fw-semibold white_text"
@@ -171,23 +174,32 @@
                 type="submit"
                 value="Execute"
               />
-
-              <span id="jquery-link"></span>
+              <div class="jq-link-display" style="display: none">
+                <label for="jquery-link" class="fw-semibold white_text"
+                  >JQuery link</label
+                >
+                <pre><code id="jquery-link" class="language-php"></code></pre>
+              </div>
             </form>
           </div>
 
-          <div class="col-sm-6" style="width: 100%; min-width: 324px">
-            <label for="sql-display" class="fw-semibold white_text"
+          <div
+            id="sql-display"
+            class="col-sm-6"
+            style="width: 100%; min-width: 324px; display: none"
+          >
+            <label for="sql-code" class="fw-semibold white_text"
               >SQL Query</label
             >
-            <textarea
+            <pre><code id="sql-code" class="language-sql"></code></pre>
+            <!-- <textarea
               id="sql-display"
               class="form-control"
               name="showsql"
               readonly
               style="resize: none; max-height: 200px; height: 100%"
               placeholder="Query in SQL"
-            ></textarea>
+            ></textarea> -->
           </div>
           <div class="results-container" style="display: none">
             <div class="table-wrapper">
@@ -220,7 +232,11 @@
             impedit! Architecto, minus.
           </div>
         </div>
-        <div class="definition-element">
+        <div class="definition-element tutorial">
+          <!-- <h2 class="title white_text">Tutorial</h2> -->
+          <div class="highlighted_code"></div>
+        </div>
+        <div class="definition-element try_it">
           <h2 class="title white_text">Try it</h2>
           <div class="description white_text">
             To see how it works you can
@@ -232,11 +248,29 @@
             >
           </div>
         </div>
-        <div class="definition-element tutorial">
-            <!-- <h2 class="title white_text">Tutorial</h2> -->
-            <div class="highlighted_code">
-
+        <div class="definition-element move_tuto" style="position: relative">
+          <h2 class="title white_text">What's Next?</h2>
+          <div class="tuto_buttons">
+            <div class="tuto_btn_container btn-prev">
+              <img
+                style="width: 24px; transform: rotate(180deg)"
+                src="assets/images/arrow-right-solid.svg"
+                alt=""
+              />
+              <span class="white_text">Previous</span>
             </div>
+            <div
+              class="tuto_btn_container btn-next"
+              style="position: absolute; right: 0; bottom: 8px"
+            >
+              <span class="white_text">Next</span>
+              <img
+                style="width: 24px"
+                src="assets/images/arrow-right-solid.svg"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
