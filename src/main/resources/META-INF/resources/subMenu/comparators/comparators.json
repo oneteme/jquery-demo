@@ -78,11 +78,43 @@
     "syntax": "column.notIn=val1,val2,val3,..."
   },
   {
-    "title": "LIKE",
+    "title": "BETWEEN",
+    "view": "products",
+    "column": "price:PriceBetween_10_20",
+    "filter": "price.between=10,20&order=price",
+    "definition": "BETWEEN is used to filter the result set within a specific range of values. It includes the boundary values.",
+    "syntax": "column.between=val1,val2"
+  },
+  {
+    "title": "CONTENT LIKE (%pattern%)",
     "view": "customers",
-    "column": "customer,contact,address,city,postal_code,country",
-    "filter": "customer.like=a%",
-    "definition": "LIKE: A SQL operator used to search for a specified pattern within a column. It supports wildcard characters to facilitate pattern matching<br><br>For example:<br><br>SELECT * FROM employees WHERE name LIKE 'J%';<br>This would find all employees whose names start with the letter 'J'.",
-    "syntax": "col1,col2&col2.like=a%"
-  }
+    "column": "customer",
+    "filter": "customer.contentLike=ue",
+    "definition": "Matches any string that contains the specified 'pattern' anywhere within it.",
+    "syntax": "col2.contentLike=pattern"
+  },
+  {
+    "title": "START LIKE (pattern%)",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.startsLike=Qu",
+    "definition": "Matches any string that starts with the specified pattern.",
+    "syntax": "col2.startsLike=pattern"
+  },
+  {
+    "title": "ENDS LIKE (%pattern)",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.endsLike=en",
+    "definition": "Matches any string that ends with the specified pattern.",
+    "syntax": "col2.endsLike=pattern"
+  },
+  {
+    "title": "NOT LIKE",
+    "view": "customers",
+    "column": "customer",
+    "filter": "customer.contentLike=ue",
+    "definition": "Matches any string that does not contain the specified 'pattern' in it",
+    "syntax": "col2.notLike=pattern"
+  },
 ]

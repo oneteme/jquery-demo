@@ -2,7 +2,7 @@
   {
     "title": "ADD (+)",
     "view": "products",
-    "column": "price,price.plus(20):Price_PLUS_20,Price_PLUS_20.plus(40):Price_PLUS_60",
+    "column": "price,price.plus(20):Plus20,Plus20.plus(40):Plus60",
     "filter": "limit=10",
     "definition": "Adds two or more numbers",
     "syntax": "column.plus(value1/column1).plus(value2/column2).plus(etc...)"
@@ -10,15 +10,15 @@
   {
     "title": "SUBSTRACT (-)",
     "view": "products",
-    "column": "price,price.minus(10):Price_MINUS_10,Price_MINUS_10.minus(20):Price_MINUS_30",
-    "filter": "limit=10&price.ge=30",
+    "column": "price,price.minus(10):MINUS10,MINUS10.minus(20):MINUS30",
+    "filter": "limit=10&price=30,40,50,60",
     "definition": "Subtracts one number from another.",
     "syntax": "column.minus(value1/column1).minus(value2/column2).minus(etc...)"
   },
   {
     "title": "MULTIPLY (*)",
     "view": "products",
-    "column": "price,price.multiply(2):Price_MULTIPLIED_BY_2,Price_MULTIPLIED_BY_2.multiply(3):Price_MULTIPLIED_BY_6",
+    "column": "price,price.multiply(2):X2,X2.multiply(3):X6",
     "filter": "limit=10&price=10,20,30,40,50,60",
     "definition": "Multiplies two numbers.",
     "syntax": "column.multiply(value1/column1).multiply(value2/column2).multiply(etc...)"
@@ -26,7 +26,7 @@
   {
     "title": "DIVIDE (/)",
     "view": "products",
-    "column": "price,price.divide(2):Price_DIVIDED_BY_2,Price_DIVIDED_BY_2.divide(4):Price_DIVIDED_BY_4",
+    "column": "price,price.divide(2):DIVIDE_BY2,DIVIDE_BY2.divide(4):DIVIDE_BY4",
     "filter": "limit=10&price.ge=4",
     "definition": "Divides one number by another.",
     "syntax": "column.divide(value1/column1).divide(value2/column2).divide(etc...)"
