@@ -4,7 +4,7 @@ spring:
   application:
     name: demo
   datasource:
-    url: jdbc:h2:mem:testdb;
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE
     username: sa
     password: 
     driver-class-name: org.h2.Driver
@@ -12,6 +12,9 @@ spring:
     hikari:
       minimum-idle: 1
       maximum-pool-size: 5
+      idle-timeout: 600000         # 10 minutes
+      max-lifetime: 1800000        # 30 minutes
+      keepalive-time: 300000       # Internal ping every 5 minutes
   h2:
     console:
       enabled: true
