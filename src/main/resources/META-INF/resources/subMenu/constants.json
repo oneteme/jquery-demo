@@ -19,12 +19,5 @@
     "column": "ctime:CurrentTime",
     "definition": "Get the current time",
     "syntax": "ctime"
-  },
-  {
-    "title": "Epoch",
-    "view": "employees",
-    "column": "ctimes:CurrentTime,CurrentTime.epoch:epoch",
-    "definition": "Get the date/TimeStamp in millisecond since 01 January 1970",
-    "syntax": "column.epoch / epoch(column)"
   }
 ]

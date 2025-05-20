@@ -308,7 +308,7 @@ function setupIntro() {
         {
           title: "JQuery Examples",
           element: ".jq-example[data-learn='select']",
-          intro: "Choose the \"SELECT\" Example for starters",
+          intro: 'Choose the "SELECT" Example for starters',
         }, // step 15
         {
           disableInteraction: true,
@@ -470,36 +470,14 @@ function createNavbar(data, element = $(".navbar-nav")) {
       //     );
       //   });
     } else {
-      // console.log("navbar key is : ", key);
-      // if (key + 1 < data.length) {
-      //   console.log(
-      //     "element : ",
-      //     nav_element.title,
-      //     " has next element : ",
-      //     data[key + 1].title
-      //   );
-      // } else {
-      //   console.log(
-      //     "element : ",
-      //     nav_element.title,
-      //     "does not have next element"
-      //   );
-      // }
       let seperatedTutoArr = setupNext(data, key);
-      // console.log(
-      //   "current element : ",
-      //   nav_element.title,
-      //   "next element is : ",
-      //   seperatedTutoArr[0],
-      //   "previous element is : ",
-      //   seperatedTutoArr[1]
-      // );
       setupNavItem(
         nav_element,
         element,
         seperatedTutoArr[0],
         seperatedTutoArr[1]
       );
+      tippy('li[data-tippy-content]')
     }
   });
 }
@@ -529,6 +507,9 @@ function setupNavItem(navItem, divElement, next, prev) {
       "data-next": next,
       "data-prev": prev,
     };
+    if(navItem.tooltip){
+      navFields["data-tippy-content"] = navItem.tooltip
+    }
   // delete navItem.title;
   $.each(navItem, (key, value) => {
     if (key != "title") {
@@ -568,7 +549,9 @@ function fetchJQData() {
     fetch(fetchLink)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log("response : ",response);
+        console.log("data : ", data);
+        $(".error_container").hide();
         $("#sql-code").html(sqlFormatter.format(data.query));
         $("#sql-display").show();
 
@@ -576,6 +559,11 @@ function fetchJQData() {
         displayTableResults(data.result);
       })
       .catch((error) => {
+        let errorMessage = "Error while executing this query.";
+        clearTable();
+        $("#sql-display").hide();
+        $(".error_container").show();
+        $("#error-code").html(errorMessage);
         console.error("Error fetching data: ", error);
       });
   }

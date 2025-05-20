@@ -5,7 +5,8 @@
       "column": "price:ActualPrice,price.trunc:TruncatedPrice,price.trunc(1):DecimalTruncatedPrice",
       "filter": "ActualPrice=21.35,23.25,17.45,62.5",
       "definition": "Truncates a number to a specified number of decimal places without rounding.",
-      "syntax": "column.trunc(optionalValue)/trunc(column,optionalValue)"
+      "syntax": "column.trunc(optionalValue)/trunc(column,optionalValue)",
+      "tooltip":"Truncate"
     },
     {
       "title": "ABS",
@@ -13,7 +14,8 @@
       "column": "price.abs:ABS,abs(-65):NegativeABS",
       "filter": "limit=1",
       "definition": "ABS(): Returns the absolute value of a number.",
-      "syntax": "column.abs"
+      "syntax": "column.abs",
+      "tooltip":"Absolute value"
     },
     {
       "title": "CEIL",
@@ -21,7 +23,8 @@
       "column": "price:ActualPrice,price.ceil:CeiledPrice",
       "filter": "",
       "definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
-      "syntax": "column.ceil"
+      "syntax": "column.ceil",
+      "tooltip":"Ceiling"
     },
     {
       "title": "FLOOR",
@@ -40,12 +43,13 @@
       "syntax": "column.round(optionalValue)/round(column,optionalValue)"
     },
     {
-      "title": "SQRT(Square root)",
+      "title": "SQRT",
       "view": "products",
       "column": "price:ActualPrice,price.sqrt:SqrtPrice",
       "filter": "",
       "definition": "SQRT(): Returns the square root of a number",
-      "syntax": "column.sqrt"
+      "syntax": "column.sqrt",
+      "tooltip":"Square root"
     },
 
     {
@@ -54,6 +58,7 @@
       "column": "price,price.mod(10):MODPrice",
       "filter": "",
       "definition": "MOD(): Returns the remainder of a division operation",
-      "syntax": "column.mod(value)"
+      "syntax": "column.mod(value)",
+      "tooltip":"Modulo"
     }
   ]

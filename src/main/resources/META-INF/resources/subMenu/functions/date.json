@@ -28,39 +28,44 @@
     "syntax": "column.week / week(column)"
   },
   {
-    "title": "Day of week (dow)",
+    "title": "Day of week",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentTimestamp.dow:Day_of_week",
+    "column": "cdate:CurrentDate,CurrentDate.dow:Day_of_week",
     "definition": "Extract the day of week from the date",
-    "syntax": "column.dow / dow(column)"
+    "syntax": "column.dow / dow(column)",
+    "tooltip":"dow"
   },
   {
-    "title": "Day of year (doy)",
+    "title": "Day of year",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentTimestamp.doy:Day_of_year",
+    "column": "cdate:CurrentDate,CurrentDate.doy:Day_of_year",
     "definition": "Extract the day of year from the date",
-    "syntax": "column.doy / doy(column)"
+    "syntax": "column.doy / doy(column)",
+    "tooltip":"doy"
   },
   {
     "title": "YearMonth",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.yearMonth:yearMonth",
+    "column": "start,start.yearMonth:yearMonth",
     "definition": "Extract the yearMonth from the date YYYY-MM",
-    "syntax": "column.yearMonth"
+    "syntax": "column.yearMonth",
+    "tooltip": "Year and month YYYY-MM"
   },
   {
     "title": "MonthDay",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.monthDay:monthDay",
+    "column": "start,start.monthDay:monthDay",
     "definition": "Extract the monthDay from the date MM-DD",
-    "syntax": "column.monthDay"
+    "syntax": "column.monthDay",
+    "tooltip": "Day and month MM-DD"
   },
   {
     "title": "YearWeek",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.yearWeek:yearWeek",
+    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.yearWeek:yearWeek",
     "definition": "Extract the yearWeek from the date YYYY-'W'WW",
-    "syntax": "column.yearWeek / yearWeek(column)"
+    "syntax": "column.yearWeek / yearWeek(column)",
+    "tooltip": "Year and week number YYYY-'W'WW"
   },
   {
     "title": "Hour",
@@ -86,8 +91,16 @@
   {
     "title": "hourMinute",
     "view": "employees",
-    "column": "ctime:CurrentTime,CurrentTime.hourMinute:hourMinute",
+    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.hourMinute:hourMinute",
     "definition": "Extract the hourMinute from the date HH:MM",
-    "syntax": "column.hourMinute / hourMinute(column)"
+    "syntax": "column.hourMinute / hourMinute(column)",
+    "tooltip": "Hours and minutes HH:MM"
+  },
+  {
+    "title": "Epoch",
+    "view": "employees",
+    "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.epoch:epoch",
+    "definition": "Get the date/TimeStamp in millisecond since 01 January 1970",
+    "syntax": "column.epoch / epoch(column)"
   }
 ]

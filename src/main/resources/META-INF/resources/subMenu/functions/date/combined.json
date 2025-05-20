@@ -4,27 +4,31 @@
     "view": "employees",
     "column": "start,start.yearMonth:yearMonth",
     "definition": "Extract the yearMonth from the date YYYY-MM",
-    "syntax": "column.yearMonth"
+    "syntax": "column.yearMonth",
+    "tooltip": "Year and month YYYY-MM"
   },
   {
     "title": "MonthDay",
     "view": "employees",
     "column": "start,start.monthDay:monthDay",
     "definition": "Extract the monthDay from the date MM-DD",
-    "syntax": "column.monthDay"
+    "syntax": "column.monthDay",
+    "tooltip": "Day and month MM-DD"
   },
   {
     "title": "YearWeek",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.yearWeek:yearWeek",
     "definition": "Extract the yearWeek from the date YYYY-'W'WW",
-    "syntax": "column.yearWeek / yearWeek(column)"
+    "syntax": "column.yearWeek / yearWeek(column)",
+    "tooltip": "Year and week number YYYY-'W'WW"
   },
   {
     "title": "hourMinute",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.hourMinute:hourMinute",
     "definition": "Extract the hourMinute from the date HH:MM",
-    "syntax": "column.hourMinute / hourMinute(column)"
+    "syntax": "column.hourMinute / hourMinute(column)",
+    "tooltip": "Hours and minutes HH:MM"
   }
 ]
