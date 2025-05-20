@@ -61,6 +61,10 @@ public enum JQDemoTable implements ViewDecorator {
 			return () -> new ViewJoin[] { ViewJoin.rightJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
 		}
+		if (CUSTOMER == this && "rightorder".equals(name)) {
+			return () -> new ViewJoin[] { ViewJoin.rightJoin(JQDemoTable.ORDER.view(), JQDemoTable.ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+		}
 		return ViewDecorator.super.join(name);
 //		return joins == null ? ViewDecorator.super.join(name) : joins.apply(name);
 	}

@@ -1,5 +1,6 @@
 package io.github.oneteme.jquery.demo.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.core.Query;
 import org.usf.jquery.core.QueryComposer;
+import org.usf.jquery.core.ResultSetMapper;
+import org.usf.jquery.core.RowMapper;
 import org.usf.jquery.web.RequestQueryParam;
+import org.usf.jquery.web.RequestQueryParam2;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +34,36 @@ public class JQueryController {
 			@RequestQueryParam(database = "demo",view = "customer", defaultColumns = "id,customer,contact,address,city,postal_code,country") QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
+	
+	@GetMapping("customers/test1")
+	public List<Customer> fetchCustomersTest1(
+			@RequestQueryParam2(database = "demo", view = "customer", limit = 1, order = "") QueryComposer query) {
+		return usingSpringJdbc(query, 
+				rs-> new Customer(
+						rs.getString("id"),
+						rs.getString("customer"),
+						rs.getString("contact")));
+	}
+	
+	@GetMapping("customers/test2Limit")
+	public Map<String, Object> fetchCustomersTest2WithLimit(
+			@RequestQueryParam2(database = "demo",column="id,customer,contact", view = "customer", limit = 0, order = "id") QueryComposer query) {
+		return usingSpringJdbc(query);
+	}
+	
+	@GetMapping("customers/test2")
+	public Map<String, Object> fetchCustomersTest2NoLimit(
+			@RequestQueryParam2(database = "demo",column="id,customer,contact", view = "customer", order = "id") QueryComposer query) {
+		return usingSpringJdbc(query);
+	}
+	
+	@GetMapping("orders/test2")
+	public Map<String, Object> fetchOrdersTest(
+			@RequestQueryParam2(database = "demo", view = "order") QueryComposer query) {
+		return usingSpringJdbc(query);
+	}
+	
+	static record Customer(String id, String name, String contact) {	}
 
 	@GetMapping("shippers")
 	public Map<String, Object> fetchShippers(
@@ -82,5 +116,15 @@ public class JQueryController {
 			throw new RuntimeException(e); //TODO custom exception
 		}
 	}
+	
+	private  <T> List<T> usingSpringJdbc(QueryComposer request, RowMapper<T> mapper)  {
+		try {
+			return request.compose(null, false).execute(ds, mapper);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e); //TODO custom exception
+		}
+	}
+	
 
 }
