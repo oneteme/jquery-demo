@@ -30,14 +30,14 @@
   {
     "title": "Day of week (dow)",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentTimestamp.dow:Day_of_week",
+    "column": "cdate:CurrentDate,CurrentDate.dow:Day_of_week",
     "definition": "Extract the day of week from the date",
     "syntax": "column.dow / dow(column)"
   },
   {
     "title": "Day of year (doy)",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentTimestamp.doy:Day_of_year",
+    "column": "cdate:CurrentDate,CurrentDate.doy:Day_of_year",
     "definition": "Extract the day of year from the date",
     "syntax": "column.doy / doy(column)"
   }

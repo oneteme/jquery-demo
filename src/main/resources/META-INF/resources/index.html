@@ -38,6 +38,14 @@
     <!-- Highlight.js Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+
+    <!-- SQL FORMATTER -->
+    <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
+
+    <!-- tippy.js -->
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+
     <script src="./assets/script/script.js"></script>
 
     <!-- SQL FORMATTER -->
@@ -104,7 +112,7 @@
 
       <div class="content jquery-display">
         <span class="white_text"
-          >Welcome to JQueryDemo, a new way to write queries</span
+          >Welcome to <b>JQueryDemo</b>, a new way to write queries</span
         >
         <div
           class="show-docs jq-rounded-btn btn-trigger"
@@ -180,6 +188,9 @@
                 >
                 <pre><code id="jquery-link" class="language-php"></code></pre>
               </div>
+              <div class="error_container" style="display: none">
+                <pre><code id="error-code" class="language-brainfuck" style="color: red;font-size: 16px;">Error Request 500</code></pre>
+              </div>
             </form>
           </div>
 
@@ -201,6 +212,7 @@
               placeholder="Query in SQL"
             ></textarea> -->
           </div>
+
           <div class="results-container" style="display: none">
             <div class="table-wrapper">
               <table class="jq-table"></table>

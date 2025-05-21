@@ -1,9 +1,12 @@
 package io.github.oneteme.jquery.demo.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.core.QueryBuilder;
@@ -66,11 +69,37 @@ public class JQueryController {
 		return usingSpringJdbc(query);
 	}
 
+//	private ResponseEntity<Map<String, Object>> usingSpringJdbc(QueryBuilder req) {
+//		Map<String, Object> result = new HashMap<>();
+//		try {			
+//			var query = req.build();
+//			var sqlQuery = query.getQuery();
+//			var queryResult = exec(req);
+//			result.put("query", sqlQuery);
+//			result.put("result", queryResult);
+//			return ResponseEntity.ok(result);
+//		} catch (Exception e) {
+//			  // Catch it here and return JSON manually
+//	        result.put("status", "error");
+//	        result.put("message", e.getMessage());
+//	        result.put("errorType", e.getClass().getSimpleName());
+//
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+//
+//		}
+//	}
 	private Map<String, Object> usingSpringJdbc(QueryBuilder req) {
-		var query = req.build();
-		var sqlQuery = query.getQuery();
-		var queryResult = exec(req);
-		return Map.of("query", sqlQuery, "result", queryResult);
+		Map<String, Object> result = new HashMap<>();
+		try {			
+			var query = req.build();
+			var sqlQuery = query.getQuery();
+			var queryResult = exec(req);
+			result.put("query", sqlQuery);
+			result.put("result", queryResult);
+		} catch (Exception e) {
+			result.put("test_error", e.getMessage());
+		}
+		return result;
 	}
 	
 	private Object exec(QueryBuilder request)  {

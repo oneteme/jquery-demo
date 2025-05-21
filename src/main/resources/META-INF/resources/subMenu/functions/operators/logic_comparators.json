@@ -1,13 +1,13 @@
 [
   {
-    "title": "AND Operator",
+    "title": "AND",
     "view": "customers",
     "filter": "country.eq(Brazil).and(city.eq(\"São Paulo\"))",
     "definition": "Used when both conditions must be true. if (condition1 is true) AND (condition2 is true)",
     "syntax": "filter1.and(filter2.and(filter3).and(etc...)).and(filter4)"
   },
   {
-    "title": "OR Operator",
+    "title": "OR",
     "view": "customers",
     "filter": "country.eq(France).or(country.eq(Germany).or(country.eq(Canada))).or(country.eq(Italy))",
     "column":"country,count:COUNT",
