@@ -6,24 +6,24 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.usf.jquery.core.QueryComposer;
-import org.usf.jquery.web.QueryRequest;
-import org.usf.jquery.web.QueryRequestResolver;
+import org.usf.jquery.web.QueryRequestFilter;
+import org.usf.jquery.web.QueryRequestFilterResolver;
 
-public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver {
+public class CommonRequestQueryFilterResolver implements HandlerMethodArgumentResolver {
 
-    private final QueryRequestResolver resolver = new QueryRequestResolver();
+    private final QueryRequestFilterResolver resolver = new QueryRequestFilterResolver();
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return QueryComposer.class.isAssignableFrom(parameter.getNestedParameterType())
-                && parameter.hasParameterAnnotation(QueryRequest.class);
+                && parameter.hasParameterAnnotation(QueryRequestFilter.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        var crp = parameter.getParameterAnnotation(QueryRequest.class);
-        return resolver.requestQuery(crp, webRequest.getParameterMap());
+        var crp = parameter.getParameterAnnotation(QueryRequestFilter.class);
+        return resolver.requestQueryCheck(crp, webRequest.getParameterMap());
     }
 }
 

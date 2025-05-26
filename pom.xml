@@ -28,14 +28,14 @@
 		<url />
 	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 	</properties>
 	<dependencies>
 
 	<dependency>
 			<groupId>io.github.oneteme</groupId>
 			<artifactId>jquery</artifactId>
-			<version>4.0.1</version>
+			<version>4.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

@@ -1,14 +1,15 @@
 package io.github.oneteme.jquery.demo;
 
 import static org.usf.jquery.core.ViewJoin.innerJoin;
+import static org.usf.jquery.core.ViewJoin.leftJoin;
+import static org.usf.jquery.core.ViewJoin.rightJoin;
 
 import java.util.function.Function;
 
 import org.usf.jquery.core.DBFilter;
 import org.usf.jquery.core.ViewJoin;
+import org.usf.jquery.web.Builder;
 import org.usf.jquery.web.ColumnDecorator;
-import org.usf.jquery.web.CriteriaBuilder;
-import org.usf.jquery.web.JoinBuilder;
 import org.usf.jquery.web.ViewDecorator;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public enum JQDemoTable implements ViewDecorator {
 	}
 
 	@Override
-	public CriteriaBuilder<DBFilter> criteria(String name) { // TODO split
+	public Builder<ViewDecorator, DBFilter> criteria(String name) { // TODO split
 		return ViewDecorator.super.criteria(name);
 	}
 
@@ -48,18 +49,18 @@ public enum JQDemoTable implements ViewDecorator {
 	}
 
 	@Override
-	public JoinBuilder join(String name) {
+	public Builder<ViewDecorator, ViewJoin[]> join(String name) {
 		if (ORDER == this && "innercustomer".equals(name)) {
-			return () -> new ViewJoin[] { ViewJoin.innerJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
-					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+			return (vd, env, args) -> new ViewJoin[] { innerJoin(CUSTOMER.view(), ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "leftcustomer".equals(name)) {
-			return () -> new ViewJoin[] { ViewJoin.leftJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
-					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+			return (vd, env, args) -> new ViewJoin[] { leftJoin(CUSTOMER.view(), ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "rightcustomer".equals(name)) {
-			return () -> new ViewJoin[] { ViewJoin.rightJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER
-					.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID))) };
+			return (vd, env, args) -> new ViewJoin[] { rightJoin(CUSTOMER.view(), ORDER
+					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		return ViewDecorator.super.join(name);
 //		return joins == null ? ViewDecorator.super.join(name) : joins.apply(name);

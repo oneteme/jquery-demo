@@ -3,7 +3,6 @@ package io.github.oneteme.jquery.demo;
 import static org.usf.jquery.core.ViewJoin.innerJoin;
 
 import org.usf.jquery.core.ViewJoin;
-import org.usf.jquery.web.JoinBuilder;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -99,23 +98,6 @@ public final class DataConstants {
 		case QUANTITY -> "QUANTITY";
 		default -> null;
 		};
-	}
-
-	public static JoinBuilder orderJoin(String name) {
-		return switch (name) {
-//		case "complete" -> () -> new ViewJoin[] { joinDepRegion(), joinConvDep() };
-//		case "depregion" -> () -> new ViewJoin[] { joinDepRegion() };
-//		case "region" -> () -> joinConvReg();
-//		case "ratt" -> () -> joinConvRatt(RATT);
-//		case "resp" -> () -> joinConvResp();
-//		case "type" -> () -> joinConvType(AutoConsTable.TYPE);
-		case "innercustomer" -> () -> new ViewJoin[] { joinOrderCustomer(JQDemoTable.CUSTOMER) };
-		default -> null;
-		};
-	}
-
-	public static ViewJoin joinOrderCustomer(JQDemoTable view) {
-		return innerJoin(view.view(),JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)));
 	}
 
 }
