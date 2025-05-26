@@ -73,7 +73,8 @@ public class JQueryController {
 	// RequestQueryParamWithCheck
 	@GetMapping("products/test")
 	public Map<String, Object> fetchProductsWithCheck(
-			@QueryRequestFilter(database = "demo",view = "product", column = "id,name,price",filters= {"price=10,20,30,40,50"},order="price") QueryComposer query) {
+			@QueryRequestFilter(database = "demo",view = "product", column = "id,name,price",
+			filters= {"price=10,20,30,40,=50"},order="price") QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
 	
