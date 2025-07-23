@@ -1,5 +1,9 @@
 package io.github.oneteme.jquery.demo.controller;
 
+import static io.github.oneteme.jquery.demo.JQDatabase.DEMO;
+import static org.usf.jquery.web.Keyword.COLUMN;
+import static org.usf.jquery.web.Keyword.ORDER;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequiredArgsConstructor
 public class JQueryController {
-
-	private final DataSource ds;
-//	private final JdbcTemplate template; TODO addArgumentResolvers initiated before H2 without template
 
 	@GetMapping("employees")
 	public Map<String, Object> fetchEmployees(
@@ -89,10 +90,16 @@ public class JQueryController {
 			@QueryRequestFilter(database = "demo", view = "customer", column = "id,customer,country", distinct = true, order = "country.desc", limit = 5, offset = 5) QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
+	
+	@GetMapping("customers/allow/test")
+	public Map<String, Object> fetchCustomersAllowColWithCheck(
+			@QueryRequestFilter(database = "demo", view = "customer", column = "id,customer,country", mergeParameters = {COLUMN,ORDER}, distinct = true, order = "country.desc", limit = 5, offset = 5) QueryComposer query) {
+		return usingSpringJdbc(query);
+	}
 
 	@GetMapping("orders/distinct/test")
 	public Map<String, Object> fetchOrdersWithCheck(
-			@QueryRequestFilter(database = "demo",view = "order", column = "id,start,customer_id,employee_id,shipper_id", distinct = true, join = "innercustomer", limit = 5) QueryComposer query) {
+			@QueryRequestFilter(database = "demo", view = "order", column = "id,start,customer_id,employee_id,shipper_id", distinct = true, join = "innercustomer", limit = 5) QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
 	
@@ -101,47 +108,20 @@ public class JQueryController {
 			@QueryRequestFilter(database = "demo",view = "order", column = "id,start,customer_id,employee_id,shipper_id", join = "innercustomer", limit = 5) QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
-//	private ResponseEntity<Map<String, Object>> usingSpringJdbc(QueryComposer req) {
-//		Map<String, Object> result = new HashMap<>();
-//		try {			
-//			var query = req.build();
-//			var sqlQuery = query.getQuery();
-//			var queryResult = exec(req);
-//			result.put("query", sqlQuery);
-//			result.put("result", queryResult);
-//			return ResponseEntity.ok(result);
-//		} catch (Exception e) {
-//			  // Catch it here and return JSON manually
-//	        result.put("status", "error");
-//	        result.put("message", e.getMessage());
-//	        result.put("errorType", e.getClass().getSimpleName());
-//
-//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
-//
-//		}
-//	}
 	private Map<String, Object> usingSpringJdbc(QueryComposer req) {
 		Map<String, Object> result = new HashMap<>();
 		try {			
-			var query = req.compose(null, false);
-			var sqlQuery = query.toString();
-			var queryResult = exec(req);
+			var query = DEMO.execute(req);
+			var sqlQuery = req.compose().buildQuery(null, false, null).getSql();
 			result.put("query", sqlQuery);
-			result.put("result", queryResult);
+			result.put("result", query);
 		} catch (Exception e) {
 			result.put("test_error", e.getMessage());
 //			log.error("error exec query : ", e);
+			return result;
 		}
 		return result;
 	}
 	
-	private Object exec(QueryComposer request)  {
-		try {
-			return request.compose().execute(ds);
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e); //TODO custom exception
-		}
-	}
 
 }

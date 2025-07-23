@@ -39,30 +39,29 @@ public enum JQDemoTable implements ViewDecorator {
 	}
 
 	@Override
-	public Builder<ViewDecorator, DBFilter> criteria(String name) { // TODO split
-		return ViewDecorator.super.criteria(name);
+	public DBFilter criteria(String name, String... args) {
+		return ViewDecorator.super.criteria(name, args);
 	}
-
 	@Override
 	public String columnName(ColumnDecorator cd) {
 		return colMap.apply((JQDemoColumn) cd);
 	}
 
 	@Override
-	public Builder<ViewDecorator, ViewJoin[]> join(String name) {
+	public Builder<ViewDecorator, ViewJoin[]> joinBuilder(String name) {
 		if (ORDER == this && "innercustomer".equals(name)) {
-			return (vd, env, args) -> new ViewJoin[] { innerJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new ViewJoin[] { innerJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "leftcustomer".equals(name)) {
-			return (vd, env, args) -> new ViewJoin[] { leftJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new ViewJoin[] { leftJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "rightcustomer".equals(name)) {
-			return (vd, env, args) -> new ViewJoin[] { rightJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new ViewJoin[] { rightJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
-		return ViewDecorator.super.join(name);
+		return (vd, env) ->ViewDecorator.super.join(name);
 //		return joins == null ? ViewDecorator.super.join(name) : joins.apply(name);
 	}
 

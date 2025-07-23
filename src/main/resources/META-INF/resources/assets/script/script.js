@@ -2,6 +2,7 @@ var intro,
   introIsCompleted = true,
   navStyleFields = {},
   resultTable,
+  shouldUpdate ,
   inputTimeOut;
 //**************** EVENT LISTENERS ****************/
 $(document).ready(function () {
@@ -26,6 +27,7 @@ $(document).ready(function () {
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
+    shouldUpdate=true
     fetchJQData();
     if (!introIsCompleted && $("#jq-table").val() === "customers")
       setTimeout(function () {
@@ -42,13 +44,19 @@ $(document).ready(function () {
     toggleNavBar();
     introNextStep();
   });
-  $(document).on("click", ".parent_title[isloaded='true']", (e) => {
+  $(document).on("click", ".jq-params .parent_title", (e) => {
+    console.log("clicked on a loaded menu");
+    if (!$(event.target).closest(".jq-column").length) {
+      toggleNavSubElements(e,".select-columns");
+    }
+  });
+  $(document).on("click", ".navbar-container .parent_title[isloaded='true']", (e) => {
     console.log("clicked on a loaded menu");
     if (!$(event.target).closest(".jq-example").length) {
       toggleNavSubElements(e);
     }
   });
-  $(document).on("click", ".parent_title[isloaded='false']", (e) => {
+  $(document).on("click", ".navbar-container .parent_title[isloaded='false']", (e) => {
     console.log("clicked on a unloaded menu");
     let subMenuFile = $(e.currentTarget).attr("sub-menu"),
       title = $(e.currentTarget).find("span:first").html();
@@ -518,13 +526,13 @@ function setupNavItem(navItem, divElement, next, prev) {
   });
   $(divElement).append($("<li>", navFields).html(title));
 }
-function toggleNavSubElements(e) {
+function toggleNavSubElements(e,subElement = ".sub-nav") {
   if ($(e.currentTarget).find(".accordion").hasClass("rot-accordion")) {
     $(e.currentTarget).find(".accordion").removeClass("rot-accordion");
-    $(e.currentTarget).siblings(".sub-nav").hide(".sub-nav");
+    $(e.currentTarget).siblings(subElement).hide(".sub-nav");
   } else {
     $(e.currentTarget).find(".accordion").addClass("rot-accordion");
-    $(e.currentTarget).siblings(".sub-nav").show();
+    $(e.currentTarget).siblings(subElement).show();
   }
 }
 function toggleNavBar(animationTime = 100) {
@@ -562,9 +570,9 @@ function fetchJQData() {
         let errorMessage = "Error while executing this query.";
         clearTable();
         $("#sql-display").hide();
-        $(".error_container").show();
-        $("#error-code").html(errorMessage);
-        console.error("Error fetching data: ", error);
+        // $(".error_container").show();
+        // $("#error-code").html(errorMessage);
+        // console.error("Error fetching data: ", error);
       });
   }
 }
@@ -572,6 +580,10 @@ function displayTableResults(data) {
   clearTable();
   showTable();
   $(".results-container").css("width", "100%");
+  if(shouldUpdate){
+    $(".select-columns").empty()
+  }
+  $(".jq-params").show()
   let tableContainer = $(".results-container table");
   var columnsHeader = Object.keys(data[0]);
   console.log(columnsHeader);
@@ -579,6 +591,11 @@ function displayTableResults(data) {
   let headerRow = $("<tr>", { class: "table_header" });
   $.each(columnsHeader, function (index, column) {
     headerRow.append($("<th>").text(column));
+    if(shouldUpdate){
+      $(".select-columns").append(
+        $('<div>',{class:"jq-column"}).html(column)
+      )
+    }
   });
   tableContainer.append($("<thead>").append(headerRow));
   tableContainer.append($("<tbody>"));
@@ -595,6 +612,7 @@ function displayTableResults(data) {
     autoWidth: false,
     ordering: false,
   });
+  shouldUpdate=false
 }
 function clearTable() {
   if ($.fn.dataTable.isDataTable(".results-container table"))

@@ -1,9 +1,5 @@
 package io.github.oneteme.jquery.demo;
 
-import static org.usf.jquery.core.ViewJoin.innerJoin;
-
-import org.usf.jquery.core.ViewJoin;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

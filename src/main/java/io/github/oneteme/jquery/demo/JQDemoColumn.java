@@ -72,7 +72,7 @@ public enum JQDemoColumn implements ColumnDecorator {
 	}
 
 	@Override
-	public Builder<ViewDecorator, ComparisonExpression> criteria(String name) {
+	public Builder<ViewDecorator, ComparisonExpression> criteriaBuilder(String name) {
 		return "ym".equals(name) && Objects.nonNull(crBulder) ? crBulder : null;
 	}
 }

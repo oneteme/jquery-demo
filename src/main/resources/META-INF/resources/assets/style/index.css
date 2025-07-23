@@ -88,6 +88,11 @@ header {
 .definition-element .description {
   font-size: 20px;
 }
+.jq-column{
+  cursor: pointer;
+  color: white;
+  text-decoration: underline;
+}
 /*** HIGHLIGHTED TEXT ***/
 .highlighted_code p {
   color: white;
@@ -186,7 +191,7 @@ header {
 }
 
 .settings-content div {
-  flex: auto !important;
+  /* flex: auto !important; */
   gap: 18px;
 }
 
@@ -272,7 +277,9 @@ header {
   display: flex;
   flex-direction: row;
 }
-
+.flex-wrap {
+  flex-wrap: wrap;
+}
 /* ALIGNED ROW */
 /* FLEX GAPS */
 .gap_8 {
