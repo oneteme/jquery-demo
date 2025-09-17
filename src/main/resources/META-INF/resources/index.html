@@ -132,78 +132,37 @@
                   >Select your table</label
                 >
                 <select id="jq-table" class="form-select">
-                  <option value="customers">Customers</option>
-                  <option value="employees">Employees</option>
-                  <option value="products">Products</option>
-                  <option value="suppliers">Suppliers</option>
-                  <option value="categories">Categories</option>
-                  <option value="shippers">Shippers</option>
-                  <option value="orders">Orders</option>
-                  <option value="details" selected>Orders details</option>
+                  
                 </select>
               </div>
-              <div class="jq-params col-sm-6" style="display: none;">
-                <div class="parent-element">
-                  <div class="parent_title" style="font-size: 16px;padding: 0;">
-                    <span>Columns</span>
-                    <img class="nav-accordion accordion" src="/assets/images/accordion.svg">
-                  </div>
-                  <div class="select-columns flex-wrap d-flex-row gap_12" style="display: none;">
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                    <div class="jq-column">id</div>
-                    <div class="jq-column">contact</div>
-                    <div class="jq-column">country</div>
-                    <div class="jq-column">city</div>
-                  </div>
-                </div>
-
-              </div>
+             
               <div class="jqsyntax-container">
-                <div
-                  class="form-floating jqcolumns_input_container"
-                  style="width: 100%"
-                >
-                  <input
-                    id="jq-columns"
-                    class="form-control"
-                    name="columns"
-                    type="text"
-                    placeholder="Setup JQuery columns..."
-                  />
-                  <label for="jq-columns" class="fw-semibold white_text"
-                    >Columns
-                  </label>
+                <div class="columns-container row" style="--bs-gutter-x:0;">
+                  <div
+                    class="form-floating jqcolumns_input_container col"
+                    style="width: 100%"
+                  >
+                    <input
+                      id="jq-columns"
+                      class="form-control"
+                      name="columns"
+                      type="text"
+                      placeholder="Setup JQuery columns..."
+                    />
+                    <label for="jq-columns" class="fw-semibold white_text"
+                      >Columns
+                    </label>
+                  </div>
+                  <div class="jq-params col-sm-4" style="display: none;">
+                    <div class="parent-element">
+                      <div class="parent_title" style="font-size: 16px;padding: 0;">
+                        <span>Columns</span>
+                        <img class="nav-accordion accordion" src="/assets/images/accordion.svg">
+                      </div>
+                      <div class="select-columns flex-wrap d-flex-row gap_12" style="display: none;">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div
                   class="form-floating jqfilters_input_container"
@@ -261,6 +220,7 @@
           </div>
 
           <div class="results-container" style="display: none">
+            <span class="fw-semibold white_text">Result</span>
             <div class="table-wrapper">
               <table class="jq-table"></table>
             </div>

@@ -1,0 +1,27 @@
+[
+  {
+    "view": "customers"
+  },
+  {
+    "view": "employees"
+  },
+  {
+    "view": "products"
+  },
+  {
+    "view": "suppliers"
+  },
+  {
+    "view": "categories"
+  },
+  {
+    "view": "shippers"
+  },
+  {
+    "view": "orders"
+  },
+  {
+    "view": "details",
+    "lb": "Orders details"
+  }
+]

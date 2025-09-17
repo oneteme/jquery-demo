@@ -1,13 +1,15 @@
 var intro,
   introIsCompleted = true,
   navStyleFields = {},
+  viewsMap = {},
   resultTable,
-  shouldUpdate ,
+  shouldUpdate,
   inputTimeOut;
 //**************** EVENT LISTENERS ****************/
 $(document).ready(function () {
   loadNavbar();
   loadSettings();
+  loadViews();
   $("#jq-live").on("click", (e) => {
     setupIntro();
   });
@@ -27,14 +29,23 @@ $(document).ready(function () {
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
-    shouldUpdate=true
+   
     fetchJQData();
     if (!introIsCompleted && $("#jq-table").val() === "customers")
       setTimeout(function () {
         intro.nextStep();
       }, 500);
   });
-
+  $(document).on("click",".jq-column",(e)=>{
+    let columnsText = $("#jq-columns").val().split(","),
+      chosenColumn = $(e.currentTarget).html();
+    if(columnsText[columnsText.length-1] == ""){
+      columnsText[columnsText.length-1] = chosenColumn
+    }else{
+      columnsText.push(chosenColumn)
+    }
+    $("#jq-columns").val(columnsText.join(","))
+  })
   $("#jq-show-examples").on("click", (e) => {
     if ($(e.currentTarget).attr("data-show") == "show") {
       showNavBar();
@@ -47,28 +58,36 @@ $(document).ready(function () {
   $(document).on("click", ".jq-params .parent_title", (e) => {
     console.log("clicked on a loaded menu");
     if (!$(event.target).closest(".jq-column").length) {
-      toggleNavSubElements(e,".select-columns");
+      toggleNavSubElements(e, ".select-columns");
     }
   });
-  $(document).on("click", ".navbar-container .parent_title[isloaded='true']", (e) => {
-    console.log("clicked on a loaded menu");
-    if (!$(event.target).closest(".jq-example").length) {
-      toggleNavSubElements(e);
-    }
-  });
-  $(document).on("click", ".navbar-container .parent_title[isloaded='false']", (e) => {
-    console.log("clicked on a unloaded menu");
-    let subMenuFile = $(e.currentTarget).attr("sub-menu"),
-      title = $(e.currentTarget).find("span:first").html();
-    fetch("subMenu/" + subMenuFile)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        createNavbar(data, $(".sub-nav[data-title='" + title + "']"));
-        $(e.currentTarget).attr("isloaded", true);
+  $(document).on(
+    "click",
+    ".navbar-container .parent_title[isloaded='true']",
+    (e) => {
+      console.log("clicked on a loaded menu");
+      if (!$(event.target).closest(".jq-example").length) {
         toggleNavSubElements(e);
-      });
-  });
+      }
+    }
+  );
+  $(document).on(
+    "click",
+    ".navbar-container .parent_title[isloaded='false']",
+    (e) => {
+      console.log("clicked on a unloaded menu");
+      let subMenuFile = $(e.currentTarget).attr("sub-menu"),
+        title = $(e.currentTarget).find("span:first").html();
+      fetch("subMenu/" + subMenuFile)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          createNavbar(data, $(".sub-nav[data-title='" + title + "']"));
+          $(e.currentTarget).attr("isloaded", true);
+          toggleNavSubElements(e);
+        });
+    }
+  );
   $(document).on("click", ".jq-example", (e) => {
     console.log("click test");
     // $('.definition-container').show();
@@ -485,7 +504,7 @@ function createNavbar(data, element = $(".navbar-nav")) {
         seperatedTutoArr[0],
         seperatedTutoArr[1]
       );
-      tippy('li[data-tippy-content]')
+      tippy("li[data-tippy-content]");
     }
   });
 }
@@ -497,6 +516,28 @@ function setupNext(arr, key) {
     prev =
       key - 1 >= 0 && !("items" in arr[key - 1]) ? arr[key - 1].title : null;
   return [next, prev];
+}
+function loadViews() {
+  $("#jq-table").empty();
+  fetch("/views.json")
+    .then((response) => response.json())
+    .then((data) => {
+      $.each(data, (key, value) => {
+        let view = value["view"],
+          viewLib = "lb" in value ? value["lb"] : capitalize(view);
+        $("#jq-table").append($("<option>", { value: view }).html(viewLib));
+        fetch("/" + view + "?limit=1")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("view is : ", view, " result is : ", data);
+            console.log("colimns : ",Object.keys(data.result[0]))
+            let columns = Object.keys(data.result[0]);
+            viewsMap[view] = columns
+          });
+      });
+      
+    });
+    
 }
 function loadNavbar() {
   $(".navbar-nav").empty();
@@ -515,9 +556,9 @@ function setupNavItem(navItem, divElement, next, prev) {
       "data-next": next,
       "data-prev": prev,
     };
-    if(navItem.tooltip){
-      navFields["data-tippy-content"] = navItem.tooltip
-    }
+  if (navItem.tooltip) {
+    navFields["data-tippy-content"] = navItem.tooltip;
+  }
   // delete navItem.title;
   $.each(navItem, (key, value) => {
     if (key != "title") {
@@ -526,7 +567,7 @@ function setupNavItem(navItem, divElement, next, prev) {
   });
   $(divElement).append($("<li>", navFields).html(title));
 }
-function toggleNavSubElements(e,subElement = ".sub-nav") {
+function toggleNavSubElements(e, subElement = ".sub-nav") {
   if ($(e.currentTarget).find(".accordion").hasClass("rot-accordion")) {
     $(e.currentTarget).find(".accordion").removeClass("rot-accordion");
     $(e.currentTarget).siblings(subElement).hide(".sub-nav");
@@ -542,15 +583,23 @@ function toggleNavBar(animationTime = 100) {
   }); // duration in milliseconds
 }
 function fetchJQData() {
-  let table = $("#jq-table").val() ? $("#jq-table").val() + "?" : null;
+  let table = $("#jq-table").val() ? $("#jq-table").val() : null;
   let columns = $("#jq-columns").val();
   let filters = $("#jq-filters").val();
   let fetchLink =
     "/" +
-    table +
+    table + "?"+
     (columns ? "column=" + columns : "") +
     (filters ? "&" + filters : "");
   if (table) {
+    console.log(viewsMap)
+    console.log(viewsMap[table])
+    $(".select-columns").empty()
+    $.each(viewsMap[table], function (index,column) {
+      $(".select-columns").append(
+        $("<div>", { class: "jq-column" }).html(column)
+      );
+    })
     $("#jquery-link").html(fetchLink);
     $(".jq-link-display").show();
     console.log("link to fetch : ", fetchLink);
@@ -570,8 +619,8 @@ function fetchJQData() {
         let errorMessage = "Error while executing this query.";
         clearTable();
         $("#sql-display").hide();
-        // $(".error_container").show();
-        // $("#error-code").html(errorMessage);
+        $(".error_container").show();
+        $("#error-code").html(errorMessage);
         // console.error("Error fetching data: ", error);
       });
   }
@@ -580,22 +629,16 @@ function displayTableResults(data) {
   clearTable();
   showTable();
   $(".results-container").css("width", "100%");
-  if(shouldUpdate){
-    $(".select-columns").empty()
-  }
-  $(".jq-params").show()
+  $(".jq-params").show();
   let tableContainer = $(".results-container table");
   var columnsHeader = Object.keys(data[0]);
   console.log(columnsHeader);
+
   // Create table header row
   let headerRow = $("<tr>", { class: "table_header" });
   $.each(columnsHeader, function (index, column) {
     headerRow.append($("<th>").text(column));
-    if(shouldUpdate){
-      $(".select-columns").append(
-        $('<div>',{class:"jq-column"}).html(column)
-      )
-    }
+    
   });
   tableContainer.append($("<thead>").append(headerRow));
   tableContainer.append($("<tbody>"));
@@ -612,7 +655,7 @@ function displayTableResults(data) {
     autoWidth: false,
     ordering: false,
   });
-  shouldUpdate=false
+  shouldUpdate = false;
 }
 function clearTable() {
   if ($.fn.dataTable.isDataTable(".results-container table"))
@@ -641,6 +684,9 @@ function loadTutorial(fileName) {
     hljs.highlightAll();
   });
 }
+function capitalize(str) {
+  return str[0].toUpperCase() + str.slice(1).toLowerCase();
+}
 // remove second class from div
 function removeSecondClass(element) {
   var classList = $(element).attr("class").split(/\s+/);
@@ -652,7 +698,6 @@ function removeSecondClass(element) {
 
 // Swap divs positions
 function swapDivsOnce(swapBtnElement, parentSelector = ".settings-content") {
-  console.log("swap");
   var parent = $(parentSelector);
 
   var divs = parent.children("div:visible");
