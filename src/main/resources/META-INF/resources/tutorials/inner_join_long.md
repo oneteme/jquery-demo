@@ -19,7 +19,9 @@ Now to add the innerJoin that we want to apply we create a function that returns
 
 // Without View Parameter
 public static ViewJoin joinOrderCustomer() {
-	return innerJoin(JQDemoTable.CUSTOMER.view(),JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)));
+	return innerJoin(JQDemoTable.CUSTOMER.view(),
+					JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID)
+					.eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)));
 }
 ```
 

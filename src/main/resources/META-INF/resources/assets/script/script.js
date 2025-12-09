@@ -7,6 +7,7 @@ var intro,
   inputTimeOut;
 //**************** EVENT LISTENERS ****************/
 $(document).ready(function () {
+
   loadNavbar();
   loadSettings();
   loadViews();
@@ -21,27 +22,24 @@ $(document).ready(function () {
   });
   $("#query-form").on("submit", (e) => {
     e.preventDefault(); // Prevent the default form submission
-    // if (!introIsCompleted) {
-    //     intro.nextStep();
-    // }
     fetchJQData();
   });
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
-   
+
     fetchJQData();
     if (!introIsCompleted && $("#jq-table").val() === "customers")
       setTimeout(function () {
         intro.nextStep();
       }, 500);
   });
-  $(document).on("click",".jq-column",(e)=>{
+  $(document).on("click", ".jq-column", (e) => {
     let columnsText = $("#jq-columns").val().split(","),
       chosenColumn = $(e.currentTarget).html();
-    if(columnsText[columnsText.length-1] == ""){
-      columnsText[columnsText.length-1] = chosenColumn
-    }else{
+    if (columnsText[columnsText.length - 1] == "") {
+      columnsText[columnsText.length - 1] = chosenColumn
+    } else {
       columnsText.push(chosenColumn)
     }
     $("#jq-columns").val(columnsText.join(","))
@@ -89,7 +87,6 @@ $(document).ready(function () {
     }
   );
   $(document).on("click", ".jq-example", (e) => {
-    console.log("click test");
     // $('.definition-container').show();
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
@@ -487,15 +484,6 @@ function createNavbar(data, element = $(".navbar-nav")) {
           })
         )
       );
-      // fetch("subMenu/" + nav_element.items)
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //     createNavbar(
-      //       data,
-      //       $(".sub-nav[data-title='" + nav_element.title + "']")
-      //     );
-      //   });
     } else {
       let seperatedTutoArr = setupNext(data, key);
       setupNavItem(
@@ -504,15 +492,20 @@ function createNavbar(data, element = $(".navbar-nav")) {
         seperatedTutoArr[0],
         seperatedTutoArr[1]
       );
-      tippy("li[data-tippy-content]");
+      tippy("li[data-tippy-content]", {
+        animation: 'scale',
+        arrow: true,
+        arrowType: 'round',
+        size: 'large',
+      });
     }
   });
 }
 function setupNext(arr, key) {
   let next =
-      key + 1 < arr.length && !("items" in arr[key + 1])
-        ? arr[key + 1].title
-        : null,
+    key + 1 < arr.length && !("items" in arr[key + 1])
+      ? arr[key + 1].title
+      : null,
     prev =
       key - 1 >= 0 && !("items" in arr[key - 1]) ? arr[key - 1].title : null;
   return [next, prev];
@@ -530,14 +523,14 @@ function loadViews() {
           .then((response) => response.json())
           .then((data) => {
             console.log("view is : ", view, " result is : ", data);
-            console.log("colimns : ",Object.keys(data.result[0]))
+            console.log("colimns : ", Object.keys(data.result[0]))
             let columns = Object.keys(data.result[0]);
             viewsMap[view] = columns
           });
       });
-      
+
     });
-    
+
 }
 function loadNavbar() {
   $(".navbar-nav").empty();
@@ -588,18 +581,20 @@ function fetchJQData() {
   let filters = $("#jq-filters").val();
   let fetchLink =
     "/" +
-    table + "?"+
+    table + "?" +
     (columns ? "column=" + columns : "") +
     (filters ? "&" + filters : "");
   if (table) {
     console.log(viewsMap)
     console.log(viewsMap[table])
     $(".select-columns").empty()
-    $.each(viewsMap[table], function (index,column) {
+    $.each(viewsMap[table], function (index, column) {
       $(".select-columns").append(
         $("<div>", { class: "jq-column" }).html(column)
       );
     })
+    console.log("current url : ", window.location.origin)
+    $("#jquery-link").closest('a').attr("href", window.location.origin + fetchLink);
     $("#jquery-link").html(fetchLink);
     $(".jq-link-display").show();
     console.log("link to fetch : ", fetchLink);
@@ -638,7 +633,7 @@ function displayTableResults(data) {
   let headerRow = $("<tr>", { class: "table_header" });
   $.each(columnsHeader, function (index, column) {
     headerRow.append($("<th>").text(column));
-    
+
   });
   tableContainer.append($("<thead>").append(headerRow));
   tableContainer.append($("<tbody>"));
@@ -654,6 +649,7 @@ function displayTableResults(data) {
   resultTable = tableContainer.DataTable({
     autoWidth: false,
     ordering: false,
+    lengthMenu: [5, 10, 15, 20, 25]
   });
   shouldUpdate = false;
 }
@@ -707,10 +703,6 @@ function swapDivsOnce(swapBtnElement, parentSelector = ".settings-content") {
       movedDivIndex = swapStatus == "1" ? divs.length - 1 : 0,
       movedToDivIndex = swapStatus == "1" ? 0 : divs.length - 1, // The div which we go before or after
       movedDiv = $(divs[movedDivIndex]);
-    console.log("swap status : ", swapStatus);
-    console.log("insertWay : ", insertWay);
-    console.log("movedDivIndex : ", movedDivIndex);
-    console.log("MovedtoDivIndex : ", movedToDivIndex);
     movedDiv[insertWay]($(divs[movedToDivIndex]));
   }
 }

@@ -68,7 +68,8 @@
       "column": "ltrim(\"            HELLO                             WORLD                       \"):ltrim",
       "filter": "",
       "definition": "In SQL, the LTRIM() function is used to remove characters from the beginning of a string. The most common use of LTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-      "syntax": "column.ltrim() / ltrim(column/text)"
+      "syntax": "column.ltrim() / ltrim(column/text)",
+      "tooltip":"LeftTrim"
     },
     {
       "title": "RTRIM",
@@ -76,6 +77,7 @@
       "column": "rtrim(\"            HELLO                             WORLD                       \"):rtrim",
       "filter": "",
       "definition": "In SQL, the RTRIM() function is used to remove characters from the end of a string. The most common use of RTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-      "syntax": "column.Rtrim() / rtrim(column/text)"
+      "syntax": "column.Rtrim() / rtrim(column/text)",
+      "tooltip":"RightTrim"
     }
   ]

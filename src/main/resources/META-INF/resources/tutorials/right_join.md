@@ -7,9 +7,12 @@ In the join function of your table you can add the join you need this way.
 
 @Override
 public JoinBuilder join(String name) {
-	if (ORDER /* The table that contains the join */ == this && "rightcustomer".equals(name) /* The join name */) {
+	if (ORDER /* The table that contains the join */ == this 
+		&& "rightcustomer".equals(name) /* The join name */) {
 			return () -> new ViewJoin[] {
-                 ViewJoin.rightJoin(JQDemoTable.CUSTOMER.view(), JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID).eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)))
+                 ViewJoin.rightJoin(JQDemoTable.CUSTOMER.view(),
+				  		JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID)
+				  		.eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)))
                     };
 		}
 	return ViewDecorator.super.join(name);
