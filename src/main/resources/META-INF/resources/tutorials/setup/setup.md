@@ -11,7 +11,7 @@ To get started with JQuery we need to add the JQuery dependency to our project.
 <dependency>
 	<groupId>io.github.oneteme</groupId>
 	<artifactId>jquery</artifactId>
-	<version>4.0.1 /* (The JQuery version we want to use) */</version>
+	<version>4.0.5 /* (The JQuery version we want to use) */</version>
 </dependency>
 
 // pom.xml
