@@ -11,10 +11,10 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.proxy.QueryRequest;
-import org.usf.jquery.web.proxy.RequestQueryMapper;
-import org.usf.jquery.web.proxy.SchemaResource;
+import org.usf.jquery.web.proxy.QueryInterpreter;
+import org.usf.jquery.web.proxy.Store;
 
-public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver, RequestQueryMapper {
+public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver, QueryInterpreter {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -26,13 +26,13 @@ public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
-        var qr = parameter.getParameterAnnotation(QueryRequest.class);
-        if(nonNull(qr)) {
-        	var schema = qr.database() == SchemaResource.class 
+        var ann = parameter.getParameterAnnotation(QueryRequest.class);
+        if(nonNull(ann)) {
+        	var schema = ann.store() == Store.class 
         			? getDefaultSchema() 
-        			: getSchema(qr.database());
-        	var mapper = schema instanceof RequestQueryMapper m ? m : this;
-        	return mapper.requestQuery(qr, webRequest.getParameterMap());
+        			: getSchema(ann.store());
+        	var mapper = schema instanceof QueryInterpreter m ? m : this;
+        	return mapper.requestQuery(ann, webRequest.getParameterMap());
 		}
         throw new IllegalStateException("missing @QueryRequest annotation");
     }
