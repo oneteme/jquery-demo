@@ -14,7 +14,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.usf.jquery.web.Environment;
+import org.usf.jquery.web.WebEnvironment;
 
 import io.github.oneteme.jquery.demo.JQDemoColumn;
 import io.github.oneteme.jquery.demo.JQDemoTable;
@@ -40,7 +40,7 @@ public class WebmvcConfig implements WebMvcConfigurer {
     
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-        register(Environment.of(
+        register(WebEnvironment.of(
     			DEMO,
     			asList(JQDemoTable.values()),
         		asList(JQDemoColumn.values()), ds));
