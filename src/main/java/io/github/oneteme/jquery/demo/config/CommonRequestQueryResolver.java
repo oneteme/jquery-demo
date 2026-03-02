@@ -1,5 +1,6 @@
 package io.github.oneteme.jquery.demo.config;
 
+import static java.util.Objects.nonNull;
 import static org.usf.jquery.web.proxy.JQueryManager.getDefaultSchema;
 import static org.usf.jquery.web.proxy.JQueryManager.getSchema;
 
@@ -26,12 +27,14 @@ public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
         var qr = parameter.getParameterAnnotation(QueryRequest.class);
-    	var schema = qr.database() == SchemaResource.class 
-    			? getDefaultSchema() 
-    			: getSchema(qr.database());
-    	var mapper = schema instanceof RequestQueryMapper m ? m : this;
-        return mapper.requestQuery(qr, webRequest.getParameterMap());
+        if(nonNull(qr)) {
+        	var schema = qr.database() == SchemaResource.class 
+        			? getDefaultSchema() 
+        			: getSchema(qr.database());
+        	var mapper = schema instanceof RequestQueryMapper m ? m : this;
+        	return mapper.requestQuery(qr, webRequest.getParameterMap());
+		}
+        throw new IllegalStateException("missing @QueryRequest annotation");
     }
-    
 }
 
