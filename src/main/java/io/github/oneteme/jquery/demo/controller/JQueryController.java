@@ -109,6 +109,8 @@ public class JQueryController {
 			@QueryRequestFilter(database = "demo",view = "order", column = "id,start,customer_id,employee_id,shipper_id", join = "innercustomer", limit = 5) QueryComposer query) {
 		return usingSpringJdbc(query);
 	}
+	
+	@Deprecated
 	private Map<String, Object> usingSpringJdbc(QueryComposer req) {
 		Map<String, Object> result = new HashMap<>();
 		try {			
