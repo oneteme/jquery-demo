@@ -1,27 +1,30 @@
 package io.github.oneteme.jquery.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.usf.jquery.web.proxy.EntryEvaluators.*;
-import static org.usf.jquery.web.proxy.EntryParser.*;
+import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateColumn;
+import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateFilter;
+import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateJoin;
+import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateView;
+import static org.usf.jquery.web.proxy.EntryParser.parseEntries;
+import static org.usf.jquery.web.proxy.EntryParser.parseEntry;
+import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.usf.jquery.web.proxy.EntryEvaluators;
-import org.usf.jquery.web.proxy.EntryParser;
-import org.usf.jquery.web.proxy.Stores;
 
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 
 class DemoTest {
+	
 	@BeforeEach
 	void init() {
-		Stores.register(DemoStore.class, null);
+		getInstance().register(DemoStore.class, null);
 	}
 	
 
 	@Test
 	void testEval() {
-		var ctx = Stores.getDefaultSchema().createContext("customers");
+		var ctx = getInstance().getDefaultStore().createContext("customers");
 		
 		assertEquals("CUSTOMER_ID", evaluateColumn(parseEntry("id"), ctx).toString());
 		assertEquals("SUM(CUSTOMER_ID)", evaluateColumn(parseEntry("id.sum"), ctx).toString());
@@ -30,7 +33,7 @@ class DemoTest {
 
 	//@Test
 	void testEvaluateView() {
-		var ctx = Stores.getDefaultSchema().createContext("v1");
+		var ctx = getInstance().getDefaultStore().createContext("v1");
 		
 		System.out.println(evaluateView(parseEntry("v1:myView"), ctx));
 		System.out.println(evaluateView(parseEntry(

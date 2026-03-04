@@ -1,9 +1,5 @@
 package io.github.oneteme.jquery.demo.config;
 
-import static io.github.oneteme.jquery.demo.JQDatabase.DEMO;
-import static java.util.Arrays.asList;
-import static org.usf.jquery.web.JQuery.register;
-
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -14,11 +10,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.usf.jquery.web.WebEnvironment;
-import org.usf.jquery.web.proxy.Stores;
+import org.usf.jquery.web.proxy.StoreManager;
 
-import io.github.oneteme.jquery.demo.JQDemoColumn;
-import io.github.oneteme.jquery.demo.JQDemoTable;
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +40,7 @@ public class WebmvcConfig implements WebMvcConfigurer {
 //    			asList(JQDemoTable.values()),
 //        		asList(JQDemoColumn.values()), ds));
     	
-    	Stores.register(DemoStore.class, ds);
+    	StoreManager.getInstance().register(DemoStore.class, ds);
     	
     }
 }
