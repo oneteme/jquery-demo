@@ -1,8 +1,8 @@
 package io.github.oneteme.jquery.demo.config;
 
 import static java.util.Objects.nonNull;
-import static org.usf.jquery.web.proxy.JQueryManager.getDefaultSchema;
-import static org.usf.jquery.web.proxy.JQueryManager.getSchema;
+import static org.usf.jquery.web.proxy.Stores.getDefaultSchema;
+import static org.usf.jquery.web.proxy.Stores.getSchema;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.proxy.QueryRequest;
 import org.usf.jquery.web.proxy.QueryInterpreter;
-import org.usf.jquery.web.proxy.Store;
+import org.usf.jquery.web.proxy.StoreResource;
 
 public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver, QueryInterpreter {
 
@@ -28,11 +28,11 @@ public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver
 
         var ann = parameter.getParameterAnnotation(QueryRequest.class);
         if(nonNull(ann)) {
-        	var schema = ann.store() == Store.class 
+        	var schema = ann.store() == StoreResource.class 
         			? getDefaultSchema() 
         			: getSchema(ann.store());
         	var mapper = schema instanceof QueryInterpreter m ? m : this;
-        	return mapper.requestQuery(ann, webRequest.getParameterMap());
+        	return mapper.parseQuery(ann, webRequest.getParameterMap());
 		}
         throw new IllegalStateException("missing @QueryRequest annotation");
     }

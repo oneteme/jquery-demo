@@ -29,6 +29,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<junit.version>5.8.1</junit.version>
 	</properties>
 	<dependencies>
 
@@ -59,6 +60,19 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.junit.jupiter</groupId> <!-- maven plugin -->
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 

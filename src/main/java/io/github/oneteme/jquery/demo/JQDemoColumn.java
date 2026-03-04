@@ -2,8 +2,8 @@ package io.github.oneteme.jquery.demo;
 
 import java.util.Objects;
 
-import org.usf.jquery.core.ComparisonExpression;
-import org.usf.jquery.core.DBColumn;
+import org.usf.jquery.core.Predicate;
+import org.usf.jquery.core.Column;
 import org.usf.jquery.web.Builder;
 import org.usf.jquery.web.ColumnDecorator;
 import org.usf.jquery.web.ViewDecorator;
@@ -44,15 +44,15 @@ public enum JQDemoColumn implements ColumnDecorator {
 	;
 
 	private final String reference;
-	private final Builder<ViewDecorator, DBColumn> builder;
-	private final Builder<ViewDecorator, ComparisonExpression> crBulder;
+	private final Builder<ViewDecorator, Column> builder;
+	private final Builder<ViewDecorator, Predicate> crBulder;
 	
 	JQDemoColumn(@NonNull String ref)
 	{
 		this(ref, null, null);
 	}
 	
-	JQDemoColumn(@NonNull String ref, @NonNull Builder<ViewDecorator, DBColumn> builder) {
+	JQDemoColumn(@NonNull String ref, @NonNull Builder<ViewDecorator, Column> builder) {
         this(ref, builder, null);
     }
 
@@ -67,12 +67,12 @@ public enum JQDemoColumn implements ColumnDecorator {
 	}
 
 	@Override
-	public Builder<ViewDecorator, DBColumn> builder() {
+	public Builder<ViewDecorator, Column> builder() {
 		return Objects.nonNull(builder) ? builder : ColumnDecorator.super.builder();
 	}
 
 	@Override
-	public Builder<ViewDecorator, ComparisonExpression> criteriaBuilder(String name) {
+	public Builder<ViewDecorator, Predicate> criteriaBuilder(String name) {
 		return "ym".equals(name) && Objects.nonNull(crBulder) ? crBulder : null;
 	}
 }

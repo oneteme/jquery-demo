@@ -6,7 +6,7 @@ import static org.usf.jquery.core.ViewJoin.rightJoin;
 
 import java.util.function.Function;
 
-import org.usf.jquery.core.DBFilter;
+import org.usf.jquery.core.Criteria;
 import org.usf.jquery.core.ViewJoin;
 import org.usf.jquery.web.Builder;
 import org.usf.jquery.web.ColumnDecorator;
@@ -39,7 +39,7 @@ public enum JQDemoTable implements ViewDecorator {
 	}
 
 	@Override
-	public DBFilter criteria(String name, String... args) {
+	public Criteria criteria(String name, String... args) {
 		return ViewDecorator.super.criteria(name, args);
 	}
 	@Override

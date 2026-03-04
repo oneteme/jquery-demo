@@ -15,9 +15,11 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.usf.jquery.web.WebEnvironment;
+import org.usf.jquery.web.proxy.Stores;
 
 import io.github.oneteme.jquery.demo.JQDemoColumn;
 import io.github.oneteme.jquery.demo.JQDemoTable;
+import io.github.oneteme.jquery.demo.repo.DemoStore;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -40,10 +42,12 @@ public class WebmvcConfig implements WebMvcConfigurer {
     
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-        register(WebEnvironment.of(
-    			DEMO,
-    			asList(JQDemoTable.values()),
-        		asList(JQDemoColumn.values()), ds));
+//        register(WebEnvironment.of(
+//    			DEMO,
+//    			asList(JQDemoTable.values()),
+//        		asList(JQDemoColumn.values()), ds));
+    	
+    	Stores.register(DemoStore.class, ds);
     	
     }
 }

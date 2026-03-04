@@ -21,11 +21,11 @@ class DemoTest {
 
 	@Test
 	void testEval() {
-		var ctx = Stores.getDefaultSchema().createContext("orders");
+		var ctx = Stores.getDefaultSchema().createContext("customers");
 		
-		//assertEquals("CUSTOMER_ID", evaluateColumn(parseEntry("id"), ctx).toString());
-//		assertEquals("SUM(CUSTOMER_ID)", evaluateColumn(parseEntry("id.sum"), ctx).toString());
-		assertEquals("LEFT JOIN demo.CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ", evaluateJoin(parseEntry("leftcustomer"), ctx).toString());
+		assertEquals("CUSTOMER_ID", evaluateColumn(parseEntry("id"), ctx).toString());
+		assertEquals("SUM(CUSTOMER_ID)", evaluateColumn(parseEntry("id.sum"), ctx).toString());
+		assertEquals("LEFT JOIN demo.CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ", evaluateJoin(parseEntry("orders.leftcustomer"), ctx).toString());
 	}
 
 	//@Test
