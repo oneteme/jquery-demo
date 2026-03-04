@@ -2,7 +2,7 @@
     {
       "title": "LENGTH",
       "view": "customers",
-      "column": "customer,customer.length:NbrOfCharacters",
+      "column": "name,name.length:NbrOfCharacters",
       "filter": "",
       "definition": "Returns the length of a string",
       "syntax": "column.length"
@@ -17,7 +17,7 @@
     {
       "title": "UPPER",
       "view": "customers",
-      "column": "customer,customer.upper:UpperCaseCustomer",
+      "column": "name,name.upper:UpperCaseCustomer",
       "filter": "",
       "definition": "UPPER(): Converts a string to uppercase.",
       "syntax": "column.upper / upper(text)"
@@ -25,7 +25,7 @@
     {
       "title": "LOWER",
       "view": "customers",
-      "column": "customer,customer.lower:LowerCaseCustomer",
+      "column": "name,name.lower:LowerCaseCustomer",
       "filter": "",
       "definition": "LOWER(): Converts a string to lowercase.",
       "syntax": "column.lower / lower(text)"
@@ -49,7 +49,7 @@
     {
       "title": "SUBSTRING",
       "view": "customers",
-      "column": "customer,customer.substring(0,4):FirstFourCharacters",
+      "column": "name,name.substring(0,4):FirstFourCharacters",
       "filter": "",
       "definition": "SUBSTRING(): Extracts a substring from a string.",
       "syntax": "column.substring(start,end)"

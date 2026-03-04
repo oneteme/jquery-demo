@@ -1,6 +1,7 @@
 package io.github.oneteme.jquery.demo.repo;
 
 import org.usf.jquery.web.proxy.Bind;
+import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
 
 public interface DemoStore extends StoreResource {
@@ -23,8 +24,9 @@ public interface DemoStore extends StoreResource {
 	@Bind("PRODUCTS_TABLE")
 	Products products();
 
+	@Expose(identity="orders_details", description="")
 	@Bind("ORDERS_DETAILS_TABLE")
-	OrdersDetails orders_details();
+	OrdersDetails ordersDetails();
 
 	@Bind("EMPLOYEES_TABLE")
 	Employees employees();

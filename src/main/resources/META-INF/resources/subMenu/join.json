@@ -2,8 +2,8 @@
   {
     "title": "CLASSIC JOIN",
     "view": "orders",
-    "column": "order.id,customer.customer,order.start",
-    "filter": "order.customer_id=customer.id",
+    "column": "orders.id,customers.name,orders.start",
+    "filter": "orders.customer_id=customers.id",
     "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them.",
     "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id"
   },

@@ -91,32 +91,32 @@
   {
     "title": "LIKE (%pattern%)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.contentLike=ue",
+    "column": "name",
+    "filter": "name.contentLike=ue",
     "definition": "Matches any string that contains the specified 'pattern' anywhere within it.",
     "syntax": "col2.contentLike=pattern"
   },
   {
     "title": "START LIKE (pattern%)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.startsLike=Qu",
+    "column": "name",
+    "filter": "name.startsLike=Qu",
     "definition": "Matches any string that starts with the specified pattern.",
     "syntax": "col2.startsLike=pattern"
   },
   {
     "title": "ENDS LIKE (%pattern)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.endsLike=en",
+    "column": "name",
+    "filter": "name.endsLike=en",
     "definition": "Matches any string that ends with the specified pattern.",
     "syntax": "col2.endsLike=pattern"
   },
   {
     "title": "NOT LIKE",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.contentLike=ue",
+    "column": "name",
+    "filter": "name.contentLike=ue",
     "definition": "Matches any string that does not contain the specified 'pattern' in it",
     "syntax": "col2.notLike=pattern"
   }

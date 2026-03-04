@@ -6,7 +6,7 @@
   {
     "title": "SELECT",
     "view": "customers",
-    "column": "customer,contact,postal_code",
+    "column": "name,contact,postal_code",
     "filter": "",
     "definition": "To fetch certain columns in JQuery all you need is to write down the columns you need seperated by a ','",
     "syntax": "column1,column2,column3,...",
@@ -31,7 +31,7 @@
   {
     "title": "AS",
     "view": "customers",
-    "column": "id:ID,customer:CustomerName",
+    "column": "id:ID,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
     "syntax": "col:new_col_name"
   },
@@ -53,7 +53,7 @@
   {
     "title": "JOIN",
     "view": "orders",
-    "column": "order.id,customer.customer,order.start",
+    "column": "order.id,customer.name,order.start",
     "filter": "order.customer_id=customer.id",
     "definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
     "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id",
