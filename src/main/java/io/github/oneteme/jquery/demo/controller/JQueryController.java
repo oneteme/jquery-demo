@@ -4,6 +4,7 @@ import static io.github.oneteme.jquery.demo.JQDatabase.DEMO;
 import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.web.Keyword.COLUMN;
 import static org.usf.jquery.web.Keyword.ORDER;
+import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -128,7 +129,7 @@ public class JQueryController {
 	private Map<String, Object> execute(Class<? extends StoreResource> clazz, QueryComposer req) {
 		Map<String, Object> result = new HashMap<>();
 		try {			
-			var query = StoreManager.getInstance().execute(clazz, s->req, keyValueMapper());
+			var query = getInstance().execute(clazz, req, keyValueMapper());
 			var sqlQuery = req.compose().build().getSql();
 			result.put("query", sqlQuery);
 			result.put("result", query);
@@ -139,6 +140,4 @@ public class JQueryController {
 		}
 		return result;
 	}
-	
-
 }
