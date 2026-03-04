@@ -1,7 +1,6 @@
 package io.github.oneteme.jquery.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateColumn;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateFilter;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateJoin;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateView;
@@ -9,12 +8,17 @@ import static org.usf.jquery.web.proxy.EntryParser.parseEntries;
 import static org.usf.jquery.web.proxy.EntryParser.parseEntry;
 import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.usf.jquery.core.DBObject;
+import org.usf.jquery.web.proxy.Entry;
+import org.usf.jquery.web.proxy.EntryEvaluators;
+import org.usf.jquery.web.proxy.RequestContext;
 
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 
@@ -25,22 +29,30 @@ class DemoTest {
 		getInstance().register(DemoStore.class, null);
 	}
 
+	void evaluate(String store, String entry, String expected, BiFunction<Entry, RequestContext, DBObject> evaluator) {
+		var ctx = getInstance().getDefaultStore().createContext(store);
+		assertEquals(expected, evaluator.apply(parseEntry(entry), ctx).toString());
+	}
 	@ParameterizedTest
 	@MethodSource("columnTestCases")
 	void testEvaluateColumn(String store, String entry, String expected) {
-		var ctx = getInstance().getDefaultStore().createContext(store);
-		assertEquals(expected, evaluateColumn(parseEntry(entry), ctx).toString());
+		evaluate(store, entry, expected, EntryEvaluators::evaluateColumn);
+	}
+
+	@ParameterizedTest
+	@MethodSource("joinTestCases")
+	void testEvaluateJoin(String store, String entry, String expected) {
+		evaluate(store, entry, expected, EntryEvaluators::evaluateJoin);
 	}
 
 	static Stream<Arguments> columnTestCases() {
-		return Stream.of(
-				Arguments.of("products", "price", "PRICE"),
+		return Stream.of(Arguments.of("products", "price", "PRICE"),
 				Arguments.of("products", "price.sum", "SUM(PRICE)"),
 				Arguments.of("products", "price.avg", "AVG(PRICE)"),
 				Arguments.of("products", "price.count", "COUNT(PRICE)"),
 				Arguments.of("products", "price.min", "MIN(PRICE)"),
 				Arguments.of("products", "price.max", "MAX(PRICE)"),
-				
+
 				Arguments.of("products", "price.trunc", "TRUNC(PRICE)"),
 				Arguments.of("products", "price.abs", "ABS(PRICE)"),
 				Arguments.of("products", "price.ceil", "CEIL(PRICE)"),
@@ -49,8 +61,14 @@ class DemoTest {
 				Arguments.of("products", "price.sqrt", "SQRT(PRICE)"),
 				Arguments.of("products", "price.mod(2)", "MOD(PRICE, 2.0)"),
 
-				Arguments.of("products", "price.plus(2)", "(PRICE+2)")
-				);
+				Arguments.of("products", "price.plus(2)", "(PRICE+2)"),
+				Arguments.of("products", "price.minus(2)", "(PRICE-2)"),
+				Arguments.of("products", "price.multiply(2)", "(PRICE*2)"),
+				Arguments.of("products", "price.divide(2)", "(PRICE/2)"));
+	}
+
+	static Stream<Arguments> joinTestCases() {
+		return Stream.of(Arguments.of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/);
 	}
 
 	// @Test
