@@ -3,7 +3,6 @@ package io.github.oneteme.jquery.demo.repo;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.StoreResource;
 
-
 public interface DemoStore extends StoreResource {
 
 	@Bind("CUSTOMERS_TABLE")

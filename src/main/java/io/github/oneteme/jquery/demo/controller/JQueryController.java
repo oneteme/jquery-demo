@@ -1,20 +1,22 @@
 package io.github.oneteme.jquery.demo.controller;
 
 import static io.github.oneteme.jquery.demo.JQDatabase.DEMO;
+import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.web.Keyword.COLUMN;
 import static org.usf.jquery.web.Keyword.ORDER;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.QueryRequest;
 import org.usf.jquery.web.QueryRequestFilter;
+import org.usf.jquery.web.proxy.StoreManager;
+import org.usf.jquery.web.proxy.StoreResource;
 
+import io.github.oneteme.jquery.demo.repo.DemoStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,8 +27,8 @@ public class JQueryController {
 
 	@GetMapping("employees")
 	public Map<String, Object> fetchEmployees(
-			@QueryRequest(database = "demo",view = "employee", defaultColumns = "id,last_name,name,start,photo,notes") QueryComposer query) {
-		return usingSpringJdbc(query);
+			@org.usf.jquery.web.proxy.QueryRequest(dataset= "employees", fields= "id,lname,fname,start,photo,notes") QueryComposer query) {
+		return execute(DemoStore.class, query);
 	}
 
 	@GetMapping("customers")
@@ -118,6 +120,21 @@ public class JQueryController {
 		} catch (Exception e) {
 			result.put("test_error", e.getMessage());
 //			log.error("error exec query : ", e);
+			return result;
+		}
+		return result;
+	}
+	
+	private Map<String, Object> execute(Class<? extends StoreResource> clazz, QueryComposer req) {
+		Map<String, Object> result = new HashMap<>();
+		try {			
+			var query = StoreManager.getInstance().execute(clazz, s->req, keyValueMapper());
+			var sqlQuery = req.compose().build().getSql();
+			result.put("query", sqlQuery);
+			result.put("result", query);
+		} catch (Exception e) {
+			result.put("test_error", e.getMessage());
+			log.error("error exec query : ", e);
 			return result;
 		}
 		return result;
