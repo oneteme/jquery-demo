@@ -1,6 +1,7 @@
 package io.github.oneteme.jquery.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.of;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateFilter;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateJoin;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateView;
@@ -46,29 +47,31 @@ class DemoTest {
 	}
 
 	static Stream<Arguments> columnTestCases() {
-		return Stream.of(Arguments.of("products", "price", "PRICE"),
-				Arguments.of("products", "price.sum", "SUM(PRICE)"),
-				Arguments.of("products", "price.avg", "AVG(PRICE)"),
-				Arguments.of("products", "price.count", "COUNT(PRICE)"),
-				Arguments.of("products", "price.min", "MIN(PRICE)"),
-				Arguments.of("products", "price.max", "MAX(PRICE)"),
+		return Stream.of(
+				of("products", "price", "PRICE"),
+				of("products", "price.sum", "SUM(PRICE)"),
+				of("products", "price.avg", "AVG(PRICE)"),
+				of("products", "price.count", "COUNT(PRICE)"),
+				of("products", "price.min", "MIN(PRICE)"),
+				of("products", "price.max", "MAX(PRICE)"),
 
-				Arguments.of("products", "price.trunc", "TRUNC(PRICE)"),
-				Arguments.of("products", "price.abs", "ABS(PRICE)"),
-				Arguments.of("products", "price.ceil", "CEIL(PRICE)"),
-				Arguments.of("products", "price.floor", "FLOOR(PRICE)"),
-				Arguments.of("products", "price.round", "ROUND(PRICE)"),
-				Arguments.of("products", "price.sqrt", "SQRT(PRICE)"),
-				Arguments.of("products", "price.mod(2)", "MOD(PRICE, 2.0)"),
+				of("products", "price.trunc", "TRUNC(PRICE)"),
+				of("products", "price.abs", "ABS(PRICE)"),
+				of("products", "price.ceil", "CEIL(PRICE)"),
+				of("products", "price.floor", "FLOOR(PRICE)"),
+				of("products", "price.round", "ROUND(PRICE)"),
+				of("products", "price.sqrt", "SQRT(PRICE)"),
+				of("products", "price.mod(2)", "MOD(PRICE, 2.0)"),
 
-				Arguments.of("products", "price.plus(2)", "(PRICE+2)"),
-				Arguments.of("products", "price.minus(2)", "(PRICE-2)"),
-				Arguments.of("products", "price.multiply(2)", "(PRICE*2)"),
-				Arguments.of("products", "price.divide(2)", "(PRICE/2)"));
+				of("products", "price.plus(2)", "(PRICE+2)"),
+				of("products", "price.minus(2)", "(PRICE-2)"),
+				of("products", "price.multiply(2)", "(PRICE*2)"),
+				of("products", "price.divide(2)", "(PRICE/2)"));
 	}
 
 	static Stream<Arguments> joinTestCases() {
-		return Stream.of(Arguments.of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/);
+		return Stream.of(
+				of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/);
 	}
 
 	// @Test
