@@ -1,7 +1,9 @@
 package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.JoinsClause.joins;
+import static org.usf.jquery.core.ViewJoin.innerJoin;
 import static org.usf.jquery.core.ViewJoin.leftJoin;
+import static org.usf.jquery.core.ViewJoin.rightJoin;
 import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
 import org.usf.jquery.core.JoinsClause;
@@ -29,5 +31,15 @@ public interface Orders extends DatasetResource {
 	default JoinsClause leftcustomer() {
 		var cust = getInstance().getStore(DemoStore.class).customers();
 		return joins(leftJoin(cust.getView(), customer_id().eq(cust.id())));
+	}
+	
+	default JoinsClause rightcustomer() {
+		var cust = getInstance().getStore(DemoStore.class).customers();
+		return joins(rightJoin(cust.getView(), customer_id().eq(cust.id())));
+	}
+	
+	default JoinsClause innercustomer() {
+		var cust = getInstance().getStore(DemoStore.class).customers();
+		return joins(innerJoin(cust.getView(), customer_id().eq(cust.id())));
 	}
 }

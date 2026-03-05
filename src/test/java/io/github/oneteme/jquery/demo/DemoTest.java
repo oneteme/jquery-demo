@@ -1,6 +1,7 @@
 package io.github.oneteme.jquery.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.of;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateFilter;
 import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateJoin;
@@ -13,6 +14,7 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,31 +32,58 @@ class DemoTest {
 		getInstance().register(DemoStore.class, null);
 	}
 
-	void evaluate(String store, String entry, String expected, BiFunction<Entry, RequestContext, DBObject> evaluator) {
+	private String evaluate(String store, String entry, BiFunction<Entry, RequestContext, DBObject> evaluator) {
 		var ctx = getInstance().getDefaultStore().createContext(store);
-		assertEquals(expected, evaluator.apply(parseEntry(entry), ctx).toString());
+		return evaluator.apply(parseEntry(entry), ctx).toString();
+		
 	}
+	
+	@ParameterizedTest
+	@MethodSource("viewTestCases")
+	void testEvaluateView(String store, String expected) {
+		assertEquals(expected, evaluate(store, store + ":v1", EntryEvaluators::evaluateView));
+	}
+
 	@ParameterizedTest
 	@MethodSource("columnTestCases")
 	void testEvaluateColumn(String store, String entry, String expected) {
-		evaluate(store, entry, expected, EntryEvaluators::evaluateColumn);
+		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateColumn));
 	}
 
 	@ParameterizedTest
 	@MethodSource("joinTestCases")
 	void testEvaluateJoin(String store, String entry, String expected) {
-		evaluate(store, entry, expected, EntryEvaluators::evaluateJoin);
+		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateJoin));
 	}
 
+	@ParameterizedTest
+	@MethodSource("orderTestCases")
+	void testEvaluateOrder(String store, String entry, String expected) {
+		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateOrder));
+	}
+
+	static Stream<Arguments> viewTestCases() {
+		return Stream.of(
+				of("customers","CUSTOMERS_TABLE"),
+				of("categories","CATEGORIES_TABLE"),
+				of("employees","EMPLOYEES_TABLE"),
+				of("products","PRODUCTS_TABLE"),
+				of("orders_details","ORDERS_DETAILS_TABLE"),
+				of("suppliers","SUPPLIERS_TABLE")
+				
+				);
+		}
+	
 	static Stream<Arguments> columnTestCases() {
 		return Stream.of(
+				// aggregate functions
 				of("products", "price", "PRICE"),
 				of("products", "price.sum", "SUM(PRICE)"),
 				of("products", "price.avg", "AVG(PRICE)"),
 				of("products", "price.count", "COUNT(PRICE)"),
 				of("products", "price.min", "MIN(PRICE)"),
 				of("products", "price.max", "MAX(PRICE)"),
-
+				// Math functions 
 				of("products", "price.trunc", "TRUNC(PRICE)"),
 				of("products", "price.abs", "ABS(PRICE)"),
 				of("products", "price.ceil", "CEIL(PRICE)"),
@@ -62,18 +91,48 @@ class DemoTest {
 				of("products", "price.round", "ROUND(PRICE)"),
 				of("products", "price.sqrt", "SQRT(PRICE)"),
 				of("products", "price.mod(2)", "MOD(PRICE, 2.0)"),
-
+				// Math operators
 				of("products", "price.plus(2)", "(PRICE+2)"),
 				of("products", "price.minus(2)", "(PRICE-2)"),
 				of("products", "price.multiply(2)", "(PRICE*2)"),
-				of("products", "price.divide(2)", "(PRICE/2)"));
+				of("products", "price.divide(2)", "(PRICE/2)"),
+
+				of("products", "price.divide(2)", "(PRICE/2)"),
+				of("products", "price.divide(2)", "(PRICE/2)"),
+				of("products", "price.divide(2)", "(PRICE/2)"),
+				
+				// CONSTANTS
+				of("products", "cdate", "CURRENT_DATE"),
+				of("products", "ctimestamp", "CURRENT_TIMESTAMP"),
+				of("products", "ctime", "CURRENT_TIME")
+				
+				
+				);
 	}
 
 	static Stream<Arguments> joinTestCases() {
 		return Stream.of(
-				of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/);
+				of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/,
+				of("orders", "rightcustomer", "RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "),
+				of("orders", "innercustomer", "INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")
+				);
 	}
+	
+	static Stream<Arguments> orderTestCases() {
+		return Stream.of(of("products", "price", "PRICE"));
+	};
 
+	private void assertThrowsMessage(Executable code) {
+		var ex = assertThrows(IllegalArgumentException.class, code);
+//	    assertEquals(msg, ex.getMessage());
+	}
+//	@ParameterizedTest
+//	@MethodSource("failTestCases")
+//	void testEvaluateFails(String store, String entry, String expected) {
+//		var ctx = getInstance().getDefaultStore().createContext(store);
+//		assertThrowsMessage(()->evaluate(store, entry, expected, EntryEvaluators::evaluateOrder));
+//	}
+	
 	// @Test
 	void testEvaluateView() {
 		var ctx = getInstance().getDefaultStore().createContext("v1");
