@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.usf.jquery.core.DBObject;
 import org.usf.jquery.web.proxy.Entry;
@@ -45,19 +46,104 @@ class DemoTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("columnTestCases")
-	void testEvaluateColumn(String store, String entry, String expected) {
-		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateColumn));
+	@CsvSource(delimiter = ';', value = {
+			
+		
+		"price; PRICE",
+		
+		//aggregate functions
+		"price.sum; SUM(PRICE)",
+		"price.avg; AVG(PRICE)",
+		"price.count; COUNT(PRICE)",
+		"price.min; MIN(PRICE)",
+		"price.max; MAX(PRICE)",
+		
+		// Arithmetic Operators
+		"price.plus(2); (PRICE+2)",
+		"price.minus(2); (PRICE-2)",
+		"price.multiply(2); (PRICE*2)",
+		"price.divide(2); (PRICE/2)",
+		
+		// numeric functions
+		"price.sqrt; SQRT(PRICE)",
+		"price.exp; EXP(PRICE)",
+		"price.log; LOG(PRICE)",
+		"price.log(2); LOG(PRICE, 2)",
+		"price.abs; ABS(PRICE)",
+		"price.ceil; CEIL(PRICE)",
+		"price.floor; FLOOR(PRICE)",
+		"price.trunc; TRUNC(PRICE)",
+		"price.trunc(2); TRUNC(PRICE, 2)",
+		"price.round; ROUND(PRICE)",
+		"price.round(2); ROUND(PRICE, 2)",
+		"price.mod(2); MOD(PRICE, 2.0)",
+		"price.pow(2); POW(PRICE, 2.0)",
+		
+		"price.bitAnd(2); (PRICE&2)",
+		"price.bitOr(2); (PRICE|2)",
+		"price.bitXor(2); (PRICE^2)",
+		//"price.bitNot; (PRICE~)", TODO : wrong Exception -> Arithmetic exception takes 2 arguments
+		"price.bitShiftLeft(2); (PRICE<<2)",
+		"price.bitShiftRight(2); (PRICE>>2)",
+		
+		// string functions
+		"name.length;LENGTH(PRODUCT_NAME)",
+		"name.trim;TRIM(PRODUCT_NAME)",
+		"name.ltrim;LTRIM(PRODUCT_NAME)",
+		"name.rtrim;RTRIM(PRODUCT_NAME)",
+		"name.upper;UPPER(PRODUCT_NAME)",
+		"name.lower;LOWER(PRODUCT_NAME)",
+		"name.initcap;INITCAP(PRODUCT_NAME)",
+		"name.reverse;REVERSE(PRODUCT_NAME)",
+		"name.left(2);LEFT(PRODUCT_NAME, 2)",
+		"name.right(2);RIGHT(PRODUCT_NAME, 2)",
+		"name.replace(toto,titi);REPLACE(PRODUCT_NAME, 'toto', 'titi')",
+		"name.substring(1,2);SUBSTRING(PRODUCT_NAME, 1, 2)",
+		"name.concat(toto);CONCAT(PRODUCT_NAME, 'toto')",
+		"name.concat(toto,titi);CONCAT(PRODUCT_NAME, 'toto', 'titi')",
+		"name.concat(toto,titi,tata);CONCAT(PRODUCT_NAME, 'toto', 'titi', 'tata')",
+		"orders.start.age;AGE(ORDER_DATE)",
+		"orders.start.age(cdate);AGE(ORDER_DATE, CURRENT_DATE)",
+		"orders.start.age(ctimestamp);AGE(ORDER_DATE, CURRENT_TIMESTAMP)",
+		
+		// temporal functions
+		"orders.start.year; EXTRACT(YEAR FROM ORDER_DATE)",
+		"orders.start.month; EXTRACT(MONTH FROM ORDER_DATE)",
+		"orders.start.week; EXTRACT(WEEK FROM ORDER_DATE)",
+		"orders.start.day; EXTRACT(DAY FROM ORDER_DATE)",
+		"orders.start.dow; EXTRACT(DOW FROM ORDER_DATE)",
+		"orders.start.doy; EXTRACT(DOY FROM ORDER_DATE)",
+		"orders.start.hour; EXTRACT(HOUR FROM ORDER_DATE)",
+		"orders.start.minute; EXTRACT(MINUTE FROM ORDER_DATE)",
+		"orders.start.second; EXTRACT(SECOND FROM ORDER_DATE)",
+		"orders.start.epoch; EXTRACT(EPOCH FROM ORDER_DATE)",
+		
+		//combined functions
+		"orders.start.semester; CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 1 ELSE 2 END",
+		"orders.start.quarter; CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<4 THEN 1 WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 2 WHEN EXTRACT(MONTH FROM ORDER_DATE)<10 THEN 3 ELSE 4 END",
+		"orders.start.yearSemester; CONCAT(CAST(EXTRACT(YEAR FROM ORDER_DATE) AS VARCHAR), '-S', CAST(CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 1 ELSE 2 END AS VARCHAR))",
+		
+		// Constants
+		"cdate; CURRENT_DATE",
+		"ctimestamp; CURRENT_TIMESTAMP",
+		"ctime; CURRENT_TIME"
+	})
+	void testEvaluateColumn(String entry, String expected) {
+		assertEquals(expected, evaluate("products", entry, EntryEvaluators::evaluateColumn));
 	}
 
 	@ParameterizedTest
-	@MethodSource("joinTestCases")
-	void testEvaluateJoin(String store, String entry, String expected) {
-		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateJoin));
+	@CsvSource(delimiter = ';', ignoreLeadingAndTrailingWhitespace = false, value = {
+	"leftcustomer;LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/
+	"rightcustomer;RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",
+	"innercustomer;INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "
+	})
+	void testEvaluateJoin( String entry, String expected) {
+		assertEquals(expected, evaluate("orders", entry, EntryEvaluators::evaluateJoin));
 	}
 
 	@ParameterizedTest
-	@MethodSource("orderTestCases")
+	@CsvSource(delimiter = ';', value = { "products;price;PRICE" })
 	void testEvaluateOrder(String store, String entry, String expected) {
 		assertEquals(expected, evaluate(store, entry, EntryEvaluators::evaluateOrder));
 	}
@@ -73,54 +159,8 @@ class DemoTest {
 				
 				);
 		}
-	
-	static Stream<Arguments> columnTestCases() {
-		return Stream.of(
-				// aggregate functions
-				of("products", "price", "PRICE"),
-				of("products", "price.sum", "SUM(PRICE)"),
-				of("products", "price.avg", "AVG(PRICE)"),
-				of("products", "price.count", "COUNT(PRICE)"),
-				of("products", "price.min", "MIN(PRICE)"),
-				of("products", "price.max", "MAX(PRICE)"),
-				// Math functions 
-				of("products", "price.trunc", "TRUNC(PRICE)"),
-				of("products", "price.abs", "ABS(PRICE)"),
-				of("products", "price.ceil", "CEIL(PRICE)"),
-				of("products", "price.floor", "FLOOR(PRICE)"),
-				of("products", "price.round", "ROUND(PRICE)"),
-				of("products", "price.sqrt", "SQRT(PRICE)"),
-				of("products", "price.mod(2)", "MOD(PRICE, 2.0)"),
-				// Math operators
-				of("products", "price.plus(2)", "(PRICE+2)"),
-				of("products", "price.minus(2)", "(PRICE-2)"),
-				of("products", "price.multiply(2)", "(PRICE*2)"),
-				of("products", "price.divide(2)", "(PRICE/2)"),
 
-				of("products", "price.divide(2)", "(PRICE/2)"),
-				of("products", "price.divide(2)", "(PRICE/2)"),
-				of("products", "price.divide(2)", "(PRICE/2)"),
-				
-				// CONSTANTS
-				of("products", "cdate", "CURRENT_DATE"),
-				of("products", "ctimestamp", "CURRENT_TIMESTAMP"),
-				of("products", "ctime", "CURRENT_TIME")
-				
-				
-				);
-	}
 
-	static Stream<Arguments> joinTestCases() {
-		return Stream.of(
-				of("orders", "leftcustomer", "LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/,
-				of("orders", "rightcustomer", "RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "),
-				of("orders", "innercustomer", "INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ")
-				);
-	}
-	
-	static Stream<Arguments> orderTestCases() {
-		return Stream.of(of("products", "price", "PRICE"));
-	};
 
 	private void assertThrowsMessage(Executable code) {
 		var ex = assertThrows(IllegalArgumentException.class, code);
