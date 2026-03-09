@@ -399,30 +399,213 @@ header {
 }
 
 /*** HIGHLIGHTED TEXT ***/
-.hljs {
-  background: var(--jarvis-darker) !important;
+/* Highlighted code in tutorials */
+.highlighted_code {
+  position: relative;
 }
 
 .highlighted_code p {
-  color: white;
-  font-size: 20px;
-}
-
-.highlighted_code ol li {
-  padding-left: 36px;
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.highlighted_code li {
-  color: white;
-  font-size: 16px;
+  color: var(--jarvis-text);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
   font-weight: 400;
 }
 
+.highlighted_code p strong,
+.highlighted_code p b {
+  color: var(--jarvis-cyan);
+  font-weight: 600;
+}
+
+.highlighted_code>p:first-of-type {
+  font-size: 1.15rem;
+  color: var(--jarvis-cyan);
+  font-weight: 500;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--jarvis-border);
+  margin-bottom: 1.5rem;
+}
+
+
+.highlighted_code ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.5rem 0;
+  background: rgba(0, 217, 255, 0.03);
+  border-left: 3px solid var(--jarvis-cyan);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.highlighted_code ul li {
+  color: var(--jarvis-text);
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+}
+
+.highlighted_code ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--jarvis-cyan);
+  font-size: 1.3rem;
+  font-weight: 700;
+  top: 0.4rem;
+}
+
+
+.highlighted_code ol>li {
+  color: var(--jarvis-text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1.25rem 0 1.25rem 4rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, rgba(0, 217, 255, 0.08) 0%, transparent 100%);
+  border-left: 3px solid var(--jarvis-cyan);
+  border-radius: 8px;
+}
+
+.highlighted_code pre {
+  background: var(--jarvis-darker);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.highlighted_code pre::before {
+  content: '// Java';
+  position: absolute;
+  top: 0.75rem;
+  right: 1.25rem;
+  color: var(--jarvis-cyan);
+  font-size: 0.75rem;
+  opacity: 0.4;
+  font-family: 'Fira Code', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.highlighted_code pre:hover::before {
+  opacity: 0.7;
+}
+
 .highlighted_code code {
-  font-size: 16px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--jarvis-text);
+}
+
+/* Inline code */
+.highlighted_code p code,
+.highlighted_code li code,
+.highlighted_code td code {
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--jarvis-cyan);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  font-weight: 500;
+}
+
+/* Tables in tutorials */
+.highlighted_code table {
+  width: 100%;
+  max-width: 650px;
+  margin: 1.5rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--jarvis-card);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.highlighted_code thead {
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 128, 255, 0.15));
+}
+
+.highlighted_code th {
+  color: var(--jarvis-cyan);
+  text-align: left;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--jarvis-cyan);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.highlighted_code tbody tr {
+  transition: all 0.3s;
+  border-bottom: 1px solid var(--jarvis-border);
+}
+
+.highlighted_code tbody tr:hover {
+  background: rgba(0, 217, 255, 0.05);
+}
+
+.highlighted_code tbody tr:last-child {
+  border-bottom: none;
+}
+
+.highlighted_code td {
+  color: var(--jarvis-text);
+  padding: 0.875rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.highlighted_code td:first-child {
+  font-weight: 500;
+}
+
+/* Links in highlighted code */
+.highlighted_code a {
+  color: var(--jarvis-cyan);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--jarvis-cyan);
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.highlighted_code a:hover {
+  border-bottom-style: solid;
+  text-shadow: 0 0 10px var(--jarvis-glow);
+  color: var(--jarvis-blue);
+}
+
+/* Success checkmark */
+.highlighted_code a {
+  background: rgba(0, 217, 255, 0.05);
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--jarvis-cyan);
+  border-radius: 6px;
+  font-family: 'Fira Code', monospace;
+}
+
+.highlighted_code p:last-child {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(0, 217, 255, 0.1));
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #22c55e;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #86efac;
+  margin-top: 2rem;
+}
+
+/* Enhanced syntax highlighting for Java */
+.hljs {
+  background: var(--jarvis-darker)!important;
 }
 
 .hljs-keyword {
@@ -434,21 +617,73 @@ header {
   color: #50fa7b;
 }
 
-.hljs-built_in {
+.hljs-built_in,
+.hljs-title.class_ {
   color: #8be9fd;
+  font-weight: 500;
+}
+
+.hljs-comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+.hljs-meta {
+  color: #f1fa8c;
+}
+
+.hljs-title.function_ {
+  color: #bd93f9;
+}
+
+.hljs-literal {
+  color: #ff5555;
+}
+
+.hljs-params {
+  color: #ffb86c;
 }
 
 .language-php {
   color: var(--jarvis-cyan);
 }
 
-pre code {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--jarvis-text);
-  border: 1px solid rgba(0, 217, 255, 0.2);
-  border-radius: 12px;
+/* Code line numbers styling */
+.highlighted_code ol {
+  counter-reset: line-counter;
+  padding-left: 3rem;
+  margin: 0;
+  position: relative;
+}
+
+.highlighted_code ol li {
+  counter-increment: line-counter;
+  position: relative;
+  padding: 0.15rem 8px;
+}
+
+.highlighted_code ol li::before {
+  position: absolute;
+  left: -2.5rem;
+  width: 2rem;
+  text-align: right;
+  color: white;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+/* Tutorial step cards styling */
+.tutorial .definition-element {
+  border-left: 4px solid var(--jarvis-cyan);
+}
+
+.tutorial .definition-element:nth-child(even) {
+  border-left-color: var(--jarvis-purple);
+}
+
+.tutorial .definition-element:nth-child(even) .title::before {
+  background: linear-gradient(180deg, var(--jarvis-purple), var(--jarvis-blue));
 }
 
 /*** HIGHLIGHTED TEXT ***/
@@ -1118,7 +1353,8 @@ div.dt-container .dt-input:focus {
   color: #f87171 !important;
   border: 0;
 }
-.error_container pre{
+
+.error_container pre {
   margin: 0;
 }
 

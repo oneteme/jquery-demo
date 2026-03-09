@@ -79,6 +79,7 @@ class DemoTest {
 		"price.mod(2); MOD(PRICE, 2.0)",
 		"price.pow(2); POW(PRICE, 2.0)",
 		
+		// bit functions
 		"price.bitAnd(2); (PRICE&2)",
 		"price.bitOr(2); (PRICE|2)",
 		"price.bitXor(2); (PRICE^2)",
@@ -102,6 +103,10 @@ class DemoTest {
 		"name.concat(toto);CONCAT(PRODUCT_NAME, 'toto')",
 		"name.concat(toto,titi);CONCAT(PRODUCT_NAME, 'toto', 'titi')",
 		"name.concat(toto,titi,tata);CONCAT(PRODUCT_NAME, 'toto', 'titi', 'tata')",
+		"name.lpad(1,toto); LPAD(PRODUCT_NAME, 1, 'toto')",
+		"lpad(20,1,toto); LPAD(20, 1, 'toto')",
+		"name.rpad(1,toto); RPAD(PRODUCT_NAME, 1, 'toto')",
+		"rpad(20,1,toto); RPAD(20, 1, 'toto')",
 		"orders.start.age;AGE(ORDER_DATE)",
 		"orders.start.age(cdate);AGE(ORDER_DATE, CURRENT_DATE)",
 		"orders.start.age(ctimestamp);AGE(ORDER_DATE, CURRENT_TIMESTAMP)",
@@ -122,6 +127,37 @@ class DemoTest {
 		"orders.start.semester; CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 1 ELSE 2 END",
 		"orders.start.quarter; CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<4 THEN 1 WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 2 WHEN EXTRACT(MONTH FROM ORDER_DATE)<10 THEN 3 ELSE 4 END",
 		"orders.start.yearSemester; CONCAT(CAST(EXTRACT(YEAR FROM ORDER_DATE) AS VARCHAR), '-S', CAST(CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 1 ELSE 2 END AS VARCHAR))",
+		"orders.start.yearQuarter; CONCAT(CAST(EXTRACT(YEAR FROM ORDER_DATE) AS VARCHAR), '-Q', CAST(CASE WHEN EXTRACT(MONTH FROM ORDER_DATE)<4 THEN 1 WHEN EXTRACT(MONTH FROM ORDER_DATE)<7 THEN 2 WHEN EXTRACT(MONTH FROM ORDER_DATE)<10 THEN 3 ELSE 4 END AS VARCHAR))",
+		"orders.start.yearWeek; CONCAT(CAST(EXTRACT(YEAR FROM ORDER_DATE) AS VARCHAR), '-W', LPAD(CAST(EXTRACT(DOY FROM ORDER_DATE) AS VARCHAR), 2, '0'))",
+		"orders.start.yearMonth; LEFT(CAST(ORDER_DATE AS VARCHAR), 7)",
+		"orders.start.monthDay; SUBSTRING(CAST(ORDER_DATE AS VARCHAR), 6, 5)",
+		"orders.start.hourMinute; LEFT(CAST(CAST(ORDER_DATE AS TIME) AS VARCHAR), 5)",
+		
+		//Cast functions
+		"price.varchar;CAST(PRICE AS VARCHAR)",
+		"price.integer;CAST(PRICE AS INTEGER)",
+		"price.bigint;CAST(PRICE AS BIGINT)",
+		"price.decimal;CAST(PRICE AS DECIMAL)",
+		"price.bool;CAST(PRICE AS BOOLEAN)",
+		"orders.start.timestamp;CAST(ORDER_DATE AS TIMESTAMP)",
+		"orders.start.date;CAST(ORDER_DATE AS DATE)",
+		"orders.start.time;CAST(ORDER_DATE AS TIME)",
+		
+		//window functions
+		"rank;RANK()",
+		"rowNumber;ROW_NUMBER()",
+		"denseRank;DENSE_RANK()",
+		"percentRank;PERCENT_RANK()",
+		"rank.over;RANK() OVER()",
+		"rowNumber.over;ROW_NUMBER() OVER()",
+		"denseRank.over;DENSE_RANK() OVER()",
+		"percentRank.over;PERCENT_RANK() OVER()",
+		"price.over;PRICE OVER()",
+//		"rank.over(partition(id).order(price.desc));RANK OVER(PARTITION)", TODO : test over with partition
+		
+		// Other functions
+		"orders.start.coalesce(cdate);COALESCE(ORDER_DATE, CURRENT_DATE)",
+		"price.distinct;DISTINCT (PRICE)",
 		
 		// Constants
 		"cdate; CURRENT_DATE",

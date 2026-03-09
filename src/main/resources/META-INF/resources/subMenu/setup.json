@@ -1,23 +1,15 @@
 [
     {
-      "title": "Setup JQuery in your project",
+      "title": "Install JQuery",
       "tutorial": "setup/setup.md"
     },
     {
-      "title": "Create JQuery Columns",
+      "title": "Create DatasetResource",
       "tutorial": "setup/columns.md"
     },
     {
-      "title": "Create DATA CONSTANTS",
-      "tutorial": "setup/data_constants.md"
-    },
-    {
-      "title": "Create JQuery Tables",
+      "title": "Create StoreResource",
       "tutorial": "setup/tables.md"
-    },
-    {
-      "title": "Create JQuery Databases",
-      "tutorial": "setup/databases.md"
     },
     {
       "title": "WebMvc configuration",
