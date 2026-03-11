@@ -10,19 +10,19 @@
   {
     "title": "INNER JOIN",
     "view": "orders",
-    "filter": "join=\"innercustomer\"",
+    "filter": "join=innercustomer",
     "tutorial": "inner_join2.md"
   },
   {
     "title": "LEFT JOIN",
     "view": "orders",
-    "filter": "join=\"leftcustomer\"",
+    "filter": "join=leftcustomer",
     "tutorial": "left_join.md"
   },
   {
     "title": "RIGHT JOIN",
     "view": "orders",
-    "filter": "join=\"rightcustomer\"",
+    "filter": "join=rightcustomer",
     "tutorial": "right_join.md"
   }
 ]

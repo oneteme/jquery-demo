@@ -23,6 +23,6 @@ public interface Products extends DatasetResource {
 
 	@Bind("UNIT")
 	ViewColumn unit();
-	
-	//par produit je veux comparer le prix avec la moyen des prix de categorie
+
+	//par product je veux comparer le prix avec la moyen des prix de categorie
 }

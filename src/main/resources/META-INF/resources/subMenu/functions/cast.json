@@ -40,5 +40,12 @@
     "column": "cdate:cdate,cdate.timestamp:cdateToTs",
     "definition": "Converts column type to Timestamp (column should be of type date or VARCHAR)",
     "syntax": "column.timestamp / timestamp(value/column)"
+  },
+  {
+    "title": "BOOLEAN",
+    "view": "orders",
+    "column": "bool(1):bool1,bool(0):bool0",
+    "definition": "Casts a value to a boolean type.<br>The function converts the value of a column into a boolean representation (<b>true</b> or <b>false</b>). This is useful when ensuring that the result is interpreted as a boolean value regardless of the original data type.",
+    "syntax": "column.boolean / boolean(column/value)"
   }
 ]

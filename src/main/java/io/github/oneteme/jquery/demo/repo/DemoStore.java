@@ -1,5 +1,11 @@
 package io.github.oneteme.jquery.demo.repo;
 
+import static org.usf.jquery.core.JDBCType.DOUBLE;
+import static org.usf.jquery.core.JDBCType.VARCHAR;
+import static org.usf.jquery.core.Operators.function;
+import static org.usf.jquery.core.Parameter.required;
+
+import org.usf.jquery.core.TypedOperator;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
@@ -30,4 +36,9 @@ public interface DemoStore extends StoreResource {
 
 	@Bind("EMPLOYEES_TABLE")
 	Employees employees();
+	
+	@Expose(identity="pow", description="Raises a numeric value to a specified power")
+	default TypedOperator pow() {
+		return new TypedOperator(DOUBLE, function("POWER"), required(DOUBLE), required(DOUBLE));
+	}
 }

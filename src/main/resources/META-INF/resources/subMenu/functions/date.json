@@ -33,7 +33,7 @@
     "column": "cdate:CurrentDate,CurrentDate.dow:Day_of_week",
     "definition": "Extract the day of week from the date",
     "syntax": "column.dow / dow(column)",
-    "tooltip":"dow"
+    "tooltip": "dow"
   },
   {
     "title": "Day of year",
@@ -41,7 +41,35 @@
     "column": "cdate:CurrentDate,CurrentDate.doy:Day_of_year",
     "definition": "Extract the day of year from the date",
     "syntax": "column.doy / doy(column)",
-    "tooltip":"doy"
+    "tooltip": "doy"
+  },
+  {
+    "title": "Semester",
+    "view": "orders",
+    "column": "start,start.semester:semester",
+    "definition": "Returns the current semester of the year based on the current month.<br>The function divides the year into two semesters:<br><br>- <b>Semester 1</b> → January to June (month ≤ 6)<br>- <b>Semester 2</b> → July to December (month > 6)",
+    "syntax": "column.semester / semester(column)"
+  },
+  {
+    "title": "Quarter",
+    "view": "orders",
+    "column": "start,start.quarter:quarter",
+    "definition": "Returns the quarter of the year for a given date.<br>The year is divided into four quarters, each covering three months:<br><br>- <b>Quarter 1</b> → January to March<br>- <b>Quarter 2</b> → April to June<br>- <b>Quarter 3</b> → July to September<br>- <b>Quarter 4</b> → October to December<br>The function extracts the month from the date and returns the corresponding quarter number (1–4).",
+    "syntax": "column.quarter / quarter(column)"
+  },
+  {
+    "title": "YearSemester",
+    "view": "orders",
+    "column": "start,start.yearSemester:yearSemester",
+    "definition": "Returns the year and semester for a given date.<br>The semester is determined based on the month of the date:<br><br>- <b>Semester 1</b> → January to June<br>- <b>Semester 2</b> → July to December<br>The function combines the year and the semester number into a single value.",
+    "syntax": "column.yearSemester / yearSemester(column)"
+  },
+  {
+    "title": "YearQuarter",
+    "view": "orders",
+    "column": "start,start.yearQuarter:yearQuarter",
+    "definition": "Returns the year and quarter for a given date.<br>The quarter is determined based on the month of the date:<br><br>- <b>Quarter 1</b> → January to March<br>- <b>Quarter 2</b> → April to June<br>- <b>Quarter 3</b> → July to September<br>- <b>Quarter 4</b> → October to December<br>The function combines the year and the quarter number into a single value.",
+    "syntax": "column.yearQuarter / yearQuarter(column)"
   },
   {
     "title": "YearMonth",

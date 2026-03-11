@@ -6,5 +6,9 @@
   {
     "title": "Arithmetic",
     "items": "functions/operators/arithmetic.json"
+  },
+  {
+    "title": "Binary",
+    "items": "functions/operators/binary.json"
   }
 ]

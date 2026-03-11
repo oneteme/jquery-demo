@@ -214,6 +214,7 @@ function introNextStep() {
       intro.nextStep();
     }, 500);
 }
+
 function setupIntro() {
   // *** DIVS TO SHOW/HIDE FOR TUTORIAL
   $(".jq-link-display").hide();
@@ -396,6 +397,7 @@ function setupIntro() {
     introIsCompleted = true;
   });
 }
+
 function loadSettings() {
   fetch("/grid_settings.json")
     .then((response) => response.json())
@@ -404,6 +406,7 @@ function loadSettings() {
       createSettings(data);
     });
 }
+
 function createSettings(data) {
   $.each(data, (key, val) => {
     let elemCount = parseInt(val.count);
@@ -430,6 +433,7 @@ function createSettings(data) {
     });
   });
 }
+
 function showNavBar(element = $("#jq-show-examples")) {
   navStyleFields = {
     height: "100%",
@@ -444,6 +448,7 @@ function showNavBar(element = $("#jq-show-examples")) {
   // });
   toggleNavBar();
 }
+
 function hideNavBar(element = $("#jq-show-examples")) {
   navStyleFields = {
     height: "0",
@@ -458,6 +463,7 @@ function hideNavBar(element = $("#jq-show-examples")) {
   // });
   toggleNavBar();
 }
+
 function createNavbar(data, element = $(".navbar-nav")) {
   console.log("createNavBar => data : ", data);
   $.each(data, (key, nav_element) => {
@@ -501,6 +507,7 @@ function createNavbar(data, element = $(".navbar-nav")) {
     }
   });
 }
+
 function setupNext(arr, key) {
   let next =
     key + 1 < arr.length && !("items" in arr[key + 1])
@@ -510,6 +517,7 @@ function setupNext(arr, key) {
       key - 1 >= 0 && !("items" in arr[key - 1]) ? arr[key - 1].title : null;
   return [next, prev];
 }
+
 function loadViews() {
   $("#jq-table").empty();
   fetch("/views.json")
@@ -532,6 +540,7 @@ function loadViews() {
     });
 
 }
+
 function loadNavbar() {
   $(".navbar-nav").empty();
   fetch("/menu.json")
@@ -541,6 +550,7 @@ function loadNavbar() {
       createNavbar(data);
     });
 }
+
 function setupNavItem(navItem, divElement, next, prev) {
   let title = navItem.title,
     navFields = {
@@ -560,6 +570,7 @@ function setupNavItem(navItem, divElement, next, prev) {
   });
   $(divElement).append($("<li>", navFields).html(title));
 }
+
 function toggleNavSubElements(e, subElement = ".sub-nav") {
   if ($(e.currentTarget).find(".accordion").hasClass("rot-accordion")) {
     $(e.currentTarget).find(".accordion").removeClass("rot-accordion");
@@ -569,12 +580,14 @@ function toggleNavSubElements(e, subElement = ".sub-nav") {
     $(e.currentTarget).siblings(subElement).show();
   }
 }
+
 function toggleNavBar(animationTime = 100) {
   console.log("style : ", navStyleFields);
   $(".navbar-container").animate(navStyleFields, animationTime, () => {
     $(".navbar-container").css("display", navStyleFields.display);
   }); // duration in milliseconds
 }
+
 function fetchJQData() {
   let table = $("#jq-table").val() ? $("#jq-table").val() : null;
   let columns = $("#jq-columns").val();
@@ -620,6 +633,7 @@ function fetchJQData() {
       });
   }
 }
+
 function displayTableResults(data) {
   clearTable();
   showTable();
@@ -653,6 +667,7 @@ function displayTableResults(data) {
   });
   shouldUpdate = false;
 }
+
 function clearTable() {
   if ($.fn.dataTable.isDataTable(".results-container table"))
     resultTable.destroy();
@@ -660,10 +675,12 @@ function clearTable() {
   $(".results-container").hide();
   $(".results-container").css("width", "0");
 }
+
 function showTable() {
   $(".results-container").show();
   $(".results-container").css("width", "100%");
 }
+
 function loadTutorial(fileName) {
   console.log("loading Tutorial with the file : ", fileName);
   $(".definition-element").hide();
@@ -680,6 +697,7 @@ function loadTutorial(fileName) {
     hljs.highlightAll();
   });
 }
+
 function capitalize(str) {
   return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }

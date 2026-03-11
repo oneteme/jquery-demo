@@ -5,14 +5,15 @@ In here we are gonna go through the needed steps for you to get started with our
 
 To get started with JQuery we need to add the JQuery dependency to our project.
 
-You can get JQuery from here : https://mvnrepository.com/artifact/io.github.oneteme/jquery
+You can get JQuery from : https://mvnrepository.com/artifact/io.github.oneteme/jquery
+
 ```java
 // pom.xml
 
 <dependency>
 	<groupId>io.github.oneteme</groupId>
 	<artifactId>jquery</artifactId>
-	<version>5.0.0 /* (The JQuery version we want to use) */</version>
+	<version>5.0.0 /* (JQuery version) */</version>
 </dependency>
 
 // pom.xml
