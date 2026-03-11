@@ -16,6 +16,7 @@
   {
     "title": "LEFT JOIN",
     "view": "orders",
+    "definition":"A JOIN clause is used to combine rows from two or more views, based on a related column between them.",
     "filter": "join=leftcustomer",
     "tutorial": "left_join.md"
   },
