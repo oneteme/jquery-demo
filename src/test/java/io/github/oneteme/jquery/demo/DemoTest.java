@@ -34,15 +34,15 @@ class DemoTest {
 		getInstance().register(DemoStore.class, null);
 	}
 
-	private String evaluate(String store, String entry, BiFunction<Entry, RequestContext, DBObject> evaluator) {
-		var ctx = getInstance().getDefaultStore().createContext(store);
+	private String evaluate(String ds, String entry, BiFunction<Entry, RequestContext, DBObject> evaluator) {
+		var ctx = getInstance().getDefaultStore().createContext(ds);
 		return evaluator.apply(parseEntry(entry), ctx).toString();
 	}
 	
 	@ParameterizedTest
 	@MethodSource("viewTestCases")
-	void testEvaluateView(String store, String expected) {
-		assertEquals(expected, evaluate(store, store + ":v1", EntryEvaluators::evaluateView));
+	void testEvaluateView(String ds, String expected) {
+		assertEquals(expected, evaluate(ds, ds, EntryEvaluators::evaluateView));
 	}
 
 	@ParameterizedTest
@@ -82,7 +82,7 @@ class DemoTest {
 		// bit functions
 		"price.bitAnd(2); (PRICE&2)",
 		"price.bitOr(2); (PRICE|2)",
-		"price.bitXor(2); (PRICE^2)",
+		"price.bitXor(2); (PRICE#2)",
 		//"price.bitNot; (PRICE~)", TODO : wrong Exception -> Arithmetic exception takes 2 arguments
 		"price.bitShiftLeft(2); (PRICE<<2)",
 		"price.bitShiftRight(2); (PRICE>>2)",
