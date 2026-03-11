@@ -479,23 +479,6 @@ header {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.highlighted_code pre::before {
-  content: '// Java';
-  position: absolute;
-  top: 0.75rem;
-  right: 1.25rem;
-  color: var(--jarvis-cyan);
-  font-size: 0.75rem;
-  opacity: 0.4;
-  font-family: 'Fira Code', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.highlighted_code pre:hover::before {
-  opacity: 0.7;
-}
-
 .highlighted_code code {
   font-family: 'Fira Code', monospace;
   font-size: 0.9rem;

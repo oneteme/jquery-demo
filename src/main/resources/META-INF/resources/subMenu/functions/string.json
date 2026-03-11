@@ -55,6 +55,14 @@
       "syntax": "column.substring(start,end)"
     },
     {
+      "title": "REPLACE",
+      "view": "products",
+      "column": "unit,unit.replace(bottles,bags):replacedUnit",
+      "filter": "unit.endsLike=bottles",
+      "definition": "Replaces a specified substring within a column with another value.<br>The function searches the column for the given text and substitutes it with the replacement text.<br>This is useful for cleaning or standardizing string values directly in a query.<br><br>Example: in the <b>PRODUCTS_TABLE</b>, the <b>UNIT</b> column may contain values such as '12 bottles'. Using <b>unit.replace(bottles,bags)</b> replaces the word <b>bottles</b> with <b>bags</b>, producing values like '12 bags'.",
+      "syntax": "column.replace(replaced,replacement)/replace(column, replacedString, replacementString)"
+    },
+    {
       "title": "TRIM",
       "view": "customers",
       "column": "trim(\"            HELLO                             WORLD                       \"):trim",

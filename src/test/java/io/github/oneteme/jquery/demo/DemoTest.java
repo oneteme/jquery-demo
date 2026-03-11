@@ -77,7 +77,7 @@ class DemoTest {
 		"price.round; ROUND(PRICE)",
 		"price.round(2); ROUND(PRICE, 2)",
 		"price.mod(2); MOD(PRICE, 2.0)",
-		"price.pow(2); POW(PRICE, 2.0)",
+		"price.pow(2); POWER(PRICE, 2.0)", // Has been overridden for H2 POW -> POWER
 		
 		// bit functions
 		"price.bitAnd(2); (PRICE&2)",

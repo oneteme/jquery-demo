@@ -3,35 +3,35 @@
     "title": "Year",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.year:Year",
-    "definition": "Extract the year from the date",
+    "definition": "Returns the year component from a date value.<br>The function extracts the four-digit year (for example: 2026) from the provided date column.",
     "syntax": "column.year"
   },
   {
     "title": "Month",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.month:Month",
-    "definition": "Extract the month from the date",
+    "definition": "Returns the month component from a date value.<br>The function extracts the numeric month (1–12) from the provided date column, where 1 represents January and 12 represents December.",
     "syntax": "column.month"
   },
   {
     "title": "Day",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.day:Day",
-    "definition": "Extract the day from the date",
+    "definition": "Returns the day of the month from a date value.<br>The function extracts the numeric day (1–31) representing the day within the month of the provided date.",
     "syntax": "column.day"
   },
   {
     "title": "Week",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.yearWeek:yearWeek",
-    "definition": "Extract the week from the date",
+    "column": "cdate:CurrentDate,CurrentDate.week:week",
+    "definition": "Returns the week number of the year for a given date.<br>The function extracts the numeric week (1–53) indicating the position of the date within the year.",
     "syntax": "column.week / week(column)"
   },
   {
     "title": "Day of week",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.dow:Day_of_week",
-    "definition": "Extract the day of week from the date",
+    "definition": "Returns the day of the week for a given date.<br>The function extracts the numeric representation of the weekday, indicating the position of the day within the week.",
     "syntax": "column.dow / dow(column)",
     "tooltip": "dow"
   },
@@ -39,7 +39,7 @@
     "title": "Day of year",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.doy:Day_of_year",
-    "definition": "Extract the day of year from the date",
+    "definition": "Returns the day number within the year for a given date.<br>The function extracts the numeric position of the date in the year, ranging from 1 to 365 (or 366 in leap years).",
     "syntax": "column.doy / doy(column)",
     "tooltip": "doy"
   },
@@ -75,7 +75,7 @@
     "title": "YearMonth",
     "view": "employees",
     "column": "start,start.yearMonth:yearMonth",
-    "definition": "Extract the yearMonth from the date YYYY-MM",
+    "definition": "Returns the year and month extracted from a date value.<br>The result is formatted as <b>YYYY-MM</b>, combining the four-digit year and the numeric month.",
     "syntax": "column.yearMonth",
     "tooltip": "Year and month YYYY-MM"
   },
@@ -83,7 +83,7 @@
     "title": "MonthDay",
     "view": "employees",
     "column": "start,start.monthDay:monthDay",
-    "definition": "Extract the monthDay from the date MM-DD",
+    "definition": "Returns the month and day extracted from a date value.<br>The result is formatted as <b>MM-DD</b>, representing the numeric month followed by the day of the month.",
     "syntax": "column.monthDay",
     "tooltip": "Day and month MM-DD"
   },
@@ -91,7 +91,7 @@
     "title": "YearWeek",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.yearWeek:yearWeek",
-    "definition": "Extract the yearWeek from the date YYYY-'W'WW",
+    "definition": "Returns the year and week number extracted from a date or timestamp.<br>The result is formatted as <b>YYYY-'W'WW</b>, combining the year with the corresponding week of the year.",
     "syntax": "column.yearWeek / yearWeek(column)",
     "tooltip": "Year and week number YYYY-'W'WW"
   },
@@ -99,28 +99,28 @@
     "title": "Hour",
     "view": "employees",
     "column": "ctime:CurrentTime,CurrentTime.hour:Hours",
-    "definition": "Extract the hours from the TimeStamp",
+    "definition": "Returns the hour component from a time or timestamp value.<br>The hour is extracted using the 24-hour format, ranging from 0 to 23.",
     "syntax": "column.hour / hour(column)"
   },
   {
     "title": "Minute",
     "view": "employees",
     "column": "ctime:CurrentTime,CurrentTime.minute:Minutes",
-    "definition": "Extract the minutes from the TimeStamp",
+    "definition": "Returns the minute component from a time or timestamp value.<br>The extracted value ranges from 0 to 59.",
     "syntax": "column.minute / minute(column)"
   },
   {
     "title": "Second",
     "view": "employees",
     "column": "ctime:CurrentTime,CurrentTime.second:Seconds",
-    "definition": "Extract the seconds from the TimeStamp",
+    "definition": "Returns the second component from a time or timestamp value.<br>The extracted value ranges from 0 to 59.",
     "syntax": "column.second / second(column)"
   },
   {
     "title": "hourMinute",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.hourMinute:hourMinute",
-    "definition": "Extract the hourMinute from the date HH:MM",
+    "definition": "Returns the hour and minute extracted from a time or timestamp value.<br>The result is formatted as <b>HH:MM</b> using the 24-hour time format.",
     "syntax": "column.hourMinute / hourMinute(column)",
     "tooltip": "Hours and minutes HH:MM"
   },
@@ -128,7 +128,7 @@
     "title": "Epoch",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.epoch:epoch",
-    "definition": "Get the date/TimeStamp in millisecond since 01 January 1970",
+    "definition": "Returns the Unix epoch time for a given date or timestamp.<br>The value represents the number of milliseconds that have elapsed since <b>January 1, 1970 (UTC)</b>.",
     "syntax": "column.epoch / epoch(column)"
   }
 ]

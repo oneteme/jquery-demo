@@ -3,6 +3,7 @@ package io.github.oneteme.jquery.demo.repo;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
+import org.usf.jquery.web.proxy.Expose;
 
 public interface Customers extends DatasetResource {
 
@@ -21,8 +22,9 @@ public interface Customers extends DatasetResource {
 	@Bind("CITY")
 	ViewColumn city();
 	
+	@Expose(identity="postal_code")
 	@Bind("POSTAL_CODE")
-	ViewColumn postal_code();
+	ViewColumn postalCode();
 	
 	@Bind("COUNTRY")
 	ViewColumn country();

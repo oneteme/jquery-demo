@@ -1,29 +1,40 @@
-1. Add the join to your table Enum
+This tutorial explains how to create and use an INNER JOIN in your dataset.
 
-In the join function of your table you can add the join you need this way.
+1. Add the Join to Your DatasetResource
+
+First, define the join inside your table class by creating a method that returns a JoinsClause.
 
 ```java
-// JQDemoTable.java
+// Orders.java
 
-@Override
-public JoinBuilder join(String name) {
-	if (ORDER /* The table that contains the join */ == this 
-		&& "innercustomer".equals(name) /* The join name */) {
-			return () -> new ViewJoin[] {
-                 ViewJoin.innerJoin(JQDemoTable.CUSTOMER.view(),
-				  		JQDemoTable.ORDER.column(JQDemoColumn.CUSTOMER_ID)
-				  		.eq(JQDemoTable.CUSTOMER.column(JQDemoColumn.ID)))
-                    };
-		}
-	return ViewDecorator.super.join(name);
-}
+	default JoinsClause innerCustomer() {
+		var cust = getInstance().getStore(DemoStore.class).customers();
+		return joins(rightJoin(cust.getView(), customerId().eq(cust.id())));
+	}
+
+// Orders.java
 ```
-In here we added a INNER JOIN called "innercustomer" (it's up to you to choose a name)
+A INNER JOIN is created between the orders table and the customers table.
 
-2. Apply the INNER JOIN
+The join condition is:
 
-Now to apply this "innercustomer" join we created:
+```java
+orders.customerId = customers.id
+```
+
+The join is named innerCustomer.
+You are free to choose any name, but it should clearly describe the join.
+
+2. Apply the Join in Your Query
+
+Once the join is defined, you can apply it in your query using the join parameter.
 
 ```c#
-col1,col2,col3,...&join="innercustomer"
+join=innerCustomer
 ```
+
+This will automatically apply the INNER JOIN you defined earlier.
+
+Tip: You can create multiple join methods in your table class and call them when needed in your queries.
+
+And now your INNER JOIN is up and ready and you can try it right now!

@@ -595,7 +595,7 @@ function fetchJQData() {
   let fetchLink =
     "/" +
     table + "?" +
-    (columns ? "field=" + columns : "") +
+    (columns ? "select=" + columns : "") +
     (filters ? "&" + filters : "");
   if (table) {
     console.log(viewsMap)

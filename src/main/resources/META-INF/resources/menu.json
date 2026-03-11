@@ -10,7 +10,7 @@
     "filter": "",
     "definition": "To fetch certain columns in JQuery all you need is to write down the columns you need seperated by a ','",
     "syntax": "column1,column2,column3,...",
-    "next":"GROUP BY"
+    "next": "GROUP BY"
   },
   {
     "title": "GROUP BY",
@@ -51,13 +51,15 @@
     "syntax": "&order=column.ASC/DESC By default it's ASC"
   },
   {
+    "title": "CASE...WHEN",
+    "view": "products",
+    "column": "price,when(price.lt(10),Cheap).when(price.ge(10).and(price.lt(20)), Normal).orElse(Expensive):Category",
+    "definition": "Evaluates multiple conditions and returns a value depending on which condition is met.<br>The CASE expression works like an if-else structure in SQL. Each <b>WHEN</b> condition is evaluated in order, and the result of the first matching condition is returned.<br>If none of the conditions are satisfied, the <b>ELSE</b> value is returned.<br>This function is commonly used to categorize or transform values directly in a query.<br><br>Example use case: categorizing products based on their price (cheap, normal, expensive).",
+    "syntax": "when(criteria1,thenVal1).when(criteria2,thenVal2)...orElse(valn)",
+    "tooltip":"CASE...WHEN THEN...ELSE"
+  },
+  {
     "title": "JOIN",
-    "view": "orders",
-    "column": "order.id,customer.name,order.start",
-    "filter": "order.customer_id=customer.id",
-    "definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
-    "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id",
-    "tutorial": "test.md",
     "items": "join.json"
   },
   {
