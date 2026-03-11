@@ -13,6 +13,7 @@ import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,15 +29,14 @@ import io.github.oneteme.jquery.demo.repo.DemoStore;
 
 class DemoTest {
 
-	@BeforeEach
-	void init() {
+	@BeforeAll
+	static void init() {
 		getInstance().register(DemoStore.class, null);
 	}
 
 	private String evaluate(String store, String entry, BiFunction<Entry, RequestContext, DBObject> evaluator) {
 		var ctx = getInstance().getDefaultStore().createContext(store);
 		return evaluator.apply(parseEntry(entry), ctx).toString();
-		
 	}
 	
 	@ParameterizedTest
