@@ -170,9 +170,9 @@ class DemoTest {
 
 	@ParameterizedTest
 	@CsvSource(delimiter = ';', ignoreLeadingAndTrailingWhitespace = false, value = {
-	"leftcustomer;LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/
-	"rightcustomer;RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",
-	"innercustomer;INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "
+	"leftCustomer;LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/
+	"rightCustomer;RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",
+	"innerCustomer;INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "
 	})
 	void testEvaluateJoin( String entry, String expected) {
 		assertEquals(expected, evaluate("orders", entry, EntryEvaluators::evaluateJoin));
