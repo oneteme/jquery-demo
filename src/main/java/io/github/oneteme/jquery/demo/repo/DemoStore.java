@@ -38,6 +38,6 @@ public interface DemoStore extends StoreResource {
 	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {
-		return new OperatorDefinition(DOUBLE, function("POWER"), required(DOUBLE), required(DOUBLE));
+		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
 	}
 }

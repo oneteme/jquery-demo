@@ -157,7 +157,7 @@ class DemoTest {
 		
 		// Other functions
 		"orders.start.coalesce(cdate);COALESCE(ORDER_DATE, CURRENT_DATE)",
-		"price.distinct;DISTINCT (PRICE)",
+		"price.distinct;DISTINCT(PRICE)",
 		
 		// Constants
 		"cdate; CURRENT_DATE",
