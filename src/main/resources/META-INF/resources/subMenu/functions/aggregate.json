@@ -1,42 +1,42 @@
 [
-    {
-      "title": "AVG",
-      "view": "products",
-      "column": "price.avg:avg",
-      "filter": "",
-      "definition": "The AVG() function returns the average value of a numeric column.",
-      "syntax": "column1,column2,column3,..."
-    },
-    {
-      "title": "COUNT",
-      "view": "products",
-      "column": "id.count:COUNT",
-      "filter": "",
-      "definition": "The COUNT() function returns the number of rows that matches a specified criterion.",
-      "syntax": "column.count"
-    },
-    {
-      "title": "SUM",
-      "view": "details",
-      "column": "quantity.sum:SUM",
-      "filter": "",
-      "definition": "The SUM() function returns the total sum of a numeric column.",
-      "syntax": "column.sum"
-    },
-    {
-      "title": "MIN",
-      "view": "products",
-      "column": "price.min:SmallestPrice",
-      "filter": "",
-      "definition": "The MIN() function returns the smallest value of the selected column",
-      "syntax": "column.min"
-    },
-    {
-      "title": "MAX",
-      "view": "products",
-      "column": "price.max:LargestPrice",
-      "filter": "",
-      "definition": "The MAX() function returns the largest value of the selected column.",
-      "syntax": "column.max"
-    }
-  ]
+  {
+    "title": "AVG",
+    "view": "products",
+    "column": "price.avg:avg",
+    "filter": "",
+    "definition": "Returns the average value of a numeric column.<br>The function calculates the sum of all values and divides it by the number of rows.",
+    "syntax": "column.avg"
+  },
+  {
+    "title": "COUNT",
+    "view": "products",
+    "column": "id.count:COUNT",
+    "filter": "",
+    "definition": "Returns the number of rows in a dataset or the number of non-null values in a column.<br>This function is commonly used to count records.",
+    "syntax": "column.count"
+  },
+  {
+    "title": "SUM",
+    "view": "details",
+    "column": "quantity.sum:SUM",
+    "filter": "",
+    "definition": "Returns the total sum of a numeric column.<br>The function adds all values from the specified column.",
+    "syntax": "column.sum"
+  },
+  {
+    "title": "MIN",
+    "view": "products",
+    "column": "price.min:SmallestPrice",
+    "filter": "",
+    "definition": "Returns the smallest value from a column.<br>This function is useful for finding minimum values such as the lowest price.",
+    "syntax": "column.min"
+  },
+  {
+    "title": "MAX",
+    "view": "products",
+    "column": "price.max:LargestPrice",
+    "filter": "",
+    "definition": "Returns the largest value from a column.<br>This function is useful for finding maximum values such as the highest price.",
+    "syntax": "column.max"
+  }
+]

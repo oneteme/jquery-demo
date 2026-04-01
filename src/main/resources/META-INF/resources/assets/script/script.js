@@ -96,6 +96,25 @@ $(document).ready(function () {
       filters = $(e.currentTarget).attr("data-filter"),
       next = $(e.currentTarget).attr("data-next"),
       prev = $(e.currentTarget).attr("data-prev");
+
+    $(".tuto_btn_container").removeClass("visible");
+    if (next) {
+      $(".tuto_btn_container.btn-next").addClass("visible");
+      $(".tuto_btn_container.btn-next span:first").html(next);
+      $(".tuto_btn_container.btn-next").attr(
+        "data-example",
+        next.toLowerCase()
+      );
+    }
+    if (prev) {
+      $(".tuto_btn_container.btn-prev").addClass("visible");
+      $(".tuto_btn_container.btn-prev span:first").html(prev);
+      $(".tuto_btn_container.btn-prev").attr(
+        "data-example",
+        prev.toLowerCase()
+      );
+    }
+
     if ($(e.currentTarget).attr("data-tutorial")) {
       loadTutorial($(e.currentTarget).attr("data-tutorial"));
       if (view || columns || filters) {
@@ -114,27 +133,7 @@ $(document).ready(function () {
       $(".definition-display .definition .description").html(definition);
       $(".definition-display .syntax .description").html(syntax);
     }
-    if (next || prev) {
-      $(".tuto_btn_container").hide();
-      console.log("next exists!!");
-      $(".definition-element.move_tuto").show();
-      if (next) {
-        $(".tuto_btn_container.btn-next").show();
-        $(".tuto_btn_container.btn-next span:first").html(next);
-        $(".tuto_btn_container.btn-next").attr(
-          "data-example",
-          next.toLowerCase()
-        );
-      }
-      if (prev) {
-        $(".tuto_btn_container.btn-prev").show();
-        $(".tuto_btn_container.btn-prev span:first").html(prev);
-        $(".tuto_btn_container.btn-prev").attr(
-          "data-example",
-          prev.toLowerCase()
-        );
-      }
-    }
+
     $(".content").animate({ scrollTop: 0 }, 10);
     $("#jq-table").val(view);
     $("#jq-columns").val(columns);
@@ -156,7 +155,7 @@ $(document).ready(function () {
     clearTimeout(inputTimeOut);
     if (
       !introIsCompleted &&
-      $(e.currentTarget).val() === "country,customer,contact,id"
+      $(e.currentTarget).val() === "country,name,contact,id"
     ) {
       inputTimeOut = setTimeout(() => {
         intro.nextStep();
@@ -292,7 +291,7 @@ function setupIntro() {
         {
           title: "JQuery syntax",
           element: ".jqcolumns_input_container input",
-          intro: "Write : <b>country,customer,contact,id</b>",
+          intro: "Write : <b>country,name,contact,id</b>",
         }, // step 8
         {
           title: "JQuery syntax",
@@ -519,7 +518,6 @@ function setupNext(arr, key) {
 }
 
 function loadViews() {
-  $("#jq-table").empty();
   fetch("/views.json")
     .then((response) => response.json())
     .then((data) => {

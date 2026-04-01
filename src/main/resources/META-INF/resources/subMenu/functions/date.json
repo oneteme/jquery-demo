@@ -55,7 +55,8 @@
     "view": "orders",
     "column": "start,start.quarter:quarter",
     "definition": "Returns the quarter of the year for a given date.<br>The year is divided into four quarters, each covering three months:<br><br>- <b>Quarter 1</b> → January to March<br>- <b>Quarter 2</b> → April to June<br>- <b>Quarter 3</b> → July to September<br>- <b>Quarter 4</b> → October to December<br>The function extracts the month from the date and returns the corresponding quarter number (1–4).",
-    "syntax": "column.quarter / quarter(column)"
+    "syntax": "column.quarter / quarter(column)",
+    "native": false
   },
   {
     "title": "YearSemester",

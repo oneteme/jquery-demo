@@ -212,12 +212,12 @@ header {
 #jq-execute {
   background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
   color: var(--jarvis-text);
-  padding: 0.75rem 2rem;
+  padding: 0.75rem;
   border: none;
   border-radius: 8px;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 4px 15px var(--jarvis-glow);
@@ -234,7 +234,7 @@ header {
 
 .show-docs {
   position: absolute;
-  top: 8px;
+  top: 24px;
   right: 28px;
   z-index: 98;
   border-radius: 8px;
@@ -247,13 +247,22 @@ header {
 .tuto_btn_container {
   cursor: pointer;
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
   align-items: center;
-  border: solid 2px white;
-  background-color: transparent;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid var(--jarvis-border);
   width: fit-content;
-  padding: 4px 16px;
-  border-radius: 20px;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.3s;
+  color: var(--jarvis-cyan);
+  font-weight: 500;
+  visibility: hidden;
+  font-size: 12px;
+}
+
+.tuto_btn_container.visible {
+  visibility: visible;
 }
 
 .tuto_btn_container:hover {
@@ -273,20 +282,6 @@ header {
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
-}
-
-.tuto_btn_container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  background: rgba(0, 217, 255, 0.1);
-  border: 1px solid var(--jarvis-border);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: var(--jarvis-cyan);
-  font-weight: 500;
 }
 
 .tuto_btn_container:hover {
@@ -588,7 +583,7 @@ header {
 
 /* Enhanced syntax highlighting for Java */
 .hljs {
-  background: var(--jarvis-darker)!important;
+  background: var(--jarvis-darker) !important;
 }
 
 .hljs-keyword {
@@ -989,6 +984,72 @@ header {
   align-items: normal;
 }
 
+.definition-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.example-title {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Use case tabs/buttons */
+.ucases-container {
+  display: flex;
+  background: var(--jarvis-darker);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 10px;
+  padding: 0.35rem;
+  gap: 0.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ucase-btn {
+  padding: 0.6rem 1.5rem;
+  color: var(--jarvis-text-dim);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 7px;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  position: relative;
+  background: transparent;
+}
+
+.ucase-btn:hover {
+  color: var(--jarvis-cyan);
+  background: rgba(0, 217, 255, 0.08);
+}
+
+.ucase-btn.active {
+  background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
+  color: var(--jarvis-darker);
+  font-weight: 600;
+  box-shadow: 0 0 15px var(--jarvis-glow);
+}
+
+.ucase-btn:active {
+  transform: scale(0.97);
+}
+
 .definition-element {
   background: var(--jarvis-card);
   border: 1px solid var(--jarvis-border);
@@ -1043,19 +1104,7 @@ header {
   text-shadow: 0 0 10px var(--jarvis-glow);
 }
 
-.example-title {
-  text-align: center;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
+
 
 .jquery-display {
   position: relative;
@@ -1119,7 +1168,7 @@ header {
   background: var(--jarvis-card);
   border: 1px solid rgba(0, 217, 255, 0.2);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 0.75rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s;
@@ -1196,6 +1245,29 @@ div.dt-container .dt-input:focus {
 
 .jqsyntax-container label {
   color: gray;
+}
+
+.form-footer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.form-footer pre {
+  margin: 0;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.form-footer .jq-link-display {
+  width: 100%;
+  min-width: 0;
+  background: var(--jarvis-card);
+}
+
+.form-footer .jq-link-display pre {
+  overflow-x: auto;
 }
 
 .hrz-label-container {
