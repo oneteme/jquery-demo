@@ -131,7 +131,7 @@ $(document).ready(function () {
       $("#defintion-text-container p").html(definition);
       $("#syntax-text-container p").html(syntax);
       $(".definition-display .definition .description").html(definition);
-      $(".definition-display .syntax .description").html(syntax);
+      $(".syntax-code").html(syntax);
     }
 
     $(".content").animate({ scrollTop: 0 }, 10);
@@ -139,7 +139,8 @@ $(document).ready(function () {
     $("#jq-columns").val(columns);
     $("#jq-filters").val(filters);
     fetchJQData();
-    introNextStep();
+    $('.syntax-content').hide();
+    introNextStep(() => $('.syntax-content').show());
   });
   $(document).on("click", ".grid-options .option-box", (e) => {
     let appliedClass = $(e.currentTarget).attr("data-class");
@@ -207,11 +208,15 @@ $(document).ready(function () {
   });
 });
 //**************** FUNCTIONS ****************/
-function introNextStep() {
-  if (!introIsCompleted)
+function introNextStep(fn = null) {
+  if (!introIsCompleted) {
     setTimeout(function () {
       intro.nextStep();
     }, 500);
+    if (fn) {
+      fn()
+    }
+  }
 }
 
 function setupIntro() {
@@ -343,7 +348,7 @@ function setupIntro() {
         {
           disableInteraction: true,
           title: "Explanation 🤓",
-          element: ".definition-element.syntax",
+          element: ".syntax-content",
           intro: "And this is how it's syntax works in JQuery",
         }, // step 17
         {

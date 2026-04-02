@@ -11,7 +11,7 @@
     "title": "INNER JOIN",
     "view": "orders",
     "filter": "join=innerCustomer",
-    "tutorial": "inner_join2.md"
+    "tutorial": "inner_join.md"
   },
   {
     "title": "LEFT JOIN",

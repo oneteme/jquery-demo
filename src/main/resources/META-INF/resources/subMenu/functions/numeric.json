@@ -66,7 +66,7 @@
     "column": "price,price.pow(2):pow2",
     "filter": "price=5,10,15,20",
     "definition": "Raises a numeric value to a specified power.<br>The function calculates the value of the column raised to the given exponent (<b>x^n</b>). This is useful for mathematical calculations such as squares, cubes, or exponential scaling.",
-    "syntax": "column.power(n) / power(column, n)"
+    "syntax": "column.pow(n) / pow(column, n)"
   },
   {
     "title": "LOG",

@@ -252,7 +252,7 @@ header {
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid var(--jarvis-border);
   width: fit-content;
-  padding: 0.75rem;
+  padding: 0.6rem;
   border-radius: 8px;
   transition: all 0.3s;
   color: var(--jarvis-cyan);
@@ -858,7 +858,7 @@ header {
 
 .settings-content div {
   /* flex: auto !important; */
-  gap: 18px;
+  gap: 8px;
   margin: 0;
 }
 
@@ -1003,6 +1003,7 @@ header {
   background-clip: text;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  margin: 0;
 }
 
 /* Use case tabs/buttons */
@@ -1015,12 +1016,12 @@ header {
   gap: 0.5rem;
   width: fit-content;
   margin-left: auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .ucase-btn {
-  padding: 0.6rem 1.5rem;
+  padding: 0.4rem 1rem;
   color: var(--jarvis-text-dim);
   font-family: 'Fira Code', monospace;
   font-size: 0.9rem;
@@ -1054,8 +1055,8 @@ header {
   background: var(--jarvis-card);
   border: 1px solid var(--jarvis-border);
   border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
   transition: all 0.3s;
   width: 100%;
 }
@@ -1069,7 +1070,7 @@ header {
   font-family: 'Orbitron', sans-serif;
   color: var(--jarvis-cyan);
   font-size: 1.4rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: flex;
@@ -1104,6 +1105,59 @@ header {
   text-shadow: 0 0 10px var(--jarvis-glow);
 }
 
+/* Syntax toggle button */
+.definition-element .syntax-toggle {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  color: var(--jarvis-cyan);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Fira Code', monospace;
+}
+
+.definition-element .syntax-toggle:hover {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: var(--jarvis-cyan);
+  box-shadow: 0 0 15px var(--jarvis-glow);
+  transform: translateY(-2px);
+}
+
+.definition-element .syntax-toggle::before {
+  content: '</>';
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+/* Syntax content collapsible */
+.definition-element .syntax-content {
+  display: none;
+  max-height: 500px;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--jarvis-border);
+}
+
+.definition-element .syntax-content pre {
+  background: var(--jarvis-darker);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.definition-element .syntax-content code {
+  color: var(--jarvis-text);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
 
 
 .jquery-display {
@@ -1180,12 +1234,158 @@ header {
   border: 1px solid var(--jarvis-border);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
 }
 
 .card-container:hover {
   border-color: var(--jarvis-cyan);
   box-shadow: 0 4px 30px var(--jarvis-glow);
 }
+
+.form-header-actions {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.form-action-btn {
+  width: 38px;
+  height: 38px;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--jarvis-cyan);
+  font-size: 1.1rem;
+}
+
+.form-action-btn:hover {
+  background: rgba(0, 217, 255, 0.2);
+  border-color: var(--jarvis-cyan);
+  box-shadow: 0 0 15px var(--jarvis-glow);
+  transform: translateY(-2px);
+}
+
+.form-action-btn.active {
+  background: var(--jarvis-cyan);
+  color: var(--jarvis-darker);
+  box-shadow: 0 0 20px var(--jarvis-glow);
+}
+
+/* Examples panel */
+.examples-panel {
+  top: 0;
+  right: 0;
+  width: 0;
+  background: var(--jarvis-darker);
+  border-radius: 0 12px 12px 0;
+  transition: transform 0.4s ease-out;
+  overflow: hidden;
+  z-index: 5;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.examples-panel.show {
+  width: 100%;
+}
+
+.examples-panel-header {
+  padding: 0.5rem;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 128, 255, 0.15));
+  border-bottom: 1px solid var(--jarvis-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.examples-panel-header h3 {
+  color: var(--jarvis-cyan);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.examples-panel-close {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid var(--jarvis-border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--jarvis-text-dim);
+  font-size: 1.2rem;
+}
+
+.examples-panel-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #f87171;
+}
+
+.examples-list {
+  padding: 0.4rem;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  max-height: 238px;
+}
+
+.examples-list li {
+  padding: 0.4rem;
+  margin-bottom: 0.5rem;
+  background: var(--jarvis-card);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--jarvis-text);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.examples-list li::before {
+  content: '▸';
+  color: var(--jarvis-cyan);
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.examples-list li:hover {
+  background: rgba(0, 217, 255, 0.08);
+  border-color: var(--jarvis-cyan);
+  transform: translateX(5px);
+  box-shadow: 0 0 15px var(--jarvis-glow);
+}
+
+.examples-list li:hover::before {
+  transform: translateX(3px);
+}
+
+.examples-list li.active {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: var(--jarvis-cyan);
+  color: var(--jarvis-cyan);
+  font-weight: 500;
+}
+
+/* Examples panel */
 
 .form-content {
   display: flex;
@@ -1223,7 +1423,6 @@ div.dt-container .dt-input:focus {
 .fw-semibold {
   font-family: 'Orbitron', sans-serif;
   color: var(--jarvis-cyan);
-  margin-bottom: 1rem;
   font-size: 1.2rem;
 }
 
@@ -1422,7 +1621,7 @@ div.dt-container .dt-input:focus {
   /* padding-top: 60px; */
   display: none;
   width: 100%;
-  max-width: 324px;
+  max-width: 304px;
   height: 0;
 }
 

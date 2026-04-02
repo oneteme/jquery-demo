@@ -99,14 +99,19 @@
     </div>
 
     <div class="content jquery-display">
-      <div class="show-docs jq-rounded-btn btn-trigger" show=".content.definition-display" hide=".content"
-        style="display: none">
-        <span class="white_text">Docs</span>
-      </div>
       <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
       <div class="settings-content">
         <div class="form-container card-container">
+          <div class="form-header-actions">
+            <button class="form-action-btn"
+              onclick="$('.examples-panel').toggleClass('show'); $(this).toggleClass('active');" title="Examples">
+              📚
+            </button>
+            <button class="show-docs form-action-btn btn-trigger" onclick="window.open('/docs', '_blank')" title="Documentation" style="display: none" show=".content.definition-display" hide=".content">
+              📖
+            </button>
+          </div>
           <form id="query-form" class="form-content">
             <div class="col-sm-6 table_input_container">
               <div class="fw-semibold white_text">Build up your Query</div>
@@ -153,6 +158,19 @@
               <pre><code id="error-code" class="language-brainfuck" style="color: red;font-size: 16px;">Error Request 500</code></pre>
             </div>
           </form>
+          <!-- Panel d'exemples (caché par défaut) -->
+          <div class="examples-panel">
+            <div class="examples-panel-header">
+              <h3>Also try</h3>
+            </div>
+            <ul class="examples-list">
+              <li>Basic Query</li>
+              <li>With Filters</li>
+              <li>With Join</li>
+              <li>Aggregation</li>
+              <li>Complex Query</li>
+            </ul>
+          </div>
         </div>
 
         <div id="sql-display" class="col-sm-6 card-container" style="width: 100%; min-width: 324px; display: none">
@@ -199,26 +217,19 @@
           partition
         </div>
       </div>
-      <div class="definition-element definition">
+      <div class="definition-element definition" style="position: relative;">
+        <button class="syntax-toggle" onclick="$('.syntax-content').toggle()">
+          Syntax
+        </button>
         <h2 class="title white_text">Definition</h2>
+        <div class="syntax-content">
+          <pre><code class="syntax-code">when(criteria1,thenVal1).when(criteria2,thenVal2) ... orElse(valn)</code></pre>
+        </div>
         <div class="description white_text">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           Voluptatibus quaerat eos, explicabo libero, aspernatur tenetur magni
           cumque vero eveniet nulla reiciendis sed, veniam dignissimos tempore
           voluptate nesciunt impedit! Architecto, minus.
-        </div>
-      </div>
-      <div class="definition-element syntax">
-        <h2 class="title white_text">Syntax</h2>
-        <div class="description white_text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Perferendis ab nisi consequuntur aperiam corporis dolore earum
-          nostrum, recusandae quam amet sapiente, veritatis vero neque
-          voluptatum ea dignissimos architecto nesciunt corrupti? Lorem ipsum,
-          dolor sit amet consectetur adipisicing elit. Voluptatibus quaerat
-          eos, explicabo libero, aspernatur tenetur magni cumque vero eveniet
-          nulla reiciendis sed, veniam dignissimos tempore voluptate nesciunt
-          impedit! Architecto, minus.
         </div>
       </div>
       <div class="definition-element tutorial">
