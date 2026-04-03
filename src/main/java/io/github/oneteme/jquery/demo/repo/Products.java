@@ -1,5 +1,6 @@
 package io.github.oneteme.jquery.demo.repo;
 
+import org.usf.jquery.core.Column;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -26,6 +27,9 @@ public interface Products extends DatasetResource {
 
 	@Bind("UNIT")
 	ViewColumn unit();
-
+	
+	default Column powPrice() {
+		return price().pow(2);
+	}
 	//par product je veux comparer le prix avec la moyen des prix de categorie
 }

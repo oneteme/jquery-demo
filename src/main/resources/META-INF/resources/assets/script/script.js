@@ -130,7 +130,7 @@ $(document).ready(function () {
       console.log("columns : ", columns);
       $("#defintion-text-container p").html(definition);
       $("#syntax-text-container p").html(syntax);
-      $(".definition-display .definition .description").html(definition);
+      $(".definition-description-content p").html(definition);
       $(".syntax-code").html(syntax);
     }
 
@@ -688,19 +688,22 @@ function loadTutorial(fileName) {
   console.log("loading Tutorial with the file : ", fileName);
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
-  $.get("tutorials/" + fileName, function (data) {
+  loadMarkDown("tutorials/" + fileName, ".highlighted_code");
+}
+
+function loadMarkDown(path, div) {
+  $.get(path, function (data) {
     // console.log("markdown data : ", data);
     // Convert Markdown to HTML
     var htmlContent = marked.parse(data);
     console.log("htmlcontent : ", htmlContent);
     // Insert the HTML into the div
-    $(".highlighted_code").html(htmlContent);
+    $(div).html(htmlContent);
 
     // Highlight all code blocks after inserting the HTML
     hljs.highlightAll();
   });
 }
-
 function capitalize(str) {
   return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }

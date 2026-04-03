@@ -104,45 +104,40 @@
       <div class="settings-content">
         <div class="form-container card-container">
           <div class="form-header-actions">
-            <button class="form-action-btn"
-              onclick="$('.examples-panel').toggleClass('show'); $(this).toggleClass('active');" title="Examples">
-              📚
-            </button>
-            <button class="show-docs form-action-btn btn-trigger" onclick="window.open('/docs', '_blank')" title="Documentation" style="display: none" show=".content.definition-display" hide=".content">
+            <button class="show-docs form-action-btn btn-trigger" title="Documentation" style="display: none"
+              show=".content.definition-display" hide=".content">
               📖
             </button>
           </div>
+          <div class="examples-sidebar">
+            <div class="examples-sidebar-title">ALSO TRY</div>
+            <div class="example-number" onclick="loadExample(1)">1</div>
+            <div class="example-number active" onclick="loadExample(2)">2</div>
+            <div class="example-number" onclick="loadExample(3)">3</div>
+          </div>
           <form id="query-form" class="form-content">
-            <div class="col-sm-6 table_input_container">
+            <div class="table_input_container">
               <div class="fw-semibold white_text">Build up your Query</div>
-              <select id="jq-table" class="form-select">
-                <option value="">-- Select a view --</option>
-              </select>
-            </div>
-
-            <div class="jqsyntax-container">
-              <div class="columns-container row" style="--bs-gutter-x:0;">
+              <div class="d-flex">
+                <select id="jq-table" class="form-select">
+                  <option value="">-- Select a view --</option>
+                </select>
                 <div class="form-floating jqcolumns_input_container col" style="width: 100%">
                   <input id="jq-columns" class="form-control" name="columns" type="text"
                     placeholder="Setup JQuery columns..." />
                   <label for="jq-columns" class="fw-semibold white_text">Columns
                   </label>
                 </div>
-                <div class="jq-params col-sm-5" style="display: none;">
-                  <div class="parent-element">
-                    <div class="parent_title" style="font-size: 16px;padding: 0;">
-                      <span>Columns</span>
-                      <img class="nav-accordion accordion" src="/assets/images/accordion.svg">
-                    </div>
-                    <div class="select-columns flex-wrap d-flex-row gap_12" style="display: none;">
-                    </div>
-                  </div>
-                </div>
+              </div>
+            </div>
+
+            <div class="jqsyntax-container">
+              <div class="columns-container row" style="--bs-gutter-x:0;">
               </div>
               <div class="form-floating jqfilters_input_container" style="width: 100%">
                 <input id="jq-filters" class="form-control" name="filters" type="text"
                   placeholder="Setup JQuery filters..." />
-                <label for="jq-filters" class="fw-semibold white_text">Filters
+                <label for="jq-filters" class="fw-semibold white_text">Query Options
                 </label>
               </div>
             </div>
@@ -158,19 +153,6 @@
               <pre><code id="error-code" class="language-brainfuck" style="color: red;font-size: 16px;">Error Request 500</code></pre>
             </div>
           </form>
-          <!-- Panel d'exemples (caché par défaut) -->
-          <div class="examples-panel">
-            <div class="examples-panel-header">
-              <h3>Also try</h3>
-            </div>
-            <ul class="examples-list">
-              <li>Basic Query</li>
-              <li>With Filters</li>
-              <li>With Join</li>
-              <li>Aggregation</li>
-              <li>Complex Query</li>
-            </ul>
-          </div>
         </div>
 
         <div id="sql-display" class="col-sm-6 card-container" style="width: 100%; min-width: 324px; display: none">
@@ -213,23 +195,48 @@
         <div class="ucase-btn">
           java
         </div>
-        <div class="ucase-btn">
-          partition
-        </div>
       </div>
-      <div class="definition-element definition" style="position: relative;">
-        <button class="syntax-toggle" onclick="$('.syntax-content').toggle()">
+      <div class="definition-element definition" style="position: relative; overflow: hidden;">
+        <!-- Titre avec bouton ? -->
+        <h2 class="title white_text">
           Syntax
-        </button>
-        <h2 class="title white_text">Definition</h2>
-        <div class="syntax-content">
-          <pre><code class="syntax-code">when(criteria1,thenVal1).when(criteria2,thenVal2) ... orElse(valn)</code></pre>
+          <button class="definition-toggle"
+            onclick="document.querySelector('.definition-description').classList.toggle('show'); this.classList.toggle('active')">
+            ?
+          </button>
+        </h2>
+
+        <!-- Blocs de code côte à côte -->
+        <div class="syntax-blocks">
+
+          <!-- Bloc syntaxe courte -->
+          <div class="syntax-block">
+            <pre><code class="syntax-code">column1,column2,column3, ... ezfjhbehd fezhef hdezyufhez fezzyufezudygeyufyu gygygy huhuhuhuh</code></pre>
+          </div>
+          <!-- Séparateur -->
+          <div class="syntax-separator"></div>
+          <!-- Bloc Java -->
+          <div class="syntax-block">
+            <pre><code class="syntax-java language-java">default Column powPrice() {
+      return price().pow(2);
+  }
+  powPrice();</code></pre>
+          </div>
         </div>
-        <div class="description white_text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Voluptatibus quaerat eos, explicabo libero, aspernatur tenetur magni
-          cumque vero eveniet nulla reiciendis sed, veniam dignissimos tempore
-          voluptate nesciunt impedit! Architecto, minus.
+
+        <!-- Panel de définition (caché par défaut, slide depuis la droite) -->
+        <div class="definition-description">
+          <div class="definition-description-header">
+            <h3 class="title">Definition</h3>
+            <button class="definition-close"
+              onclick="document.querySelector('.definition-description').classList.remove('show'); document.querySelector('.definition-toggle').classList.remove('active')">
+              ×
+            </button>
+          </div>
+          <div class="definition-description-content">
+            <p>To fetch certain columns in JQuery all you need is to write down the columns you need separated by a ','
+            </p>
+          </div>
         </div>
       </div>
       <div class="definition-element tutorial">
