@@ -87,60 +87,9 @@ $(document).ready(function () {
     }
   );
   $(document).on("click", ".jq-example", (e) => {
-    // $('.definition-container').show();
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
-    $(".definition-display .example-title").html($(e.currentTarget).html());
-    let view = $(e.currentTarget).attr("data-view"),
-      columns = $(e.currentTarget).attr("data-column"),
-      filters = $(e.currentTarget).attr("data-filter"),
-      next = $(e.currentTarget).attr("data-next"),
-      prev = $(e.currentTarget).attr("data-prev");
-
-    $(".tuto_btn_container").removeClass("visible");
-    if (next) {
-      $(".tuto_btn_container.btn-next").addClass("visible");
-      $(".tuto_btn_container.btn-next span:first").html(next);
-      $(".tuto_btn_container.btn-next").attr(
-        "data-example",
-        next.toLowerCase()
-      );
-    }
-    if (prev) {
-      $(".tuto_btn_container.btn-prev").addClass("visible");
-      $(".tuto_btn_container.btn-prev span:first").html(prev);
-      $(".tuto_btn_container.btn-prev").attr(
-        "data-example",
-        prev.toLowerCase()
-      );
-    }
-
-    if ($(e.currentTarget).attr("data-tutorial")) {
-      loadTutorial($(e.currentTarget).attr("data-tutorial"));
-      if (view || columns || filters) {
-        $(".definition-element.try_it").show();
-      }
-    } else {
-      $(".definition-element").show();
-      $(".definition-element.tutorial").hide();
-      $(".definition-element.move_tuto").hide();
-      let definition = $(e.currentTarget).attr("data-definition");
-      let syntax = $(e.currentTarget).attr("data-syntax");
-      console.log("view : ", view);
-      console.log("columns : ", columns);
-      $("#defintion-text-container p").html(definition);
-      $("#syntax-text-container p").html(syntax);
-      $(".definition-description-content p").html(definition);
-      $(".syntax-code").html(syntax);
-    }
-
-    $(".content").animate({ scrollTop: 0 }, 10);
-    $("#jq-table").val(view);
-    $("#jq-columns").val(columns);
-    $("#jq-filters").val(filters);
-    fetchJQData();
-    $('.syntax-content').hide();
-    introNextStep(() => $('.syntax-content').show());
+    loadExample($(e.currentTarget));
   });
   $(document).on("click", ".grid-options .option-box", (e) => {
     let appliedClass = $(e.currentTarget).attr("data-class");
@@ -551,7 +500,7 @@ function loadNavbar() {
     .then((data) => {
       console.log(data);
       createNavbar(data);
-    });
+    })
 }
 
 function setupNavItem(navItem, divElement, next, prev) {
@@ -589,6 +538,74 @@ function toggleNavBar(animationTime = 100) {
   $(".navbar-container").animate(navStyleFields, animationTime, () => {
     $(".navbar-container").css("display", navStyleFields.display);
   }); // duration in milliseconds
+}
+
+function loadExample(exampleDiv) {
+  console.log("loadExample")
+  $(".definition-display .example-title").html(exampleDiv.html());
+  $(".definition-toggle").hide();
+  let view = exampleDiv.attr("data-view"),
+    columns = exampleDiv.attr("data-column"),
+    filters = exampleDiv.attr("data-filter"),
+    next = exampleDiv.attr("data-next"),
+    prev = exampleDiv.attr("data-prev");
+
+  $(".tuto_btn_container").removeClass("visible");
+  if (next) {
+    $(".tuto_btn_container.btn-next").addClass("visible");
+    $(".tuto_btn_container.btn-next span:first").html(next);
+    $(".tuto_btn_container.btn-next").attr(
+      "data-example",
+      next.toLowerCase()
+    );
+  }
+  if (prev) {
+    $(".tuto_btn_container.btn-prev").addClass("visible");
+    $(".tuto_btn_container.btn-prev span:first").html(prev);
+    $(".tuto_btn_container.btn-prev").attr(
+      "data-example",
+      prev.toLowerCase()
+    );
+  }
+
+  if (exampleDiv.attr("data-tutorial")) {
+    loadTutorial(exampleDiv.attr("data-tutorial"));
+    if (view || columns || filters) {
+      $(".definition-element.try_it").show();
+    }
+  } else {
+    $(".definition-element").show();
+    $(".definition-toggle").show();
+    $(".definition-element.tutorial").hide();
+    $(".definition-element.move_tuto").hide();
+    let definition = exampleDiv.attr("data-definition");
+    let syntax = exampleDiv.attr("data-syntax");
+    console.log("view : ", view);
+    console.log("columns : ", columns);
+    console.log("[EXAMPLE]", "definition : ", definition)
+    const defToolTip = $(".definition-toggle")[0]._tippy;
+    if (defToolTip) {
+      defToolTip.setContent(definition);
+    } else {
+      tippy(".definition-toggle", {
+        content: definition,
+        animation: 'scale',
+        arrow: true,
+      });
+    }
+    $("#defintion-text-container p").html(definition);
+    $("#syntax-text-container p").html(syntax);
+    $(".definition-description-content p").html(definition);
+    $(".syntax-code").html(syntax);
+  }
+
+  $(".content").animate({ scrollTop: 0 }, 10);
+  $("#jq-table").val(view);
+  $("#jq-columns").val(columns);
+  $("#jq-filters").val(filters);
+  fetchJQData();
+  $('.syntax-content').hide();
+  introNextStep(() => $('.syntax-content').show());
 }
 
 function fetchJQData() {

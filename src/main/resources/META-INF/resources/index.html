@@ -67,7 +67,7 @@
     </div>
   </div>
   <header>
-    <div class="d-flex align-items-center justify-content-between px-4" style="gap: 20px; height: 100%">
+    <div class="d-flex align-items-center justify-content-between px-2" style="gap: 20px; height: 100%">
       <div class="header-left d-flex">
         <div id="jq-show-examples" data-show="show">
           <img src="assets/images/menu_icon.svg" />
@@ -91,7 +91,7 @@
   </header>
   <div class="page-container">
     <div class="navbar-container">
-      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+      <ul class="navbar-nav justify-content-end flex-grow-1 pe-2">
         <li class="nav-item jq-example" data-column="name,contact,postal_code" data-table="customers">
           SELECT TEST
         </li>
@@ -182,7 +182,14 @@
           <img style="width: 24px; transform: rotate(180deg)" src="assets/images/arrow-right-solid.svg" alt="" />
           <span class="white_text">Previous</span>
         </div>
-        <h1 class="example-title white_text">Having</h1>
+        <div class="example-title-section d-flex gap_8" style="align-items: center;">
+          <h1 class="example-title white_text">Having</h1>
+          <div class="example-header-info d-flex gap_4" style="align-items: center;">
+            <div class="definition-toggle">
+              !
+            </div>
+          </div>
+        </div>
         <div class="tuto_btn_container btn-next" style="top: 0;right: 0;">
           <span class="white_text">Next</span>
           <img style="width: 24px" src="assets/images/arrow-right-solid.svg" alt="" />
@@ -200,10 +207,6 @@
         <!-- Titre avec bouton ? -->
         <h2 class="title white_text">
           Syntax
-          <button class="definition-toggle"
-            onclick="document.querySelector('.definition-description').classList.toggle('show'); this.classList.toggle('active')">
-            ?
-          </button>
         </h2>
 
         <!-- Blocs de code côte à côte -->
@@ -211,16 +214,16 @@
 
           <!-- Bloc syntaxe courte -->
           <div class="syntax-block">
-            <pre><code class="syntax-code">column1,column2,column3, ... ezfjhbehd fezhef hdezyufhez fezzyufezudygeyufyu gygygy huhuhuhuh</code></pre>
+            <pre><code class="syntax-code language-scss">column1,column2,column3, ... ezfjhbehd fezhef hdezyufhez fezzyufezudygeyufyu gygygy huhuhuhuh</code></pre>
           </div>
           <!-- Séparateur -->
           <div class="syntax-separator"></div>
           <!-- Bloc Java -->
           <div class="syntax-block">
-            <pre><code class="syntax-java language-java">default Column powPrice() {
+            <pre><code class="syntax-java language-java">default Column priceSquare() {
       return price().pow(2);
   }
-  powPrice();</code></pre>
+  priceSquare();</code></pre>
           </div>
         </div>
 
@@ -228,10 +231,6 @@
         <div class="definition-description">
           <div class="definition-description-header">
             <h3 class="title">Definition</h3>
-            <button class="definition-close"
-              onclick="document.querySelector('.definition-description').classList.remove('show'); document.querySelector('.definition-toggle').classList.remove('active')">
-              ×
-            </button>
           </div>
           <div class="definition-description-content">
             <p>To fetch certain columns in JQuery all you need is to write down the columns you need separated by a ','

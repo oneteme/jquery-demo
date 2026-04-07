@@ -36,7 +36,7 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: 80px;
+  grid-template-rows: 52px;
 }
 
 /* Animated background grid */
@@ -86,12 +86,12 @@ body::before {
 header {
   position: relative;
   background: linear-gradient(135deg, var(--jarvis-darker) 0%, var(--jarvis-dark) 100%);
-  padding: 1.5rem 2rem;
   border-bottom: 2px solid var(--jarvis-cyan);
   box-shadow: 0 4px 20px var(--jarvis-glow);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 52px;
 }
 
 /*** HEADER  ***/
@@ -144,7 +144,7 @@ header {
 
 #main-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
   -webkit-background-clip: text;
@@ -160,28 +160,30 @@ header {
   transform: translateY(-2px);
 }
 
+#main-title:hover span {
+  display: contents !important;
+}
+
 .header-list img {
-  width: 44px;
+  width: 24px;
   filter: brightness(0) saturate(100%) invert(63%) sepia(93%) saturate(2555%) hue-rotate(169deg) brightness(101%) contrast(105%);
   transition: all 0.3s;
-  padding: 7px;
   border-radius: 8px;
   border: 1px solid transparent;
 }
 
 .header-list img:hover {
   background: rgba(0, 217, 255, 0.1);
-  border-color: var(--jarvis-cyan);
   box-shadow: 0 0 15px var(--jarvis-glow);
   transform: translateY(-2px);
 }
 
 #version-text a {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--jarvis-cyan);
   opacity: 0.8;
   transition: all 0.3s;
-  padding: 0.35rem 0.85rem;
+  padding: 0.15rem 0.65rem;
   border: 1px solid var(--jarvis-border);
   border-radius: 6px;
   background: rgba(0, 217, 255, 0.05);
@@ -241,7 +243,7 @@ header {
 }
 
 #jq-live {
-  width: 48px !important;
+  width: 28px !important;
 }
 
 .tuto_btn_container {
@@ -356,7 +358,7 @@ header {
 }
 
 .jqcolumns_input_container {
-  flex: 2;
+  flex: 5;
 }
 
 .jq-params {
@@ -1125,18 +1127,18 @@ pre {
 }
 
 .definition-toggle {
-  width: 32px;
-  height: 32px;
+  cursor: help;
+  width: 20px;
+  height: 20px;
   background: rgba(0, 217, 255, 0.1);
-  border: 1px solid var(--jarvis-border);
+  border: 2px solid var(--jarvis-cyan);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.3s;
   color: var(--jarvis-cyan);
-  font-size: 1rem;
+  font-size: .75rem;
   font-weight: 700;
   margin-left: auto;
 }
@@ -1465,8 +1467,9 @@ pre {
   border-radius: 8px;
   color: var(--jarvis-text);
   font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  padding: 0;
+  padding-left: 8px;
   transition: all 0.3s;
 }
 
@@ -1483,6 +1486,7 @@ div.dt-container .dt-input:focus {
 .form-select option {
   background: var(--jarvis-card);
   color: var(--jarvis-text);
+  text-align: left;
 }
 
 .fw-semibold {
@@ -1684,11 +1688,10 @@ div.dt-container .dt-input:focus {
   overflow-y: auto;
   background: var(--jarvis-card);
   border-right: 1px solid var(--jarvis-border);
-  padding: 8px;
   /* padding-top: 60px; */
   display: none;
   width: 100%;
-  max-width: 304px;
+  max-width: 272px;
   height: 0;
 }
 
@@ -1731,7 +1734,6 @@ div.dt-container .dt-input:focus {
 }
 
 .navbar-nav {
-  padding: 1.5rem 0;
   list-style: none;
   margin: 0;
 }
