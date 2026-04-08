@@ -482,8 +482,6 @@ function loadViews() {
         fetch("/" + view + "?limit=1")
           .then((response) => response.json())
           .then((data) => {
-            console.log("view is : ", view, " result is : ", data);
-            console.log("colimns : ", Object.keys(data.result[0]))
             let columns = Object.keys(data.result[0]);
             viewsMap[view] = columns
           });
@@ -516,9 +514,10 @@ function setupNavItem(navItem, divElement, next, prev) {
   }
   // delete navItem.title;
   $.each(navItem, (key, value) => {
-    if (key != "title") {
-      navFields["data-" + key] = value;
+    if (key == "examples") {
+      value = JSON.stringify(value);
     }
+    navFields["data-" + key] = value;
   });
   $(divElement).append($("<li>", navFields).html(title));
 }
@@ -534,7 +533,6 @@ function toggleNavSubElements(e, subElement = ".sub-nav") {
 }
 
 function toggleNavBar(animationTime = 100) {
-  console.log("style : ", navStyleFields);
   $(".navbar-container").animate(navStyleFields, animationTime, () => {
     $(".navbar-container").css("display", navStyleFields.display);
   }); // duration in milliseconds
@@ -544,6 +542,8 @@ function loadExample(exampleDiv) {
   console.log("loadExample")
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-toggle").hide();
+  $(".examples-sidebar").hide();
+  $(".examples-numbers-container").empty();
   let view = exampleDiv.attr("data-view"),
     columns = exampleDiv.attr("data-column"),
     filters = exampleDiv.attr("data-filter"),
@@ -578,8 +578,8 @@ function loadExample(exampleDiv) {
     $(".definition-toggle").show();
     $(".definition-element.tutorial").hide();
     $(".definition-element.move_tuto").hide();
-    let definition = exampleDiv.attr("data-definition");
-    let syntax = exampleDiv.attr("data-syntax");
+    const definition = exampleDiv.attr("data-definition"),
+      syntax = exampleDiv.attr("data-syntax");
     console.log("view : ", view);
     console.log("columns : ", columns);
     console.log("[EXAMPLE]", "definition : ", definition)
@@ -597,6 +597,26 @@ function loadExample(exampleDiv) {
     $("#syntax-text-container p").html(syntax);
     $(".definition-description-content p").html(definition);
     $(".syntax-code").html(syntax);
+    if (exampleDiv.attr("data-examples")) {
+      const examples = JSON.parse(exampleDiv.attr("data-examples"));
+      if (examples.length > 1) {
+        $(".examples-sidebar").show();
+        $.each(examples, (key, val) => {
+          const example = $("<div>", { class: "example-number" }).html(key + 1);
+          example.on('click', () => {
+            console.log("clicked on example : ", val.title);
+          });
+
+          tippy(example[0], {
+            content: val.title,
+            animation: 'scale',
+            arrow: true,
+            placement: 'right'
+          });
+          $(".examples-numbers-container").append(example)
+        })
+      }
+    }
   }
 
   $(".content").animate({ scrollTop: 0 }, 10);

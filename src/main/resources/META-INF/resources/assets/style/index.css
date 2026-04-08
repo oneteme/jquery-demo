@@ -805,7 +805,7 @@ pre {
   flex-direction: column;
   /* flex: 1; */
   overflow-y: auto;
-  padding: 10px;
+  padding: 4px;
   gap: 16px;
   width: 100%;
 }
@@ -841,7 +841,7 @@ pre {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 16px;
+  gap: 8px;
 }
 
 .settings-content div {
@@ -922,6 +922,10 @@ pre {
 .d-flex-col {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+}
+
+.grid-options .d-flex-col {
   gap: 5px;
 }
 
@@ -941,23 +945,23 @@ pre {
 /* ALIGNED ROW */
 /* FLEX GAPS */
 .gap_4 {
-  gap: 4px;
+  gap: 4px!important;
 }
 
 .gap_8 {
-  gap: 8px;
+  gap: 8px!important;
 }
 
 .gap_12 {
-  gap: 12px;
+  gap: 12px!important;
 }
 
 .gap_16 {
-  gap: 16px;
+  gap: 16px!important;
 }
 
 .gap_20 {
-  gap: 20px;
+  gap: 20px!important;
 }
 
 /* FLEX GAPS */
@@ -1330,6 +1334,7 @@ pre {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   display: flex;
+  padding: 0;
 }
 
 .card-container:hover {
@@ -1376,7 +1381,7 @@ pre {
 
 /* Examples panel */
 .examples-sidebar {
-  width: 50px;
+  width: 40px;
   background: var(--jarvis-darker);
   border-right: 2px solid var(--jarvis-cyan);
   border-radius: 12px 0 0 12px;
@@ -1455,22 +1460,22 @@ pre {
 .form-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   flex: 1;
+  padding: 8px;
 }
 
 .form-select,
 .form-control {
-  flex: 1;
   background: var(--jarvis-darker);
   border: 1px solid var(--jarvis-border);
   border-radius: 8px;
   color: var(--jarvis-text);
   font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  padding: 0;
-  padding-left: 8px;
+  font-size: 0.875rem;
+  padding: 0.6rem 0.875rem;
   transition: all 0.3s;
+  height: auto;
+  min-height: 42px;
 }
 
 .form-select:focus,
@@ -1487,6 +1492,56 @@ div.dt-container .dt-input:focus {
   background: var(--jarvis-card);
   color: var(--jarvis-text);
   text-align: left;
+}
+
+.form-floating {
+  position: relative;
+}
+
+.form-floating>.form-control {
+  padding: 0.6rem 0.875rem;
+}
+
+.form-floating>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.6rem 0.875rem;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
+  transform: scale(0.75) translateY(-0.8rem) translateX(0.15rem);
+  opacity: 1;
+  color: var(--jarvis-cyan);
+}
+
+.table_input_container {
+  margin-bottom: 1.25rem;
+}
+
+.table_input_container>.fw-semibold {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--jarvis-cyan);
+  font-size: 1.1rem;
+  margin-bottom: .3rem;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.table_input_container .d-flex {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.table_input_container .form-select {
+  max-width: 280px;
 }
 
 .fw-semibold {
@@ -1519,7 +1574,7 @@ div.dt-container .dt-input:focus {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: .4rem !important;
 }
 
 .form-footer pre {

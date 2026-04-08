@@ -18,7 +18,7 @@ A INNER JOIN is created between the orders table and the customers table.
 
 The join condition is:
 
-```java
+```javascript
 orders.customerId = customers.id
 ```
 
@@ -38,3 +38,4 @@ This will automatically apply the INNER JOIN you defined earlier.
 Tip: You can create multiple join methods in your table class and call them when needed in your queries.
 
 And now your INNER JOIN is up and ready and you can try it right now!
+
