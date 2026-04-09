@@ -1,7 +1,6 @@
 	```java
-    default Column powPrice() {
-		return price().pow(2);
+    default Column columnPower() {
+		return column().pow(n);
 	}
-
-    powPrice();
     ```
+    URL : select=columnPower:colPower

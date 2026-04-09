@@ -24,7 +24,8 @@
     "filter": "",
     "definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
     "syntax": "column.ceil",
-    "tooltip": "Ceiling"
+    "tooltip": "Ceiling",
+    "usages": []
   },
   {
     "title": "FLOOR",
@@ -66,7 +67,8 @@
     "column": "price,price.pow(2):pow2",
     "filter": "price=5,10,15,20",
     "definition": "Raises a numeric value to a specified power.<br>The function calculates the value of the column raised to the given exponent (<b>x^n</b>). This is useful for mathematical calculations such as squares, cubes, or exponential scaling.",
-    "syntax": "column.pow(n) / pow(column, n)"
+    "syntax": "column.pow(n) / pow(column, n)",
+    "java": "power.md"
   },
   {
     "title": "LOG",

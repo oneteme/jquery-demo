@@ -48,7 +48,7 @@
   <!-- SQL FORMATTER -->
   <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
 
-  <script src="./assets/script/script.js"></script>
+  <script type="module" src="./assets/script/script.js"></script>
 </head>
 
 <body>
@@ -77,7 +77,7 @@
           J<span style="display: none;">ava</span>Query demo</h2>
         <div id="version-text" class="d-flex gap_4">
           <a href="https://mvnrepository.com/artifact/io.github.oneteme/jquery" class="white_text"
-            style="text-decoration: auto;" target="_blank">v4.0.5</a>
+            style="text-decoration: auto;" target="_blank">v5.0.0</a>
         </div>
 
       </div>
@@ -218,7 +218,7 @@
           <!-- Séparateur -->
           <div class="syntax-separator"></div>
           <!-- Bloc Java -->
-          <div class="syntax-block">
+          <div class="syntax-block java">
             <pre><code class="syntax-java language-java">default Column priceSquare() {
       return price().pow(2);
   }

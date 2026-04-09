@@ -36,7 +36,7 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: 52px;
+  grid-template-rows: 40px;
 }
 
 /* Animated background grid */
@@ -91,7 +91,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 52px;
+  height: 40px;
 }
 
 /*** HEADER  ***/
@@ -118,8 +118,8 @@ header {
 }
 
 #jq-show-examples {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,7 +144,7 @@ header {
 
 #main-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
   -webkit-background-clip: text;
@@ -179,7 +179,7 @@ header {
 }
 
 #version-text a {
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   color: var(--jarvis-cyan);
   opacity: 0.8;
   transition: all 0.3s;
@@ -945,23 +945,23 @@ pre {
 /* ALIGNED ROW */
 /* FLEX GAPS */
 .gap_4 {
-  gap: 4px!important;
+  gap: 4px !important;
 }
 
 .gap_8 {
-  gap: 8px!important;
+  gap: 8px !important;
 }
 
 .gap_12 {
-  gap: 12px!important;
+  gap: 12px !important;
 }
 
 .gap_16 {
-  gap: 16px!important;
+  gap: 16px !important;
 }
 
 .gap_20 {
-  gap: 20px!important;
+  gap: 20px !important;
 }
 
 /* FLEX GAPS */
@@ -1167,7 +1167,6 @@ pre {
 
 .syntax-block {
   flex: 1;
-  background: var(--jarvis-darker);
   border: 0;
   border-radius: 8px;
   overflow-x: auto;
@@ -1258,6 +1257,14 @@ pre {
   font-size: 0.9rem;
 }
 
+pre code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--jarvis-text);
+  border: 0;
+  border-radius: 12px;
+}
 
 .jquery-display {
   position: relative;
@@ -1464,6 +1471,7 @@ pre {
   padding: 8px;
 }
 
+/* Form inputs - Compact */
 .form-select,
 .form-control {
   background: var(--jarvis-darker);
@@ -1471,54 +1479,42 @@ pre {
   border-radius: 8px;
   color: var(--jarvis-text);
   font-family: 'Fira Code', monospace;
-  font-size: 0.875rem;
-  padding: 0.6rem 0.875rem;
+  font-size: 0.8rem;
   transition: all 0.3s;
-  height: auto;
-  min-height: 42px;
+  /* height: auto; */
+  /* min-height: 42px; */
 }
 
 .form-select:focus,
-.form-control:focus,
-div.dt-container .dt-input:focus {
+.form-control:focus {
   outline: none;
-  color: white;
   border-color: var(--jarvis-cyan);
   box-shadow: 0 0 15px var(--jarvis-glow);
   background: var(--jarvis-dark);
-}
-
-.form-select option {
-  background: var(--jarvis-card);
   color: var(--jarvis-text);
-  text-align: left;
-}
-
-.form-floating {
-  position: relative;
-}
-
-.form-floating>.form-control {
-  padding: 0.6rem 0.875rem;
 }
 
 .form-floating>label {
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  left: 0;
-  padding: 0.6rem 0.875rem;
+  left: 0; */
+  /* padding: 0.6rem 0.875rem; */
   pointer-events: none;
   transform-origin: 0 0;
   transition: all 0.3s;
   font-size: 0.875rem;
-  opacity: 0.6;
+  opacity: 0.4;
+  color: var(--jarvis-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
 .form-floating>.form-control:focus~label,
 .form-floating>.form-control:not(:placeholder-shown)~label {
-  transform: scale(0.75) translateY(-0.8rem) translateX(0.15rem);
+  transform: scale(0.6) translateY(-0.1rem) translateX(0.5rem);
   opacity: 1;
-  color: var(--jarvis-cyan);
+  color: var(--jarvis-blue);
 }
 
 .table_input_container {
