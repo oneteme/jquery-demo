@@ -7,6 +7,7 @@ import * as utils from "./utils.js";
 var inputTimeOut;
 //**************** EVENT LISTENERS ****************/
 $(document).ready(function () {
+  hljs.highlightAll();
   $(".navbar-nav").empty();
   loadNavData();
   loadSettings();
@@ -17,12 +18,13 @@ $(document).ready(function () {
   });
   $("#query-form").on("submit", (e) => {
     e.preventDefault(); // Prevent the default form submission
+    console.log("fetchJQ from submitting form")
     fetchJQData();
   });
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
-
+    console.log("fetchJQ from changing table at form")
     fetchJQData();
     introNextStepCondition($("#jq-table").val() === "customers");
   });
@@ -91,6 +93,7 @@ $(document).ready(function () {
       });
   });
   $(".definition-element .show-demo").on("click", (e) => {
+    $(".example-number:first").click();
     introNextStep();
   });
   $(".tuto_btn_container").on("click", (e) => {
@@ -98,6 +101,8 @@ $(document).ready(function () {
     $(".jq-example[data-learn='" + example + "']").click();
   });
 });
+
+
 //**************** FUNCTIONS ****************/
 function loadViews() {
   fetch("/views.json")
@@ -119,6 +124,7 @@ function loadExample(exampleDiv) {
   $(".definition-toggle").hide();
   $(".examples-sidebar").hide();
   $(".examples-numbers-container").empty();
+  $(".syntax-block").hide();
   let view = exampleDiv.attr("data-view"),
     columns = exampleDiv.attr("data-column"),
     filters = exampleDiv.attr("data-filter"),
@@ -152,12 +158,8 @@ function loadExample(exampleDiv) {
     $(".definition-element").show();
     $(".definition-toggle").show();
     $(".definition-element.tutorial").hide();
-    $(".definition-element.move_tuto").hide();
     const definition = exampleDiv.attr("data-definition"),
       syntax = exampleDiv.attr("data-syntax");
-    console.log("view : ", view);
-    console.log("columns : ", columns);
-    console.log("[EXAMPLE]", "definition : ", definition)
     const defToolTip = $(".definition-toggle")[0]._tippy;
     if (defToolTip) {
       defToolTip.setContent(definition);
@@ -168,13 +170,14 @@ function loadExample(exampleDiv) {
         arrow: true,
       });
     }
-    $("#defintion-text-container p").html(definition);
-    $("#syntax-text-container p").html(syntax);
-    $(".definition-description-content p").html(definition);
-    $(".syntax-code").html(syntax);
+    if (syntax) {
+      $(".syntax-block.url").show();
+      $(".syntax-code").html(syntax);
+    }
 
     if (exampleDiv.attr("data-java")) {
-      utils.loadMarkDown("/tutorials/java/" + exampleDiv.attr("data-java"), ".syntax-block.java");
+      $(".syntax-block.java").show();
+      utils.loadMarkDown("/tutorials/java/" + exampleDiv.attr("data-java"), $(".syntax-block.java"));
     }
     const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
     if (view || columns || filters) {
@@ -193,6 +196,7 @@ function loadExample(exampleDiv) {
         $("#jq-filters").val(val.filter ?? "");
         $(".example-number").removeClass("active");
         example.addClass("active");
+        console.log("fetchJQ from clikcing example")
         fetchJQData();
       });
 
@@ -204,9 +208,7 @@ function loadExample(exampleDiv) {
       });
       $(".examples-numbers-container").append(example)
     })
-    $(".example-number:first").click();
-
-
+    hljs.highlightAll();
   }
   $(".content").animate({ scrollTop: 0 }, 10);
   $('.syntax-content').hide();
@@ -225,7 +227,7 @@ function fetchJQData() {
   if (table) {
     $("#jquery-link").closest('a').attr("href", window.location.origin + fetchLink);
     $("#jquery-link").html(fetchLink);
-    $(".jq-link-display").show();
+    $(".jq-link-display").css("visibility", "visible");
     console.log("link to fetch : ", fetchLink);
     fetch(fetchLink)
       .then((response) => response.json())
@@ -254,5 +256,5 @@ function loadTutorial(fileName) {
   console.log("loading Tutorial with the file : ", fileName);
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
-  utils.loadMarkDown("tutorials/" + fileName, ".highlighted_code");
+  utils.loadMarkDown("tutorials/" + fileName, $(".highlighted_code"));
 }

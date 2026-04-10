@@ -5,7 +5,7 @@ export function loadMarkDown(path, div) {
     var htmlContent = marked.parse(data);
     console.log("htmlcontent : ", htmlContent);
     // Insert the HTML into the div
-    $(div).html(htmlContent);
+    div.html(htmlContent);
 
     // Highlight all code blocks after inserting the HTML
     hljs.highlightAll();

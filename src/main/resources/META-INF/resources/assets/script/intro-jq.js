@@ -151,7 +151,7 @@ export function introNextStepCondition(condition, timeOut = 500, fn = null) {
 
 function setupIntro() {
     // *** DIVS TO SHOW/HIDE FOR TUTORIAL
-    $(".jq-link-display").hide();
+    $(".jq-link-display").css("visibility", "hidden");
     $("#sql-display").hide();
     clearTable();
     $(".definition-container").hide();
