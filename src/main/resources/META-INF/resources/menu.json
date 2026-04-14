@@ -13,12 +13,12 @@
     "next": "GROUP BY",
     "examples": [
       {
-        "title":"select name and country",
+        "title": "select name and country",
         "view": "customers",
         "column": "name,country"
       },
       {
-        "title":"select postal_code and country",
+        "title": "select postal_code and country",
         "column": "postal_code,country",
         "view": "customers"
       }
@@ -45,7 +45,8 @@
     "view": "customers",
     "column": "id:ID,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
-    "syntax": "col:new_col_name"
+    "syntax": "col:new_col_name",
+    "tooltip": "Aliases/TAG"
   },
   {
     "title": "LIMIT",
@@ -60,7 +61,7 @@
     "filter": "order=price.asc",
     "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
-    "syntax": "&order=column.ASC/DESC By default it's ASC"
+    "syntax": "&order=column.ASC&;&order=column.DESC"
   },
   {
     "title": "CASE...WHEN",

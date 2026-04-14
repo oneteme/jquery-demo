@@ -1,15 +1,22 @@
 export function loadMarkDown(path, div) {
-  $.get(path, function (data) {
-    // console.log("markdown data : ", data);
-    // Convert Markdown to HTML
-    var htmlContent = marked.parse(data);
-    console.log("htmlcontent : ", htmlContent);
-    // Insert the HTML into the div
-    div.html(htmlContent);
+  return new Promise((res, rej) => {
+    $.get(path)
+      .done(function (data) {
+        // console.log("markdown data : ", data);
+        // Convert Markdown to HTML
+        var htmlContent = marked.parse(data);
+        console.log("htmlcontent : ", htmlContent);
+        // Insert the HTML into the div
+        div.html(htmlContent);
 
-    // Highlight all code blocks after inserting the HTML
-    hljs.highlightAll();
-  });
+        // Highlight all code blocks after inserting the HTML
+        hljs.highlightAll();
+        res();
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        rej(new Error(`Failed to load markdown: ${textStatus}`));
+      });// get fail
+
+  })// Promise
 }
 
 export function capitalize(str) {

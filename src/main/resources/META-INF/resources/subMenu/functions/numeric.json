@@ -4,8 +4,8 @@
     "view": "products",
     "column": "price:ActualPrice,price.trunc:TruncatedPrice,price.trunc(1):DecimalTruncatedPrice",
     "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-    "definition": "Truncates a number to a specified number of decimal places without rounding.",
-    "syntax": "column.trunc(optionalValue)/trunc(column,optionalValue)",
+    "definition": "Returns a number truncated to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, only that number of digits is kept after the decimal point (e.g. 21.35 → 21.3 with trunc(1)).<br>If no value is provided, the number is truncated to an integer (decimal part removed) without rounding.",
+    "syntax": "column.trunc(decimal_places)",
     "tooltip": "Truncate"
   },
   {
@@ -13,7 +13,7 @@
     "view": "products",
     "column": "price.abs:ABS,abs(-65):NegativeABS",
     "filter": "limit=1",
-    "definition": "ABS(): Returns the absolute value of a number.",
+    "definition": "Returns the absolute value of a number.<br>The result is always non-negative: negative values become positive, while positive values remain unchanged.",
     "syntax": "column.abs",
     "tooltip": "Absolute value"
   },
@@ -22,7 +22,7 @@
     "view": "products",
     "column": "price:ActualPrice,price.ceil:CeiledPrice",
     "filter": "",
-    "definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
+    "definition": "Returns the smallest integer greater than or equal to the given number.<br>This means the value is always rounded up to the next integer if it has a decimal part.",
     "syntax": "column.ceil",
     "tooltip": "Ceiling",
     "usages": []
@@ -32,7 +32,7 @@
     "view": "products",
     "column": "price:ActualPrice,price.floor:FlooredPrice",
     "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-    "definition": "FLOOR(): Rounds a number down to the nearest integer",
+    "definition": "Returns the largest integer less than or equal to the given number.<br>This means the value is always rounded down by removing the decimal part.",
     "syntax": "column.floor"
   },
   {
@@ -40,15 +40,15 @@
     "view": "products",
     "column": "price:ActualPrice,price.round(1):DecimalRoundedPrice,price.round:RoundedPrice",
     "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-    "definition": "ROUND(): Rounds to decimal places",
-    "syntax": "column.round(optionalValue)/round(column,optionalValue)"
+    "definition": "Returns a number rounded to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, the number is rounded to that precision (e.g. 21.35 → 21.4 with round(1)).<br>If no value is provided, the number is rounded to the nearest integer.",
+    "syntax": "column.round(optionalValue)"
   },
   {
     "title": "SQRT",
     "view": "products",
     "column": "price:ActualPrice,price.sqrt:SqrtPrice",
     "filter": "",
-    "definition": "SQRT(): Returns the square root of a number",
+    "definition": "Returns the square root of a numeric value.<br>The result is a number which, when multiplied by itself, equals the original value.",
     "syntax": "column.sqrt",
     "tooltip": "Square root"
   },
@@ -57,7 +57,7 @@
     "view": "products",
     "column": "price,price.mod(10):MODPrice",
     "filter": "",
-    "definition": "MOD(): Returns the remainder of a division operation",
+    "definition": "Returns the remainder of a division operation.<br>The function divides the column value by the given value and returns what is left after the division (e.g. 25 mod 10 = 5).",
     "syntax": "column.mod(value)",
     "tooltip": "Modulo"
   },
@@ -66,24 +66,43 @@
     "view": "products",
     "column": "price,price.pow(2):pow2",
     "filter": "price=5,10,15,20",
-    "definition": "Raises a numeric value to a specified power.<br>The function calculates the value of the column raised to the given exponent (<b>x^n</b>). This is useful for mathematical calculations such as squares, cubes, or exponential scaling.",
-    "syntax": "column.pow(n) / pow(column, n)",
-    "java": "power.md"
+    "definition": "Raises a numeric value to a specified power.<br>The parameter <b>n</b> represents the exponent (e.g. pow(2) squares the value, pow(3) cubes it).<br>The result is calculated as <b>x^n</b>.",
+    "syntax": "column.pow(n)",
+    "examples": [
+      {
+        "title": "Cube",
+        "view": "products",
+        "column": "price,price.pow(3):pow3",
+        "filter": "price=10,20"
+      },
+      {
+        "title": "Arithmetic",
+        "view": "products",
+        "column": "price,price.plus(10).pow(2):plus10Pow2",
+        "filter": "price=10,20"
+      },
+      {
+        "title": "SQRT",
+        "view": "products",
+        "column": "price,price.plus(10).pow(2).sqrt:plus10PowSQRT",
+        "filter": "price=10,20"
+      }
+    ]
   },
   {
     "title": "LOG",
     "view": "products",
     "column": "price,price.log:Log,price.log(2):Log2",
-    "definition": "Returns the natural logarithm of a numeric value.<br>The function calculates the logarithm of the value using base <b>e</b> (Euler's number). This is commonly used in mathematical calculations, data normalization, and exponential growth analysis.",
-    "syntax": "column.log(optionalBase) / log(column,optionalBase)",
+    "definition": "Returns the logarithm of a numeric value.<br>By default, the function computes the natural logarithm (base <b>e</b>).<br>If a base is provided, the logarithm is calculated using that base (e.g. log(2) = base 2).",
+    "syntax": "column.log(optionalBase)",
     "tooltip": "Logarithm"
   },
   {
     "title": "EXP",
     "view": "products",
     "column": "price,price.exp:EXP",
-    "definition": "Returns the exponential value of a numeric column.<br>The function calculates <b>e</b> raised to the power of the column value (<b>e^x</b>). This is commonly used in mathematical models, growth calculations, and inverse operations of the logarithm function.",
-    "syntax": "column.exp / exp(column)",
+    "definition": "Returns the exponential value of a numeric column.<br>The function computes <b>e</b> raised to the power of the column value (<b>e^x</b>).<br>This is the inverse operation of the logarithm function.",
+    "syntax": "column.exp",
     "tooltip": "Exponential"
   }
 ]

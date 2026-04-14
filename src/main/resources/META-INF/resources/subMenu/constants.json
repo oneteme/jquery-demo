@@ -19,5 +19,43 @@
     "column": "ctime:CurrentTime",
     "definition": "Get the current time",
     "syntax": "ctime"
+  },
+  {
+    "title": "RANDOM",
+    "view": "employees",
+    "column": "random:randomValue",
+    "definition": "Returns a random numeric value.<br>The function generates a pseudo-random number, typically between <b>0</b> and <b>1</b>, each time the query is executed. This is useful for sampling, testing, or generating random data.",
+    "syntax": "random",
+    "examples": [
+      {
+        "title": "Random number between <b>0</b> and <b>100</b>",
+        "view": "employees",
+        "column": "random.multiply(100):random_0_100"
+      },
+      {
+        "title": "Random <b>integer</b> between <b>0</b> and <b>9</b>",
+        "view": "employees",
+        "column": "random.multiply(10).floor:random_0_9"
+      },
+      {
+        "title": "Shuffle results",
+        "view": "customers",
+        "filter":"order=random"
+      }
+    ]
+  },
+  {
+    "title": "Pi(π)",
+    "view": "employees",
+    "column": "pi:PI",
+    "definition": "Returns the mathematical constant <b>π (pi)</b>.<br>The value of π is approximately <b>3.14159</b> and is commonly used in mathematical calculations involving circles and trigonometry.",
+    "syntax": "pi",
+    "examples": [
+      {
+        "title": "Circumference factor (2π)",
+        "view": "employees",
+        "column": "pi.multiply(2):CircumferenceFactor"
+      }
+    ]
   }
 ]

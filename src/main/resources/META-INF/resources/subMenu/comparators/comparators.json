@@ -4,9 +4,15 @@
     "title": "Equal (=)",
     "view": "products",
     "column": "price:Equal_30",
-    "filter": "price=30&price.eq(30)",
+    "filter": "price=30",
     "definition": "column is equal to value.",
-    "syntax": "column=value/column.eq(value)"
+    "syntax": "column=value&;column.eq(value)",
+    "examples":[{
+      "title":"JQuery equal (.eq)",
+      "view": "products",
+      "filter":"price.eq(30)",
+      "column": "price:Equal_30"
+    }]
   },
   {
     "title": "Greater Than (>)",

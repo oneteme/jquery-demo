@@ -12,7 +12,7 @@
       "view": "customers",
       "column": "city,country,city.concat(\"------->\",country):ConcatenatedValue",
       "definition": "Concatenates multiple strings.",
-      "syntax": "column.concat(text1,text2,...) / concat(column,text1,text2,...)"
+      "syntax": "column.concat(text1,text2,...)"
     },
     {
       "title": "UPPER",
@@ -20,7 +20,7 @@
       "column": "name,name.upper:UpperCaseCustomer",
       "filter": "",
       "definition": "UPPER(): Converts a string to uppercase.",
-      "syntax": "column.upper / upper(text)"
+      "syntax": "column.upper"
     },
     {
       "title": "LOWER",
@@ -28,7 +28,7 @@
       "column": "name,name.lower:LowerCaseCustomer",
       "filter": "",
       "definition": "LOWER(): Converts a string to lowercase.",
-      "syntax": "column.lower / lower(text)"
+      "syntax": "column.lower"
     },
     {
       "title": "LEFT",
@@ -36,7 +36,7 @@
       "column": "country,country.left(3):Left,count:COUNT",
       "filter": "",
       "definition": "In SQL, the LEFT() function returns the desired number of characters from the first characters of a string. This function will voluntarily truncate the input text to the desired length.",
-      "syntax": "column.left(number) / left(text,number)"
+      "syntax": "column.left(number)"
     },
     {
       "title": "RIGHT",
@@ -44,7 +44,7 @@
       "column": "country,country.right(3):Right,count:COUNT",
       "filter": "",
       "definition": "In SQL language, the RIGHT() function allows you to extract the end of a string by defining the desired length. The function allows you to truncate a string starting from the end, by the desired number of characters.",
-      "syntax": "column.right(number) / right(text,number)"
+      "syntax": "column.right(number)"
     },
     {
       "title": "SUBSTRING",
@@ -60,7 +60,7 @@
       "column": "unit,unit.replace(bottles,bags):replacedUnit",
       "filter": "unit.endsLike=bottles",
       "definition": "Replaces a specified substring within a column with another value.<br>The function searches the column for the given text and substitutes it with the replacement text.<br>This is useful for cleaning or standardizing string values directly in a query.<br><br>Example: in the <b>PRODUCTS_TABLE</b>, the <b>UNIT</b> column may contain values such as '12 bottles'. Using <b>unit.replace(bottles,bags)</b> replaces the word <b>bottles</b> with <b>bags</b>, producing values like '12 bags'.",
-      "syntax": "column.replace(replaced,replacement)/replace(column, replacedString, replacementString)"
+      "syntax": "column.replace(replaced,replacement)"
     },
     {
       "title": "TRIM",
@@ -68,7 +68,7 @@
       "column": "trim(\"            HELLO                             WORLD                       \"):trim",
       "filter": "",
       "definition": "In SQL language, the TRIM() function allows you to remove characters at the beginning and end of a string. Most often, the TRIM() function allows you to remove invisible characters, i.e. characters such as space, tab, line break or even carriage return. Such a function can be useful to save space in a database or to display data properly.",
-      "syntax": "column.trim() / trim(column/text)"
+      "syntax": "column.trim()"
     },
     {
       "title": "LTRIM",
@@ -76,7 +76,7 @@
       "column": "ltrim(\"            HELLO                             WORLD                       \"):ltrim",
       "filter": "",
       "definition": "In SQL, the LTRIM() function is used to remove characters from the beginning of a string. The most common use of LTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-      "syntax": "column.ltrim() / ltrim(column/text)",
+      "syntax": "column.ltrim()",
       "tooltip":"LeftTrim"
     },
     {
@@ -85,7 +85,7 @@
       "column": "rtrim(\"            HELLO                             WORLD                       \"):rtrim",
       "filter": "",
       "definition": "In SQL, the RTRIM() function is used to remove characters from the end of a string. The most common use of RTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-      "syntax": "column.Rtrim() / rtrim(column/text)",
+      "syntax": "column.Rtrim()",
       "tooltip":"RightTrim"
     }
   ]

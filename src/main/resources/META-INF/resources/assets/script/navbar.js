@@ -54,12 +54,14 @@ function createNavbar(data, element) {
 }
 
 function setupNavItem(navItem, divElement, next, prev) {
-    let title = navItem.title,
+    let lcTitle = navItem.title.toLowerCase(),
+        javapath = (divElement.attr("data-title") ? divElement.attr("data-title").toLowerCase() + "/" : "") + lcTitle + ".md",
         navFields = {
             class: "nav-item jq-example",
-            "data-learn": title.toLowerCase(),
+            "data-learn": lcTitle,
             "data-next": next,
             "data-prev": prev,
+            "data-java": javapath
         };
     if (navItem.tooltip) {
         navFields["data-tippy-content"] = navItem.tooltip;
@@ -71,7 +73,7 @@ function setupNavItem(navItem, divElement, next, prev) {
         }
         navFields["data-" + key] = value;
     });
-    $(divElement).append($("<li>", navFields).html(title));
+    divElement.append($("<li>", navFields).html(navItem.title));
 }
 
 function setupNext(arr, key) {

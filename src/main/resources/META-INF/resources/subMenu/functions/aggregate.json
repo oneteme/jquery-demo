@@ -5,7 +5,13 @@
     "column": "price.avg:avg",
     "filter": "",
     "definition": "Returns the average value of a numeric column.<br>The function calculates the sum of all values and divides it by the number of rows.",
-    "syntax": "column.avg"
+    "syntax": "column.avg",
+    "examples":[{
+      "title":"AVG OVER",
+      "column":"name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
+      "filter":"order=cat_id",
+      "view":"products"
+    }]
   },
   {
     "title": "COUNT",

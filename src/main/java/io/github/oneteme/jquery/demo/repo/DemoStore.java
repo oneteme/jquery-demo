@@ -1,10 +1,12 @@
 package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.JDBCType.DOUBLE;
+import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
 import static org.usf.jquery.core.Parameter.required;
 
 import org.usf.jquery.core.OperatorDefinition;
+import org.usf.jquery.core.Predicate;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
@@ -40,4 +42,20 @@ public interface DemoStore extends StoreResource {
 	default OperatorDefinition pow() {
 		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
 	}
+	
+	@Expose(identity="pi", description="")
+	default OperatorDefinition pi() {
+		return constant(DOUBLE, "PI()");
+	}
+	
+	@Expose(identity="random", description="")
+	default OperatorDefinition random() {
+		return constant(DOUBLE, "RANDOM()");
+	}
+	
+	
+//	default Predicate predDemo() {
+//		return null;
+//		
+//	}
 }

@@ -171,17 +171,29 @@ function loadExample(exampleDiv) {
       });
     }
     if (syntax) {
+      $(".syntax-block.url").empty();
+      const syntaxes = syntax.split("&;");
+      console.log("syntaxes : ", syntaxes)
+      $.each(syntaxes, (key, val) => {
+        console.log("syntax val : ", val)
+        $(".syntax-block.url").append(
+          $("<pre>").append($("<code>", { class: "syntax-code language-scss" }).html(val))
+        )
+      })
       $(".syntax-block.url").show();
-      $(".syntax-code").html(syntax);
+      // $(".syntax-code").html(syntax);
     }
 
     if (exampleDiv.attr("data-java")) {
-      $(".syntax-block.java").show();
-      utils.loadMarkDown("/tutorials/java/" + exampleDiv.attr("data-java"), $(".syntax-block.java"));
+      utils.loadMarkDown("/tutorials/java/" + exampleDiv.attr("data-java"), $(".syntax-block.java")).then(() => {
+        $(".syntax-block.java").show();
+        }).catch(err => {
+          console.log(err)
+      });
     }
     const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
     if (view || columns || filters) {
-      examples.unshift({ "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
+      examples.unshift({ "title": "BASIC " + exampleDiv.html(), "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
     }
 
     if (examples.length > 1) {
@@ -189,19 +201,19 @@ function loadExample(exampleDiv) {
     }
 
     $.each(examples, (key, val) => {
-      const example = $("<div>", { class: "example-number" }).html(key + 1);
+      const index = key + 1,
+        example = $("<div>", { class: "example-number" }).html(index);
       example.on('click', () => {
         $("#jq-table").val(val.view ?? "");
         $("#jq-columns").val(val.column ?? "");
         $("#jq-filters").val(val.filter ?? "");
         $(".example-number").removeClass("active");
         example.addClass("active");
-        console.log("fetchJQ from clikcing example")
         fetchJQData();
       });
 
       tippy(example[0], {
-        content: val.title ?? "Main example",
+        content: val.title ?? "Example " + index,
         animation: 'scale',
         arrow: true,
         placement: 'right'
@@ -225,8 +237,8 @@ function fetchJQData() {
     (columns ? "select=" + columns : "") +
     (filters ? "&" + filters : "");
   if (table) {
-    $("#jquery-link").closest('a').attr("href", window.location.origin + fetchLink);
-    $("#jquery-link").html(fetchLink);
+    $(".jq-link-display").attr("href", window.location.origin + fetchLink);
+    $(".jq-link-display").html(fetchLink);
     $(".jq-link-display").css("visibility", "visible");
     console.log("link to fetch : ", fetchLink);
     fetch(fetchLink)

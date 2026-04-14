@@ -5,5 +5,5 @@ default Column columnPow() {
 ```
 
 ```javascript
-URL -> select=columnPow:colPower
+select=columnPow:colPower
 ```

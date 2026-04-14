@@ -4,41 +4,41 @@
     "view": "products",
     "column": "bitNot(5):bitNot",
     "definition": "Performs a bitwise NOT operation on a numeric value.<br>A bitwise NOT inverts each bit of the binary representation of the number.<br>For each bit position:<br>- If the bit is 1, it becomes 0<br>- If the bit is 0, it becomes 1<br>This operation is commonly used when working with <b>bit flags, permissions or encoded values</b> to invert stored states.<br>Example : <br>5  = 0101<br>~5 = 1010  → -6 (depending on integer representation)",
-    "syntax": "column.bitNot / bitNot(column)"
+    "syntax": "column.bitNot"
   },
   {
     "title": "bitAnd",
     "view": "products",
     "column": "bitAnd(5,3):bitAnd",
     "definition": "Performs a bitwise AND operation between two numeric values.<br>A bitwise AND compares the binary representation of two numbers bit by bit.<br>For each bit position:<br>- If both bits are 1, the result is 1<br>- Otherwise, the result is 0<br>This operation is commonly used when working with <b>bit flags, permissions or encoded values</b>, where multiple states are stored inside a single integer.<br>Example : <br>5  = 0101<br>3  = 0011<br>bitAnd = 0001  → 1",
-    "syntax": "column.bitAnd(value/column) / value.bitAnd(value/column) / bitAnd(column,value)"
+    "syntax": "column.bitAnd(value)"
   },
   {
     "title": "bitOr",
     "view": "products",
     "column": "bitOr(5,3):bitOr",
     "definition": "Performs a bitwise OR operation between two numeric values.<br>A bitwise OR compares the binary representation of two numbers bit by bit.<br>For each bit position:<br>- If at least one bit is 1, the result is 1<br>- If both bits are 0, the result is 0<br>This operation is commonly used when working with <b>bit flags, permissions or encoded values</b>, where multiple states are stored inside a single integer.<br>Example : <br>5  = 0101<br>3  = 0011<br>bitOr = 0111  → 7",
-    "syntax": "column.bitOr(value/column) / value.bitOr(value/column) / bitOr(column,value)"
+    "syntax": "column.bitOr(value)"
   },
   {
     "title": "bitXor",
     "view": "products",
     "column": "bitXor(5,3):bitXor",
     "definition": "Performs a bitwise XOR (exclusive OR) operation between two numeric values.<br>A bitwise XOR compares the binary representation of two numbers bit by bit.<br>For each bit position:<br>- If the bits are different, the result is 1<br>- If the bits are the same, the result is 0<br>This operation is commonly used when working with <b>bit flags, permissions or encoded values</b>, where multiple states are stored inside a single integer.<br>Example : <br>5  = 0101<br>3  = 0011<br>bitXor = 0110  → 6",
-    "syntax": "column.bitXor(value/column) / value.bitXor(value/column) / bitXor(column,value)"
+    "syntax": "column.bitXor(value)"
   },
   {
     "title": "bitShiftLeft",
     "view": "products",
     "column": "bitShiftLeft(5,1):bitShiftLeft",
     "definition": "Performs a bitwise left shift on a numeric value.<br>This operation shifts the binary representation of a number to the left by a specified number of positions.<br>Each shift to the left adds a 0 to the right, effectively multiplying the number by 2 for each shift.<br>Example : <br>5  = 0101<br><< 1<br>bitShiftLeft = 1010  → 10",
-    "syntax": "column.bitShiftLeft(value/column) / value.bitShiftLeft(value/column) / bitShiftLeft(column,value)"
+    "syntax": "column.bitShiftLeft(value)"
   },
   {
     "title": "bitShiftRight",
     "view": "products",
     "column": "bitShiftRight(5,1):bitShiftRight",
     "definition": "Performs a bitwise right shift on a numeric value.<br>This operation shifts the binary representation of a number to the right by a specified number of positions.<br>Each shift to the right removes the rightmost bit, effectively dividing the number by 2 for each shift (ignoring any remainder).<br>Example : <br>5  = 0101<br>>> 1<br>bitShiftRight = 0010  → 2",
-    "syntax": "column.bitShiftRight(value/column) / value.bitShiftRight(value/column) / bitShiftRight(column,value)"
+    "syntax": "column.bitShiftRight(value)"
   }
 ]

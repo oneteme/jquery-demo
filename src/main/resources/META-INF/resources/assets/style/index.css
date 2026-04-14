@@ -235,10 +235,6 @@ header {
 
 
 .show-docs {
-  position: absolute;
-  top: 24px;
-  right: 28px;
-  z-index: 98;
   border-radius: 8px;
 }
 
@@ -303,8 +299,8 @@ header {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -554,7 +550,7 @@ pre {
 }
 
 /* Links in highlighted code */
-.highlighted_code a {
+a {
   color: var(--jarvis-cyan);
   text-decoration: none;
   border-bottom: 1px dashed var(--jarvis-cyan);
@@ -562,14 +558,14 @@ pre {
   font-weight: 500;
 }
 
-.highlighted_code a:hover {
+a:hover {
   border-bottom-style: solid;
   text-shadow: 0 0 10px var(--jarvis-glow);
   color: var(--jarvis-blue);
 }
 
 /* Success checkmark */
-.highlighted_code a {
+a {
   background: rgba(0, 217, 255, 0.05);
   padding: 0.75rem 1rem;
   border-left: 3px solid var(--jarvis-cyan);
@@ -1085,14 +1081,14 @@ pre {
   font-size: 0.95rem;
 }
 
-.definition-element a {
+a {
   color: var(--jarvis-cyan);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.3s;
 }
 
-.definition-element a:hover {
+a:hover {
   border-bottom-color: var(--jarvis-cyan);
   text-shadow: 0 0 10px var(--jarvis-glow);
 }
@@ -1259,11 +1255,45 @@ pre {
 
 pre code {
   font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.75rem;
+  line-height: 1.4;
   color: var(--jarvis-text);
   border: 0;
   border-radius: 12px;
+}
+
+pre {
+  position: relative
+}
+
+code:hover::before {
+  opacity: 1;
+}
+
+code::before {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  opacity: 0.5;
+  font-weight: 600;
+  /* font-size: 15px; */
+}
+
+.language-java::before {
+  content: "</>JAVA";
+  color: orange;
+}
+
+.language-scss::before,
+.language-javascript::before,
+.language-js::before {
+  content: "</>URL";
+  color: var(--jarvis-cyan);
+}
+
+.language-sql::before {
+  content: "</>SQL";
+  color: var(--jarvis-cyan);
 }
 
 .jquery-display {
@@ -1336,6 +1366,7 @@ pre code {
 }
 
 .form-container {
+  position: relative;
   background: var(--jarvis-card);
   border: 1px solid var(--jarvis-border);
   border-radius: 12px;
@@ -1351,16 +1382,16 @@ pre code {
 
 .form-header-actions {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 4px;
+  right: 8px;
   display: flex;
   gap: 0.5rem;
   z-index: 10;
 }
 
 .form-action-btn {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid var(--jarvis-border);
   border-radius: 8px;
@@ -1405,7 +1436,7 @@ pre code {
   text-orientation: mixed;
   color: var(--jarvis-cyan);
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1414,11 +1445,11 @@ pre code {
 }
 
 .example-number {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: rgba(0, 217, 255, 0.08);
   border: 1px solid var(--jarvis-border);
-  border-radius: 6px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1581,9 +1612,10 @@ pre code {
 
 .form-footer .jq-link-display {
   width: 100%;
-  /* min-width: 0; */
   background: var(--jarvis-card);
-  border-radius: 24px;
+  font-size: 0.72rem;
+  visibility: hidden;
+  padding: 8px 8px;
   visibility: hidden;
 }
 

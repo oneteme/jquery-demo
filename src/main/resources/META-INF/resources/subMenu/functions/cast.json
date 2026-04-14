@@ -4,48 +4,48 @@
     "view": "products",
     "column": "price,price.varchar(2):PriceToVarchar",
     "definition": "Casts a value to a VARCHAR type.<br>The function converts the column into a string representation with a specified maximum length.",
-    "syntax": "column.varchar(length) / varchar(column,length)"
+    "syntax": "column.varchar(length)"
   },
   {
     "title": "INTEGER",
     "view": "products",
     "column": "price,price.integer:PriceToInteger",
     "definition": "Casts a value to an INTEGER type.<br>The function converts the column into a whole number by removing any decimal part if present.",
-    "syntax": "column.integer / integer(column)"
+    "syntax": "column.integer"
   },
   {
     "title": "BIG INTEGER",
     "view": "products",
     "column": "price,price.bigint:PriceToBigint",
     "definition": "Casts a value to a BIGINT type.<br>This function converts the column into a large integer type used for handling bigger numeric values.",
-    "syntax": "column.bigint / bigint(column)"
+    "syntax": "column.bigint"
   },
   {
     "title": "DECIMAL",
     "view": "products",
     "column": "price,price.decimal:PriceToDecimal",
     "definition": "Casts a value to a DECIMAL type.<br>The function converts the column into a numeric value that can include decimal precision.",
-    "syntax": "column.decimal / decimal(column)"
+    "syntax": "column.decimal"
   },
   {
     "title": "DATE",
     "view": "orders",
     "column": "ctimestamp.date:TimestampToDate,date(\"2025-12-08\"):date",
     "definition": "Casts a value to a DATE type.<br>The function converts a timestamp or string into a date value, keeping only the date part (year, month, day).",
-    "syntax": "column.date / date(value/column)"
+    "syntax": "column.date"
   },
   {
     "title": "TIMESTAMP",
     "view": "orders",
     "column": "cdate:cdate,cdate.timestamp:cdateToTs",
     "definition": "Casts a value to a TIMESTAMP type.<br>The function converts a date or string into a full timestamp value including date and time.",
-    "syntax": "column.timestamp / timestamp(value/column)"
+    "syntax": "column.timestamp"
   },
   {
     "title": "BOOLEAN",
     "view": "orders",
     "column": "bool(1):bool1,bool(0):bool0",
     "definition": "Casts a value to a BOOLEAN type.<br>The function converts the value into <b>true</b> or <b>false</b> depending on its representation (for example: 1 = true, 0 = false).",
-    "syntax": "column.boolean / boolean(column/value)"
+    "syntax": "column.boolean"
   }
 ]
