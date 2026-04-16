@@ -1,22 +1,27 @@
-export function loadMarkDown(path, div) {
+export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)
       .done(function (data) {
-        // console.log("markdown data : ", data);
-        // Convert Markdown to HTML
-        var htmlContent = marked.parse(data);
-        console.log("htmlcontent : ", htmlContent);
-        // Insert the HTML into the div
-        div.html(htmlContent);
+        console.log("FOUND FILE : ",path)
+        res(data)
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        rej(new Error(`File NOT FOUND ${textStatus}`));
+      });
+  })
+}
 
-        // Highlight all code blocks after inserting the HTML
-        hljs.highlightAll();
-        res();
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-        rej(new Error(`Failed to load markdown: ${textStatus}`));
-      });// get fail
+export function loadMarkDown(path, div) {
+  return checkForFile(path).then((data) => {
+    var htmlContent = marked.parse(data);
+    console.log("htmlcontent : ", htmlContent);
+    // Insert the HTML into the div
+    div.html(htmlContent);
 
-  })// Promise
+    // Highlight all code blocks after inserting the HTML
+    hljs.highlightAll();
+    return;
+  })
 }
 
 export function capitalize(str) {

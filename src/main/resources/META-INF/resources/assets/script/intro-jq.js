@@ -11,18 +11,18 @@ const introSteps = [
     {
         disableInteraction: true,
         title: "Table selection",
-        element: ".table_input_container select",
+        element: "#jq-table",
         intro: "This is where you choose the table which you want to test",
     }, // step 1
     {
         disableInteraction: true,
         title: "What's a Table ?",
-        element: ".table_input_container select",
+        element: "#jq-table",
         intro: "it's a structured collection of data organized into rows and columns, used to store and manage information in a database. \nFor instance, in a table named 'Customers', you might find all the data related to a customer (name, contact, and address).",
     }, // step 2
     {
         title: "What's a Table ?",
-        element: ".table_input_container select",
+        element: "#jq-table",
         intro: "Choose <b>Customers</b> to give it a try",
     }, // step 3
     {
@@ -38,8 +38,7 @@ const introSteps = [
     {
         title: "Columns",
         element: ".results-container",
-        intro:
-            "As you can see we fetched all <b>columns</b> which are : <b>id, name(customer), contact, address, city, postal_code and country</b>. But what if we need to get only some specific columns?",
+        intro: "As you can see we fetched all <b>columns</b> which are : <b>id, name(customer), contact, address, city, postal_code and country</b>. But what if we need to get only some specific columns?",
     }, // step 6
     {
         disableInteraction: true,

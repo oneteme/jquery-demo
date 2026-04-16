@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>JQuery Demo</title>
+  <link rel="icon" type="image/x-icon" href="/assets/images/main-icon.png">
   <!-- FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -73,7 +74,7 @@
           <img src="assets/images/menu_icon.svg" />
           <img src="assets/images/close_icon.svg" style="display: none" />
         </div>
-        <h2 id="main-title" class=" white_text btn-trigger" show=".content.jquery-display,.show-docs" hide=".content">
+        <h2 id="main-title" class=" white_text btn-trigger">
           J<span style="display: none;">ava</span>Query demo</h2>
         <div id="version-text" class="d-flex gap_4">
           <a href="https://mvnrepository.com/artifact/io.github.oneteme/jquery" class="white_text"
@@ -102,7 +103,7 @@
       <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
       <div class="settings-content">
-        <div class="form-container card-container">
+        <div class="form-container card-container" style="overflow: hidden;">
           <div class="form-header-actions">
             <button class="show-docs form-action-btn btn-trigger" title="Documentation" style="display: none"
               show=".content.definition-display" hide=".content">
@@ -115,10 +116,10 @@
             </div>
           </div>
           <form id="query-form" class="form-content">
-            <div class="table_input_container">
+            
               <div class="fw-semibold white_text">Build up your Query</div>
               <div class="d-flex">
-                <select id="jq-table" class="form-select">
+                <select id="jq-table" class="form-select" style="width: fit-content;">
                   <option value="">-- Select a view --</option>
                 </select>
                 <div class="form-floating jqcolumns_input_container col" style="width: 100%">
@@ -128,18 +129,15 @@
                   </label>
                 </div>
               </div>
+            
+
+            <div class="form-floating jqfilters_input_container" style="width: 100%">
+              <input id="jq-filters" class="form-control" name="filters" type="text"
+                placeholder="Setup JQuery filters..." />
+              <label for="jq-filters" class="fw-semibold white_text">Query Options
+              </label>
             </div>
 
-            <div class="jqsyntax-container">
-              <div class="columns-container row" style="--bs-gutter-x:0;">
-              </div>
-              <div class="form-floating jqfilters_input_container" style="width: 100%">
-                <input id="jq-filters" class="form-control" name="filters" type="text"
-                  placeholder="Setup JQuery filters..." />
-                <label for="jq-filters" class="fw-semibold white_text">Query Options
-                </label>
-              </div>
-            </div>
 
             <div class="form-footer d-flex-row gap_8">
               <a href="" class="jq-link-display" target="_blank">
@@ -181,7 +179,7 @@
           <span class="white_text">Previous</span>
         </div>
         <div class="example-title-section d-flex gap_8" style="align-items: center;">
-          <h1 class="example-title white_text">Having</h1>
+          <h1 class="example-title white_text">SELECT</h1>
           <div class="example-header-info d-flex gap_4" style="align-items: center;">
             <div class="definition-toggle">
               !
@@ -204,7 +202,7 @@
 
           <!-- Bloc syntaxe courte -->
           <div class="syntax-block url d-flex-col gap_8">
-            <pre><code class="syntax-code language-scss">column1,column2,column3, ... ezfjhbehd fezhef hdezyufhez fezzyufezudygeyufyu gygygy huhuhuhuh</code></pre>
+            <pre><code class="syntax-code language-scss">column1,column2,column3, ...</code></pre>
           </div>
           <!-- Séparateur -->
           <div class="syntax-separator"></div>

@@ -40,5 +40,13 @@ public interface Products extends DatasetResource {
 	default Criteria critColumn(String unit) {
 		return unit().eq(unit);
 	}
+	
+	default Criteria inCol(Integer ...arr) {
+		return price().in(arr);
+	}
+	
+	default Criteria startsLike(String pattern) {
+		return price().startsLike(pattern);
+	}
 	//par product je veux comparer le prix avec la moyen des prix de categorie
 }

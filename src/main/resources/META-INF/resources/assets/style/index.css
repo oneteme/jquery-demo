@@ -214,17 +214,16 @@ header {
 #jq-execute {
   background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
   color: var(--jarvis-text);
-  padding: 0.75rem;
+  padding: 0.4rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 4px 15px var(--jarvis-glow);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .jq-rounded-btn:hover,
@@ -550,7 +549,7 @@ pre {
 }
 
 /* Links in highlighted code */
-a {
+.content a {
   color: var(--jarvis-cyan);
   text-decoration: none;
   border-bottom: 1px dashed var(--jarvis-cyan);
@@ -558,20 +557,21 @@ a {
   font-weight: 500;
 }
 
-a:hover {
+.content a:hover {
   border-bottom-style: solid;
   text-shadow: 0 0 10px var(--jarvis-glow);
   color: var(--jarvis-blue);
 }
 
-/* Success checkmark */
-a {
+.content a {
   background: rgba(0, 217, 255, 0.05);
   padding: 0.75rem 1rem;
   border-left: 3px solid var(--jarvis-cyan);
   border-radius: 6px;
   font-family: 'Fira Code', monospace;
 }
+
+/* Success checkmark */
 
 .highlighted_code p:last-child {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(0, 217, 255, 0.1));
@@ -606,6 +606,7 @@ a {
 .hljs-comment {
   color: #6272a4;
   font-style: italic;
+  font-size: .6rem;
 }
 
 .hljs-meta {
@@ -1081,14 +1082,14 @@ a {
   font-size: 0.95rem;
 }
 
-a {
+.content a {
   color: var(--jarvis-cyan);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.3s;
 }
 
-a:hover {
+.content a:hover {
   border-bottom-color: var(--jarvis-cyan);
   text-shadow: 0 0 10px var(--jarvis-glow);
 }
@@ -1263,37 +1264,54 @@ pre code {
 }
 
 pre {
-  position: relative
-}
-
-code:hover::before {
-  opacity: 1;
+  position: relative;
 }
 
 code::before {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  opacity: 0.5;
+  top: 4px;
+  right: 8px;
+  opacity: 0.7;
   font-weight: 600;
-  /* font-size: 15px; */
+  font-size: 0.6rem;
+  padding: 0.2rem;
+  border-radius: 6px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+  border: 1px solid;
+  backdrop-filter: blur(5px);
+}
+
+code:hover::before {
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 0 4px currentColor;
 }
 
 .language-java::before {
-  content: "</>JAVA";
-  color: orange;
+  content: '☕ JAVA';
+  color: #f89820;
+  background: rgba(248, 152, 32, 0.1);
+  border-color: rgba(248, 152, 32, 0.3);
 }
 
 .language-scss::before,
 .language-javascript::before,
-.language-js::before {
-  content: "</>URL";
+.language-js::before,
+.language-php::before {
+  content: '🌐 URL';
+  top: 8px;
   color: var(--jarvis-cyan);
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--jarvis-border);
 }
 
 .language-sql::before {
-  content: "</>SQL";
+  content: '🗄️ SQL';
   color: var(--jarvis-cyan);
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--jarvis-border);
 }
 
 .jquery-display {
@@ -1358,7 +1376,7 @@ code::before {
   background: var(--jarvis-card);
   border: 1px solid rgba(0, 217, 255, 0.2);
   border-radius: 12px;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s;
@@ -1382,7 +1400,7 @@ code::before {
 
 .form-header-actions {
   position: absolute;
-  top: 4px;
+  top: -6px;
   right: 8px;
   display: flex;
   gap: 0.5rem;
@@ -1390,8 +1408,8 @@ code::before {
 }
 
 .form-action-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: rgba(0, 217, 255, 0.1);
   border: 1px solid var(--jarvis-border);
   border-radius: 8px;
@@ -1401,14 +1419,14 @@ code::before {
   cursor: pointer;
   transition: all 0.3s;
   color: var(--jarvis-cyan);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .form-action-btn:hover {
   background: rgba(0, 217, 255, 0.2);
   border-color: var(--jarvis-cyan);
   box-shadow: 0 0 15px var(--jarvis-glow);
-  transform: translateY(-2px);
+  transform: translateY(-0.5px);
 }
 
 .form-action-btn.active {
@@ -1499,7 +1517,8 @@ code::before {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 8px;
+  padding: 4px 8px;
+  gap: 4px;
 }
 
 /* Form inputs - Compact */
@@ -1512,8 +1531,8 @@ code::before {
   font-family: 'Fira Code', monospace;
   font-size: 0.8rem;
   transition: all 0.3s;
-  /* height: auto; */
-  /* min-height: 42px; */
+  height: 32px !important;
+  min-height: auto !important;
 }
 
 .form-select:focus,
@@ -1530,10 +1549,12 @@ code::before {
   top: 0;
   left: 0; */
   /* padding: 0.6rem 0.875rem; */
+  top: auto;
+  bottom: 8px;
   pointer-events: none;
   transform-origin: 0 0;
   transition: all 0.3s;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   opacity: 0.4;
   color: var(--jarvis-text-dim);
   text-transform: uppercase;
@@ -1574,7 +1595,7 @@ code::before {
 .fw-semibold {
   font-family: 'Orbitron', sans-serif;
   color: var(--jarvis-cyan);
-  font-size: 1.2rem;
+  font-size: .85rem;
 }
 
 .jqsyntax-container {
@@ -1706,7 +1727,7 @@ code::before {
 .jq-table tbody td {
   padding: 0.875rem;
   color: var(--jarvis-text);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
 }
 
 /* Pagination buttons */
@@ -1770,7 +1791,7 @@ code::before {
   /* padding-top: 60px; */
   display: none;
   width: 100%;
-  max-width: 272px;
+  max-width: 256px;
   height: 0;
 }
 
@@ -1779,7 +1800,7 @@ code::before {
 /*** LISTS  ***/
 
 .navbar-container ul {
-  gap: 8px;
+  gap: 4px;
 }
 
 .parent-element {
@@ -1788,7 +1809,7 @@ code::before {
 
 .parent_title {
   position: relative;
-  padding: 0.875rem 1.75rem;
+  padding: 0.75rem 1.75rem;
   color: var(--jarvis-cyan);
   cursor: pointer;
   transition: all 0.3s;
@@ -1824,7 +1845,7 @@ code::before {
 }
 
 .nav-item {
-  padding: 0.875rem 1.0rem;
+  padding: 0.65rem 1.0rem;
   color: var(--jarvis-text-dim);
   cursor: pointer;
   transition: all 0.3s;
@@ -1834,10 +1855,10 @@ code::before {
 }
 
 .nav-item:hover {
-  background: rgba(0, 217, 255, 0.08);
+  background: linear-gradient(135deg, var(--jarvis-darker) 75%, var(--jarvis-dark) 100%);
   color: var(--jarvis-cyan);
   border-left-color: var(--jarvis-cyan);
-  padding-left: 2rem;
+  padding-left: 1.5rem;
 }
 
 .nav-item.active {

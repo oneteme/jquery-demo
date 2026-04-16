@@ -39,8 +39,9 @@
       },
       {
         "title": "Shuffle results",
-        "view": "customers",
-        "filter":"order=random"
+        "view": "employees",
+        "column": "lname,fname,start",
+        "filter": "order=random"
       }
     ]
   },

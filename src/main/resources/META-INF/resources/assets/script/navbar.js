@@ -1,3 +1,5 @@
+import { javaMdFiles } from "./files.js";
+
 var navStyleFields = {};
 export function loadNavData(path = "/menu.json", element = $(".navbar-nav")) {
     return new Promise(res => {
@@ -54,15 +56,18 @@ function createNavbar(data, element) {
 }
 
 function setupNavItem(navItem, divElement, next, prev) {
-    let lcTitle = navItem.title.toLowerCase(),
-        javapath = (divElement.attr("data-title") ? divElement.attr("data-title").toLowerCase() + "/" : "") + lcTitle + ".md",
+    const javapath = (divElement.attr("data-title") ? divElement.attr("data-title").toLowerCase() + "/" : "") + (navItem.label ?? navItem.title).toLowerCase() + ".md",
         navFields = {
             class: "nav-item jq-example",
-            "data-learn": lcTitle,
+            "data-learn": navItem.title.toLowerCase(),
             "data-next": next,
-            "data-prev": prev,
-            "data-java": javapath
+            "data-prev": prev
         };
+    console.log("javapath : ", javapath)
+    console.log("javaMdFiles : ", javaMdFiles)
+    if (javaMdFiles.includes(javapath)) {
+        navFields["data-java"] = javapath;
+    }
     if (navItem.tooltip) {
         navFields["data-tippy-content"] = navItem.tooltip;
     }

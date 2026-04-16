@@ -1,18 +1,19 @@
 [
   {
-
     "title": "Equal (=)",
     "view": "products",
     "column": "price:Equal_30",
     "filter": "price=30",
     "definition": "column is equal to value.",
     "syntax": "column=value&;column.eq(value)",
-    "examples":[{
-      "title":"JQuery equal (.eq)",
-      "view": "products",
-      "filter":"price.eq(30)",
-      "column": "price:Equal_30"
-    }]
+    "examples": [
+      {
+        "title": "JQuery equal (.eq)",
+        "view": "products",
+        "filter": "price.eq(30)",
+        "column": "price:Equal_30"
+      }
+    ]
   },
   {
     "title": "Greater Than (>)",
@@ -20,7 +21,8 @@
     "column": "price:GreaterThan_30",
     "filter": "price.gt=30&order=price",
     "definition": "column is greater than value",
-    "syntax": "column.gt=value"
+    "syntax": "column.gt=value",
+    "label": "greater than"
   },
   {
     "title": "Lower Than (<)",
@@ -28,7 +30,8 @@
     "column": "price:LowerThan_30",
     "filter": "price.lt=30&order=price",
     "definition": "column is lower than value",
-    "syntax": "column.lt=value"
+    "syntax": "column.lt=value",
+    "label": "lower than"
   },
   {
     "title": "Greater equal (>=)",
@@ -36,7 +39,8 @@
     "column": "price:GreaterEqual_30",
     "filter": "price.ge=30&order=price",
     "definition": "column is greater or equal to value",
-    "syntax": "column.ge=value"
+    "syntax": "column.ge=value",
+    "label": "greater equal"
   },
   {
     "title": "Lower equal (<=)",
@@ -44,7 +48,8 @@
     "column": "price:LowerEqual_30",
     "filter": "price.le=30&order=price",
     "definition": "column is lower or equal to value",
-    "syntax": "column.le=value"
+    "syntax": "column.le=value",
+    "label": "lower equal"
   },
   {
     "title": "Not equal (<>)",
@@ -52,7 +57,8 @@
     "column": "price:PriceNotEqualTo_30",
     "filter": "price.ne=30&order=price",
     "definition": "column is not equal to value",
-    "syntax": "column.ne=value"
+    "syntax": "column.ne=value",
+    "label": "not equal"
   },
   {
     "title": "NULL",
@@ -73,16 +79,24 @@
   {
     "title": "IN",
     "view": "products",
-    "column": "price:PriceEqualTo_10_20_30_40_50",
-    "filter": "price=10,20,30,40,50&order=price",
+    "column": "price:Price_In_10_30_50",
+    "filter": "price=10,30,50&order=price",
     "definition": "TRUE if the operand is equal to any value in a list of expressions",
-    "syntax": "column=val1,val2,val3,..."
+    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...",
+    "examples": [
+      {
+        "title": "JQuery IN",
+        "view": "products",
+        "column": "price:Price_In_10_30_50",
+        "filter": "price.in=10,30,50&order=price"
+      }
+    ]
   },
   {
     "title": "Not IN",
     "view": "products",
-    "column": "price:PriceNotEqualTo_10_20_30_40_50",
-    "filter": "price.notIn=10,20,30,40,50&order=price",
+    "column": "price:PriceNotEqualTo_10_30_50",
+    "filter": "price.notIn=10,30,50&order=price",
     "definition": "TRUE if the operand is not equal to any value in a list of expressions",
     "syntax": "column.notIn=val1,val2,val3,..."
   },
@@ -100,7 +114,8 @@
     "column": "name",
     "filter": "name.contentLike=ue",
     "definition": "Matches any string that contains the specified 'pattern' anywhere within it.",
-    "syntax": "col2.contentLike=pattern"
+    "syntax": "column.contentLike=pattern",
+    "label": "Like"
   },
   {
     "title": "START LIKE (pattern%)",
@@ -108,7 +123,8 @@
     "column": "name",
     "filter": "name.startsLike=Qu",
     "definition": "Matches any string that starts with the specified pattern.",
-    "syntax": "col2.startsLike=pattern"
+    "syntax": "column.startsLike=pattern",
+    "label": "Start Like"
   },
   {
     "title": "ENDS LIKE (%pattern)",
@@ -116,14 +132,34 @@
     "column": "name",
     "filter": "name.endsLike=en",
     "definition": "Matches any string that ends with the specified pattern.",
-    "syntax": "col2.endsLike=pattern"
+    "syntax": "column.endsLike=pattern",
+    "label": "Ends like"
   },
   {
     "title": "NOT LIKE",
     "view": "customers",
     "column": "name",
-    "filter": "name.contentLike=ue",
+    "filter": "name.notLike=ue",
     "definition": "Matches any string that does not contain the specified 'pattern' in it",
-    "syntax": "col2.notLike=pattern"
+    "syntax": "column.notLike=pattern",
+    "label": "Not Like"
+  },
+  {
+    "title": "START NOT LIKE (pattern%)",
+    "view": "customers",
+    "column": "name",
+    "filter": "name.startsNotLike=Qu",
+    "definition": "Matches any string that does not start with the specified pattern.",
+    "syntax": "column.startsNotLike=pattern",
+    "label": "Start Not Like"
+  },
+  {
+    "title": "ENDS NOT LIKE (%pattern)",
+    "view": "customers",
+    "column": "name",
+    "filter": "name.endsNotLike=en",
+    "definition": "Matches any string that does not end with the specified pattern.",
+    "syntax": "column.endsNotLike=pattern",
+    "label": "Ends Not like"
   }
 ]

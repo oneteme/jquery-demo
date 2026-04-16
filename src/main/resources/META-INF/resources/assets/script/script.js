@@ -1,3 +1,4 @@
+import { getAllJavaMd } from "./files.js";
 import { introNextStep, introNextStepCondition, isIntro } from "./intro-jq.js";
 import { hideNavBar, loadNavData, showNavBar, toggleNavBar, toggleNavSubElements } from "./navbar.js";
 import { loadSettings } from "./settings.js";
@@ -9,7 +10,7 @@ var inputTimeOut;
 $(document).ready(function () {
   hljs.highlightAll();
   $(".navbar-nav").empty();
-  loadNavData();
+  getAllJavaMd().then(mdFiles => loadNavData())
   loadSettings();
   loadViews();
   $("#jq-execute").on("click", (e) => {
@@ -50,6 +51,9 @@ $(document).ready(function () {
     $(".content.definition-display").show();
     $(".content.jquery-display").hide();
     loadExample($(e.currentTarget));
+    if (!$("#main-title").attr("show")) {
+      $("#main-title").attr({ "show": ".content.jquery-display,.show-docs", "hide": ".content" })
+    }
   });
 
   $("#jq-columns").on("input", (e) => {
@@ -119,6 +123,8 @@ function loadViews() {
 }
 
 function loadExample(exampleDiv) {
+  $(".nav-item").removeClass("active")
+  exampleDiv.addClass("active")
   console.log("loadExample")
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-toggle").hide();
@@ -187,8 +193,6 @@ function loadExample(exampleDiv) {
     if (exampleDiv.attr("data-java")) {
       utils.loadMarkDown("/tutorials/java/" + exampleDiv.attr("data-java"), $(".syntax-block.java")).then(() => {
         $(".syntax-block.java").show();
-        }).catch(err => {
-          console.log(err)
       });
     }
     const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
