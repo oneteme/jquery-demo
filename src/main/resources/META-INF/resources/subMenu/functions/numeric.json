@@ -7,18 +7,19 @@
     "definition": "Returns a number truncated to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, only that number of digits is kept after the decimal point (e.g. 21.35 → 21.3 with trunc(1)).<br>If no value is provided, the number is truncated to an integer (decimal part removed) without rounding.",
     "syntax": "column.trunc(decimal_places)",
     "tooltip": "Truncate",
-    "examples":[{
-      "title":"With optional <b>decimal_places</b>",
-      "view":"products",
-      "column":"price:ActualPrice,price.trunc(1):DecimalTruncatedPrice",
-      "filter": "ActualPrice=21.35,23.25,17.45,62.5"
-    }]
+    "examples": [
+      {
+        "title": "With optional <b>decimal_places</b>",
+        "view": "products",
+        "column": "price:ActualPrice,price.trunc(1):DecimalTruncatedPrice",
+        "filter": "ActualPrice=21.35,23.25,17.45,62.5"
+      }
+    ]
   },
   {
     "title": "ABS",
     "view": "products",
-    "column": "price.abs:ABS,abs(-65):NegativeABS",
-    "filter": "limit=1",
+    "column": "abs(25):ABS,abs(-25):NegativeABS",
     "definition": "Returns the absolute value of a number.<br>The result is always non-negative: negative values become positive, while positive values remain unchanged.",
     "syntax": "column.abs",
     "tooltip": "Absolute value"
@@ -27,11 +28,10 @@
     "title": "CEIL",
     "view": "products",
     "column": "price:ActualPrice,price.ceil:CeiledPrice",
-    "filter": "",
+    "filter": "ActualPrice=21.35,23.25,17.45,62.5",
     "definition": "Returns the smallest integer greater than or equal to the given number.<br>This means the value is always rounded up to the next integer if it has a decimal part.",
     "syntax": "column.ceil",
-    "tooltip": "Ceiling",
-    "usages": []
+    "tooltip": "Ceiling"
   },
   {
     "title": "FLOOR",
@@ -44,10 +44,18 @@
   {
     "title": "ROUND",
     "view": "products",
-    "column": "price:ActualPrice,price.round(1):DecimalRoundedPrice,price.round:RoundedPrice",
+    "column": "price:ActualPrice,price.round:RoundedPrice",
     "filter": "ActualPrice=21.35,23.25,17.45,62.5",
     "definition": "Returns a number rounded to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, the number is rounded to that precision (e.g. 21.35 → 21.4 with round(1)).<br>If no value is provided, the number is rounded to the nearest integer.",
-    "syntax": "column.round(optionalValue)"
+    "syntax": "column.round(decimal_places)",
+    "examples": [
+      {
+        "title": "With optional <b>decimal_places</b>",
+        "view": "products",
+        "column": "price:ActualPrice,price.round(1):DecimalRoundedPrice",
+        "filter": "ActualPrice=21.35,23.25,17.45,62.5"
+      }
+    ]
   },
   {
     "title": "SQRT",
@@ -61,11 +69,18 @@
   {
     "title": "MOD",
     "view": "products",
-    "column": "price,price.mod(10):MODPrice",
-    "filter": "",
+    "column": "price,price.mod(10):MOD_10",
     "definition": "Returns the remainder of a division operation.<br>The function divides the column value by the given value and returns what is left after the division (e.g. 25 mod 10 = 5).",
     "syntax": "column.mod(value)",
-    "tooltip": "Modulo"
+    "tooltip": "Modulo",
+    "examples": [
+      {
+        "title":"Even prices",
+        "view": "products",
+        "column": "price",
+        "filter": "price.mod(2).eq(0)"
+      }
+    ]
   },
   {
     "title": "POWER",
@@ -98,10 +113,17 @@
   {
     "title": "LOG",
     "view": "products",
-    "column": "price,price.log:Log,price.log(2):Log2",
+    "column": "price,price.log:Log",
     "definition": "Returns the logarithm of a numeric value.<br>By default, the function computes the natural logarithm (base <b>e</b>).<br>If a base is provided, the logarithm is calculated using that base (e.g. log(2) = base 2).",
     "syntax": "column.log(optionalBase)",
-    "tooltip": "Logarithm"
+    "tooltip": "Logarithm",
+    "examples": [
+      {
+        "title": "LOG with <b>base = 2</b>",
+        "view": "products",
+        "column": "price,price.log(2):Log2"
+      }
+    ]
   },
   {
     "title": "EXP",

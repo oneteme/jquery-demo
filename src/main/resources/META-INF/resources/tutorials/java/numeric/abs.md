@@ -5,5 +5,5 @@ default Column columnABS() {
 ```
 
 ```javascript
-select=columnTrunc:colTrunc
+select=columnABS:colABS
 ```

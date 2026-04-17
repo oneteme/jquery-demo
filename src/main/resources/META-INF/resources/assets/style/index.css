@@ -1256,11 +1256,12 @@ pre {
 
 pre code {
   font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   line-height: 1.4;
   color: var(--jarvis-text);
   border: 0;
   border-radius: 12px;
+  padding-right: 68px !important;
 }
 
 pre {
@@ -1269,13 +1270,13 @@ pre {
 
 code::before {
   position: absolute;
-  top: 4px;
-  right: 8px;
-  opacity: 0.7;
+  top: 0;
+  right: 4px;
+  opacity: 0.5;
   font-weight: 600;
-  font-size: 0.6rem;
-  padding: 0.2rem;
-  border-radius: 6px;
+  font-size: 0.55rem;
+  padding: 0.1rem;
+  border-radius: 4px;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 0.05em;
   transition: all 0.3s;
@@ -1285,8 +1286,8 @@ code::before {
 
 code:hover::before {
   opacity: 1;
-  transform: translateY(-2px);
-  box-shadow: 0 0 4px currentColor;
+  transform: translateY(-0.2px);
+  /* box-shadow: 0 0 2px currentColor; */
 }
 
 .language-java::before {

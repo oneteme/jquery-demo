@@ -118,6 +118,14 @@
     "label": "Like"
   },
   {
+    "title": "ILIKE",
+    "view": "products",
+    "column": "name",
+    "filter": "name.ilike=ue",
+    "definition": "Performs a case-insensitive pattern match on a string column.<br>The function compares the column value with the given pattern while ignoring letter case.<br>It behaves like <b>LIKE</b> but does not distinguish between uppercase and lowercase characters (e.g. 'Chai', 'chai', 'CHAI' all match).<br>This is useful for flexible text searches.",
+    "syntax": "column.ilike=value"
+  },
+  {
     "title": "START LIKE (pattern%)",
     "view": "customers",
     "column": "name",
