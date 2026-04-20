@@ -32,14 +32,10 @@ public interface Orders extends DatasetResource {
 	@Bind("SHIPPER_ID")
 	ViewColumn shipperId();
 	
-	default JoinsClause leftCustomer() {
-		var cust = getInstance().getStore(DemoStore.class).customers();
-		return joins(leftJoin(cust.getView(), customerId().eq(cust.id())));
-	}
 	
-	default JoinsClause rightCustomer() {
-		var cust = getInstance().getStore(DemoStore.class).customers();
-		return joins(rightJoin(cust.getView(), customerId().eq(cust.id())));
+	default JoinsClause rightEmployee() {
+		var employees = getInstance().getStore(DemoStore.class).employees();
+		return joins(rightJoin(employees.getView(), employeeId().eq(employees.id())));
 	}
 	
 	default JoinsClause innerCustomer() {

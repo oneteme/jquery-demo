@@ -1,9 +1,9 @@
 package io.github.oneteme.jquery.demo.repo;
 
+import static org.usf.jquery.core.Column.beginCase;
 import static org.usf.jquery.core.Predicate.lt;
 
 import org.usf.jquery.core.CaseColumn;
-import org.usf.jquery.core.CaseColumnComposer;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Criteria;
 import org.usf.jquery.core.ViewColumn;
@@ -55,7 +55,11 @@ public interface Products extends DatasetResource {
 	
 	default CaseColumn whenCol() {
 		return price().toCase().when(lt(10), "cheap").orElse("expensive");
-		
 	}
+	
+	default CaseColumn whenColCase() {
+		return beginCase().when(price().lt(10), "cheap").orElse("Expensive");
+	}
+	
 	//par product je veux comparer le prix avec la moyen des prix de categorie
 }

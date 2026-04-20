@@ -1,28 +1,40 @@
 [
   {
-    "title": "CLASSIC JOIN",
-    "view": "orders",
-    "column": "orders.id,customers.name,orders.start",
-    "filter": "orders.customer_id=customers.id",
-    "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them.",
-    "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id"
-  },
-  {
     "title": "INNER JOIN",
-    "view": "orders",
-    "filter": "join=innerCustomer",
-    "tutorial": "inner_join.md"
+    "view": "customers",
+    "column": "orders.id,name",
+    "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(id))&orders.customer_id.isNull",
+    "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them."
   },
   {
     "title": "LEFT JOIN",
-    "view": "orders",
-    "filter": "join=leftCustomer",
-    "tutorial": "left_join.md"
+    "view": "customers",
+    "column": "orders.id,name",
+    "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(customers.id))&orders.customer_id.isNull",
+    "definition": "Combines rows from two views by returning all records from the left view and the matching records from the right view.<br>If no match is found, the right-side columns return <b>null</b>.<br>This allows you to identify missing relationships, such as customers who have not placed any orders by filtering where the joined column is null.",
+    "syntax": "join=leftJoin(v1).criteria(v1.column.eq(v0.column))",
+    "examples": [
+      {
+        "title": "Using Left Join from JAVA",
+        "view": "customers",
+        "column": "orders.id,customers.name",
+        "filter": "join=leftOrder&orders.customer_id.isNull"
+      }
+    ]
   },
   {
     "title": "RIGHT JOIN",
     "view": "orders",
-    "filter": "join=rightCustomer",
-    "tutorial": "right_join.md"
+    "column": "id,employees.lname,employees.fname",
+    "filter": "join=rightJoin(employees).criteria(orders.employee_id.eq(employees.id))&order=id",
+    "definition": "Combines rows from two views by returning all records from the right view and the matching records from the left view.<br>If no match is found, the left-side columns return <b>null</b>.<br>This allows you to retrieve all records from the right table (for example, all employees), even if they are not associated with any records in the left table (orders).",
+    "syntax": "join=rightJoin(v1).criteria(v1.column.eq(v0.column))",
+    "examples": [
+      {
+        "view": "orders",
+        "column": "id,employees.lname,employees.fname",
+        "filter":"join=rightEmployee&order=id"
+      }
+    ]
   }
 ]
