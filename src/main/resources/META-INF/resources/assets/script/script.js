@@ -2,6 +2,7 @@ import { getAllJavaMd } from "./files.js";
 import { introNextStep, introNextStepCondition, isIntro } from "./intro-jq.js";
 import { hideNavBar, loadNavData, showNavBar, toggleNavBar, toggleNavSubElements } from "./navbar.js";
 import { loadSettings } from "./settings.js";
+import { hideLoading, showError, showLoading, showSuccess } from "./status.js";
 import { clearTable, displayTableResults } from "./table.js";
 import * as utils from "./utils.js";
 
@@ -240,6 +241,7 @@ function fetchJQData() {
     table + "?" +
     (columns ? "select=" + columns : "") +
     (filters ? "&" + filters : "");
+  showLoading($(".loader"), $(".query-status-btn"));
   if (table) {
     $(".jq-link-display").attr("href", window.location.origin + fetchLink);
     $(".jq-link-display").html(fetchLink);
@@ -248,6 +250,10 @@ function fetchJQData() {
     fetch(fetchLink)
       .then((response) => response.json())
       .then((data) => {
+        setTimeout(() => {
+          showSuccess("Query executed successfully : " + data.result.length + " rows.");
+          hideLoading($(".loader"), $(".query-status-btn"))
+        }, 300)
         // console.log("response : ",response);
         console.log("data : ", data);
         $(".error_container").hide();
@@ -255,14 +261,20 @@ function fetchJQData() {
         $("#sql-display").show();
 
         hljs.highlightAll();
-        displayTableResults(data.result);
+        if (data.result.length > 0) {
+          displayTableResults(data.result);
+        } else {
+          clearTable();
+        }
       })
       .catch((error) => {
+        console.log("error : ", error)
         let errorMessage = "Error while executing this query.";
         clearTable();
         $("#sql-display").hide();
-        $(".error_container").show();
-        $("#error-code").html(errorMessage);
+        showError(errorMessage);
+        // $(".error_container").show();
+        // $("#error-code").html(errorMessage);
         // console.error("Error fetching data: ", error);
       });
   }

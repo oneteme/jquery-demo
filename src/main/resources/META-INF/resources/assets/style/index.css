@@ -1261,7 +1261,7 @@ pre code {
   color: var(--jarvis-text);
   border: 0;
   border-radius: 12px;
-  padding-right: 68px !important;
+  padding-right: 24px !important;
 }
 
 pre {
@@ -1376,7 +1376,7 @@ code:hover::before {
 .card-container {
   background: var(--jarvis-card);
   border: 1px solid rgba(0, 217, 255, 0.2);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0.5rem 0.75rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -1434,6 +1434,90 @@ code:hover::before {
   background: var(--jarvis-cyan);
   color: var(--jarvis-darker);
   box-shadow: 0 0 20px var(--jarvis-glow);
+}
+
+/* Status indicator button */
+.query-status-btn {
+  /* À gauche du bouton docs */
+  width: 28px;
+  height: 28px;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.query-status-btn:hover {
+  border-color: #555;
+}
+
+/* Status states */
+.query-status-btn.success {
+  color: #22c55e;
+  border-color: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.query-status-btn.error {
+  color: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 28px;
+  height: 28px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side, var(--jarvis-cyan) 90%, #0000);
+  background:
+    var(--_g) 0% 50%,
+    var(--_g) 50% 50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: l7 1s infinite linear;
+}
+
+@keyframes l7 {
+  33% {
+    background-size: calc(100%/3) 0%, calc(100%/3) 100%, calc(100%/3) 100%
+  }
+
+  50% {
+    background-size: calc(100%/3) 100%, calc(100%/3) 0%, calc(100%/3) 100%
+  }
+
+  66% {
+    background-size: calc(100%/3) 100%, calc(100%/3) 100%, calc(100%/3) 0%
+  }
+}
+
+/* Status tooltip on hover */
+.query-status-btn::after {
+  content: attr(data-status);
+  position: absolute;
+  bottom: -2.5rem;
+  right: 0;
+  background: #0a0a0a;
+  border: 1px solid currentColor;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.query-status-btn:hover::after {
+  opacity: 1;
 }
 
 /* Examples panel */
@@ -1634,8 +1718,7 @@ code:hover::before {
 
 .form-footer .jq-link-display {
   width: 100%;
-  background: var(--jarvis-card);
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   visibility: hidden;
   padding: 8px 8px;
   visibility: hidden;

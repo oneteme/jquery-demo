@@ -1,11 +1,11 @@
 ```java	
 // v0 is the DatasetResource that contains the JoinClause
-default JoinsClause myLeftJoin() {
+default JoinsClause myInnerJoin() {
     var v1 = getInstance().getStore(myStore.class).myView();
-	return joins(leftJoin(v1.getView(), column().eq(v1.id())));
+	return joins(innerJoin(v1.getView(), column().eq(v1.id())));
 }
 ```
 
 ```javascript
-select=...&join=myLeftJoin
+select=...&join=myInnerJoin
 ```

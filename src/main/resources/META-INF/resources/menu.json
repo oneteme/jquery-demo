@@ -45,7 +45,7 @@
     "view": "customers",
     "column": "id:ID,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
-    "syntax": "col:new_col_name",
+    "syntax": "column:new_col_name",
     "tooltip": "Aliases/TAG"
   },
   {
@@ -61,7 +61,7 @@
     "filter": "order=price.asc",
     "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
-    "syntax": "&order=column.ASC&;&order=column.DESC"
+    "syntax": "&order=column.ASC // default&;&order=column.DESC"
   },
   {
     "title": "CASE...WHEN",

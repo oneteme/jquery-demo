@@ -6,6 +6,7 @@ import static org.usf.jquery.core.Predicate.lt;
 import org.usf.jquery.core.CaseColumn;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Criteria;
+import org.usf.jquery.core.Operators;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -59,6 +60,14 @@ public interface Products extends DatasetResource {
 	
 	default CaseColumn whenColCase() {
 		return beginCase().when(price().lt(10), "cheap").orElse("Expensive");
+	}
+	
+	default Column columnPlus() {
+		return price().plus(1);
+	}
+	
+	default Column columnTag() {
+		return price().as("price_value");
 	}
 	
 	//par product je veux comparer le prix avec la moyen des prix de categorie

@@ -109,6 +109,10 @@
               show=".content.definition-display" hide=".content">
               📖
             </button>
+            <button class="query-status-btn success" data-status="Query executed successfully" style="display: none;">
+              ✓
+            </button>
+            <div class="loader" style="display: none;"></div>
           </div>
           <div class="examples-sidebar" style="display: none;">
             <div class="examples-sidebar-title">ALSO TRY</div>
@@ -116,20 +120,20 @@
             </div>
           </div>
           <form id="query-form" class="form-content">
-            
-              <div class="fw-semibold white_text">Build up your Query</div>
-              <div class="d-flex">
-                <select id="jq-table" class="form-select" style="width: fit-content;">
-                  <option value="">-- Select a view --</option>
-                </select>
-                <div class="form-floating jqcolumns_input_container col" style="width: 100%">
-                  <input id="jq-columns" class="form-control" name="columns" type="text"
-                    placeholder="Setup JQuery columns..." />
-                  <label for="jq-columns" class="fw-semibold white_text">Columns
-                  </label>
-                </div>
+
+            <div class="fw-semibold white_text">Build up your Query</div>
+            <div class="d-flex">
+              <select id="jq-table" class="form-select" style="width: fit-content;">
+                <option value="">-- Select a view --</option>
+              </select>
+              <div class="form-floating jqcolumns_input_container col" style="width: 100%">
+                <input id="jq-columns" class="form-control" name="columns" type="text"
+                  placeholder="Setup JQuery columns..." />
+                <label for="jq-columns" class="fw-semibold white_text">Columns
+                </label>
               </div>
-            
+            </div>
+
 
             <div class="form-floating jqfilters_input_container" style="width: 100%">
               <input id="jq-filters" class="form-control" name="filters" type="text"
@@ -137,7 +141,6 @@
               <label for="jq-filters" class="fw-semibold white_text">Query Options
               </label>
             </div>
-
 
             <div class="form-footer d-flex-row gap_8">
               <a href="" class="jq-link-display" target="_blank">

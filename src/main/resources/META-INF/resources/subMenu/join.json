@@ -4,7 +4,8 @@
     "view": "customers",
     "column": "orders.id,name",
     "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(id))&orders.customer_id.isNull",
-    "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them."
+    "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them.",
+    "syntax": "join=innerJoin(v1).criteria(v1.column.eq(v0.column))"
   },
   {
     "title": "LEFT JOIN",
@@ -31,6 +32,7 @@
     "syntax": "join=rightJoin(v1).criteria(v1.column.eq(v0.column))",
     "examples": [
       {
+        "title":"Using Left Join from JAVA",
         "view": "orders",
         "column": "id,employees.lname,employees.fname",
         "filter":"join=rightEmployee&order=id"

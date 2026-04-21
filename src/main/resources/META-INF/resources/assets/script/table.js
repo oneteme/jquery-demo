@@ -1,5 +1,6 @@
 var resultTable;
 export function displayTableResults(data) {
+    console.log("display table results data : ", data)
     clearTable();
     showTable();
     $(".results-container").css("width", "100%");

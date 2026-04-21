@@ -5,7 +5,7 @@
     "column": "price:Equal_30",
     "filter": "price=30",
     "definition": "column is equal to value.",
-    "syntax": "column=value&;column.eq(value)",
+    "syntax": "column=value&;column.eq(value) // Recommended for chainable filters",
     "examples": [
       {
         "title": "JQuery equal (.eq)",
@@ -66,7 +66,15 @@
     "filter": "country.isNull",
     "definition": "IS NULL is used to check if a value is missing or empty (it has no value).",
     "syntax": "column.isNull",
-    "tooltip": "is NULL"
+    "tooltip": "is NULL",
+    "examples": [
+      {
+        "title": "Customers who didn't place any orders",
+        "view": "customers",
+        "column": "orders.id,customers.name",
+        "filter": "join=leftOrder&orders.customer_id.isNull"
+      }
+    ]
   },
   {
     "title": "NOT NULL",

@@ -29,10 +29,10 @@ export function capitalize(str) {
 }
 // remove second class from div
 export function removeSecondClass(element) {
-  var classList = $(element).attr("class").split(/\s+/);
+  var classList = element.attr("class").split(/\s+/);
   if (classList.length > 1) {
     var secondClass = classList[1]; // Get the second class
-    $(element).removeClass(secondClass); // Remove the second class
+    element.removeClass(secondClass); // Remove the second class
   }
 }
 

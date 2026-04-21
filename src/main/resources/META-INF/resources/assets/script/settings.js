@@ -38,7 +38,7 @@ function createSettings(data) {
 
 $(document).on("click", ".grid-options .option-box", (e) => {
     let appliedClass = $(e.currentTarget).attr("data-class");
-    utils.removeSecondClass(".settings-content");
+    utils.removeSecondClass($(".settings-content"));
     $(".settings-content").addClass(appliedClass);
 });
 
