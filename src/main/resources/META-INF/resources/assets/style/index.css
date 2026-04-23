@@ -990,7 +990,7 @@ pre {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.1em;
   margin: 0;
 }
@@ -1256,7 +1256,7 @@ pre {
 
 pre code {
   font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   line-height: 1.4;
   color: var(--jarvis-text);
   border: 0;
@@ -1471,9 +1471,37 @@ code:hover::before {
   box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
 }
 
-/* HTML: <div class="loader"></div> */
+
+.jarvis-theme {
+  background-color: var(--jarvis-dark);
+  border: solid 2px var(--jarvis-cyan);
+  color: var(--jarvis-cyan);
+}
+
+.tippy-popper[x-placement^=top] .jarvis-theme {
+  background-color: var(--jarvis-darker);
+}
+
+.tippy-popper[x-placement^=top] .jarvis-theme .tippy-arrow {
+  border-top-color: var(--jarvis-cyan);
+  bottom: -10px;
+}
+
+
+.tippy-popper[x-placement^=bottom] .jarvis-theme {
+  border-top: 0;
+}
+
+.tippy-popper[x-placement^=bottom] .jarvis-theme .tippy-arrow {
+  border-bottom-color: var(--jarvis-dark);
+}
+
+.tippy-popper[x-placement^=bottom] .jarvis-theme .tippy-content {
+  text-align: left !important;
+}
+
 .loader {
-  width: 28px;
+  width: 20px;
   height: 28px;
   aspect-ratio: 4;
   --_g: no-repeat radial-gradient(circle closest-side, var(--jarvis-cyan) 90%, #0000);
@@ -1614,7 +1642,7 @@ code:hover::before {
   border-radius: 8px;
   color: var(--jarvis-text);
   font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   transition: all 0.3s;
   height: 32px !important;
   min-height: auto !important;
@@ -1718,7 +1746,7 @@ code:hover::before {
 
 .form-footer .jq-link-display {
   width: 100%;
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   visibility: hidden;
   padding: 8px 8px;
   visibility: hidden;
@@ -1795,7 +1823,6 @@ code:hover::before {
   border-bottom: 2px solid var(--jarvis-border);
   font-weight: 600;
   font-size: 0.85rem;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 

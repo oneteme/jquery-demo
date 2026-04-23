@@ -1,20 +1,34 @@
 [
   {
     "title": "INNER JOIN",
-    "view": "customers",
-    "column": "orders.id,name",
-    "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(id))&orders.customer_id.isNull",
-    "definition": "A JOIN clause is used to combine rows from two or more views, based on a related column between them.",
-    "syntax": "join=innerJoin(v1).criteria(v1.column.eq(v0.column))"
+    "definition": "Combines rows from two views by returning only the records that have matching values in both views.<br>If no match exists, the row is excluded from the result.<br>For example, only products that have a valid CategoryID matching an existing category will be returned.",
+    "syntax": "join=innerJoin(v1).criteria(v1.column.eq(v0.column))",
+    "examples": [
+      {
+        "title": "Inner Join in URL",
+        "view": "products",
+        "column": "id,name,categories.name:cat_name",
+        "filter": "join=innerJoin(categories).criteria(cat_id.eq(categories.id))"
+      },
+      {
+        "title": "Using Inner Join from JAVA",
+        "view": "products",
+        "column": "id,name,categories.name:cat_name",
+        "filter": "join=innerCat"
+      }
+    ]
   },
   {
     "title": "LEFT JOIN",
-    "view": "customers",
-    "column": "orders.id,name",
-    "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(customers.id))&orders.customer_id.isNull",
     "definition": "Combines rows from two views by returning all records from the left view and the matching records from the right view.<br>If no match is found, the right-side columns return <b>null</b>.<br>This allows you to identify missing relationships, such as customers who have not placed any orders by filtering where the joined column is null.",
     "syntax": "join=leftJoin(v1).criteria(v1.column.eq(v0.column))",
     "examples": [
+      {
+        "title": "Left Join in URL",
+        "view": "customers",
+        "column": "orders.id,name",
+        "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(customers.id))&orders.customer_id.isNull"
+      },
       {
         "title": "Using Left Join from JAVA",
         "view": "customers",
@@ -25,17 +39,50 @@
   },
   {
     "title": "RIGHT JOIN",
-    "view": "orders",
-    "column": "id,employees.lname,employees.fname",
-    "filter": "join=rightJoin(employees).criteria(orders.employee_id.eq(employees.id))&order=id",
     "definition": "Combines rows from two views by returning all records from the right view and the matching records from the left view.<br>If no match is found, the left-side columns return <b>null</b>.<br>This allows you to retrieve all records from the right table (for example, all employees), even if they are not associated with any records in the left table (orders).",
     "syntax": "join=rightJoin(v1).criteria(v1.column.eq(v0.column))",
     "examples": [
       {
-        "title":"Using Left Join from JAVA",
+        "title": "Right Join in URL",
         "view": "orders",
         "column": "id,employees.lname,employees.fname",
-        "filter":"join=rightEmployee&order=id"
+        "filter": "join=rightJoin(employees).criteria(orders.employee_id.eq(employees.id))&order=id"
+      },
+      {
+        "title": "Using Right Join from JAVA",
+        "view": "orders",
+        "column": "id,employees.lname,employees.fname",
+        "filter": "join=rightEmployee&order=id"
+      }
+    ]
+  },
+  {
+    "title": "MULTIPLE JOIN",
+    "definition": "Allows combining data from more than two views by applying multiple JOIN operations in a single query.<br>Each join links the main view to another related view using its own condition.<br>This makes it possible to retrieve related data from several tables at once.",
+    "examples": [
+      {
+        "title": "Multiple URL joins",
+        "view": "orders",
+        "column": "id,customers.name,shippers.name:shipper_name",
+        "filter": "join=innerJoin(customers).criteria(customer_id.eq(customers.id)),innerJoin(shippers).criteria(shipper_id.eq(shippers.id))"
+      },
+      {
+        "title": "Multiple Java joins",
+        "view": "orders",
+        "column": "id,customers.name,shippers.name:shipper_name",
+        "filter": "join=innerCustomer,innerShipper"
+      },
+      {
+        "title": "One single Java join but with multiple joins",
+        "view": "orders",
+        "column": "id,customers.name,shippers.name:shipper_name",
+        "filter": "join=innerShippCust"
+      },
+      {
+        "title": "Combine URL and JAVA joins",
+        "view": "orders",
+        "column": "id,customers.name,shippers.name:shipper_name",
+        "filter": "join=innerCustomer,innerJoin(shippers).criteria(shipper_id.eq(shippers.id))"
       }
     ]
   }

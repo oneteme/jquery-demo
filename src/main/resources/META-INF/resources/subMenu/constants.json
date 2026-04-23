@@ -57,6 +57,7 @@
         "view": "employees",
         "column": "pi.multiply(2):CircumferenceFactor"
       }
-    ]
+    ],
+    "label":"pi"
   }
 ]

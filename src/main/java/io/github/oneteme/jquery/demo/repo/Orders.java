@@ -42,4 +42,17 @@ public interface Orders extends DatasetResource {
 		var cust = getInstance().getStore(DemoStore.class).customers();
 		return joins(innerJoin(cust.getView(), customerId().eq(cust.id())));
 	}
+	
+	default JoinsClause innerShipper() {
+		var ship = getInstance().getStore(DemoStore.class).shippers();
+		return joins(innerJoin(ship.getView(), shipperId().eq(ship.id())));
+	}
+	
+	default JoinsClause innerShippCust() {
+		var ship = getInstance().getStore(DemoStore.class).shippers();
+		var cust = getInstance().getStore(DemoStore.class).customers();
+		return joins(
+				innerJoin(cust.getView(), customerId().eq(cust.id())),
+				innerJoin(ship.getView(), shipperId().eq(ship.id())));
+	}
 }

@@ -5,6 +5,8 @@ import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
 import static org.usf.jquery.core.Parameter.required;
 
+import org.usf.jquery.core.Column;
+import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.web.proxy.Bind;
@@ -53,6 +55,9 @@ public interface DemoStore extends StoreResource {
 		return constant(DOUBLE, "RANDOM()");
 	}
 	
+	default Column getPi() {
+		return Dialect.getDialect().pi().invoke();
+	}
 	
 //	default Predicate predDemo() {
 //		return null;

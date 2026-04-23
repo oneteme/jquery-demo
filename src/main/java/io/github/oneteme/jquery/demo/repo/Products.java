@@ -1,12 +1,15 @@
 package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.Column.beginCase;
+import static org.usf.jquery.core.JoinsClause.joins;
 import static org.usf.jquery.core.Predicate.lt;
+import static org.usf.jquery.core.ViewJoin.innerJoin;
+import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
 import org.usf.jquery.core.CaseColumn;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Criteria;
-import org.usf.jquery.core.Operators;
+import org.usf.jquery.core.JoinsClause;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -62,13 +65,15 @@ public interface Products extends DatasetResource {
 		return beginCase().when(price().lt(10), "cheap").orElse("Expensive");
 	}
 	
-	default Column columnPlus() {
-		return price().plus(1);
+	default Column columnYear() {
+		return price().year();
 	}
 	
-	default Column columnTag() {
-		return price().as("price_value");
+	default JoinsClause innerCat() {
+		var cat = getInstance().getStore(DemoStore.class).categories();
+		return joins(innerJoin(cat.getView(), catId().eq(cat.id())));
 	}
+	
 	
 	//par product je veux comparer le prix avec la moyen des prix de categorie
 }

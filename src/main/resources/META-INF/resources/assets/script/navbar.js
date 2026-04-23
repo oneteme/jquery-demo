@@ -47,9 +47,10 @@ function createNavbar(data, element) {
             );
             tippy("li[data-tippy-content]", {
                 animation: 'scale',
+                placement: 'top',
                 arrow: true,
-                arrowType: 'round',
-                size: 'large',
+                theme: 'jarvis'
+
             });
         }
     });

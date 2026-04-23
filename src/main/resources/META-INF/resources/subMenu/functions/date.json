@@ -32,16 +32,14 @@
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.dow:Day_of_week",
     "definition": "Returns the day of the week for a given date.<br>The function extracts the numeric representation of the weekday, indicating the position of the day within the week.",
-    "syntax": "column.dow",
-    "tooltip": "dow"
+    "syntax": "column.dow"
   },
   {
     "title": "Day of year",
     "view": "employees",
     "column": "cdate:CurrentDate,CurrentDate.doy:Day_of_year",
     "definition": "Returns the day number within the year for a given date.<br>The function extracts the numeric position of the date in the year, ranging from 1 to 365 (or 366 in leap years).",
-    "syntax": "column.doy",
-    "tooltip": "doy"
+    "syntax": "column.doy"
   },
   {
     "title": "Semester",
@@ -77,24 +75,21 @@
     "view": "employees",
     "column": "start,start.yearMonth:yearMonth",
     "definition": "Returns the year and month extracted from a date value.<br>The result is formatted as <b>YYYY-MM</b>, combining the four-digit year and the numeric month.",
-    "syntax": "column.yearMonth",
-    "tooltip": "Year and month YYYY-MM"
+    "syntax": "column.yearMonth"
   },
   {
     "title": "MonthDay",
     "view": "employees",
     "column": "start,start.monthDay:monthDay",
     "definition": "Returns the month and day extracted from a date value.<br>The result is formatted as <b>MM-DD</b>, representing the numeric month followed by the day of the month.",
-    "syntax": "column.monthDay",
-    "tooltip": "Day and month MM-DD"
+    "syntax": "column.monthDay"
   },
   {
     "title": "YearWeek",
     "view": "employees",
     "column": "ctimestamp:CurrentTimestamp,CurrentTimestamp.yearWeek:yearWeek",
     "definition": "Returns the year and week number extracted from a date or timestamp.<br>The result is formatted as <b>YYYY-'W'WW</b>, combining the year with the corresponding week of the year.",
-    "syntax": "column.yearWeek",
-    "tooltip": "Year and week number YYYY-'W'WW"
+    "syntax": "column.yearWeek"
   },
   {
     "title": "Hour",

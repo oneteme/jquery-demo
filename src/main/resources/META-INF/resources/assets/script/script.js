@@ -175,6 +175,11 @@ function loadExample(exampleDiv) {
         content: definition,
         animation: 'scale',
         arrow: true,
+        hideOnClick: false,
+        interactive: true,
+        // interactiveBorder: 5,
+        interactiveDebounce: 200,
+        theme: 'jarvis'
       });
     }
     if (syntax) {
