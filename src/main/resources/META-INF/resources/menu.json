@@ -7,22 +7,9 @@
     "title": "SELECT",
     "view": "customers",
     "column": "name,contact,postal_code",
-    "filter": "",
     "definition": "To fetch certain columns in JQuery all you need is to write down the columns you need seperated by a ','",
-    "syntax": "column1,column2,column3,...",
-    "next": "GROUP BY",
-    "examples": [
-      {
-        "title": "select name and country",
-        "view": "customers",
-        "column": "name,country"
-      },
-      {
-        "title": "select postal_code and country",
-        "column": "postal_code,country",
-        "view": "customers"
-      }
-    ]
+    "syntax": "select=column1,column2,column3,...",
+    "next": "GROUP BY"
   },
   {
     "title": "GROUP BY",
@@ -30,7 +17,7 @@
     "column": "id.count:COUNT,country",
     "filter": "",
     "definition": "GROUP BY: A SQL clause that groups rows in a database table based on one or more columns, allowing for the aggregation of data (e.g., summing, counting, or averaging) within each group.\nFor example, if you have a sales database and want to find the total sales per region, you would use GROUP BY to group the sales data by region and then calculate the total for each group.",
-    "syntax": "Aggregate(ex : sum,count,avg,...),col1,col2"
+    "syntax": "select=Aggregate(ex : sum,count,avg,...),col1,col2"
   },
   {
     "title": "HAVING",
@@ -38,7 +25,7 @@
     "column": "id.count:COUNT,country",
     "filter": "COUNT.gt=5",
     "definition": "The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.",
-    "syntax": "Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
+    "syntax": "select=Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
   },
   {
     "title": "AS",
@@ -61,7 +48,15 @@
     "filter": "order=price.asc",
     "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
-    "syntax": "&order=column.ASC // default&;&order=column.DESC"
+    "syntax": "&order=column.ASC // default&;&order=column.DESC",
+    "examples": [
+      {
+        "title": "Shuffle results",
+        "view": "employees",
+        "column": "lname,fname,start",
+        "filter": "order=random"
+      }
+    ]
   },
   {
     "title": "CASE...WHEN",
@@ -70,7 +65,19 @@
     "definition": "Evaluates multiple conditions and returns a value depending on which condition is met.<br>The CASE expression works like an if-else structure in SQL. Each <b>WHEN</b> condition is evaluated in order, and the result of the first matching condition is returned.<br>If none of the conditions are satisfied, the <b>ELSE</b> value is returned.<br>This function is commonly used to categorize or transform values directly in a query.<br><br>Example use case: categorizing products based on their price (cheap, normal, expensive).",
     "syntax": "when(criteria1,val1).when(criteria2,val2)...orElse(valn)",
     "tooltip": "CASE...WHEN THEN...ELSE",
-    "label":"caseColumn"
+    "label": "caseColumn"
+  },
+  {
+    "title": "SUB QUERY",
+    "view": "products",
+    "column": "categories.name:catName,name,price",
+    "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))&join=innerCat",
+    "definition": "Allows using a query inside another query.<br>A subquery is executed first and its result is used by the main query.<br>This is useful for dynamic comparisons, such as filtering values based on aggregated results.<br>For example, you can retrieve products whose category starts with 'Con'",
+    "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))"
+  },
+  {
+    "title": "Advanced JQuery",
+    "items": "advanced.json"
   },
   {
     "title": "JOIN",

@@ -1,0 +1,17 @@
+[
+    {
+        "title": "RANK",
+        "view": "products",
+        "column": "id,name,price,rank.over(partition(id).order(price.desc)):rank",
+        "definition": "Assigns a ranking to each row based on a specified ordering.<br>The function ranks values within a result set according to a given column, such as price or quantity.<br>Rows with the same value receive the same rank, and the next rank is skipped.<br>This is useful for finding relative positions such as the most expensive or cheapest products.",
+        "syntax": "rank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title":"Ranking products by category",
+                "view": "products",
+                "column":"categories.name:category,price,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter":"join=innerCat&order=category,rank"
+            }
+        ]
+    }
+]

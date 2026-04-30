@@ -41,7 +41,7 @@ public class JQueryController {
 
 	@GetMapping("shippers")
 	public Map<String, Object> fetchShippers(
-			@org.usf.jquery.web.proxy.QueryRequest(dataset= "shippers", fields = "id,name,phone") QueryComposer query) {
+			@QueryRequest(dataset= "shippers", fields = "id,name,phone") QueryComposer query) {
 		return execute(DemoStore.class, query);
 	}
 

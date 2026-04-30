@@ -16,7 +16,11 @@
       "tutorial": "setup/webmvc.md"
     },
     {
-      "title": "Controllers setup",
-      "tutorial": "setup/Controllers.md"
+      "title":"QueryRequest",
+      "tutorial":"setup/queryRequest.md"
+    },
+    {
+      "title":"QueryRequestFilter",
+      "tutorial":"setup/queryRequestFilter.md"
     }
   ]

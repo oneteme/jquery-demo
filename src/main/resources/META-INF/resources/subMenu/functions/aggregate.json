@@ -6,12 +6,14 @@
     "filter": "",
     "definition": "Returns the average value of a numeric column.<br>The function calculates the sum of all values and divides it by the number of rows.",
     "syntax": "column.avg",
-    "examples":[{
-      "title":"AVG OVER",
-      "column":"name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
-      "filter":"order=cat_id",
-      "view":"products"
-    }]
+    "examples": [
+      {
+        "title": "AVG OVER",
+        "column": "name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
+        "filter": "order=cat_id",
+        "view": "products"
+      }
+    ]
   },
   {
     "title": "COUNT",
@@ -44,5 +46,26 @@
     "filter": "",
     "definition": "Returns the largest value from a column.<br>This function is useful for finding maximum values such as the highest price.",
     "syntax": "column.max"
+  },
+  {
+    "title": "MEDIAN",
+    "view": "products",
+    "column": "price.median:medianPrice",
+    "definition": "Returns the median value of a numeric column.<br>The median is the middle value when all values are ordered from lowest to highest.<br>If the number of values is even, the median is calculated as the average of the two middle values.<br>This is useful for understanding the central tendency of data without being affected by extreme values.",
+    "syntax": "column.median",
+    "examples": [
+      {
+        "title": "Compare price distribution by category",
+        "view": "products",
+        "column":"categories.name,price.median:priceMedian",
+        "filter":"join=innerCat"
+      },
+      {
+        "title": "Median VS AVG",
+        "view": "products",
+        "column":"categories.name,price.avg:priceAvg,price.median:priceMedian",
+        "filter":"join=innerCat"
+      }
+    ]
   }
 ]

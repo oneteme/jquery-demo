@@ -1,11 +1,12 @@
-Hello and welcome to our JQuery Demo.
-In here we are gonna go through the needed steps for you to get started with our library and get to writing queries in a faster,easier and more efficient way.
+This guide will help you quickly set up JQuery (JavaQuery) and start writing queries in a simple and efficient way.
 
 1. Add JQuery Dependency
 
-To get started with JQuery we need to add the JQuery dependency to our project.
+To use JQuery in your project, add the following dependency to your pom.xml.
 
-You can get JQuery from : https://mvnrepository.com/artifact/io.github.oneteme/jquery
+You can find the latest version here:<br>
+
+https://mvnrepository.com/artifact/io.github.oneteme/jquery
 
 ```java
 // pom.xml
@@ -18,4 +19,4 @@ You can get JQuery from : https://mvnrepository.com/artifact/io.github.oneteme/j
 
 // pom.xml
 ```
-All set! Now let's get it up and running for your project
+Once the dependency is added, you're ready to start configuring your datasets and store.

@@ -398,9 +398,9 @@ header {
 
 .highlighted_code p {
   color: var(--jarvis-text);
-  font-size: 1.05rem;
-  line-height: 1.8;
-  margin-bottom: 1.25rem;
+  font-size: .85rem;
+  /* line-height: 1; */
+  margin-bottom: .2rem;
   font-weight: 400;
 }
 
@@ -411,47 +411,47 @@ header {
 }
 
 .highlighted_code>p:first-of-type {
-  font-size: 1.15rem;
+  font-size: 0.85rem;
   color: var(--jarvis-cyan);
   font-weight: 500;
   padding-bottom: 0.75rem;
   border-bottom: 2px solid var(--jarvis-border);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 
 .highlighted_code ul {
   list-style: none;
   padding-left: 0;
-  margin: 1.5rem 0;
+  margin: 0.7rem 0;
   background: rgba(0, 217, 255, 0.03);
   border-left: 3px solid var(--jarvis-cyan);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
+  padding: 0rem 1rem;
+  border-radius: 12px;
 }
 
 .highlighted_code ul li {
   color: var(--jarvis-text);
-  font-size: 1rem;
+  font-size: .8rem;
   font-weight: 400;
-  padding: 0.5rem 0 0.5rem 1.75rem;
+  padding: 0.4rem 0 0.2rem 1.75rem;
   position: relative;
 }
 
 .highlighted_code ul li::before {
   content: '▸';
   position: absolute;
-  left: 0;
+  left: 0.3rem;
   color: var(--jarvis-cyan);
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 700;
-  top: 0.4rem;
+  top: 0.1rem;
 }
 
 
 .highlighted_code ol>li {
   color: var(--jarvis-text);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   padding: 1.25rem 0 1.25rem 4rem;
   position: relative;
@@ -469,7 +469,7 @@ pre {
   background: var(--jarvis-darker);
   border: 1px solid var(--jarvis-border);
   border-radius: 12px;
-  margin: 1.5rem 0;
+  margin: .6rem 0;
   overflow-x: auto;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -477,8 +477,8 @@ pre {
 
 .highlighted_code code {
   font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.75rem;
+  line-height: 1.6;
   color: var(--jarvis-text);
 }
 
@@ -498,7 +498,6 @@ pre {
 /* Tables in tutorials */
 .highlighted_code table {
   width: 100%;
-  max-width: 650px;
   margin: 1.5rem 0;
   border-collapse: separate;
   border-spacing: 0;
@@ -1915,7 +1914,7 @@ code:hover::before {
 }
 
 .parent-element {
-  margin: 0.5rem 0;
+  margin: 0.1rem 0;
 }
 
 .parent_title {

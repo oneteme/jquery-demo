@@ -82,7 +82,15 @@
     "filter": "country.notNull",
     "definition": "NOT NULL is used to check if a value exists (it's not missing).",
     "syntax": "column.notNull",
-    "tooltip": "is NOT NULL"
+    "tooltip": "is NOT NULL",
+    "examples": [
+      {
+        "title": "Customers who placed orders",
+        "view": "customers",
+        "column": "orders.id,customers.name",
+        "filter": "join=leftOrder&orders.customer_id.notNull"
+      }
+    ]
   },
   {
     "title": "IN",
@@ -97,6 +105,12 @@
         "view": "products",
         "column": "price:Price_In_10_30_50",
         "filter": "price.in=10,30,50&order=price"
+      },
+      {
+        "title": "SubQuery",
+        "view": "products",
+        "column": "categories.name:catName,name,price",
+        "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))&join=innerCat"
       }
     ]
   },

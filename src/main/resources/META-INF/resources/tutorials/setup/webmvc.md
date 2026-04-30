@@ -1,67 +1,92 @@
-1. CommonRequestQueryResolver
+A Resolver converts HTTP request parameters into a QueryComposer. It allows you to directly inject a query object into your controller.
 
-To be able to write queries in the URL we will need HandlerMethodArgumentResolver.
+In this guide, you will learn how to:
 
-Let's create a HandlerMethodArgumentResolver class called "CommonRequestQueryResolver"
+- Create resolvers
+- Register them in your project
+- Use them in a controller
 
-```java
-// CommonRequestQueryResolver.java
-
-public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver {
-
-
-}
-
-// CommonRequestQueryResolver.java
-```
-
-2. Setup CommonRequestQueryResolver
+1. Create the QueryRequest Resolver
 
 ```java
 // CommonRequestQueryResolver.java
 
-public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver {
-
-    private final RequestParameterResolver resolver = new RequestParameterResolver();
+public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver, QueryInterpreter {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return QueryBuilder.class.isAssignableFrom(parameter.getNestedParameterType())
-                && parameter.hasParameterAnnotation(RequestQueryParam.class);
+        return QueryComposer.class.isAssignableFrom(parameter.getNestedParameterType())
+                && parameter.hasParameterAnnotation(QueryRequest.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-        var crp = parameter.getParameterAnnotation(RequestQueryParam.class);
-        return resolver.requestQuery(crp, webRequest.getParameterMap());
+
+        var ann = parameter.getParameterAnnotation(QueryRequest.class);
+        if (ann != null) {
+            var schema = ann.store() == StoreResource.class 
+                    ? getInstance().getDefaultStore() 
+                    : getInstance().getStore(ann.store());
+
+            var mapper = schema instanceof QueryInterpreter m ? m : this;
+            return mapper.parseQuery(ann, webRequest.getParameterMap());
+        }
+        throw new IllegalStateException("missing @QueryRequest annotation");
     }
 }
-
-// CommonRequestQueryResolver.java
 ```
 
-3. WebMvcConfig Setup
+2. Create the QueryRequestFilter Resolver
 
-And finally we create the "webMvcConfig" class in order to load our tables,columns and databases
+Create a second resolver using the same implementation, and replace:
+
+- QueryRequest → QueryRequestFilter
+
+3. Register the Resolvers
+
+Add both resolvers to your Spring configuration.
 
 ```java
 // WebMvcConfig.java
 
-@Configuration
-@RequiredArgsConstructor
 public class WebmvcConfig implements WebMvcConfigurer {
-    
+
     private final DataSource ds;
 
-	@Override
+    @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        register(ContextEnvironment.of(
-    			DEMO,
-    			asList(JQDemoTable.values()),
-        		asList(JQDemoColumn.values()), ds));
         resolvers.add(new CommonRequestQueryResolver());
+        resolvers.add(new CommonRequestQueryFilterResolver());
+    }
+
+    @EventListener(ApplicationStartedEvent.class)
+    void onReady() {
+        StoreManager.getInstance().register(DemoStore.class, ds);
     }
 }
-
 ```
+
+4. Quick Example
+
+Once the resolvers are registered, you can use them in your controller.
+
+```java
+@GetMapping("products")
+public Map<String, Object> fetchProducts(
+    @QueryRequest(dataset = "products", fields = "id,name,price") QueryComposer query) {
+    return execute(DemoStore.class, query);
+}
+```
+
+<b>Result</b>
+
+The request parameters are automatically converted into a query.
+
+- Resolvers convert HTTP requests into QueryComposer
+- You need to:
+    - Create them
+    - Register them
+    - Once registered, they can be used directly in controllers
+
+✅ Your project is now ready to use QueryRequest and QueryRequestFilter.

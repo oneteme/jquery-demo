@@ -4,7 +4,10 @@ import static org.usf.jquery.core.JDBCType.DOUBLE;
 import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
 import static org.usf.jquery.core.Parameter.required;
+import static org.usf.jquery.core.Predicate.ge;
+import static org.usf.jquery.core.Predicate.lt;
 
+import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
@@ -40,6 +43,11 @@ public interface DemoStore extends StoreResource {
 	@Bind("EMPLOYEES_TABLE")
 	Employees employees();
 	
+	@Expose(identity="date_sub", description="substracts days")
+	default OperatorDefinition dateSub() {
+		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
+	}
+	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {
 		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
@@ -59,6 +67,15 @@ public interface DemoStore extends StoreResource {
 		return Dialect.getDialect().pi().invoke();
 	}
 	
+	@Expose(identity="category") 
+    default Predicate priceCategory(String... values) {
+		return Chainable.or(values, v-> switch (v) {
+            case "cheap" -> lt(10);
+            case "medium" -> ge(10).and(lt(20));
+            case "expensive" -> ge(20);
+            default -> null;
+        });
+    }
 //	default Predicate predDemo() {
 //		return null;
 //		

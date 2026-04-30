@@ -1,0 +1,10 @@
+[
+    {
+        "title": "Criteria",
+        "tutorial": "advanced/criteria.md"
+    },
+    {
+        "title": "Predicate",
+        "tutorial": "advanced/predicate.md"
+    }
+]
