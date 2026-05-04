@@ -72,6 +72,7 @@ public class WebmvcConfig implements WebMvcConfigurer {
 Once the resolvers are registered, you can use them in your controller.
 
 ```java
+// myController.java
 @GetMapping("products")
 public Map<String, Object> fetchProducts(
     @QueryRequest(dataset = "products", fields = "id,name,price") QueryComposer query) {

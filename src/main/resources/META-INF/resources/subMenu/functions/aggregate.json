@@ -8,7 +8,7 @@
     "syntax": "column.avg",
     "examples": [
       {
-        "title": "AVG OVER",
+        "title": "Average Product Price per Category",
         "column": "name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
         "filter": "order=cat_id",
         "view": "products"

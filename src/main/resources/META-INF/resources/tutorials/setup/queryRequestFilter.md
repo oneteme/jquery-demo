@@ -76,6 +76,7 @@ By default:
 5. Example: Allow ORDER
 
 ```java
+// myController.java
 @GetMapping("products")
 public Map<String, Object> fetchProducts(
     @QueryRequestFilter(view = "product",column = "id,name", order="name",mergeParameters = {Keyword.ORDER}) QueryComposer query) {
@@ -112,6 +113,7 @@ UI constraint:
 <b>Solution</b>
 
 ```java
+// myController.java
 @QueryRequestFilter(
     view = "product",
     column = {"id","name","price"}

@@ -129,12 +129,18 @@ export function showNavBar(element = $("#jq-show-examples")) {
 }
 
 export function toggleNavSubElements(e, subElement = ".sub-nav") {
-    if ($(e.currentTarget).find(".accordion").hasClass("rot-accordion")) {
-        $(e.currentTarget).find(".accordion").removeClass("rot-accordion");
-        $(e.currentTarget).siblings(subElement).hide(".sub-nav");
+    const parent = $(e.currentTarget);
+    if (parent.find(".accordion").hasClass("rot-accordion")) {
+        parent.find(".accordion").removeClass("rot-accordion");
+        parent.siblings(subElement).hide(".sub-nav");
     } else {
-        $(e.currentTarget).find(".accordion").addClass("rot-accordion");
-        $(e.currentTarget).siblings(subElement).show();
+        parent.find(".accordion").addClass("rot-accordion");
+        parent.siblings(subElement).show();
+        $(".navbar-container").animate({
+            scrollTop: $(".navbar-container").scrollTop()
+                + parent.offset().top
+                - $(".navbar-container").offset().top
+        }, 600);
     }
 }
 

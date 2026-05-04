@@ -64,6 +64,7 @@ SELECT v0.ID, v0.NAME FROM PRODUCTS_TABLE v0;
 4. Example
 
 ```java
+// myController.java
 @GetMapping("products")
 public Map<String, Object> fetchProducts(
     @QueryRequest(dataset = "products", fields = "id,name,price") QueryComposer query) {

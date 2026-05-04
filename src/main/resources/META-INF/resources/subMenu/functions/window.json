@@ -13,5 +13,72 @@
                 "filter":"join=innerCat&order=category,rank"
             }
         ]
+    },
+    {
+        "title": "ROW NUMBER",
+        "view": "products",
+        "column": "id,name,price,rowNumber.over(partition(id).order(price.desc)):rowNumber",
+        "definition": "Assigns a unique sequential number to each row in the result set.<br>The numbering is based on the specified ordering and starts at 1.<br>Unlike RANK, each row receives a distinct number even if values are identical.<br>This is useful for ordering rows or generating unique row positions.",
+        "syntax": "rowNumber.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title":"Ranking products by category",
+                "view": "products",
+                "column":"categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber",
+                "filter":"join=innerCat&order=category,rowNumber"
+            },
+            {
+                "title":"ROW NUMBER vs RANK",
+                "view": "products",
+                "column":"categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter":"join=innerCat&order=category,rowNumber"
+            }
+
+        ]
+    },
+    {
+        "title": "DENSE RANK",
+        "view": "products",
+        "column": "id,name,price,denseRank.over(partition(id).order(price.desc)):denseRank",
+        "definition": "Assigns a ranking to each row based on a specified ordering.<br>Rows with the same value receive the same rank, and unlike RANK, no rank numbers are skipped.<br>This means the ranking remains consecutive even when there are duplicate values.<br>This is useful when you want grouped rankings without gaps.",
+        "syntax": "denseRank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title":"Ranking products by category",
+                "view": "products",
+                "column":"categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank",
+                "filter":"join=innerCat&order=category,denseRank"
+            },
+            {
+                "title":"DENSE RANK vs RANK",
+                "view": "products",
+                "column":"categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter":"join=innerCat&order=category,denseRank"
+            }
+
+        ]
+    },
+    {
+        "title": "PERCENT RANK",
+        "view": "products",
+        "column": "id,name,price,percentRank.over(partition(id).order(price.desc)):percentRank",
+        "definition": "Returns the relative rank of each row as a percentage between 0 and 1.<br>The value represents the position of the row within the result set based on the specified ordering.<br>The lowest value has a percent rank of 0, and the highest value approaches 1.<br>This is useful for understanding how a value compares proportionally to others in the dataset.",
+        "syntax": "percentRank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title":"Ranking products by category",
+                "view": "products",
+                "column":"categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
+                "filter":"join=innerCat&order=category,percentRank"
+            },
+            {
+                "title":"PERCENT RANK vs RANK",
+                "view": "products",
+                "column":"categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter":"join=innerCat&order=category,percentRank"
+            }
+
+        ]
     }
+    
 ]
