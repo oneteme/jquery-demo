@@ -1,6 +1,6 @@
 ```java
 default Column columnLength() {
-	return column().length();
+	return myColumn().length();
 }
 ```
 

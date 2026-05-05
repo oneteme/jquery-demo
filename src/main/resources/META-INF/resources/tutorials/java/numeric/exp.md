@@ -1,6 +1,6 @@
 ```java
 default Column columnExp() {
-	return column().exp();
+	return myColumn().exp();
 }
 ```
 

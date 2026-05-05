@@ -1,7 +1,7 @@
 ```java
 // Criteria function parameters are fully customizable [...args]
 default Criteria columnIn(Integer ...values) {
-	return column().in(values);
+	return myColumn().in(values);
 }
 ```
 

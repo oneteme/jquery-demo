@@ -1,6 +1,6 @@
 ```java
 default Column columnMod() {
-	return column().mod(value);
+	return myColumn().mod(value);
 }
 ```
 

@@ -56,6 +56,16 @@
         "title": "Circumference factor (2π)",
         "view": "employees",
         "column": "pi.multiply(2):CircumferenceFactor"
+      },
+      {
+        "title": "Circle outline <b>(2πr)</b> r = 5",
+        "view": "employees",
+        "column": "pi.multiply(2).multiply(5):outline"
+      },
+      {
+        "title": "Circle radius <b>(πr²)</b> r = 5",
+        "view": "employees",
+        "column": "pi.multiply(pow(5,2)):radius"
       }
     ],
     "label":"pi"

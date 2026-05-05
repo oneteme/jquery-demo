@@ -1,6 +1,6 @@
 ```java
 default Column columnReplace() {
-	return column().replace(replaced, replacement);
+	return myColumn().replace(replaced, replacement);
 }
 ```
 

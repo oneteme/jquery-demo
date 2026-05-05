@@ -1,6 +1,6 @@
 ```java
 default Column columnSecond() {
-	return column().second();
+	return myColumn().second();
 }
 ```
 

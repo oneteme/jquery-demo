@@ -1,6 +1,6 @@
 ```java
 default Column columnAvg() {
-	return column().avg();
+	return myColumn().avg();
 }
 ```
 

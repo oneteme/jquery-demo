@@ -1,6 +1,6 @@
 ```java
 default Column columnDivide() {
-	return column().divide(val1).divide(val2)... .divide(valn);
+	return myColumn().divide(val1).divide(val2)... .divide(valn);
 }
 ```
 

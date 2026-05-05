@@ -1,6 +1,6 @@
 ```java
 default Column columnEpoch() {
-	return column().epoch();
+	return myColumn().epoch();
 }
 ```
 

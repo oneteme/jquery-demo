@@ -1,6 +1,6 @@
 ```java
 default Column columnMonthDay() {
-	return column().monthDay();
+	return myColumn().monthDay();
 }
 ```
 

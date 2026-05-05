@@ -1,7 +1,7 @@
 ```java
 // Criteria function parameters are fully customizable [...args]
 default Criteria columnNotIn(Integer ...values) {
-	return column().notIn(values);
+	return myColumn().notIn(values);
 }
 ```
 

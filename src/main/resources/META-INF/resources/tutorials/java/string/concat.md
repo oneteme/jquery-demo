@@ -1,6 +1,6 @@
 ```java
 default Column columnConcat() {
-	return column().concat(text1, text2, ...);
+	return myColumn().concat(text1, text2, ...);
 }
 ```
 

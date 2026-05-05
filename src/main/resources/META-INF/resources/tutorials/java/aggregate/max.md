@@ -1,6 +1,6 @@
 ```java
 default Column columnMax() {
-	return column().max();
+	return myColumn().max();
 }
 ```
 

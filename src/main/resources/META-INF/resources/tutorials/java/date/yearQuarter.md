@@ -1,6 +1,6 @@
 ```java
 default Column columnyearQuarter() {
-	return column().yearQuarter();
+	return myColumn().yearQuarter();
 }
 ```
 

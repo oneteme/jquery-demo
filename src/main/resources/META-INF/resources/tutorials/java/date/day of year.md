@@ -1,6 +1,6 @@
 ```java
 default Column columnDOY() {
-	return column().doy();
+	return myColumn().doy();
 }
 ```
 

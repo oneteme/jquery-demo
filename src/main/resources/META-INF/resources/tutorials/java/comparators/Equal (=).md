@@ -1,7 +1,7 @@
 ```java
 // Criteria function parameters are fully customizable [...args]
 default Criteria columnEqual(String value) {
-	return column().eq(value);
+	return myColumn().eq(value);
 }
 ```
 

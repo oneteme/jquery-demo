@@ -1,6 +1,6 @@
 ```java
 default Criteria columnIsNull() {
-	return column().isNull();
+	return myColumn().isNull();
 }
 ```
 

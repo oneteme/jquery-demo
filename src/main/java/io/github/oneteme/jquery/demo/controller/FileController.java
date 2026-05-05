@@ -3,8 +3,11 @@
  */
 package io.github.oneteme.jquery.demo.controller;
 
+import static java.nio.file.Files.walk;
+import static java.nio.file.Paths.get;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.ResponseEntity.ok;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,20 +28,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileController {
 
     @GetMapping("/markdown-files")
-    public ResponseEntity<List<String>> getMarkdownFiles() throws IOException {
-    	ClassPathResource resource = new ClassPathResource("META-INF/resources/tutorials/java");
-        Path root = Paths.get(resource.getURI());
-        
-        try (Stream<Path> walk = Files.walk(root)) {
-            List<String> mdFiles = walk
-                .filter(Files::isRegularFile)
-                .filter(p -> p.toString().endsWith(".md"))
-                .map(p -> root.relativize(p).toString().replace("\\", "/").toLowerCase())
-                .collect(toList());
-
-            return ResponseEntity.ok(mdFiles);
-        } catch (IOException e) {
-            return ResponseEntity.ok(emptyList());
-        }
-    }
+    public ResponseEntity<List<String>> getMarkdownFiles()  {
+    	var resource = new ClassPathResource("META-INF/resources/tutorials/java");
+        try {
+        	var root = get(resource.getURI());
+            try (var walk = walk(get(resource.getURI()))) {
+                var mdFiles = walk
+                    .filter(Files::isRegularFile)
+                    .filter(p -> p.toString().endsWith(".md"))
+                    .map(p -> root.relativize(p).toString().replace("\\", "/").toLowerCase())
+                    .collect(toList());
+                return ok(mdFiles);
+            }
+	    }catch (IOException e) {
+	        return ok(emptyList());
+	    }
+	}
 }

@@ -1,6 +1,6 @@
 ```java
 default Column columnYear() {
-	return column().year();
+	return myColumn().year();
 }
 ```
 

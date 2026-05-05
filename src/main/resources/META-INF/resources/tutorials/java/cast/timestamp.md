@@ -1,6 +1,6 @@
 ```java
 default Column columnTimestamp() {
-	return column().timestamp();
+	return myColumn().timestamp();
 }
 ```
 

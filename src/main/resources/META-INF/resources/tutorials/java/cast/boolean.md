@@ -1,6 +1,6 @@
 ```java
 default Column columnBoolean() {
-	return column().boolean();
+	return myColumn().boolean();
 }
 ```
 

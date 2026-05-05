@@ -1,6 +1,6 @@
 ```java
 default Column columnSqrt() {
-	return column().sqrt();
+	return myColumn().sqrt();
 }
 ```
 

@@ -5,6 +5,20 @@
     },
     {
         "title": "Predicate",
-        "tutorial": "advanced/predicate.md"
+        "tutorial": "advanced/predicate.md",
+        "examples": [
+            {
+                "title": "Get cheap products",
+                "view": "products",
+                "column":"name,unit,price",
+                "filter": "price.category(cheap)"
+            },
+            {
+                "title": "Get cheap and medium products",
+                "view": "products",
+                "column":"name,unit,price",
+                "filter": "price.category(cheap,medium)"
+            }
+        ]
     }
 ]

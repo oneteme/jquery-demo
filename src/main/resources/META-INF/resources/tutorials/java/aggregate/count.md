@@ -1,7 +1,7 @@
 ```java
-// Count function can be called without "column()" to get view row number
+// Count function can be called without "myColumn()" to get view row number
 default Column columnCount() {
-	return column().count();
+	return myColumn().count();
 }
 ```
 

@@ -1,7 +1,7 @@
 ```java
 // Criteria function parameters are fully customizable [...args]
 default Criteria columnGreaterEqual(String value) {
-	return column().ge(value);
+	return myColumn().ge(value);
 }
 ```
 

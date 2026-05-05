@@ -128,6 +128,7 @@ function loadExample(exampleDiv) {
   exampleDiv.addClass("active")
   console.log("loadExample")
   $(".definition-display .example-title").html(exampleDiv.html());
+  $(".definition-element").hide();
   $(".definition-toggle").hide();
   $(".examples-sidebar").hide();
   $(".examples-numbers-container").empty();
@@ -141,7 +142,7 @@ function loadExample(exampleDiv) {
   $(".tuto_btn_container").removeClass("visible");
   if (next) {
     $(".tuto_btn_container.btn-next").addClass("visible");
-    $(".tuto_btn_container.btn-next span:first").html(next);
+    $(".tuto_btn_container.btn-next").find("span:first").html(next);
     $(".tuto_btn_container.btn-next").attr(
       "data-example",
       next.toLowerCase()
@@ -149,7 +150,7 @@ function loadExample(exampleDiv) {
   }
   if (prev) {
     $(".tuto_btn_container.btn-prev").addClass("visible");
-    $(".tuto_btn_container.btn-prev span:first").html(prev);
+    $(".tuto_btn_container.btn-prev").find("span:first").html(prev);
     $(".tuto_btn_container.btn-prev").attr(
       "data-example",
       prev.toLowerCase()
@@ -158,13 +159,9 @@ function loadExample(exampleDiv) {
 
   if (exampleDiv.attr("data-tutorial")) {
     loadTutorial(exampleDiv.attr("data-tutorial"));
-    if (view || columns || filters) {
-      $(".definition-element.try_it").show();
-    }
   } else {
-    $(".definition-element").show();
     $(".definition-toggle").show();
-    $(".definition-element.tutorial").hide();
+    $(".definition-element.definition").show();
     const definition = exampleDiv.attr("data-definition"),
       syntax = exampleDiv.attr("data-syntax");
     const defToolTip = $(".definition-toggle")[0]._tippy;
@@ -201,37 +198,41 @@ function loadExample(exampleDiv) {
         $(".syntax-block.java").show();
       });
     }
-    const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
-    if (view || columns || filters) {
-      examples.unshift({ "title": "BASIC " + exampleDiv.html(), "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
-    }
+    hljs.highlightAll();
+  }
+  const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
+  if (view || columns || filters) {
+    examples.unshift({ "title": "BASIC " + exampleDiv.html(), "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
+  }
 
+  if (examples.length > 0) {
+    $(".definition-element.try_it").show();
     if (examples.length > 1) {
       $(".examples-sidebar").show();
     }
-
-    $.each(examples, (key, val) => {
-      const index = key + 1,
-        example = $("<div>", { class: "example-number" }).html(index);
-      example.on('click', () => {
-        $("#jq-table").val(val.view ?? "");
-        $("#jq-columns").val(val.column ?? "");
-        $("#jq-filters").val(val.filter ?? "");
-        $(".example-number").removeClass("active");
-        example.addClass("active");
-        fetchJQData();
-      });
-
-      tippy(example[0], {
-        content: val.title ?? "Example " + index,
-        animation: 'scale',
-        arrow: true,
-        placement: 'right'
-      });
-      $(".examples-numbers-container").append(example)
-    })
-    hljs.highlightAll();
   }
+
+  $.each(examples, (key, val) => {
+    const index = key + 1,
+      example = $("<div>", { class: "example-number" }).html(index);
+    example.on('click', () => {
+      $("#jq-table").val(val.view ?? "");
+      $("#jq-columns").val(val.column ?? "");
+      $("#jq-filters").val(val.filter ?? "");
+      $(".example-number").removeClass("active");
+      example.addClass("active");
+      fetchJQData();
+    });
+
+    tippy(example[0], {
+      content: val.title ?? "Example " + index,
+      animation: 'scale',
+      arrow: true,
+      placement: 'right'
+    });
+    $(".examples-numbers-container").append(example)
+  })
+
   $(".content").animate({ scrollTop: 0 }, 10);
   $('.syntax-content').hide();
   introNextStep(() => $('.syntax-content').show());
@@ -289,5 +290,6 @@ function loadTutorial(fileName) {
   console.log("loading Tutorial with the file : ", fileName);
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
+  $(".definition-element.whats_next").show();
   utils.loadMarkDown("tutorials/" + fileName, $(".highlighted_code"));
 }

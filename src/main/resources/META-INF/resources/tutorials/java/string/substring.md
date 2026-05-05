@@ -1,6 +1,6 @@
 ```java
 default Column columnSubstring() {
-	return column().substring(start, end);
+	return myColumn().substring(start, end);
 }
 ```
 

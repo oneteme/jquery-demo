@@ -675,12 +675,12 @@ pre {
   background: var(--jarvis-card);
   border: 2px solid var(--jarvis-cyan);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 0.8rem;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--jarvis-glow);
   z-index: 1000;
   animation: modalSlideIn 0.3s ease-out;
   backdrop-filter: blur(10px);
-  min-width: 280px;
+  min-width: 240px;
   z-index: 99;
 }
 
@@ -834,10 +834,12 @@ pre {
 
 /* SETTINGS CONTAINERS */
 .settings-content {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   gap: 8px;
+}
+
+.settings-content.d-flex-col div {
+  width: 100%;
 }
 
 .settings-content div {
@@ -902,7 +904,7 @@ pre {
 .lower-col-grid>div {
   grid-column: span 1;
   grid-row: 1;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .lower-col-grid>div:last-child {
@@ -1382,16 +1384,15 @@ code:hover::before {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s;
   animation: slideIn 0.6s ease-out;
+  padding: 0;
+  height: fit-content;
 }
 
 .form-container {
   position: relative;
   background: var(--jarvis-card);
-  border: 1px solid var(--jarvis-border);
-  border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   display: flex;
-  padding: 0;
 }
 
 .card-container:hover {
@@ -1443,7 +1444,7 @@ code:hover::before {
   height: 28px;
   background: #0a0a0a;
   border: 1px solid #333;
-  border-radius: 8px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1452,6 +1453,10 @@ code:hover::before {
   font-family: 'Fira Code', monospace;
   font-weight: 700;
   font-size: 0.85rem;
+  position: absolute;
+  z-index: 99;
+  top: -4px;
+  right: -4px;
 }
 
 .query-status-btn:hover {
@@ -1632,6 +1637,7 @@ code:hover::before {
   flex: 1;
   padding: 4px 8px;
   gap: 4px;
+  min-width: 0;
 }
 
 /* Form inputs - Compact */
@@ -1731,25 +1737,28 @@ code:hover::before {
   color: gray;
 }
 
-.form-footer {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+.jq-link-display {
+  width: 100%;
+  font-size: 0.7rem;
+  padding: 8px 8px;
+  visibility: hidden;
+  /* word-break: break-word; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-top: .4rem !important;
 }
 
-.form-footer pre {
-  margin: 0;
-  overflow-x: auto;
-  max-width: 100%;
-}
+.jq-link-display:hover {
+  white-space: normal;
+  /* allow wrapping */
+  word-break: break-all;
+  /* break long URLs */
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+  /* optional */
 
-.form-footer .jq-link-display {
-  width: 100%;
-  font-size: 0.58rem;
-  visibility: hidden;
-  padding: 8px 8px;
-  visibility: hidden;
 }
 
 .hrz-label-container {
@@ -1768,11 +1777,6 @@ code:hover::before {
 }
 
 /*** TABLE ***/
-.results-container {
-  /* background: var(--jarvis-card); */
-  border: 1px solid var(--jarvis-border);
-  border-radius: 12px;
-}
 
 
 
@@ -1920,12 +1924,12 @@ code:hover::before {
 
 .parent_title {
   position: relative;
-  padding: 0.75rem 1.75rem;
+  padding: 0.75rem 1.4rem;
   color: var(--jarvis-cyan);
   cursor: pointer;
   transition: all 0.3s;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1956,20 +1960,20 @@ code:hover::before {
 }
 
 .nav-item {
-  padding: 0.65rem 1.0rem;
+  padding: 0.65rem 0.8rem;
   color: var(--jarvis-text-dim);
   cursor: pointer;
   transition: all 0.3s;
   border-left: 3px solid transparent;
   font-weight: 500;
-  font-size: 0.80rem;
+  font-size: 0.7rem;
 }
 
 .nav-item:hover {
   background: linear-gradient(135deg, var(--jarvis-darker) 75%, var(--jarvis-dark) 100%);
   color: var(--jarvis-cyan);
   border-left-color: var(--jarvis-cyan);
-  padding-left: 1.5rem;
+  padding-left: 1.2rem;
 }
 
 .nav-item.active {
@@ -2048,6 +2052,41 @@ code:hover::before {
   #jq-settings {
     display: none !important;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar-container {
+    position: absolute;
+    z-index: 99;
+  }
+
+  .settings-content {
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* flex: 1; */
+    overflow-y: auto !important;
+    padding: 10px !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  #jq-settings {
+    display: none !important;
+  }
+}
+
+/* @media screen and (min-width: 1200px) {
+  .navbar-container {
+    max-width: 400px;
+  }
+} */
+
+/* Ultra-wide screens (2K, 4K) */
+@media screen and (min-width: 1920px) {
+  /* .navbar-container {
+    max-width: 800px;
+  } */
 }
 
 /*** RESPONSIVE ***/

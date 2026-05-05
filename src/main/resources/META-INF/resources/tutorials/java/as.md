@@ -1,6 +1,6 @@
 ```java
 default Column columnTag() {
-	return column().as("new_col_name");
+	return myColumn().as("new_col_name");
 }
 ```
 

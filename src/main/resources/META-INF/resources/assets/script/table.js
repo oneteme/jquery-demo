@@ -27,9 +27,14 @@ export function displayTableResults(data) {
     });
 
     resultTable = tableContainer.DataTable({
+        fixedHeader: true,
         autoWidth: false,
         ordering: false,
-        lengthMenu: [5, 10, 15, 20, 25]
+        dom: 'tp',
+        pageLength: 10,
+        lengthChange: false,
+        searching: false,
+        info: false
     });
     // shouldUpdate = false;
 }

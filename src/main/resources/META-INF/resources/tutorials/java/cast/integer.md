@@ -1,6 +1,6 @@
 ```java
 default Column columnInteger() {
-	return column().integer();
+	return myColumn().integer();
 }
 ```
 

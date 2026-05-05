@@ -1,6 +1,6 @@
 ```java
 default Column columnRound() {
-	return column().round(decimal_places); // OPTIONAL [decimal_places]
+	return myColumn().round(decimal_places); // OPTIONAL [decimal_places]
 }
 ```
 

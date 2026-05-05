@@ -1,6 +1,6 @@
 ```java
 default Column columnUpper() {
-	return column().upper();
+	return myColumn().upper();
 }
 ```
 

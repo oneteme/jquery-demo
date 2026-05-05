@@ -1,6 +1,6 @@
 ```java
 default Column columnSum() {
-	return column().sum();
+	return myColumn().sum();
 }
 ```
 

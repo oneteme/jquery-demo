@@ -1,6 +1,6 @@
 ```java
 default Criteria columnStartsNotLike(String pattern) {
-	return column().startsNotLike(pattern);
+	return myColumn().startsNotLike(pattern);
 }
 ```
 

@@ -1,6 +1,6 @@
 ```java
 default Criteria columnEndsLike(String pattern) {
-	return column().endsLike(pattern);
+	return myColumn().endsLike(pattern);
 }
 ```
 

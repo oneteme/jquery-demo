@@ -1,6 +1,6 @@
 ```java
 default Column columnRTrim() {
-	return column().rtrim();
+	return myColumn().rtrim();
 }
 ```
 

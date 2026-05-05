@@ -1,6 +1,6 @@
 ```java
 default Criteria columnIlike(String pattern) {
-	return column().ilike(pattern);
+	return myColumn().iLike(pattern);
 }
 ```
 

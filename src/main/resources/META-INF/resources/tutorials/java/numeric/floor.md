@@ -1,6 +1,6 @@
 ```java
 default Column columnFloor() {
-	return column().floor();
+	return myColumn().floor();
 }
 ```
 

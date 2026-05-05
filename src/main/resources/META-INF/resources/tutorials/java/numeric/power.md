@@ -1,6 +1,6 @@
 ```java
 default Column columnPow() {
-	return column().pow(n);
+	return myColumn().pow(n);
 }
 ```
 

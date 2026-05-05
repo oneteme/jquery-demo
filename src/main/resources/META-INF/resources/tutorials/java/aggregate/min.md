@@ -1,6 +1,6 @@
 ```java
 default Column columnMin() {
-	return column().min();
+	return myColumn().min();
 }
 ```
 

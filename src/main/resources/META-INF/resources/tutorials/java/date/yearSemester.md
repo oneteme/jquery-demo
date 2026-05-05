@@ -1,6 +1,6 @@
 ```java
 default Column columnyearSemester() {
-	return column().yearSemester();
+	return myColumn().yearSemester();
 }
 ```
 

@@ -1,6 +1,6 @@
 ```java
 default Column columnDecimal() {
-	return column().decimal();
+	return myColumn().decimal();
 }
 ```
 

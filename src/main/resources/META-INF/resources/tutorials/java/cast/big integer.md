@@ -1,6 +1,6 @@
 ```java
 default Column columnBigInteger() {
-	return column().bigint();
+	return myColumn().bigint();
 }
 ```
 

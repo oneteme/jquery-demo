@@ -102,15 +102,12 @@
     <div class="content jquery-display">
       <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
-      <div class="settings-content">
+      <div class="settings-content d-flex-col">
         <div class="form-container card-container" style="overflow: hidden;">
           <div class="form-header-actions">
             <button class="show-docs form-action-btn btn-trigger" title="Documentation" style="display: none"
               show=".content.definition-display" hide=".content">
               📖
-            </button>
-            <button class="query-status-btn success" data-status="Query executed successfully" style="display: none;">
-              ✓
             </button>
             <div class="loader" style="display: none;"></div>
           </div>
@@ -135,27 +132,24 @@
             </div>
 
 
-            <div class="form-floating jqfilters_input_container" style="width: 100%">
-              <input id="jq-filters" class="form-control" name="filters" type="text"
-                placeholder="Setup JQuery filters..." />
-              <label for="jq-filters" class="fw-semibold white_text">Query Options
-              </label>
-            </div>
-
-            <div class="form-footer d-flex-row gap_8">
-              <a href="" class="jq-link-display" target="_blank">
-              </a>
+            <div class="d-flex gap_4">
+              <div class="form-floating jqfilters_input_container" style="width: 100%">
+                <input id="jq-filters" class="form-control" name="filters" type="text"
+                  placeholder="Setup JQuery filters..." />
+                <label for="jq-filters" class="fw-semibold white_text">Query Options
+                </label>
+              </div>
               <input id="jq-execute" class="jq-rounded-btn align-self-end" name="executejq" type="submit"
                 value="Execute" />
             </div>
-            <div class="error_container" style="display: none">
-              <pre><code id="error-code" class="language-brainfuck" style="color: red;font-size: 16px;">Error Request 500</code></pre>
-            </div>
+            <a href="" class="jq-link-display" target="_blank">
+            </a>
+
           </form>
         </div>
 
-        <div id="sql-display" class="col-sm-6 card-container"
-          style="width: 100%; min-width: 324px; display: none;padding: 0;">
+        <div id="sql-display" class="card-container"
+          style="display: none;padding: 0;">
           <pre><code id="sql-code" class="language-sql"></code></pre>
           <!-- <textarea
               id="sql-display"
@@ -167,8 +161,10 @@
             ></textarea> -->
         </div>
 
-        <div class="results-container card-container" style="display: none">
-          <span class="fw-semibold white_text">Result</span>
+        <div class="results-container card-container" style="display: none;overflow: hidden;">
+          <button class="query-status-btn success" data-status="Query executed successfully" style="display: none;position: absolute;">
+            ✓
+          </button>
           <div class="table-wrapper">
             <table class="jq-table"></table>
           </div>
@@ -228,6 +224,20 @@
           To see how it works you can
           <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.show-docs" hide=".content">Try it
             Here</a>
+        </div>
+      </div>
+      <div class="definition-element whats_next">
+        <h2 class="title white_text">What's Next</h2>
+        <div class="d-flex-row" style="justify-content: space-between;">
+          <div class="tuto_btn_container btn-prev" style="top: 0;left: 0;">
+            <img style="width: 24px; transform: rotate(180deg)" src="assets/images/arrow-right-solid.svg" alt="" />
+            <span class="white_text">Previous</span>
+          </div>
+
+          <div class="tuto_btn_container btn-next" style="top: 0;right: 0;">
+            <span class="white_text">Next</span>
+            <img style="width: 24px" src="assets/images/arrow-right-solid.svg" alt="" />
+          </div>
         </div>
       </div>
     </div>

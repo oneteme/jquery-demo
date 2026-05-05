@@ -75,6 +75,10 @@ public interface Products extends DatasetResource {
 		var cat = getInstance().getStore(DemoStore.class).categories();
 		return joins(innerJoin(cat.getView(), catId().eq(cat.id())));
 	}
+	
+	default Column getPi() {
+		return getInstance().getStore(DemoStore.class).pi().invoke();
+	}
 
 	
 	

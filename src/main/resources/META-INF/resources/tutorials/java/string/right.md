@@ -1,6 +1,6 @@
 ```java
 default Column columnRight() {
-	return column().right(number);
+	return myColumn().right(number);
 }
 ```
 

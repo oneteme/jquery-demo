@@ -1,6 +1,6 @@
 ```java
 default Column columnABS() {
-	return column().abs();
+	return myColumn().abs();
 }
 ```
 

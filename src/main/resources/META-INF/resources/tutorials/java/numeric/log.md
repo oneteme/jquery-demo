@@ -1,6 +1,6 @@
 ```java
 default Column columnLog() {
-	return column().log(base); // OPTIONAL : [base]
+	return myColumn().log(base); // OPTIONAL : [base]
 }
 ```
 

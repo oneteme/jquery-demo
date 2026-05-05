@@ -1,6 +1,6 @@
 ```java
 default Column columnHourMinute() {
-	return column().hourMinute();
+	return myColumn().hourMinute();
 }
 ```
 

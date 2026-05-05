@@ -1,6 +1,6 @@
 ```java
 default Column columnDate() {
-	return column().date();
+	return myColumn().date();
 }
 ```
 

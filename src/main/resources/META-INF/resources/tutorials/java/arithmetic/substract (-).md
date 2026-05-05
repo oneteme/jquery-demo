@@ -1,6 +1,6 @@
 ```java
 default Column columnMinus() {
-	return column().minus(val1).minus(val2)... .minus(valn);
+	return myColumn().minus(val1).minus(val2)... .minus(valn);
 }
 ```
 

@@ -1,6 +1,6 @@
 ```java
 default Column columnDOW() {
-	return column().dow();
+	return myColumn().dow();
 }
 ```
 

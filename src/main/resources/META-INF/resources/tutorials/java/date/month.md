@@ -1,6 +1,6 @@
 ```java
 default Column columnMonth() {
-	return column().month();
+	return myColumn().month();
 }
 ```
 

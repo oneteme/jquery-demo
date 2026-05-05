@@ -1,6 +1,6 @@
 ```java
 default Column columnLeft() {
-	return column().left(number);
+	return myColumn().left(number);
 }
 ```
 

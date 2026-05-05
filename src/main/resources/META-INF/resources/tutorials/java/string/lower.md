@@ -1,6 +1,6 @@
 ```java
 default Column columnLower() {
-	return column().lower();
+	return myColumn().lower();
 }
 ```
 

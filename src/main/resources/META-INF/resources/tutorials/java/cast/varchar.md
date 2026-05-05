@@ -1,6 +1,6 @@
 ```java
 default Column columnVarchar() {
-	return column().varchar(length); //  OPTIONAL [length] 
+	return myColumn().varchar(length); //  OPTIONAL [length] 
 }
 ```
 

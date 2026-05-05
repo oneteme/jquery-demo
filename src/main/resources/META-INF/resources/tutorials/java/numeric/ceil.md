@@ -1,6 +1,6 @@
 ```java
 default Column columnCeil() {
-	return column().ceil();
+	return myColumn().ceil();
 }
 ```
 

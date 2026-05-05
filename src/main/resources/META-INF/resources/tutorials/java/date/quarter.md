@@ -1,6 +1,6 @@
 ```java
 default Column columnQuarter() {
-	return column().quarter();
+	return myColumn().quarter();
 }
 ```
 

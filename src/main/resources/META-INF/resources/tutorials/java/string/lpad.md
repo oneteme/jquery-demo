@@ -1,6 +1,6 @@
 ```java
 default Column columnLPad() {
-	return column().lpad(length, padString);
+	return myColumn().lpad(length, padString);
 }
 ```
 

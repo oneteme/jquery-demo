@@ -1,6 +1,6 @@
 ```java
 default Column columnYearWeek() {
-	return column().yearWeek();
+	return myColumn().yearWeek();
 }
 ```
 
