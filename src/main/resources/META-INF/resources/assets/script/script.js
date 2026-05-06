@@ -16,7 +16,7 @@ $(document).ready(function () {
   loadViews();
   $("#jq-execute").on("click", (e) => {
     introNextStep(100);
-    // $("#query-form").submit();
+    $("#query-form").submit();
   });
   $("#query-form").on("submit", (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -257,7 +257,7 @@ function fetchJQData() {
       .then((response) => response.json())
       .then((data) => {
         setTimeout(() => {
-          showSuccess("Query executed successfully : " + data.result.length + " rows.");
+          showSuccess(data.result.length);
           hideLoading($(".loader"), $(".query-status-btn"))
         }, 300)
         // console.log("response : ",response);

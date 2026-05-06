@@ -48,7 +48,7 @@
 
   <!-- SQL FORMATTER -->
   <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   <script type="module" src="./assets/script/script.js"></script>
 </head>
 
@@ -100,6 +100,15 @@
     </div>
 
     <div class="content jquery-display">
+      <div class="toast" id="toast" role="alert">
+        <div class="toast-icon"><i class="ti" id="toast-icon"></i></div>
+        <div class="toast-body">
+          <p class="toast-title" id="toast-title"></p>
+          <p class="toast-msg" id="toast-msg"></p>
+        </div>
+        <button class="toast-close">✕</button>
+        <div class="toast-bar" id="toast-bar"></div>
+      </div>
       <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
       <div class="settings-content d-flex-col">
@@ -139,8 +148,9 @@
                 <label for="jq-filters" class="fw-semibold white_text">Query Options
                 </label>
               </div>
-              <input id="jq-execute" class="jq-rounded-btn align-self-end" name="executejq" type="submit"
-                value="Execute" />
+              <div id="jq-execute" class="jq-rounded-btn align-self-end"><i class="ti ti-player-play"></i></div>
+              <input name="executejq" type="submit"
+                value="Execute" style="display: none;"/>
             </div>
             <a href="" class="jq-link-display" target="_blank">
             </a>
@@ -148,8 +158,7 @@
           </form>
         </div>
 
-        <div id="sql-display" class="card-container"
-          style="display: none;padding: 0;">
+        <div id="sql-display" class="card-container" style="display: none;padding: 0;">
           <pre><code id="sql-code" class="language-sql"></code></pre>
           <!-- <textarea
               id="sql-display"
@@ -161,10 +170,7 @@
             ></textarea> -->
         </div>
 
-        <div class="results-container card-container" style="display: none;overflow: hidden;">
-          <button class="query-status-btn success" data-status="Query executed successfully" style="display: none;position: absolute;">
-            ✓
-          </button>
+        <div class="results-container card-container" style="display: none;">
           <div class="table-wrapper">
             <table class="jq-table"></table>
           </div>
@@ -179,11 +185,7 @@
         </div>
         <div class="example-title-section d-flex gap_8" style="align-items: center;">
           <h1 class="example-title white_text">SELECT</h1>
-          <div class="example-header-info d-flex gap_4" style="align-items: center;">
-            <div class="definition-toggle">
-              !
-            </div>
-          </div>
+          <i class="ti ti-info-circle definition-toggle"></i>
         </div>
         <div class="tuto_btn_container btn-next" style="top: 0;right: 0;">
           <span class="white_text">Next</span>
