@@ -112,23 +112,17 @@
       <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
       <div class="settings-content d-flex-col">
-        <div class="form-container card-container" style="overflow: hidden;">
-          <div class="form-header-actions">
-            <button class="show-docs form-action-btn btn-trigger" title="Documentation" style="display: none"
-              show=".content.definition-display" hide=".content">
-              📖
-            </button>
-            <div class="loader" style="display: none;"></div>
-          </div>
+        <div class="form-container card-container">
+
           <div class="examples-sidebar" style="display: none;">
             <div class="examples-sidebar-title">ALSO TRY</div>
             <div class="examples-numbers-container d-flex-col gap_4">
             </div>
           </div>
-          <form id="query-form" class="form-content">
-
+          <form id="query-form" class="form-content" style="position: relative;">
+            <div class="loader" style="display: none;position: absolute;"></div>
             <div class="fw-semibold white_text">Build up your Query</div>
-            <div class="d-flex">
+            <div class="d-flex gap_4">
               <select id="jq-table" class="form-select" style="width: fit-content;">
                 <option value="">-- Select a view --</option>
               </select>
@@ -148,14 +142,29 @@
                 <label for="jq-filters" class="fw-semibold white_text">Query Options
                 </label>
               </div>
-              <div id="jq-execute" class="jq-rounded-btn align-self-end"><i class="ti ti-player-play"></i></div>
-              <input name="executejq" type="submit"
-                value="Execute" style="display: none;"/>
+
+              <input name="executejq" type="submit" value="Execute" style="display: none;" />
             </div>
             <a href="" class="jq-link-display" target="_blank">
             </a>
 
           </form>
+
+          <div class="form-sidebar-actions d-flex-col justify-content-space-between">
+
+            <div class="sidebar-upper-content d-flex-col gap_4">
+              <div class="btn-trigger show-docs" hide=".content" style="visibility: hidden;"
+                show=".content.definition-display">
+                <i class="ti ti-book"></i>
+              </div>
+              <div class="show-info" style="visibility: hidden;">
+                <i class="ti ti-info-square-rounded"></i>
+              </div>
+            </div>
+            <div class="sidebar-lower-content gap_4">
+              <div id="jq-execute" class="jq-rounded-btn align-self-end"><i class="ti ti-player-play"></i></div>
+            </div>
+          </div>
         </div>
 
         <div id="sql-display" class="card-container" style="display: none;padding: 0;">
@@ -224,7 +233,8 @@
         <h2 class="title white_text">Try it</h2>
         <div class="description white_text">
           To see how it works you can
-          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.show-docs" hide=".content">Try it
+          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display" hide=".content"
+            visible=".show-docs,.show-info">Try it
             Here</a>
         </div>
       </div>

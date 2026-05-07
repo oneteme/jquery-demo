@@ -14,6 +14,30 @@ $(document).ready(function () {
   getAllJavaMd().then(mdFiles => loadNavData())
   loadSettings();
   loadViews();
+  tippy(".show-docs", {
+    content: "Documentation",
+    animation: 'scale',
+    arrow: true,
+    placement: 'left',
+    hideOnClick: false,
+    interactive: true
+  });
+  tippy(".show-info", {
+    content: "More info",
+    animation: 'scale',
+    arrow: true,
+    placement: 'left',
+    hideOnClick: false,
+    interactive: true
+  });
+  tippy("#jq-execute", {
+    content: "Execute",
+    animation: 'scale',
+    arrow: true,
+    placement: 'left',
+    hideOnClick: false,
+    interactive: true
+  });
   $("#jq-execute").on("click", (e) => {
     introNextStep(100);
     $("#query-form").submit();
@@ -53,7 +77,7 @@ $(document).ready(function () {
     $(".content.jquery-display").hide();
     loadExample($(e.currentTarget));
     if (!$("#main-title").attr("show")) {
-      $("#main-title").attr({ "show": ".content.jquery-display,.show-docs", "hide": ".content" })
+      $("#main-title").attr({ "show": ".content.jquery-display", "hide": ".content", "visible": ".show-docs,.show-info" })
     }
   });
 
@@ -78,25 +102,7 @@ $(document).ready(function () {
   $(".close_window_btn").on("click", (e) => {
     $(e.currentTarget).parent().hide();
   });
-  $(".btn-trigger").on("click", (e) => {
-    let elementToHide = $(e.currentTarget).attr("hide"),
-      elementToShow = $(e.currentTarget).attr("show"),
-      elementAtCursor = $(e.currentTarget).attr("cursor-data");
-    if (elementToHide) {
-      $.each(elementToHide.split(","), (key, element) => {
-        $(element).hide();
-      });
-    }
-    if (elementToShow)
-      $.each(elementToShow.split(","), (key, element) => {
-        $(element).show();
-      });
 
-    if (elementAtCursor)
-      $.each(elementAtCursor.split(","), (key, element) => {
-        utils.displayDivAtCursor($(element), e);
-      });
-  });
   $(".definition-element .show-demo").on("click", (e) => {
     $(".example-number:first").click();
     introNextStep();
@@ -263,7 +269,7 @@ function fetchJQData() {
         // console.log("response : ",response);
         console.log("data : ", data);
         $(".error_container").hide();
-        $("#sql-code").html(sqlFormatter.format(data.query));
+        $("#sql-code").html(sqlFormatter.format(data.query, { language: 'postgresql' }));
         $("#sql-display").show();
 
         hljs.highlightAll();

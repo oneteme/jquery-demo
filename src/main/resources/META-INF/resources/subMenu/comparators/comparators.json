@@ -71,7 +71,7 @@
       {
         "title": "Customers who didn't place any orders",
         "view": "customers",
-        "column": "orders.id,customers.name",
+        "column": "orders.id:orderId,customers.name",
         "filter": "join=leftOrder&orders.customer_id.isNull"
       }
     ]
@@ -87,7 +87,7 @@
       {
         "title": "Customers who placed orders",
         "view": "customers",
-        "column": "orders.id,customers.name",
+        "column": "orders.id:orderId,customers.name",
         "filter": "join=leftOrder&orders.customer_id.notNull"
       }
     ]

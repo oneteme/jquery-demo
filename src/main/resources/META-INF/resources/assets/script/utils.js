@@ -2,7 +2,7 @@ export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)
       .done(function (data) {
-        console.log("FOUND FILE : ",path)
+        console.log("FOUND FILE : ", path)
         res(data)
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -83,3 +83,35 @@ export function placeAtTop(divElement = $(".form-container")) {
   console.log("Parent div : ", parentDiv);
   divElement.prependTo(parentDiv);
 }
+
+$(".btn-trigger").on("click", (e) => {
+  let elementToHide = $(e.currentTarget).attr("hide"),
+    elementToShow = $(e.currentTarget).attr("show"),
+    visibleElements = $(e.currentTarget).attr("visible"),
+    invisibleElements = $(e.currentTarget).attr("invisible"),
+    elementAtCursor = $(e.currentTarget).attr("cursor-data");
+  if (visibleElements) {
+    $.each(visibleElements.split(","), (key, element) => {
+      $(element).css("visibility", "visible");
+    });
+  }
+  if (invisibleElements) {
+    $.each(invisibleElements.split(","), (key, element) => {
+      $(element).css("visibility", "hidden");
+    });
+  }
+  if (elementToHide) {
+    $.each(elementToHide.split(","), (key, element) => {
+      $(element).hide();
+    });
+  }
+  if (elementToShow)
+    $.each(elementToShow.split(","), (key, element) => {
+      $(element).show();
+    });
+
+  if (elementAtCursor)
+    $.each(elementAtCursor.split(","), (key, element) => {
+      displayDivAtCursor($(element), e);
+    });
+});

@@ -3,13 +3,6 @@ const ICONS = { success: 'ti-circle-check', error: 'ti-alert-circle', info: 'ti-
     DURATION = 3000;
 let timer;
 
-export function hideStatus() {
-    $(".query-status-btn").hide();
-}
-
-export function showStatus() {
-    $(".query-status-btn").show();
-}
 export function showError(message) {
     showToast("error", "Error", message);
 }

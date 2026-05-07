@@ -79,7 +79,6 @@ public interface Products extends DatasetResource {
 	default Column getPi() {
 		return getInstance().getStore(DemoStore.class).pi().invoke();
 	}
-
 	
 	
 	//par product je veux comparer le prix avec la moyen des prix de categorie

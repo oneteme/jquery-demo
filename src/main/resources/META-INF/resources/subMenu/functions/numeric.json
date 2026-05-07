@@ -75,7 +75,7 @@
     "tooltip": "Modulo",
     "examples": [
       {
-        "title":"Even prices",
+        "title": "Even prices",
         "view": "products",
         "column": "price",
         "filter": "price.mod(2).eq(0)"
@@ -109,6 +109,13 @@
         "filter": "price=10,20"
       }
     ]
+  },
+  {
+    "title": "FACTORIAL",
+    "view": "products",
+    "column": "factorial(5):fact_5",
+    "definition": "Returns the factorial of a numeric value.<br>The factorial of a number is calculated by multiplying the number by all positive integers smaller than it.<br>For example: <b>5! = 5 × 4 × 3 × 2 × 1 = 120</b>.<br>This function is commonly used in mathematics, probability, and combinatorics.",
+    "syntax": "column.factorial"
   },
   {
     "title": "LOG",

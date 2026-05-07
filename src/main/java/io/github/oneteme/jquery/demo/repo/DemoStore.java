@@ -1,5 +1,6 @@
 package io.github.oneteme.jquery.demo.repo;
 
+import static org.usf.jquery.core.JDBCType.BIGINT;
 import static org.usf.jquery.core.JDBCType.DOUBLE;
 import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
@@ -61,6 +62,11 @@ public interface DemoStore extends StoreResource {
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {
 		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
+	}
+	
+	@Expose(identity="factorial", description="Raises a numeric value to a specified power")
+	default OperatorDefinition factorial() {
+		return function(DOUBLE, "factorial", required(BIGINT));
 	}
 	
 	@Expose(identity="pi", description="")

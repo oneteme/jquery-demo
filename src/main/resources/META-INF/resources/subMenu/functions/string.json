@@ -63,6 +63,13 @@
     "syntax": "column.replace(replaced,replacement)"
   },
   {
+    "title": "REVERSE",
+    "view": "categories",
+    "column": "reverse(alucard):reverse",
+    "definition": "Reverses the characters of a string value.<br>The function returns the text in the opposite order from the original value.<br>For example: <b>'Chai'</b> becomes <b>'iahC'</b>.",
+    "syntax": "column.reverse"
+  },
+  {
     "title": "TRIM",
     "view": "customers",
     "column": "trim(\"            HELLO                             WORLD                       \"):trim",

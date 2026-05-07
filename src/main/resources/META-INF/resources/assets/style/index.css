@@ -164,6 +164,11 @@ header {
   display: contents !important;
 }
 
+.header-list i {
+  color: var(--jarvis-cyan);
+  font-size: 26px;
+}
+
 .header-list img {
   width: 24px;
   filter: brightness(0) saturate(100%) invert(63%) sepia(93%) saturate(2555%) hue-rotate(169deg) brightness(101%) contrast(105%);
@@ -211,30 +216,24 @@ header {
 }
 
 .jq-rounded-btn,
-#jq-execute {
-  background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
+#jq-execute,
+.show-docs,
+.show-info {
   color: var(--jarvis-text);
-  padding: 0.1rem 0.4rem;
-  border: none;
-  border-radius: 16px;
+  padding: 0 0.4rem;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px var(--jarvis-glow);
-  text-transform: uppercase;
 }
 
 .jq-rounded-btn:hover,
-#jq-execute:hover {
+#jq-execute:hover,
+.show-docs:hover,
+.show-info:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px var(--jarvis-glow);
 }
 
-
-.show-docs {
-  border-radius: 8px;
-}
 
 #jq-live {
   width: 28px !important;
@@ -979,7 +978,7 @@ pre {
 
 .settings-content div {
   /* flex: auto !important; */
-  gap: 8px;
+  /* gap: 8px; */
   margin: 0;
 }
 
@@ -1549,6 +1548,14 @@ code:hover::before {
   box-shadow: 0 0 20px var(--jarvis-glow);
 }
 
+.form-sidebar-actions {
+  padding: 4px 0;
+  background-color: black;
+  border-left: solid var(--jarvis-cyan);
+  justify-content: space-between;
+  border-radius: 0 12px 12px 0;
+}
+
 /* Status indicator button */
 .query-status-btn {
   /* À gauche du bouton docs */
@@ -1621,6 +1628,8 @@ code:hover::before {
   width: 20px;
   height: 28px;
   aspect-ratio: 4;
+  top: 0;
+  right: 12px;
   --_g: no-repeat radial-gradient(circle closest-side, var(--jarvis-cyan) 90%, #0000);
   background:
     var(--_g) 0% 50%,
@@ -1849,13 +1858,19 @@ code:hover::before {
   color: gray;
 }
 
+.lower-col-grid .jq-link-display,
+.upper-col-grid .jq-link-display {
+  word-break: break-word;
+  white-space: normal;
+}
+
 .jq-link-display {
   width: 100%;
   font-size: 0.7rem;
   padding: 8px 8px;
   visibility: hidden;
   /* word-break: break-word; */
-  /* white-space: nowrap; */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: .4rem !important;
@@ -2018,7 +2033,7 @@ code:hover::before {
   /* padding-top: 60px; */
   display: none;
   width: 100%;
-  max-width: 256px;
+  max-width: 238px;
   height: 0;
 }
 
