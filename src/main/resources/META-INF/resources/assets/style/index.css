@@ -215,8 +215,18 @@ header {
   cursor: pointer;
 }
 
+#jq-execute {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 0px 8px 8px 0px;
+  background-color: #00d9ff54;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  color: var(--jarvis-cyan);
+}
+
 .jq-rounded-btn,
-#jq-execute,
 .show-docs,
 .show-info {
   color: var(--jarvis-text);
@@ -228,7 +238,6 @@ header {
 }
 
 .jq-rounded-btn:hover,
-#jq-execute:hover,
 .show-docs:hover,
 .show-info:hover {
   transform: translateY(-2px);
@@ -1549,6 +1558,7 @@ code:hover::before {
 }
 
 .form-sidebar-actions {
+  display: none;
   padding: 4px 0;
   background-color: black;
   border-left: solid var(--jarvis-cyan);
@@ -1783,7 +1793,9 @@ code:hover::before {
   background: var(--jarvis-dark);
   color: var(--jarvis-text);
 }
-
+#jq-filters{
+  border-radius: 8px 0 0 8px!important;
+}
 .form-floating>label {
   /* position: absolute;
   top: 0;

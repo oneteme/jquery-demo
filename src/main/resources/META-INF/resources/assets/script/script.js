@@ -77,7 +77,7 @@ $(document).ready(function () {
     $(".content.jquery-display").hide();
     loadExample($(e.currentTarget));
     if (!$("#main-title").attr("show")) {
-      $("#main-title").attr({ "show": ".content.jquery-display", "hide": ".content", "visible": ".show-docs,.show-info" })
+      $("#main-title").attr({ "show": ".content.jquery-display,.form-sidebar-actions", "hide": ".content", "visible": ".show-docs,.show-info" })
     }
   });
 

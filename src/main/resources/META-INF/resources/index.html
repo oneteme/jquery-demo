@@ -131,18 +131,19 @@
                   placeholder="Setup JQuery columns..." />
                 <label for="jq-columns" class="fw-semibold white_text">Columns
                 </label>
+                
               </div>
             </div>
 
 
-            <div class="d-flex gap_4">
-              <div class="form-floating jqfilters_input_container" style="width: 100%">
+            <div class="d-flex">
+              <div class="form-floating jqfilters_input_container" style="width: 100%;position: relative;">
                 <input id="jq-filters" class="form-control" name="filters" type="text"
                   placeholder="Setup JQuery filters..." />
                 <label for="jq-filters" class="fw-semibold white_text">Query Options
                 </label>
               </div>
-
+              <div id="jq-execute"><i class="ti ti-player-play"></i></div>
               <input name="executejq" type="submit" value="Execute" style="display: none;" />
             </div>
             <a href="" class="jq-link-display" target="_blank">
@@ -161,9 +162,9 @@
                 <i class="ti ti-info-square-rounded"></i>
               </div>
             </div>
-            <div class="sidebar-lower-content gap_4">
+            <!-- <div class="sidebar-lower-content gap_4">
               <div id="jq-execute" class="jq-rounded-btn align-self-end"><i class="ti ti-player-play"></i></div>
-            </div>
+            </div> -->
           </div>
         </div>
 
@@ -233,7 +234,7 @@
         <h2 class="title white_text">Try it</h2>
         <div class="description white_text">
           To see how it works you can
-          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display" hide=".content"
+          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.form-sidebar-actions" hide=".content"
             visible=".show-docs,.show-info">Try it
             Here</a>
         </div>
