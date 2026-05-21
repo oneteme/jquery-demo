@@ -2,28 +2,28 @@
   {
     "title": "Year",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.year:Year",
+    "column": "cdate:CurrentDate,CurrentDate.year:myYear",
     "definition": "Returns the year component from a date value.<br>The function extracts the four-digit year (for example: 2026) from the provided date column.",
     "syntax": "column.year"
   },
   {
     "title": "Month",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.month:Month",
+    "column": "cdate:CurrentDate,CurrentDate.month:myMonth",
     "definition": "Returns the month component from a date value.<br>The function extracts the numeric month (1–12) from the provided date column, where 1 represents January and 12 represents December.",
     "syntax": "column.month"
   },
   {
     "title": "Day",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.day:Day",
+    "column": "cdate:CurrentDate,CurrentDate.day:myDay",
     "definition": "Returns the day of the month from a date value.<br>The function extracts the numeric day (1–31) representing the day within the month of the provided date.",
     "syntax": "column.day"
   },
   {
     "title": "Week",
     "view": "employees",
-    "column": "cdate:CurrentDate,CurrentDate.week:week",
+    "column": "cdate:CurrentDate,CurrentDate.week:myWeek",
     "definition": "Returns the week number of the year for a given date.<br>The function extracts the numeric week (1–53) indicating the position of the date within the year.",
     "syntax": "column.week"
   },
