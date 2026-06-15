@@ -13,8 +13,6 @@ import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
-import org.usf.jquery.core.QueryComposer;
-import org.usf.jquery.core.QueryView;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
@@ -46,13 +44,13 @@ public interface DemoStore extends StoreResource {
 	@Bind("EMPLOYEES_TABLE")
 	Employees employees();
 	
-	default QueryView testView() {
-		var v = categories().getView();
-		return new QueryComposer()
-				.columns(Column.allColumns(v))
-				.filters()
-				.compose();
-	}
+//	default QueryView testView() {
+//		var v = categories().getView();
+//		return new QueryComposer()
+//				.columns(Column.allColumns(v))
+//				.filters()
+//				.compose();
+//	}
 	
 	@Expose(identity="date_sub", description="substracts days")
 	default OperatorDefinition dateSub() {

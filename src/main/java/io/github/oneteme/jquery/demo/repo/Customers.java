@@ -1,10 +1,10 @@
 package io.github.oneteme.jquery.demo.repo;
 
-import static org.usf.jquery.core.JoinsClause.joins;
-import static org.usf.jquery.core.ViewJoin.leftJoin;
+import static org.usf.jquery.core.Join.leftJoin;
+import static org.usf.jquery.core.JoinGroup.joins;
 import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
-import org.usf.jquery.core.JoinsClause;
+import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -36,7 +36,7 @@ public interface Customers extends DatasetResource {
 	
 	//create partition, join
 	
-	default JoinsClause leftOrder() {
+	default JoinGroup leftOrder() {
 		var orders = getInstance().getStore(DemoStore.class).orders();
 		return joins(leftJoin(orders.getView(), id().eq(orders.customerId())));
 	}

@@ -1,12 +1,11 @@
 package io.github.oneteme.jquery.demo.repo;
 
-import static org.usf.jquery.core.JoinsClause.joins;
-import static org.usf.jquery.core.ViewJoin.innerJoin;
-import static org.usf.jquery.core.ViewJoin.leftJoin;
-import static org.usf.jquery.core.ViewJoin.rightJoin;
+import static org.usf.jquery.core.Join.innerJoin;
+import static org.usf.jquery.core.Join.rightJoin;
+import static org.usf.jquery.core.JoinGroup.joins;
 import static org.usf.jquery.web.proxy.StoreManager.getInstance;
 
-import org.usf.jquery.core.JoinsClause;
+import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -33,22 +32,22 @@ public interface Orders extends DatasetResource {
 	ViewColumn shipperId();
 	
 	
-	default JoinsClause rightEmployee() {
+	default JoinGroup rightEmployee() {
 		var employees = getInstance().getStore(DemoStore.class).employees();
 		return joins(rightJoin(employees.getView(), employeeId().eq(employees.id())));
 	}
 	
-	default JoinsClause innerCustomer() {
+	default JoinGroup innerCustomer() {
 		var cust = getInstance().getStore(DemoStore.class).customers();
 		return joins(innerJoin(cust.getView(), customerId().eq(cust.id())));
 	}
 	
-	default JoinsClause innerShipper() {
+	default JoinGroup innerShipper() {
 		var ship = getInstance().getStore(DemoStore.class).shippers();
 		return joins(innerJoin(ship.getView(), shipperId().eq(ship.id())));
 	}
 	
-	default JoinsClause innerShippCust() {
+	default JoinGroup innerShippCust() {
 		var ship = getInstance().getStore(DemoStore.class).shippers();
 		var cust = getInstance().getStore(DemoStore.class).customers();
 		return joins(

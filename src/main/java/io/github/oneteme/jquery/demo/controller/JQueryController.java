@@ -11,8 +11,8 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.core.Environment.SimpleEnvironment;
+import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.QueryRequestFilter;
 import org.usf.jquery.web.proxy.QueryRequest;
 import org.usf.jquery.web.proxy.StoreResource;
@@ -133,7 +133,7 @@ public class JQueryController {
 		Map<String, Object> result = new HashMap<>();
 		try {			
 			var query = getInstance().execute(clazz, req, keyValueMapper());
-			var sqlQuery = req.compose().buildQuery(NO_ENV, false).sql();
+			var sqlQuery = req.toString();
 			result.put("query", sqlQuery);
 			result.put("result", query);
 		} catch (Exception e) {

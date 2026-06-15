@@ -1,6 +1,5 @@
 package io.github.oneteme.jquery.demo.repo;
 
-import org.usf.jquery.core.JoinsClause;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.DatasetResource;
@@ -15,8 +14,5 @@ public interface Categories extends DatasetResource {
 	
 	@Bind("DESCRIPTION")
 	ViewColumn description();
-	
-	default JoinsClause myJoin() {
-		return null;
-	}
+
 }

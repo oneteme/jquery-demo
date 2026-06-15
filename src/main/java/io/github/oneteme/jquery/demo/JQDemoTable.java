@@ -48,6 +48,7 @@ public enum JQDemoTable implements ViewDecorator {
 	}
 
 	@Override
+	@Deprecated
 	public Builder<ViewDecorator, ViewJoin[]> joinBuilder(String name) {
 		if (ORDER == this && "innercustomer".equals(name)) {
 			return (vd, env) -> new ViewJoin[] { innerJoin(CUSTOMER.view(), ORDER
