@@ -27,7 +27,7 @@
         "title": "Left Join in URL",
         "view": "customers",
         "column": "orders.id,name",
-        "filter": "join=leftJoin(orders).criteria(orders.customer_id.eq(customers.id))&orders.customer_id.isNull"
+        "filter": "join=leftJoin(orders).criteria(customers.id.eq(orders.customer_id))&orders.customer_id.isNull"
       },
       {
         "title": "Using Left Join from JAVA",

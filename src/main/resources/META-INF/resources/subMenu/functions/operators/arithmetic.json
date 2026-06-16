@@ -18,11 +18,22 @@
   {
     "title": "MULTIPLY (*)",
     "view": "products",
-    "column": "price,price.multiply(2):X2,X2.multiply(3):X6",
-    "filter": "limit=10&price=10,20,30,40,50,60",
+    "column": "multiply(2,2):X2",
     "definition": "Multiplies two numbers.",
     "syntax": "column.multiply(val1).multiply(val2).multiply(valn)",
-    "label":"multiply"
+    "label": "multiply",
+    "examples": [
+      {
+        "title": "Column multiply",
+        "view": "products",
+        "column": "price.multiply(2):X2"
+      },
+      {
+        "title": "Column multiply filter",
+        "view": "products",
+        "filter":"price.multiply(2).lt(multiply(2,10))"
+      }
+    ]
   },
   {
     "title": "DIVIDE (/)",
@@ -31,6 +42,6 @@
     "filter": "limit=10&price.ge=4",
     "definition": "Divides one number by another.",
     "syntax": "column.divide(val1).divide(val2).divide(valn)",
-    "label":"divide"
+    "label": "divide"
   }
 ]

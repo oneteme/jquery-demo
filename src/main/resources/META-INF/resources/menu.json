@@ -12,6 +12,23 @@
     "next": "GROUP BY"
   },
   {
+    "title": "DISTINCT",
+    "definition": "Removes duplicate values from the result set.<br>The DISTINCT operation ensures that only unique values are returned for the selected column(s).<br>This is useful when you want to eliminate repeated data and retrieve only unique records.",
+    "syntax": "column.distinct&;distinct=true",
+    "examples": [
+      {
+        "view": "products",
+        "column": "price",
+        "filter": "distinct=true"
+      },
+      {
+        "title": "apply on a single column",
+        "view": "products",
+        "column": "price.distinct"
+      }
+    ]
+  },
+  {
     "title": "GROUP BY",
     "view": "customers",
     "column": "id.count:COUNT,country",
@@ -33,7 +50,15 @@
     "column": "id:ID,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
     "syntax": "column:new_col_name",
-    "tooltip": "Aliases/TAG"
+    "tooltip": "Aliases/TAG",
+    "examples": [
+      {
+        "title": "Reuse Alias inside filter",
+        "view": "customers",
+        "column": "name:CustomerNameAlias",
+        "filter": "CustomerNameAlias.length.lt(10)"
+      }
+    ]
   },
   {
     "title": "LIMIT",
@@ -41,6 +66,13 @@
     "filter": "limit=5",
     "definition": "The LIMIT clause is to be used in an SQL query to specify the maximum number of results that one wishes to obtain. This clause is often associated with an OFFSET, that is to say to perform an offset on the result set. These 2 clauses allow for example to carry out pagination systems (example: retrieve the 10 articles of page 4).",
     "syntax": "&limit=number"
+  },
+  {
+    "title": "OFFSET",
+    "view": "customers",
+    "filter": "offset=5",
+    "definition": "Skips a specified number of rows before returning the query result.<br>The parameter defines how many rows should be ignored from the beginning of the result set.<br>This is commonly used for pagination together with LIMIT.",
+    "syntax": "offset=value"
   },
   {
     "title": "ORDER",
@@ -74,6 +106,14 @@
     "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))&join=innerCat",
     "definition": "Allows using a query inside another query.<br>A subquery is executed first and its result is used by the main query.<br>This is useful for dynamic comparisons, such as filtering values based on aggregated results.<br>For example, you can retrieve products whose category starts with 'Con'",
     "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))"
+  },
+  {
+    "title": "CTE",
+    "view": "products",
+    "column": "myCte.name",
+    "filter": "cte=categories.select(name).criteria(startsLike(name,Con)):myCte",
+    "definition": "Defines a Common Table Expression (CTE), which creates a temporary named result set that can be referenced within the main query.<br>A CTE helps simplify complex queries by breaking them into reusable and readable parts.<br>This is useful for organizing subqueries, recursive queries, or intermediate calculations.",
+    "syntax": "cte=select(...):cteName"
   },
   {
     "title": "Advanced JQuery",
