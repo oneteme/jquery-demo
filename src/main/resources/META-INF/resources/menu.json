@@ -17,7 +17,7 @@
     "syntax": "column.distinct&;distinct=true",
     "examples": [
       {
-        "title":"Apply to all columns",
+        "title": "Apply to all columns",
         "view": "products",
         "column": "price",
         "filter": "distinct=true"
@@ -109,7 +109,14 @@
     "definition": "Evaluates multiple conditions and returns a value depending on which condition is met.<br>The CASE expression works like an if-else structure in SQL. Each <b>WHEN</b> condition is evaluated in order, and the result of the first matching condition is returned.<br>If none of the conditions are satisfied, the <b>ELSE</b> value is returned.<br>This function is commonly used to categorize or transform values directly in a query.<br><br>Example use case: categorizing products based on their price (cheap, normal, expensive).",
     "syntax": "when(criteria1,val1).when(criteria2,val2)...orElse(valn)",
     "tooltip": "CASE...WHEN THEN...ELSE",
-    "label": "caseColumn"
+    "label": "caseColumn",
+    "examples": [
+      {
+        "title": "WhenCase column created in Java",
+        "view": "products",
+        "column": "whenCol"
+      }
+    ]
   },
   {
     "title": "SUB QUERY",
@@ -131,8 +138,8 @@
       {
         "title": "Apply join with CTE",
         "view": "products",
-        "column":"name,myCTE.name:cat_name",
-        "filter":"cte=categories.select(id,name).criteria(startsLike(name,Con)):myCTE&join=innerJoin(myCTE).criteria(id.eq(myCTE.id))"
+        "column": "name,myCTE.name:cat_name",
+        "filter": "cte=categories.select(id,name).criteria(startsLike(name,Con)):myCTE&join=innerJoin(myCTE).criteria(id.eq(myCTE.id))"
       }
     ]
   },

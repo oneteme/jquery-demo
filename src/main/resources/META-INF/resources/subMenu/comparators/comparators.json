@@ -2,63 +2,145 @@
   {
     "title": "Equal (=)",
     "view": "products",
-    "column": "price:Equal_30",
+    "column": "price",
     "filter": "price=30",
     "definition": "column is equal to value.",
     "syntax": "column=value&;column.eq(value) // Recommended for chainable filters",
     "examples": [
       {
-        "title": "JQuery equal (.eq)",
+        "title": "Chainable equal (.eq)",
         "view": "products",
         "filter": "price.eq(30)",
         "column": "price:Equal_30"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.eq(10):Equal_10"
+      },
+      {
+        "title": "With logical operator",
+        "view": "products",
+        "column": "price",
+        "filter": "price.eq(10).or(price.eq(20))"
       }
     ]
   },
   {
     "title": "Greater Than (>)",
     "view": "products",
-    "column": "price:GreaterThan_30",
-    "filter": "price.gt=30&order=price",
+    "column": "price",
+    "filter": "price.gt=30",
     "definition": "column is greater than value",
-    "syntax": "column.gt=value",
-    "label": "greater than"
+    "syntax": "column.gt=value&;column.gt(value) // Recommended for chainable filters",
+    "label": "greater than",
+    "examples": [
+      {
+        "title": "Chainable Greater Than",
+        "view": "products",
+        "filter": "price.gt(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.gt(30):greater_30"
+      }
+    ]
   },
   {
     "title": "Lower Than (<)",
     "view": "products",
-    "column": "price:LowerThan_30",
-    "filter": "price.lt=30&order=price",
+    "column": "price:lower_30",
+    "filter": "price.lt=30",
     "definition": "column is lower than value",
-    "syntax": "column.lt=value",
-    "label": "lower than"
+    "syntax": "column.lt=value&;column.lt(value) // Recommended for chainable filters",
+    "label": "lower than",
+    "examples": [
+      {
+        "title": "Chainable Lower Than",
+        "view": "products",
+        "filter": "price.lt(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.lt(30):lower_30"
+      }
+    ]
   },
   {
     "title": "Greater equal (>=)",
     "view": "products",
-    "column": "price:GreaterEqual_30",
-    "filter": "price.ge=30&order=price",
+    "column": "price",
+    "filter": "price.ge=30",
     "definition": "column is greater or equal to value",
-    "syntax": "column.ge=value",
-    "label": "greater equal"
+    "syntax": "column.ge=value&;column.ge(value) // Recommended for chainable filters",
+    "label": "greater equal",
+    "examples": [
+      {
+        "title": "Chainable Greater Equal",
+        "view": "products",
+        "filter": "price.ge(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.gt(30):greater_Eq_30"
+      }
+    ]
   },
   {
     "title": "Lower equal (<=)",
     "view": "products",
-    "column": "price:LowerEqual_30",
-    "filter": "price.le=30&order=price",
+    "column": "price",
+    "filter": "price.le=30",
     "definition": "column is lower or equal to value",
-    "syntax": "column.le=value",
-    "label": "lower equal"
+    "syntax": "column.le=value&;column.le(value) // Recommended for chainable filters",
+    "label": "lower equal",
+    "examples": [
+      {
+        "title": "Chainable Lower Equal",
+        "view": "products",
+        "filter": "price.le(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.le(30):lower_eq_30"
+      }
+    ]
   },
   {
     "title": "Not equal (<>)",
     "view": "products",
     "column": "price:PriceNotEqualTo_30",
-    "filter": "price.ne=30&order=price",
+    "filter": "price.ne=30",
     "definition": "column is not equal to value",
-    "syntax": "column.ne=value",
-    "label": "not equal"
+    "syntax": "column.ne=value&;column.ne(value) // Recommended for chainable filters",
+    "label": "not equal",
+    "examples": [
+      {
+        "title": "Chainable Not equal (.ne)",
+        "view": "products",
+        "filter": "price.ne(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.ne(10):NotEqual_10"
+      },
+      {
+        "title": "With logical operator",
+        "view": "products",
+        "column": "price",
+        "filter": "price.ne(10).and(price.ne(20))"
+      }
+    ]
   },
   {
     "title": "NULL",
