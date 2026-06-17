@@ -1,13 +1,13 @@
 package io.github.oneteme.jquery.demo;
 
-import static org.usf.jquery.core.ViewJoin.innerJoin;
-import static org.usf.jquery.core.ViewJoin.leftJoin;
-import static org.usf.jquery.core.ViewJoin.rightJoin;
+import static org.usf.jquery.core.Join.innerJoin;
+import static org.usf.jquery.core.Join.leftJoin;
+import static org.usf.jquery.core.Join.rightJoin;
 
 import java.util.function.Function;
 
 import org.usf.jquery.core.Criteria;
-import org.usf.jquery.core.ViewJoin;
+import org.usf.jquery.core.Join;
 import org.usf.jquery.web.Builder;
 import org.usf.jquery.web.ColumnDecorator;
 import org.usf.jquery.web.ViewDecorator;
@@ -49,17 +49,17 @@ public enum JQDemoTable implements ViewDecorator {
 
 	@Override
 	@Deprecated
-	public Builder<ViewDecorator, ViewJoin[]> joinBuilder(String name) {
+	public Builder<ViewDecorator, Join[]> joinBuilder(String name) {
 		if (ORDER == this && "innercustomer".equals(name)) {
-			return (vd, env) -> new ViewJoin[] { innerJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new Join[] { innerJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "leftcustomer".equals(name)) {
-			return (vd, env) -> new ViewJoin[] { leftJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new Join[] { leftJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		if (ORDER == this && "rightcustomer".equals(name)) {
-			return (vd, env) -> new ViewJoin[] { rightJoin(CUSTOMER.view(), ORDER
+			return (vd, env) -> new Join[] { rightJoin(CUSTOMER.view(), ORDER
 					.column(JQDemoColumn.CUSTOMER_ID).eq(CUSTOMER.column(JQDemoColumn.ID))) };
 		}
 		return (vd, env) ->ViewDecorator.super.join(name);

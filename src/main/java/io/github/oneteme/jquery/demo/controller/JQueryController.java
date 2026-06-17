@@ -118,7 +118,7 @@ public class JQueryController {
 		Map<String, Object> result = new HashMap<>();
 		try {			
 			var query = DEMO.execute(req);
-			var sqlQuery = req.compose().buildQuery(null, false, null).sql();
+			var sqlQuery = req.compose(null).build().sql();
 			result.put("query", sqlQuery);
 			result.put("result", query);
 		} catch (Exception e) {
@@ -133,7 +133,7 @@ public class JQueryController {
 		Map<String, Object> result = new HashMap<>();
 		try {			
 			var query = getInstance().execute(clazz, req, keyValueMapper());
-			var sqlQuery = req.toString();
+			var sqlQuery =  req.compose(getInstance().getStore(clazz)).buildQuery(false).sql();
 			result.put("query", sqlQuery);
 			result.put("result", query);
 		} catch (Exception e) {
