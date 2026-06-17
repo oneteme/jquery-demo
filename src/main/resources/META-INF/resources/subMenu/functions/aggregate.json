@@ -73,13 +73,15 @@
     "view": "products",
     "column": "percentileCont(0.5).within(group.order(price.desc)):percentile_cont",
     "definition": "Returns the continuous percentile value of a numeric column.<br>The percentile is calculated by ordering the values and interpolating between them when necessary.<br>The parameter must be a value between <b>0</b> and <b>1</b>, where <b>0.5</b> represents the median.<br>This function is useful for statistical analysis and distribution measurements.",
-    "syntax": "percentileCont(value).within(group.order(order))"
+    "syntax": "percentileCont(value).within(group.order(order))",
+    "tooltip":"Continuous percentile"
   },
   {
     "title": "PERCENTILE_DISC",
     "view": "products",
     "column": "percentileDisc(0.5).within(group.order(price.desc)):percentile_disc",
     "definition": "Returns the discrete percentile value of a numeric column.<br>The function selects the first actual value whose position matches or exceeds the requested percentile.<br>Unlike PERCENTILE_CONT, no interpolation is performed.<br>The parameter must be a value between <b>0</b> and <b>1</b>.",
-    "syntax": "percentileDisc(value).within(group.order(order))"
+    "syntax": "percentileDisc(value).within(group.order(order))",
+    "tooltip":"Discontinuous percentile"
   }
 ]

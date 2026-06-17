@@ -1,3 +1,5 @@
+import { clearTable } from "./table.js";
+
 export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)
@@ -84,6 +86,11 @@ export function placeAtTop(divElement = $(".form-container")) {
   divElement.prependTo(parentDiv);
 }
 
+export function clearData() {
+  clearTable();
+  $("#sql-display").hide();
+}
+
 $(".btn-trigger").on("click", (e) => {
   let elementToHide = $(e.currentTarget).attr("hide"),
     elementToShow = $(e.currentTarget).attr("show"),
@@ -115,3 +122,4 @@ $(".btn-trigger").on("click", (e) => {
       displayDivAtCursor($(element), e);
     });
 });
+

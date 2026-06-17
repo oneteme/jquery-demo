@@ -7,10 +7,16 @@
         "syntax": "rank.over(partition(column).order(orderCol))",
         "examples": [
             {
-                "title":"Ranking products by category",
+                "title": "Filter with RANK",
                 "view": "products",
-                "column":"categories.name:category,price,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter":"join=innerCat&order=category,rank"
+                "column": "id,name,price",
+                "filter": "rank.over(partition(id).order(price.desc))=1"
+            },
+            {
+                "title": "Ranking products by category",
+                "view": "products",
+                "column": "categories.name:category,price,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "join=innerCat&order=category,rank"
             }
         ]
     },
@@ -22,18 +28,23 @@
         "syntax": "rowNumber.over(partition(column).order(orderCol))",
         "examples": [
             {
-                "title":"Ranking products by category",
+                "title": "Filter with ROW NUMBER",
                 "view": "products",
-                "column":"categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber",
-                "filter":"join=innerCat&order=category,rowNumber"
+                "column": "id,name,price",
+                "filter": "rowNumber.over(partition(id).order(price.desc))=1"
             },
             {
-                "title":"ROW NUMBER vs RANK",
+                "title": "ROW NUMBER vs RANK",
                 "view": "products",
-                "column":"categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter":"join=innerCat&order=category,rowNumber"
+                "column": "categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "join=innerCat&order=category,rowNumber"
+            },
+            {
+                "title": "Complex : Ranking products by category",
+                "view": "products",
+                "column": "categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber",
+                "filter": "join=innerCat&order=category,rowNumber"
             }
-
         ]
     },
     {
@@ -44,18 +55,23 @@
         "syntax": "denseRank.over(partition(column).order(orderCol))",
         "examples": [
             {
-                "title":"Ranking products by category",
+                "title": "Filter with DENSE RANK",
                 "view": "products",
-                "column":"categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank",
-                "filter":"join=innerCat&order=category,denseRank"
+                "column": "id,name,price",
+                "filter": "denseRank.over(partition(id).order(price.desc))=1"
             },
             {
-                "title":"DENSE RANK vs RANK",
+                "title": "DENSE RANK vs RANK",
                 "view": "products",
-                "column":"categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter":"join=innerCat&order=category,denseRank"
+                "column": "categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "join=innerCat&order=category,denseRank"
+            },
+            {
+                "title": "Complex : Ranking products by category",
+                "view": "products",
+                "column": "categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank",
+                "filter": "join=innerCat&order=category,denseRank"
             }
-
         ]
     },
     {
@@ -66,19 +82,23 @@
         "syntax": "percentRank.over(partition(column).order(orderCol))",
         "examples": [
             {
-                "title":"Ranking products by category",
+                "title": "Filter with PERCENT RANK",
                 "view": "products",
-                "column":"categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
-                "filter":"join=innerCat&order=category,percentRank"
+                "column": "id,name,price",
+                "filter": "percentRank.over(partition(id).order(price.desc))=1"
             },
             {
-                "title":"PERCENT RANK vs RANK",
+                "title": "Ranking products by category",
                 "view": "products",
-                "column":"categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter":"join=innerCat&order=category,percentRank"
+                "column": "categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
+                "filter": "join=innerCat&order=category,percentRank"
+            },
+            {
+                "title": "PERCENT RANK vs RANK",
+                "view": "products",
+                "column": "categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "join=innerCat&order=category,percentRank"
             }
-
         ]
     }
-    
 ]

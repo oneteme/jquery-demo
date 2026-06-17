@@ -17,6 +17,7 @@
     "syntax": "column.distinct&;distinct=true",
     "examples": [
       {
+        "title":"Apply to all columns",
         "view": "products",
         "column": "price",
         "filter": "distinct=true"
@@ -76,16 +77,27 @@
   },
   {
     "title": "ORDER",
-    "view": "products",
-    "filter": "order=price.asc",
-    "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
     "syntax": "&order=column.ASC // default&;&order=column.DESC",
     "examples": [
       {
+        "title": "order without direction (ASC by default)",
+        "view": "products",
+        "filter": "order=price"
+      },
+      {
+        "title": "Descending order",
+        "view": "products",
+        "filter": "order=price.desc"
+      },
+      {
+        "title": "Ordering with more than one column",
+        "view": "products",
+        "filter": "order=price.desc,cat_id"
+      },
+      {
         "title": "Shuffle results",
         "view": "employees",
-        "column": "lname,fname,start",
         "filter": "order=random"
       }
     ]
@@ -113,11 +125,16 @@
     "column": "myCte.name",
     "filter": "cte=categories.select(name).criteria(startsLike(name,Con)):myCte",
     "definition": "Defines a Common Table Expression (CTE), which creates a temporary named result set that can be referenced within the main query.<br>A CTE helps simplify complex queries by breaking them into reusable and readable parts.<br>This is useful for organizing subqueries, recursive queries, or intermediate calculations.",
-    "syntax": "cte=select(...):cteName"
-  },
-  {
-    "title": "Advanced JQuery",
-    "items": "advanced.json"
+    "syntax": "cte=select(...):cteName",
+    "tooltip": "Common Table Expression",
+    "examples": [
+      {
+        "title": "Apply join with CTE",
+        "view": "products",
+        "column":"name,myCTE.name:cat_name",
+        "filter":"cte=categories.select(id,name).criteria(startsLike(name,Con)):myCTE&join=innerJoin(myCTE).criteria(id.eq(myCTE.id))"
+      }
+    ]
   },
   {
     "title": "JOIN",
@@ -138,5 +155,9 @@
   {
     "title": "Comparators",
     "items": "comparators/comparators.json"
+  },
+  {
+    "title": "Advanced JQuery",
+    "items": "advanced.json"
   }
 ]

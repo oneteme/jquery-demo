@@ -245,6 +245,8 @@ function loadExample(exampleDiv) {
 }
 
 function fetchJQData() {
+  showLoading($(".loader"), $(".query-status-btn"));
+  utils.clearData();
   let table = $("#jq-table").val() ? $("#jq-table").val() : null;
   let columns = $("#jq-columns").val();
   let filters = $("#jq-filters").val();
@@ -253,7 +255,7 @@ function fetchJQData() {
     table + "?" +
     (columns ? "select=" + columns : "") +
     (filters ? "&" + filters : "");
-  showLoading($(".loader"), $(".query-status-btn"));
+
   if (table) {
     $(".jq-link-display").attr("href", window.location.origin + fetchLink);
     $(".jq-link-display").html(fetchLink);
@@ -282,8 +284,7 @@ function fetchJQData() {
       .catch((error) => {
         console.log("error : ", error)
         let errorMessage = "Error while executing this query.";
-        clearTable();
-        $("#sql-display").hide();
+        utils.clearData();
         showError(errorMessage);
         // $(".error_container").show();
         // $("#error-code").html(errorMessage);

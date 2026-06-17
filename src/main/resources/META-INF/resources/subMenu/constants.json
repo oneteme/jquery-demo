@@ -33,9 +33,9 @@
         "column": "random.multiply(100):random_0_100"
       },
       {
-        "title": "Random <b>integer</b> between <b>0</b> and <b>9</b>",
+        "title": "Random inside filter",
         "view": "employees",
-        "column": "random.multiply(10).floor:random_0_9"
+        "filter":"random.lt(0.5)"
       },
       {
         "title": "Shuffle results",
