@@ -14,12 +14,13 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.usf.jquery.core.DBObject;
+import org.usf.jquery.core.QueryPart;
 import org.usf.jquery.web.proxy.Entry;
 import org.usf.jquery.web.proxy.EntryEvaluators;
 import org.usf.jquery.web.proxy.RequestContext;
@@ -33,7 +34,7 @@ class DemoTest {
 		getInstance().register(DemoStore.class, null);
 	}
 
-	private String evaluate(String ds, String entry, BiFunction<Entry, RequestContext, DBObject> evaluator) {
+	private String evaluate(String ds, String entry, BiFunction<Entry, RequestContext, QueryPart> evaluator) {
 		var ctx = getInstance().getDefaultStore().createContext(ds);
 		return evaluator.apply(parseEntry(entry), ctx).toString();
 	}
@@ -169,9 +170,9 @@ class DemoTest {
 
 	@ParameterizedTest
 	@CsvSource(delimiter = ';', ignoreLeadingAndTrailingWhitespace = false, value = {
-	"leftCustomer;LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/
-	"rightCustomer;RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID ",
-	"innerCustomer;INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID "
+	"leftCustomer;LEFT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID",/*TODO : an additional space after CUSTOMERS_TABLE and at the end of the query*/
+	"rightCustomer;RIGHT JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID",
+	"innerCustomer;INNER JOIN CUSTOMERS_TABLE  ON CUSTOMER_ID=CUSTOMER_ID"
 	})
 	void testEvaluateJoin( String entry, String expected) {
 		assertEquals(expected, evaluate("orders", entry, EntryEvaluators::evaluateJoin));
