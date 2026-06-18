@@ -3,17 +3,16 @@
     "title": "AVG",
     "view": "products",
     "column": "price.avg:avg",
-    "filter": "",
     "definition": "Returns the average value of a numeric column.<br>The function calculates the sum of all values and divides it by the number of rows.",
     "syntax": "column.avg",
     "examples": [
       {
-        "title": "Average with GROUP BY",
+        "title": "Average as column (GROUP BY)",
         "view": "products",
         "column": "cat_id,price.avg"
       },
       {
-        "title": "Average with HAVING",
+        "title": "Using Average as filter (HAVING)",
         "view": "products",
         "column": "price,cat_id",
         "filter": "price.avg.lt(10)"
@@ -32,31 +31,81 @@
     "column": "id.count:COUNT",
     "filter": "",
     "definition": "Returns the number of rows in a dataset or the number of non-null values in a column.<br>This function is commonly used to count records.",
-    "syntax": "column.count"
+    "syntax": "column.count",
+    "examples": [
+      {
+        "title": "Using COUNT as a column (GROUP BY)",
+        "view": "products",
+        "column": "cat_id.count,price"
+      },
+      {
+        "title": "Using COUNT as a filter (HAVING)",
+        "view": "products",
+        "column": "cat_id",
+        "filter": "id.count.gt(5)"
+      }
+    ]
   },
   {
     "title": "SUM",
     "view": "details",
     "column": "quantity.sum:SUM",
-    "filter": "",
     "definition": "Returns the total sum of a numeric column.<br>The function adds all values from the specified column.",
-    "syntax": "column.sum"
+    "syntax": "column.sum",
+    "examples": [
+      {
+        "title": "Using SUM as a column (GROUP BY)",
+        "view": "details",
+        "column": "order_id,quantity.sum"
+      },
+      {
+        "title": "Using SUM as a filter (HAVING)",
+        "view": "details",
+        "column": "order_id",
+        "filter": "quantity.sum.gt(100)"
+      }
+    ]
   },
   {
     "title": "MIN",
     "view": "products",
-    "column": "price.min:SmallestPrice",
-    "filter": "",
+    "column": "price.min:MinPrice",
     "definition": "Returns the smallest value from a column.<br>This function is useful for finding minimum values such as the lowest price.",
-    "syntax": "column.min"
+    "syntax": "column.min",
+    "examples": [
+      {
+        "title": "Cheapest price by category(GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.min:MinPrice"
+      },
+      {
+        "title": "Using MIN inside filter (HAVING)",
+        "view": "products",
+        "column": "cat_id,price.min:MinPrice",
+        "filter": "MinPrice.gt(7)"
+      }
+    ]
   },
   {
     "title": "MAX",
     "view": "products",
-    "column": "price.max:LargestPrice",
+    "column": "price.max:MaxPrice",
     "filter": "",
     "definition": "Returns the largest value from a column.<br>This function is useful for finding maximum values such as the highest price.",
-    "syntax": "column.max"
+    "syntax": "column.max",
+    "examples": [
+      {
+        "title": "Highest price by category(GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.max:MaxPrice"
+      },
+      {
+        "title": "Using MAX inside filter (HAVING)",
+        "view": "products",
+        "column": "cat_id,price.max:MaxPrice",
+        "filter": "MaxPrice.gt(70)"
+      }
+    ]
   },
   {
     "title": "MEDIAN",
@@ -66,15 +115,19 @@
     "syntax": "column.median",
     "examples": [
       {
-        "title": "Compare price distribution by category",
-        "view": "products",
-        "column": "categories.name,price.median:priceMedian",
-        "filter": "join=innerCat"
-      },
-      {
         "title": "Median VS AVG",
         "view": "products",
-        "column": "categories.name,price.avg:priceAvg,price.median:priceMedian",
+        "column": "cat_id,price.avg,price.median"
+      },
+      {
+        "title": "Median inside filter(with subQuery)",
+        "view": "products",
+        "filter": "price.gt(products.select(price.median))"
+      },
+      {
+        "title": "Complex : Compare price distribution by category",
+        "view": "products",
+        "column": "categories.name:category,price.median:median",
         "filter": "join=innerCat"
       }
     ]
@@ -82,17 +135,41 @@
   {
     "title": "PERCENTILE_CONT",
     "view": "products",
-    "column": "percentileCont(0.5).within(group.order(price.desc)):percentile_cont",
+    "column": "cat_id,percentileCont(0.5).within(group.order(price.desc)):percentile_cont",
     "definition": "Returns the continuous percentile value of a numeric column.<br>The percentile is calculated by ordering the values and interpolating between them when necessary.<br>The parameter must be a value between <b>0</b> and <b>1</b>, where <b>0.5</b> represents the median.<br>This function is useful for statistical analysis and distribution measurements.",
     "syntax": "percentileCont(value).within(group.order(order))",
-    "tooltip": "Continuous percentile"
+    "tooltip": "Continuous percentile",
+    "examples": [
+      {
+        "title": "AVG vs PERCENTILE_CONT",
+        "view": "products",
+        "column": "cat_id,percentileCont(0.9).within(group.order(price)):percentile_cont,price.avg"
+      },
+      {
+        "title": "PERCENTILE_CONT inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(percentileCont(0.9).within(group.order(price)):percentile_cont)"
+      }
+    ]
   },
   {
     "title": "PERCENTILE_DISC",
     "view": "products",
-    "column": "percentileDisc(0.5).within(group.order(price.desc)):percentile_disc",
+    "column": "cat_id,percentileDisc(0.5).within(group.order(price.desc)):percentile_disc",
     "definition": "Returns the discrete percentile value of a numeric column.<br>The function selects the first actual value whose position matches or exceeds the requested percentile.<br>Unlike PERCENTILE_CONT, no interpolation is performed.<br>The parameter must be a value between <b>0</b> and <b>1</b>.",
     "syntax": "percentileDisc(value).within(group.order(order))",
-    "tooltip": "Discontinuous percentile"
+    "tooltip": "Discontinuous percentile",
+    "examples": [
+      {
+        "title": "AVG vs PERCENTILE_DISC",
+        "view": "products",
+        "column": "cat_id,percentileDisc(0.9).within(group.order(price)):percentile_disc,price.avg"
+      },
+      {
+        "title": "PERCENTILE_DISC inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)):percentile_disc)"
+      }
+    ]
   }
 ]

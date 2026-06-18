@@ -7,13 +7,11 @@
       {
         "title": "Inner Join in URL",
         "view": "products",
-        "column": "id,name,categories.name:cat_name",
         "filter": "join=innerJoin(categories).criteria(cat_id.eq(categories.id))"
       },
       {
         "title": "Using Inner Join from JAVA",
         "view": "products",
-        "column": "id,name,categories.name:cat_name",
         "filter": "join=innerCat"
       }
     ]
@@ -26,13 +24,11 @@
       {
         "title": "Left Join in URL",
         "view": "customers",
-        "column": "orders.id,name",
         "filter": "join=leftJoin(orders).criteria(customers.id.eq(orders.customer_id))&orders.customer_id.isNull"
       },
       {
         "title": "Using Left Join from JAVA",
         "view": "customers",
-        "column": "orders.id,customers.name",
         "filter": "join=leftOrder&orders.customer_id.isNull"
       }
     ]
@@ -45,13 +41,11 @@
       {
         "title": "Right Join in URL",
         "view": "orders",
-        "column": "id,employees.lname,employees.fname",
         "filter": "join=rightJoin(employees).criteria(orders.employee_id.eq(employees.id))&order=id"
       },
       {
         "title": "Using Right Join from JAVA",
         "view": "orders",
-        "column": "id,employees.lname,employees.fname",
         "filter": "join=rightEmployee&order=id"
       }
     ]
@@ -63,25 +57,21 @@
       {
         "title": "Multiple URL joins",
         "view": "orders",
-        "column": "id,customers.name,shippers.name:shipper_name",
         "filter": "join=innerJoin(customers).criteria(customer_id.eq(customers.id)),innerJoin(shippers).criteria(shipper_id.eq(shippers.id))"
       },
       {
         "title": "Multiple Java joins",
         "view": "orders",
-        "column": "id,customers.name,shippers.name:shipper_name",
         "filter": "join=innerCustomer,innerShipper"
       },
       {
         "title": "One single Java join but with multiple joins",
         "view": "orders",
-        "column": "id,customers.name,shippers.name:shipper_name",
         "filter": "join=innerShippCust"
       },
       {
         "title": "Combine URL and JAVA joins",
         "view": "orders",
-        "column": "id,customers.name,shippers.name:shipper_name",
         "filter": "join=innerCustomer,innerJoin(shippers).criteria(shipper_id.eq(shippers.id))"
       }
     ]

@@ -40,10 +40,10 @@
   {
     "title": "HAVING",
     "view": "customers",
-    "column": "id.count:COUNT,country",
-    "filter": "COUNT.gt=5",
+    "column": "country",
+    "filter": "id.count.gt=5",
     "definition": "The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.",
-    "syntax": "select=Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
+    "syntax": "select=col1,col2 WHERE(&) filter(Aggregate(ex : sum,count,avg,...))"
   },
   {
     "title": "AS",
