@@ -180,14 +180,14 @@
     "syntax": "column.mode.within(group.order(order))",
     "examples": [
       {
-        "title": "PERCENTILE_DISC inside filter (subQuery)",
+        "title": "MODE inside filter (subQuery)",
         "view": "products",
-        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)):percentile_disc)"
+        "filter": "price.gt=products.select(test_mode.within(group.order(price)))"
       },
       {
         "title": "AVG vs MODE",
         "view": "products",
-        "column": "cat_id,percentileDisc(0.9).within(group.order(price)):percentile_disc,price.avg"
+        "column": "cat_id,test_mode.within(group.order(price)):mode,price.avg"
       }
     ]
   }
