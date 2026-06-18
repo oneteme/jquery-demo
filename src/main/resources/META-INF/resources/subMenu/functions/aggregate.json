@@ -115,11 +115,6 @@
     "syntax": "column.median",
     "examples": [
       {
-        "title": "Median VS AVG",
-        "view": "products",
-        "column": "cat_id,price.avg,price.median"
-      },
-      {
         "title": "Median inside filter(with subQuery)",
         "view": "products",
         "filter": "price.gt(products.select(price.median))"
@@ -129,6 +124,11 @@
         "view": "products",
         "column": "categories.name:category,price.median:median",
         "filter": "join=innerCat"
+      },
+      {
+        "title": "Median VS AVG",
+        "view": "products",
+        "column": "cat_id,price.avg,price.median"
       }
     ]
   },
@@ -141,14 +141,14 @@
     "tooltip": "Continuous percentile",
     "examples": [
       {
-        "title": "AVG vs PERCENTILE_CONT",
-        "view": "products",
-        "column": "cat_id,percentileCont(0.9).within(group.order(price)):percentile_cont,price.avg"
-      },
-      {
         "title": "PERCENTILE_CONT inside filter (subQuery)",
         "view": "products",
         "filter": "price.gt=products.select(percentileCont(0.9).within(group.order(price)):percentile_cont)"
+      },
+      {
+        "title": "AVG vs PERCENTILE_CONT",
+        "view": "products",
+        "column": "cat_id,percentileCont(0.9).within(group.order(price)):percentile_cont,price.avg"
       }
     ]
   },
@@ -161,14 +161,33 @@
     "tooltip": "Discontinuous percentile",
     "examples": [
       {
+        "title": "PERCENTILE_DISC inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)):percentile_disc)"
+      },
+      {
         "title": "AVG vs PERCENTILE_DISC",
         "view": "products",
         "column": "cat_id,percentileDisc(0.9).within(group.order(price)):percentile_disc,price.avg"
-      },
+      }
+    ]
+  },
+  {
+    "title": "MODE",
+    "view": "products",
+    "column": "test_mode.within(group.order(price)):mode",
+    "definition": "Returns the most frequently occurring value in a column.<br>The mode is the value that appears the greatest number of times in the result set.<br>Unlike AVG or MEDIAN, the mode identifies the most common value rather than the center of the distribution.<br>This is useful for finding the most frequently occurring price, quantity, or category.",
+    "syntax": "column.mode.within(group.order(order))",
+    "examples": [
       {
         "title": "PERCENTILE_DISC inside filter (subQuery)",
         "view": "products",
         "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)):percentile_disc)"
+      },
+      {
+        "title": "AVG vs MODE",
+        "view": "products",
+        "column": "cat_id,percentileDisc(0.9).within(group.order(price)):percentile_disc,price.avg"
       }
     ]
   }

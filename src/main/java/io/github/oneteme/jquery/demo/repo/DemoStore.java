@@ -2,16 +2,19 @@ package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.JDBCType.BIGINT;
 import static org.usf.jquery.core.JDBCType.DOUBLE;
+import static org.usf.jquery.core.Operators.aggregate;
 import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
 import static org.usf.jquery.core.Parameter.required;
 import static org.usf.jquery.core.Predicate.ge;
 import static org.usf.jquery.core.Predicate.lt;
+import static org.usf.jquery.core.TypeResolver.firstArgType;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
+import org.usf.jquery.core.Operators;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
@@ -65,6 +68,11 @@ public interface DemoStore extends StoreResource {
 	@Expose(identity="factorial", description="Raises a numeric value to a specified power")
 	default OperatorDefinition factorial() {
 		return function(DOUBLE, "factorial", required(BIGINT));
+	}
+	
+	@Expose(identity="test_mode", description="")
+	default OperatorDefinition mode() {
+		return aggregate(DOUBLE, "MODE");
 	}
 	
 	@Expose(identity="pi", description="")
