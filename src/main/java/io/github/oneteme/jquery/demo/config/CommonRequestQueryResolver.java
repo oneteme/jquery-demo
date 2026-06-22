@@ -23,7 +23,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import org.usf.jquery.web.Parameters;
 import org.usf.jquery.web.proxy.MvcRequest;
 import org.usf.jquery.web.proxy.QueryInterpreter;
 import org.usf.jquery.web.proxy.QueryRequest;
@@ -56,49 +55,37 @@ public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver
              throw new IllegalStateException("missing @QueryRequest annotation");
  		}
     	if(parameter.getNestedParameterType() == MvcRequest.class) {
-			return resolveQueryComposer(ann, parameter, webRequest);
+			return cacheAttribute(webRequest, MvcRequest.class, ()-> resolveQueryComposer(ann, parameter, webRequest));
 		}
     	throw new IllegalStateException("unsupported parameter type: " + parameter.getNestedParameterType());
     }
 
 	MvcRequest resolveQueryComposer(QueryRequest ann, MethodParameter parameter, NativeWebRequest webRequest) {
-    	return cacheAttribute(webRequest, MvcRequest.class, ()->{
-        	var store = resolveStore(ann, parameter, null);
-    		var modifiableMap = new LinkedHashMap<>(webRequest.getParameterMap()); //modifiable map + preserve order
-    		if(!isEmpty(ann.ignore())) {
-    			for(var k : ann.ignore()) {
-    				if(modifiableMap.containsKey(k)) {
-    					log.debug("ignoring parameter '{}' as specified in @QueryRequest", k);
-    					modifiableMap.remove(k);
-    				}
-    			}
-    		}
-    		resolveParameterCompatibility(modifiableMap);
-    		modifiableMap.compute(VIEW_PARAM, (k,v)->{
-    			if(isEmpty(v) || ann.view().equals(v)) {
-    				return v;
-    			}
-    			throw new IllegalArgumentException("");
-    		});
-    		modifiableMap.computeIfAbsent(VIEW_PARAM, k-> DEFAULT_VIEWER);	
-    		modifiableMap.computeIfAbsent(SELECT_PARAM, k-> ann.fields());	
-        	return parseQuery(store, ann.dataset(), modifiableMap);
-    	});
+    	var store = resolveStore(ann, parameter);
+		var modifiableMap = new LinkedHashMap<>(webRequest.getParameterMap()); //modifiable map + preserve order
+		if(!isEmpty(ann.ignore())) {
+			for(var k : ann.ignore()) {
+				if(modifiableMap.containsKey(k)) {
+					log.debug("ignoring parameter '{}' as specified in @QueryRequest", k);
+					modifiableMap.remove(k);
+				}
+			}
+		}
+		resolveParameterCompatibility(modifiableMap);
+		modifiableMap.computeIfAbsent(VIEW_PARAM, k-> DEFAULT_VIEWER);	
+		modifiableMap.computeIfAbsent(SELECT_PARAM, k-> ann.fields());	
+    	return parseQuery(store, ann.dataset(), modifiableMap);
     }
     
-    StoreResource resolveStore(QueryRequest ann, MethodParameter parameter, Class<? extends StoreResource> type) {
+    StoreResource resolveStore(QueryRequest ann, MethodParameter parameter) {
     	var store = ann.store() == StoreResource.class 
     			? getInstance().getDefaultStore() 
     			: getInstance().getStore(ann.store());
-    	if(nonNull(type) && !type.isInstance(store)) {
-    		throw new IllegalStateException("");
-    	}
         var rst = parameter.getParameterAnnotation(Restriction.class);
-		if(nonNull(rst)) {
-			store = restrict(store, rst.maxCols(), rst.maxRows(), rst.aggregate(), 
-					Set.of(rst.excludeResources()), Set.of(rst.excludeDialects()));
-		}
-		return store;
+		return nonNull(rst) 
+				? restrict(store, rst.maxCols(), rst.maxRows(), rst.aggregate(), 
+						Set.of(rst.excludeResources()), Set.of(rst.excludeDialects()))
+				: store;
     }
     
     private static <T> T cacheAttribute(NativeWebRequest webRequest, Class<T> clazz, Supplier<? extends T> supplier) {
