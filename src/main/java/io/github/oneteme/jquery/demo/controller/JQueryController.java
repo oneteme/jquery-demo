@@ -1,7 +1,6 @@
 package io.github.oneteme.jquery.demo.controller;
 
 import static io.github.oneteme.jquery.demo.JQDatabase.DEMO;
-import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.web.Keyword.COLUMN;
 import static org.usf.jquery.web.Keyword.ORDER;
 import static org.usf.jquery.web.proxy.StoreManager.getInstance;
@@ -12,12 +11,10 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.core.Environment.SimpleEnvironment;
-import org.usf.jquery.core.Query;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.QueryRequestFilter;
 import org.usf.jquery.web.proxy.MvcRequest;
 import org.usf.jquery.web.proxy.QueryRequest;
-import org.usf.jquery.web.proxy.StoreResource;
 
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 import lombok.RequiredArgsConstructor;

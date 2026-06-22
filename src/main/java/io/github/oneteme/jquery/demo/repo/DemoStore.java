@@ -12,10 +12,12 @@ import static org.usf.jquery.core.TypeResolver.firstArgType;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
+import org.usf.jquery.core.ComposerDefinition;
 import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Operators;
 import org.usf.jquery.core.Predicate;
+import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
@@ -85,7 +87,7 @@ public interface DemoStore extends StoreResource {
 		return constant(DOUBLE, "RANDOM()");
 	}
 	default Column getRandom() {
-		return Dialect.getDialect().ctimestamp().invoke();
+		return Dialect.getDialect().ctimestamp().invoke(); //!!TODO use store dialect
 	}
 
 	
@@ -102,4 +104,5 @@ public interface DemoStore extends StoreResource {
 //		return null;
 //		
 //	}
+	
 }
