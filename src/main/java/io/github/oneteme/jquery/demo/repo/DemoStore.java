@@ -25,16 +25,16 @@ import org.usf.jquery.web.proxy.ViewRegistry;
 public interface DemoStore extends StoreResource {
 	
 	static ViewRegistry registry = new ViewRegistry().register("debug", rsp-> (qc, str)->{
-		var result = new HashMap<String, Object>();
-		try {			
+		var res = new HashMap<String, Object>();
+		try {
 			var query = qc.compose(str);
-			result.put("query", query.buildQuery(false).sql());
-			result.put("result", str.execute(query, keyValueMapper()));
+			res.put("query", query.buildQuery(false).sql()); //rename to sql 
+			res.put("result", str.execute(query, keyValueMapper())); //rename to "data"
 		} catch (Exception e) {
-			result.put("test_error", e.getMessage()); //TODO rename to "error"
+			res.put("test_error", e.getMessage()); //TODO rename to "error"
 			log.error("error exec query : ", e);
 		}
-		return result;
+		return res;
 	});
 
 	@Bind("CUSTOMERS_TABLE")
