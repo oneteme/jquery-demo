@@ -2,27 +2,40 @@ package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.JDBCType.BIGINT;
 import static org.usf.jquery.core.JDBCType.DOUBLE;
+import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.core.Operators.aggregate;
 import static org.usf.jquery.core.Operators.constant;
 import static org.usf.jquery.core.Operators.function;
 import static org.usf.jquery.core.Parameter.required;
 import static org.usf.jquery.core.Predicate.ge;
 import static org.usf.jquery.core.Predicate.lt;
-import static org.usf.jquery.core.TypeResolver.firstArgType;
+
+import java.util.HashMap;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
-import org.usf.jquery.core.ComposerDefinition;
 import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
-import org.usf.jquery.core.Operators;
 import org.usf.jquery.core.Predicate;
-import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.web.proxy.Bind;
 import org.usf.jquery.web.proxy.Expose;
 import org.usf.jquery.web.proxy.StoreResource;
+import org.usf.jquery.web.proxy.ViewRegistry;
 
 public interface DemoStore extends StoreResource {
+	
+	static ViewRegistry registry = new ViewRegistry().register("debug", rsp-> (qc, str)->{
+		var result = new HashMap<String, Object>();
+		try {			
+			var query = qc.compose(str);
+			result.put("query", query.buildQuery(false).sql());
+			result.put("result", str.execute(query, keyValueMapper()));
+		} catch (Exception e) {
+			result.put("test_error", e.getMessage()); //TODO rename to "error"
+			log.error("error exec query : ", e);
+		}
+		return result;
+	});
 
 	@Bind("CUSTOMERS_TABLE")
 	Customers customers();
@@ -105,4 +118,8 @@ public interface DemoStore extends StoreResource {
 //		
 //	}
 	
+	@Override
+	default ViewRegistry viewRegistry() {
+		return registry;
+	}
 }

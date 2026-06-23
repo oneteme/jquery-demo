@@ -70,7 +70,7 @@ public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver
 			}
 		}
 		resolveParameterCompatibility(map);
-		map.computeIfAbsent(VIEW_PARAM, k-> DEFAULT_VIEWER);	
+		map.computeIfAbsent(VIEW_PARAM, k-> new String[] {ann.view()});	
 		map.computeIfAbsent(SELECT_PARAM, k-> ann.fields());	
 		return parseQuery(str, ann.dataset(), map);
 	}
