@@ -3,12 +3,12 @@ package io.github.oneteme.jquery.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.of;
-import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateFilter;
-import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateJoin;
-import static org.usf.jquery.web.proxy.EntryEvaluators.evaluateView;
-import static org.usf.jquery.web.proxy.EntryParser.parseEntries;
-import static org.usf.jquery.web.proxy.EntryParser.parseEntry;
-import static org.usf.jquery.web.proxy.StoreManager.getInstance;
+import static org.usf.jquery.mvc.EntryEvaluators.evaluateFilter;
+import static org.usf.jquery.mvc.EntryEvaluators.evaluateJoin;
+import static org.usf.jquery.mvc.EntryEvaluators.evaluateView;
+import static org.usf.jquery.mvc.EntryParser.parseEntries;
+import static org.usf.jquery.mvc.EntryParser.parseEntry;
+import static org.usf.jquery.mvc.StoreManager.getInstance;
 
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
@@ -21,9 +21,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.usf.jquery.core.QueryPart;
-import org.usf.jquery.web.proxy.Entry;
-import org.usf.jquery.web.proxy.EntryEvaluators;
-import org.usf.jquery.web.proxy.RequestContext;
+import org.usf.jquery.mvc.Entry;
+import org.usf.jquery.mvc.EntryEvaluators;
+import org.usf.jquery.mvc.RequestContext;
 
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 

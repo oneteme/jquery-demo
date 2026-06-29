@@ -1,5 +1,7 @@
 package io.github.oneteme.jquery.demo.config;
 
+import static org.usf.jquery.mvc.StoreManager.getInstance;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -10,7 +12,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.usf.jquery.web.proxy.StoreManager;
 
 import io.github.oneteme.jquery.demo.repo.DemoStore;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class WebmvcConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new CommonRequestQueryResolver());
-        resolvers.add(new CommonRequestQueryFilterResolver());
+//        resolvers.add(new CommonRequestQueryFilterResolver());
     }
     
     @Override
@@ -35,12 +36,6 @@ public class WebmvcConfig implements WebMvcConfigurer {
     
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-//        register(WebEnvironment.of(
-//    			DEMO,
-//    			asList(JQDemoTable.values()),
-//        		asList(JQDemoColumn.values()), ds));
-    	
-    	StoreManager.getInstance().register(DemoStore.class, ds);
-    	
+    	getInstance().register(DemoStore.class, ds);
     }
 }

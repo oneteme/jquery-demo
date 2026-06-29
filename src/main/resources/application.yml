@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: demo
+    name: JQuery-Demo
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE
     username: sa

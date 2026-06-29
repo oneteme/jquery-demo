@@ -11,10 +11,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
@@ -37,10 +34,10 @@ public class FileController {
                     .filter(Files::isRegularFile)
                     .filter(p -> p.toString().endsWith(".md"))
                     .map(p -> root.relativize(p).toString().replace("\\", "/").toLowerCase())
-                    .collect(toList());
+                    .toList();
                 return ok(mdFiles);
             }
-	    }catch (IOException e) {
+	    } catch (IOException e) {
 	        return ok(emptyList());
 	    }
 	}
