@@ -85,28 +85,15 @@
   {
     "title": "POWER",
     "view": "products",
-    "column": "price,price.pow(2):pow2",
-    "filter": "price=5,10,15,20",
+    "column": "pow(3,2):pow2",
     "definition": "Raises a numeric value to a specified power.<br>The parameter <b>n</b> represents the exponent (e.g. pow(2) squares the value, pow(3) cubes it).<br>The result is calculated as <b>x^n</b>.",
     "syntax": "column.pow(n)",
     "examples": [
       {
-        "title": "Cube",
+        "title": "POWER inside filter",
         "view": "products",
-        "column": "price,price.pow(3):pow3",
-        "filter": "price=10,20"
-      },
-      {
-        "title": "Arithmetic",
-        "view": "products",
-        "column": "price,price.plus(10).pow(2):plus10Pow2",
-        "filter": "price=10,20"
-      },
-      {
-        "title": "SQRT",
-        "view": "products",
-        "column": "price,price.plus(10).pow(2).sqrt:plus10PowSQRT",
-        "filter": "price=10,20"
+        "column": "price",
+        "filter": "price.pow(2).gt(20)"
       }
     ]
   },

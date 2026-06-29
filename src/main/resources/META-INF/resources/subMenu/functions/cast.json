@@ -30,7 +30,7 @@
   {
     "title": "DATE",
     "view": "orders",
-    "column": "ctimestamp.date:TimestampToDate,date(\"2025-12-08\"):date",
+    "column": "ctimestamp.date:TimestampToDate,date(2025-12-08):date",
     "definition": "Casts a value to a DATE type.<br>The function converts a timestamp or string into a date value, keeping only the date part (year, month, day).",
     "syntax": "column.date"
   },

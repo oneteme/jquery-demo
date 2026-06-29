@@ -76,6 +76,10 @@ public interface Products extends DatasetResource {
 	default Column getPi() {
 		return getInstance().getStore(DemoStore.class).pi().invoke();
 	}
+	
+	default Column getPercentileCont() {
+		return price().bitNot();
+	}
 //	default Column columnRank() {
 //		return Dialect.getDialect().rank();
 //	}
