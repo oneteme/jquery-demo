@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@EnableTransactionManagement
+@EnableTransactionManagement //TODO for what ?????
 public class DemoJQueryApplication {
 
 	public static void main(String[] args) {

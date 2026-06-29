@@ -2,13 +2,13 @@ package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.Join.leftJoin;
 import static org.usf.jquery.core.JoinGroup.joins;
-import static org.usf.jquery.web.proxy.StoreManager.getInstance;
+import static org.usf.jquery.mvc.StoreManager.getInstance;
 
 import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.ViewColumn;
-import org.usf.jquery.web.proxy.Bind;
-import org.usf.jquery.web.proxy.DatasetResource;
-import org.usf.jquery.web.proxy.Expose;
+import org.usf.jquery.mvc.Bind;
+import org.usf.jquery.mvc.DatasetResource;
+import org.usf.jquery.mvc.Expose;
 
 public interface Customers extends DatasetResource {
 

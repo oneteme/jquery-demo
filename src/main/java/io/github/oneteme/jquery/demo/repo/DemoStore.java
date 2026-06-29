@@ -14,21 +14,20 @@ import java.util.HashMap;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
-import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
-import org.usf.jquery.web.proxy.Bind;
-import org.usf.jquery.web.proxy.Expose;
-import org.usf.jquery.web.proxy.StoreResource;
-import org.usf.jquery.web.proxy.ViewRegistry;
+import org.usf.jquery.mvc.Bind;
+import org.usf.jquery.mvc.Expose;
+import org.usf.jquery.mvc.StoreResource;
+import org.usf.jquery.mvc.ViewRegistry;
 
 public interface DemoStore extends StoreResource {
 	
 	static ViewRegistry registry = new ViewRegistry().register("debug", rsp-> (qc, str)->{
 		var res = new HashMap<String, Object>();
+		var query = qc.compose(str);
+		res.put("query", query.buildQuery(false).sql()); //rename to sql 
 		try {
-			var query = qc.compose(str);
-			res.put("query", query.buildQuery(false).sql()); //rename to sql 
 			res.put("result", str.execute(query, keyValueMapper())); //rename to "data"
 		} catch (Exception e) {
 			res.put("test_error", e.getMessage()); //TODO rename to "error"
@@ -90,7 +89,7 @@ public interface DemoStore extends StoreResource {
 		return aggregate(DOUBLE, "MODE");
 	}
 	
-	@Expose(identity="pi", description="")
+	@Expose(identity="pi", description="", value = false)
 	default OperatorDefinition pi() {
 		return constant(DOUBLE, "PI()");
 	}
@@ -100,10 +99,9 @@ public interface DemoStore extends StoreResource {
 		return constant(DOUBLE, "RANDOM()");
 	}
 	default Column getRandom() {
-		return Dialect.getDialect().ctimestamp().invoke(); //!!TODO use store dialect
+		return dialect().ctimestamp().invoke();
 	}
 
-	
 	@Expose(identity="category") 
     default Predicate priceCategory(String... values) {
 		return Chainable.or(values, v-> switch (v) {
