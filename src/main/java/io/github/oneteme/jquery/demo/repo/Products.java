@@ -37,28 +37,12 @@ public interface Products extends DatasetResource {
 	@Bind("UNIT")
 	ViewColumn unit();
 	
-	default Column powPrice() {
-		return price().pow(2);
-	}
-
-	default Column priceABS() {
-		return price().abs();
-	}
-	
 	default Criteria critColumn(String unit) {
 		return unit().eq(unit);
 	}
 	
-	default Criteria inCol(Integer ...arr) {
-		return price().in(arr);
-	}
-	
-	default Criteria startsLike(String pattern) {
-		return price().startsLike(pattern);
-	}
-	
 	default CaseColumn whenCol() {
-		return price().toCase().when(lt(10), "cheap").orElse("expensive");
+		return price().toCase().when(lt(10), "cheap").orElse("Expensive");
 	}
 	
 	default CaseColumn whenColCase() {
@@ -72,18 +56,5 @@ public interface Products extends DatasetResource {
 		var cat = getInstance().getStore(DemoStore.class).categories();
 		return joins(innerJoin(cat.getView(), catId().eq(cat.id())));
 	}
-	
-	default Column getPi() {
-		return getInstance().getStore(DemoStore.class).pi().invoke();
-	}
-	
-	default Column getPercentileCont() {
-		return price().bitNot();
-	}
-//	default Column columnRank() {
-//		return Dialect.getDialect().rank();
-//	}
-	
-	
-	//par product je veux comparer le prix avec la moyen des prix de categorie
+
 }

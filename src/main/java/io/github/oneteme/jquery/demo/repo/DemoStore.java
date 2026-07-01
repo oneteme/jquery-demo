@@ -69,11 +69,6 @@ public interface DemoStore extends StoreResource {
 //				.compose();
 //	}
 	
-	@Expose(identity="date_sub", description="substracts days")
-	default OperatorDefinition dateSub() {
-		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
-	}
-	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {
 		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
@@ -111,10 +106,6 @@ public interface DemoStore extends StoreResource {
             default -> null;
         });
     }
-//	default Predicate predDemo() {
-//		return null;
-//		
-//	}
 	
 	@Override
 	default ViewRegistry viewRegistry() {
