@@ -14,13 +14,12 @@
       {
         "title": "Using Average as filter (HAVING)",
         "view": "products",
-        "column": "price,cat_id",
-        "filter": "price.avg.lt(10)"
+        "column": "cat_id",
+        "filter": "price.avg.gt(10)"
       },
       {
         "title": "Average Product Price per Category",
         "column": "name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
-        "filter": "order=cat_id",
         "view": "products"
       }
     ]
@@ -115,15 +114,14 @@
     "syntax": "column.median",
     "examples": [
       {
+        "title": "Median as column (GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.median"
+      },
+      {
         "title": "Median inside filter(with subQuery)",
         "view": "products",
         "filter": "price.gt(products.select(price.median))"
-      },
-      {
-        "title": "Complex : Compare price distribution by category",
-        "view": "products",
-        "column": "categories.name:category,price.median:median",
-        "filter": "join=innerCat"
       },
       {
         "title": "Median VS AVG",

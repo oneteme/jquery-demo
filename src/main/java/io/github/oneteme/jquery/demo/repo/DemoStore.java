@@ -84,7 +84,7 @@ public interface DemoStore extends StoreResource {
 		return aggregate(DOUBLE, "MODE");
 	}
 	
-	@Expose(identity="pi", description="", value = false)
+	@Expose(identity="pi", description="")
 	default OperatorDefinition pi() {
 		return constant(DOUBLE, "PI()");
 	}

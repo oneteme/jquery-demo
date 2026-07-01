@@ -2,39 +2,63 @@
   {
     "title": "LENGTH",
     "view": "customers",
-    "column": "name,name.length:NbrOfCharacters",
-    "filter": "",
+    "column": "length(jarvis):basic_length",
     "definition": "Returns the length of a string",
-    "syntax": "column.length"
+    "syntax": "column.length",
+    "examples": [
+      {
+        "title": "LENGTH with a column",
+        "view": "customers",
+        "column": "name.length"
+      }
+    ]
   },
   {
     "title": "CONCAT",
     "view": "customers",
-    "column": "city,country,city.concat(\"------->\",country):ConcatenatedValue",
+    "column": "concat(Tony, Stark, is also, Iron man)",
     "definition": "Concatenates multiple strings.",
-    "syntax": "column.concat(text1,text2,...)"
+    "syntax": "column.concat(text1,text2,...)",
+    "examples": [
+      {
+        "title": "CONCAT with a column",
+        "view": "customers",
+        "column": "city.concat(\" can be found in \",country):concat_city"
+      }
+    ]
   },
   {
     "title": "UPPER",
     "view": "customers",
-    "column": "name,name.upper:UpperCaseCustomer",
-    "filter": "",
+    "column": "upper(Jarvis):basic_upper",
     "definition": "UPPER(): Converts a string to uppercase.",
-    "syntax": "column.upper"
+    "syntax": "column.upper",
+    "examples": [
+      {
+        "title": "UPPER with a column",
+        "view": "customers",
+        "column": "name.upper"
+      }
+    ]
   },
   {
     "title": "LOWER",
     "view": "customers",
-    "column": "name,name.lower:LowerCaseCustomer",
-    "filter": "",
+    "column": "lower(Jarvis):basic_lower",
     "definition": "LOWER(): Converts a string to lowercase.",
-    "syntax": "column.lower"
+    "syntax": "column.lower",
+    "examples": [
+      {
+        "title": "UPPER with a column",
+        "view": "customers",
+        "column": "name.upper"
+      }
+    ]
   },
   {
     "title": "LEFT",
     "view": "customers",
     "column": "country,country.left(3):Left,count:COUNT",
-    "filter": "",
     "definition": "In SQL, the LEFT() function returns the desired number of characters from the first characters of a string. This function will voluntarily truncate the input text to the desired length.",
     "syntax": "column.left(number)"
   },
