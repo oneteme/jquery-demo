@@ -49,88 +49,152 @@
     "syntax": "column.lower",
     "examples": [
       {
-        "title": "UPPER with a column",
+        "title": "LOWER with a column",
         "view": "customers",
-        "column": "name.upper"
+        "column": "name.lower"
       }
     ]
   },
   {
     "title": "LEFT",
     "view": "customers",
-    "column": "country,country.left(3):Left,count:COUNT",
+    "column": "left(Jarvis,3):basic_left",
     "definition": "In SQL, the LEFT() function returns the desired number of characters from the first characters of a string. This function will voluntarily truncate the input text to the desired length.",
-    "syntax": "column.left(number)"
+    "syntax": "column.left(number)",
+    "examples": [
+      {
+        "title": "LEFT on a column",
+        "view": "customers",
+        "column": "country.left(3)"
+      }
+    ]
   },
   {
     "title": "RIGHT",
     "view": "customers",
-    "column": "country,country.right(3):Right,count:COUNT",
-    "filter": "",
+    "column": "right(jarvis,3):basic_right",
     "definition": "In SQL language, the RIGHT() function allows you to extract the end of a string by defining the desired length. The function allows you to truncate a string starting from the end, by the desired number of characters.",
-    "syntax": "column.right(number)"
+    "syntax": "column.right(number)",
+    "examples": [
+      {
+        "title": "RIGHT on a column",
+        "view": "customers",
+        "column": "country.right(3)"
+      }
+    ]
   },
   {
     "title": "SUBSTRING",
     "view": "customers",
-    "column": "name,name.substring(0,4):FirstFourCharacters",
-    "filter": "",
+    "column": "substring(Tony Stark,0,4):basic_substring",
     "definition": "SUBSTRING(): Extracts a substring from a string.",
-    "syntax": "column.substring(start,end)"
+    "syntax": "column.substring(start,end)",
+    "examples": [
+      {
+        "title": "SUBSTRING on a column",
+        "view": "customers",
+        "column": "name,name.substring(2,6)"
+      }
+    ]
   },
   {
     "title": "REPLACE",
     "view": "products",
-    "column": "unit,unit.replace(bottles,bags):replacedUnit",
-    "filter": "unit.endsLike=bottles",
+    "column": "replace(Just A Rather Very Small System,Small,Intelligent):basic_replace",
     "definition": "Replaces a specified substring within a column with another value.<br>The function searches the column for the given text and substitutes it with the replacement text.<br>This is useful for cleaning or standardizing string values directly in a query.<br><br>Example: in the <b>PRODUCTS_TABLE</b>, the <b>UNIT</b> column may contain values such as '12 bottles'. Using <b>unit.replace(bottles,bags)</b> replaces the word <b>bottles</b> with <b>bags</b>, producing values like '12 bags'.",
-    "syntax": "column.replace(replaced,replacement)"
+    "syntax": "column.replace(replaced,replacement)",
+    "examples": [
+      {
+        "title": "REPLACE on a column",
+        "view": "products",
+        "column": "unit.replace(bottles,bags)"
+      }
+    ]
   },
   {
     "title": "REVERSE",
     "view": "categories",
-    "column": "reverse(alucard):reverse",
+    "column": "reverse(alucard):basic_reverse",
     "definition": "Reverses the characters of a string value.<br>The function returns the text in the opposite order from the original value.<br>For example: <b>'Chai'</b> becomes <b>'iahC'</b>.",
-    "syntax": "column.reverse"
+    "syntax": "column.reverse",
+    "examples": [
+      {
+        "title": "REVERSE on a column",
+        "view": "customers",
+        "column": "name.reverse"
+      }
+    ]
   },
   {
     "title": "TRIM",
     "view": "customers",
-    "column": "trim(\"            HELLO                             WORLD                       \"):trim",
-    "filter": "",
+    "column": "trim(\"            HELLO                             WORLD                       \"):basic_trim",
     "definition": "In SQL language, the TRIM() function allows you to remove characters at the beginning and end of a string. Most often, the TRIM() function allows you to remove invisible characters, i.e. characters such as space, tab, line break or even carriage return. Such a function can be useful to save space in a database or to display data properly.",
-    "syntax": "column.trim()"
+    "syntax": "column.trim",
+    "examples": [
+      {
+        "title": "TRIM on a column",
+        "view": "customers",
+        "column": "name.trim"
+      }
+    ]
   },
   {
     "title": "LTRIM",
     "view": "customers",
-    "column": "ltrim(\"            HELLO                             WORLD                       \"):ltrim",
-    "filter": "",
+    "column": "ltrim(\"            HELLO                             WORLD                       \"):basic_ltrim",
     "definition": "In SQL, the LTRIM() function is used to remove characters from the beginning of a string. The most common use of LTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-    "syntax": "column.ltrim()",
-    "tooltip": "LeftTrim"
+    "syntax": "column.ltrim",
+    "tooltip": "LeftTrim",
+    "examples": [
+      {
+        "title": "LTRIM on a column",
+        "view": "customers",
+        "column": "name.ltrim"
+      }
+    ]
   },
   {
     "title": "RTRIM",
     "view": "customers",
-    "column": "rtrim(\"            HELLO                             WORLD                       \"):rtrim",
-    "filter": "",
+    "column": "rtrim(\"            HELLO                             WORLD                       \"):basic_rtrim",
     "definition": "In SQL, the RTRIM() function is used to remove characters from the end of a string. The most common use of RTRIM() is to remove invisible characters such as spaces, tabs, and newlines.",
-    "syntax": "column.rtrim()",
-    "tooltip": "RightTrim"
+    "syntax": "column.rtrim",
+    "tooltip": "RightTrim",
+    "examples": [
+      {
+        "title": "RTRIM on a column",
+        "view": "customers",
+        "column": "name.rtrim"
+      }
+    ]
   },
   {
     "title": "LPAD",
     "view": "products",
-    "column": "lpad(arvis,10,J):LPAD",
+    "column": "lpad(arvis,10,J):basic_lpad",
     "definition": "Pads a string on the left side to a specified length.<br>The function adds the given character to the beginning of the value until the desired length is reached.<br>If the original string is longer than the specified length, it is truncated.<br><br>Example: lpad('Chai', 10, '*') → '******Chai'",
-    "syntax": "column.lpad(length, padString)"
+    "syntax": "column.lpad(length, padString)",
+    "examples": [
+      {
+        "title":"LPAD on a column",
+        "view":"customers",
+        "column":"name.lpad(5,Q)"
+      }
+    ]
   },
   {
     "title": "RPAD",
     "view": "products",
-    "column": "rpad(jarvi,10,s):RPAD",
+    "column": "rpad(jarvi,10,s):basic_rpad",
     "definition": "Pads a string on the right side to a specified length.<br>The function adds the given character to the end of the value until the desired length is reached.<br>If the original string is longer than the specified length, it is truncated.<br><br>Example: rpad('Chai', 10, '*') → 'Chai******'",
-    "syntax": "column.rpad(length, padString)"
+    "syntax": "column.rpad(length, padString)",
+    "examples": [
+      {
+        "title":"RPAD on a column",
+        "view":"customers",
+        "column":"name.rpad(5,Q)"
+      }
+    ]
   }
 ]

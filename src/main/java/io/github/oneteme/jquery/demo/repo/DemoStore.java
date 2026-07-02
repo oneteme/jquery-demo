@@ -16,6 +16,8 @@ import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
+import org.usf.jquery.core.Query;
+import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.StoreResource;
@@ -68,6 +70,12 @@ public interface DemoStore extends StoreResource {
 //				.filters()
 //				.compose();
 //	}
+	default Query subCategories() {
+		return new QueryComposer()
+				.columns(categories().id())
+				.criteria(categories().name().startsLike("Con"))
+				.compose(this);
+	}
 	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {

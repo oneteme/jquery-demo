@@ -141,7 +141,7 @@
       {
         "title": "PERCENTILE_CONT inside filter (subQuery)",
         "view": "products",
-        "filter": "price.gt=products.select(percentileCont(0.9).within(group.order(price)):percentile_cont)"
+        "filter": "price.gt=products.select(percentileCont(0.9).within(group.order(price)))"
       },
       {
         "title": "AVG vs PERCENTILE_CONT",
@@ -161,7 +161,7 @@
       {
         "title": "PERCENTILE_DISC inside filter (subQuery)",
         "view": "products",
-        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)):percentile_disc)"
+        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)))"
       },
       {
         "title": "AVG vs PERCENTILE_DISC",

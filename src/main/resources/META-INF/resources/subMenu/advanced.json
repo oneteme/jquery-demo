@@ -1,7 +1,19 @@
 [
     {
         "title": "Criteria",
-        "tutorial": "advanced/criteria.md"
+        "tutorial": "advanced/criteria.md",
+        "examples": [
+            {
+                "title":"Use Criteria as a function",
+                "view": "products",
+                "filter": "priceRangeByName(ef,10,30)"
+            },
+            {
+                "title":"Criteria = ...params",
+                "view": "products",
+                "filter": "priceRangeByName=ef,10,30"
+            }
+        ]
     },
     {
         "title": "Predicate",
@@ -10,13 +22,13 @@
             {
                 "title": "Get cheap products",
                 "view": "products",
-                "column":"name,unit,price",
+                "column": "name,unit,price",
                 "filter": "price.category(cheap)"
             },
             {
                 "title": "Get cheap and medium products",
                 "view": "products",
-                "column":"name,unit,price",
+                "column": "name,unit,price",
                 "filter": "price.category(cheap,medium)"
             }
         ]

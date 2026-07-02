@@ -2,6 +2,7 @@
   {
     "title": "AND",
     "view": "customers",
+    "column":"city,country",
     "filter": "country.eq(Brazil).and(city.eq(\"São Paulo\"))",
     "definition": "Used when both conditions must be true. if (condition1 is true) AND (condition2 is true)",
     "syntax": "filter1.and(filter2.and(filter3).and(etc...)).and(filter4)"
@@ -9,8 +10,8 @@
   {
     "title": "OR",
     "view": "customers",
-    "filter": "country.eq(France).or(country.eq(Germany).or(country.eq(Canada))).or(country.eq(Italy))",
-    "column":"country,count:COUNT",
+    "filter": "country.eq(France).or(country.eq(Germany))",
+    "column":"country",
     "definition": "Used when at least one condition must be true. if (condition1 is true) OR (condition2 is true)",
     "syntax": "filter1.or(filter2.or(filter3).or(etc...)).or(filter4)"
   }

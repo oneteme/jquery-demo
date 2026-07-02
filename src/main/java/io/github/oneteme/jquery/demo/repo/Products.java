@@ -1,6 +1,9 @@
 package io.github.oneteme.jquery.demo.repo;
 
 import static org.usf.jquery.core.Column.beginCase;
+import static org.usf.jquery.core.Column.denseRank;
+import static org.usf.jquery.core.Column.rank;
+import static org.usf.jquery.core.Column.rowNumber;
 import static org.usf.jquery.core.Join.innerJoin;
 import static org.usf.jquery.core.JoinGroup.joins;
 import static org.usf.jquery.core.Predicate.ge;
@@ -11,6 +14,9 @@ import org.usf.jquery.core.CaseColumn;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Criteria;
 import org.usf.jquery.core.JoinGroup;
+import org.usf.jquery.core.Order;
+import org.usf.jquery.core.Partition;
+import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
@@ -39,8 +45,8 @@ public interface Products extends DatasetResource {
 	@Bind("UNIT")
 	ViewColumn unit();
 	
-	default Criteria critColumn(String unit) {
-		return unit().eq(unit);
+	default Criteria priceRangeByName(String name, Integer v1, Integer v2) {
+		return price().gt(v1).and(price().lt(v2)).and(name().contentLike(name));
 	}
 	
 	default CaseColumn whenCol() {
@@ -50,13 +56,26 @@ public interface Products extends DatasetResource {
 	default CaseColumn whenColCase() {
 		return beginCase().when(price().lt(10), "cheap").orElse("Expensive");
 	}
-	
-	default Column columnYear() {
-		return price().year();
-	}
+
 	default JoinGroup innerCat() {
 		var cat = getInstance().getStore(DemoStore.class).categories();
 		return joins(innerJoin(cat.getView(), catId().eq(cat.id())));
 	}
 
+	
+	default Column rankProducts() {
+		return rank().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+	}
+	
+	default Column denseProducts() {
+		return denseRank().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+	}
+	
+	default Column rowProducts() {
+		return rowNumber().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+	}
+	
+//	default Column percentRankProducts(ViewColumn partition, Order order) {
+//		return percentRank().over(new PartitionComposer().columns(partition).orders(order).compose(getInstance().getStore(DemoStore.class)));
+//	}
 }

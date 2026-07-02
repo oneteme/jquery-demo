@@ -2,21 +2,21 @@
   {
     "title": "Current Timestamp",
     "view": "employees",
-    "column": "ctimestamp:CurrentTimestamp",
+    "column": "ctimestamp",
     "definition": "Get the current timestamp",
     "syntax": "ctimestamp"
   },
   {
     "title": "Current Date",
     "view": "employees",
-    "column": "cdate:CurrentDate",
+    "column": "cdate",
     "definition": "Get the current date",
     "syntax": "cdate"
   },
   {
     "title": "Current Time",
     "view": "employees",
-    "column": "ctime:CurrentTime",
+    "column": "ctime",
     "definition": "Get the current time",
     "syntax": "ctime"
   },

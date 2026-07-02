@@ -43,12 +43,12 @@
       {
         "title": "CEIL a <b>column</b>",
         "view": "products",
-        "column": "price,price.ceil(1):price_ceil"
+        "column": "price,price.ceil:price_ceil"
       },
       {
         "title": "CEIL inside a <b>filter</b>",
         "view": "products",
-        "filter": "price.ceil(1).eq(23.2)"
+        "filter": "price.ceil.eq(23.2)"
       }
     ]
   },
@@ -62,12 +62,12 @@
       {
         "title": "FLOOR a <b>column</b>",
         "view": "products",
-        "column": "price,price.floor(1):price_floor"
+        "column": "price,price.floor:price_floor"
       },
       {
         "title": "FLOOR inside a <b>filter</b>",
         "view": "products",
-        "filter": "price.floor(1).eq(23.2)"
+        "filter": "price.floor.eq(23.2)"
       }
     ]
   },
@@ -75,7 +75,6 @@
     "title": "ROUND",
     "view": "products",
     "column": "round(20.08):basic_round",
-    "filter": "ActualPrice=21.35,23.25,17.45,62.5",
     "definition": "Returns a number rounded to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, the number is rounded to that precision (e.g. 21.35 → 21.4 with round(1)).<br>If no value is provided, the number is rounded to the nearest integer.",
     "syntax": "column.round(decimal_places)",
     "examples": [

@@ -15,8 +15,8 @@
             {
                 "title": "Ranking products by category",
                 "view": "products",
-                "column": "categories.name:category,price,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter": "join=innerCat&order=category,rank"
+                "column": "cat_id,price,rankProducts:rank",
+                "filter":"order=cat_id,rank"
             }
         ]
     },
@@ -36,14 +36,14 @@
             {
                 "title": "ROW NUMBER vs RANK",
                 "view": "products",
-                "column": "categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter": "join=innerCat&order=category,rowNumber"
+                "column": "cat_id,price,rowProducts:rowNumber,rankProducts:rank",
+                "filter": "order=cat_id,rowNumber"
             },
             {
                 "title": "Complex : Ranking products by category",
                 "view": "products",
-                "column": "categories.name:category,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber",
-                "filter": "join=innerCat&order=category,rowNumber"
+                "column": "cat_id,price,rowProducts:rowNumber",
+                "filter": "order=cat_id,rowNumber"
             }
         ]
     },
@@ -63,14 +63,14 @@
             {
                 "title": "DENSE RANK vs RANK",
                 "view": "products",
-                "column": "categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter": "join=innerCat&order=category,denseRank"
+                "column": "cat_id,price,denseProducts:denseRank,rankProducts:rank",
+                "filter": "order=cat_id,denseRank"
             },
             {
                 "title": "Complex : Ranking products by category",
                 "view": "products",
-                "column": "categories.name:category,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank",
-                "filter": "join=innerCat&order=category,denseRank"
+                "column": "cat_id,price,denseProducts:denseRank",
+                "filter": "order=cat_id,denseRank"
             }
         ]
     },
@@ -90,14 +90,14 @@
             {
                 "title": "Ranking products by category",
                 "view": "products",
-                "column": "categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
-                "filter": "join=innerCat&order=category,percentRank"
+                "column": "cat_id,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
+                "filter": "order=cat_id,percentRank"
             },
             {
                 "title": "PERCENT RANK vs RANK",
                 "view": "products",
-                "column": "categories.name:category,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
-                "filter": "join=innerCat&order=category,percentRank"
+                "column": "cat_id,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "order=cat_id,percentRank"
             }
         ]
     }

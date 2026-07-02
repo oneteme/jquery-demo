@@ -9,7 +9,7 @@
       {
         "title": "Column plus",
         "view": "products",
-        "column": "price.plus(2):Plus2"
+        "column": "price.plus(2)"
       },
       {
         "title": "Column plus filter",
@@ -28,7 +28,7 @@
       {
         "title": "Column minus",
         "view": "products",
-        "column": "price.minus(10):minus10"
+        "column": "price.minus(10)"
       },
       {
         "title": "Column minus filter",
@@ -48,7 +48,7 @@
       {
         "title": "Column multiply",
         "view": "products",
-        "column": "price.multiply(2):X2"
+        "column": "price.multiply(2)"
       },
       {
         "title": "Column multiply filter",
@@ -68,7 +68,7 @@
       {
         "title": "Column divide",
         "view": "products",
-        "column": "price.divide(2):divideBy2"
+        "column": "price.divide(2)"
       },
       {
         "title": "Column divide filter",

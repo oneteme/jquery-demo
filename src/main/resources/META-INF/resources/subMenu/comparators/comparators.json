@@ -11,12 +11,12 @@
         "title": "Chainable equal (.eq)",
         "view": "products",
         "filter": "price.eq(30)",
-        "column": "price:Equal_30"
+        "column": "price"
       },
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.eq(10):Equal_10"
+        "column": "price.eq(10)"
       },
       {
         "title": "With logical operator",
@@ -44,7 +44,7 @@
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.gt(30):greater_30"
+        "column": "price.gt(30)"
       }
     ]
   },
@@ -66,7 +66,7 @@
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.lt(30):lower_30"
+        "column": "price.lt(30)"
       }
     ]
   },
@@ -88,7 +88,7 @@
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.gt(30):greater_Eq_30"
+        "column": "price.gt(30)"
       }
     ]
   },
@@ -110,14 +110,14 @@
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.le(30):lower_eq_30"
+        "column": "price.le(30)"
       }
     ]
   },
   {
     "title": "Not equal (<>)",
     "view": "products",
-    "column": "price:PriceNotEqualTo_30",
+    "column": "price",
     "filter": "price.ne=30",
     "definition": "column is not equal to value",
     "syntax": "column.ne=value&;column.ne(value) // Recommended for chainable filters",
@@ -132,7 +132,7 @@
       {
         "title": "Comparator as a column",
         "view": "products",
-        "column": "price.ne(10):NotEqual_10"
+        "column": "price.ne(10)"
       },
       {
         "title": "With logical operator",
@@ -177,38 +177,46 @@
   {
     "title": "IN",
     "view": "products",
-    "column": "price:Price_In_10_30_50",
-    "filter": "price=10,30,50&order=price",
+    "column": "price",
+    "filter": "price=10,20,30,40",
     "definition": "TRUE if the operand is equal to any value in a list of expressions",
-    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...",
+    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...&;column.in=select(...).criteria(...) //SubQuery",
     "examples": [
       {
         "title": "JQuery IN",
         "view": "products",
-        "column": "price:Price_In_10_30_50",
-        "filter": "price.in=10,30,50&order=price"
+        "column": "price",
+        "filter": "price.in=10,20,30,40"
       },
       {
         "title": "SubQuery",
         "view": "products",
-        "column": "categories.name:catName,name,price",
-        "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))&join=innerCat"
+        "column": "cat_id,name",
+        "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))"
       }
     ]
   },
   {
     "title": "Not IN",
     "view": "products",
-    "column": "price:PriceNotEqualTo_10_30_50",
-    "filter": "price.notIn=10,30,50&order=price",
+    "column": "price",
+    "filter": "price.notIn=10,20,30,40",
     "definition": "TRUE if the operand is not equal to any value in a list of expressions",
-    "syntax": "column.notIn=val1,val2,val3,..."
+    "syntax": "column.notIn=val1,val2,val3,...&;column.notIn=val1,val2,val3,...",
+     "examples": [
+      {
+        "title": "JQuery IN",
+        "view": "products",
+        "column": "price",
+        "filter": "price.notIn(10,20,30,40)"
+      }
+    ]
   },
   {
     "title": "BETWEEN",
     "view": "products",
-    "column": "price:PriceBetween_10_20",
-    "filter": "price.between=10,20&order=price",
+    "column": "price",
+    "filter": "price.between=10,20",
     "definition": "BETWEEN is used to filter the result set within a specific range of values. It includes the boundary values.",
     "syntax": "column.between=val1,val2"
   },

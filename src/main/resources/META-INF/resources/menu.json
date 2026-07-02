@@ -32,7 +32,7 @@
   {
     "title": "GROUP BY",
     "view": "customers",
-    "column": "id.count:COUNT,country",
+    "column": "id.count,country",
     "definition": "GROUP BY: A SQL clause that groups rows in a database table based on one or more columns, allowing for the aggregation of data (e.g., summing, counting, or averaging) within each group.\nFor example, if you have a sales database and want to find the total sales per region, you would use GROUP BY to group the sales data by region and then calculate the total for each group.",
     "syntax": "select=Aggregate(ex : sum,count,avg,...),col1,col2"
   },
@@ -47,7 +47,7 @@
   {
     "title": "AS",
     "view": "customers",
-    "column": "id:ID,name:CustomerName",
+    "column": "id:my_id,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
     "syntax": "column:new_col_name",
     "tooltip": "Aliases/TAG",
@@ -123,7 +123,6 @@
   {
     "title": "SUB QUERY",
     "view": "products",
-    "column": "name,price",
     "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))",
     "definition": "Allows using a query inside another query.<br>A subquery is executed first and its result is used by the main query.<br>This is useful for dynamic comparisons, such as filtering values based on aggregated results.<br>For example, you can retrieve products whose category starts with 'Con'",
     "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))"

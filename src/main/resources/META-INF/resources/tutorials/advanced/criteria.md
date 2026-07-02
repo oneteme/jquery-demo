@@ -35,18 +35,23 @@ Example:
 
 ```java 
 // In your DatasetResource
-default Criteria priceRange(Integer ...arr) {
-	return price().in(arr);
+default Criteria priceRangeByName(String name, Integer v1, Integer v2) {
+	return price().between(arr).and(name().contentLike(name));
 }
 ```
 
 Usage:
 ```javascript
-select=...&priceRange(10,20,30)
+select=...&priceRangeByName(ef,10,20,30)
 ```
 When used in a query, this generates:
 ```sql
-WHERE price IN (10, 20, 30)
+WHERE
+  (
+    v1.PRICE > 10
+    AND v1.PRICE < 30
+    AND v1.PRODUCT_NAME LIKE '%ef%'
+  )
 ```
 
 - A Criteria is used to filter query results
