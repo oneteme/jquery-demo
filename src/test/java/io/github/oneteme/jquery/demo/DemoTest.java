@@ -3,7 +3,7 @@ package io.github.oneteme.jquery.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.of;
-import static org.usf.jquery.mvc.EntryEvaluators.evaluateFilter;
+import static org.usf.jquery.mvc.EntryEvaluators.evaluateCriteria;
 import static org.usf.jquery.mvc.EntryEvaluators.evaluateJoin;
 import static org.usf.jquery.mvc.EntryEvaluators.evaluateView;
 import static org.usf.jquery.mvc.EntryParser.parseEntries;
@@ -218,14 +218,14 @@ class DemoTest {
 				"v1.column(start,end,varchar(33).myFn:txt).filter(start.gt(ctimestamp)).order(end.desc,start):v5"),
 				ctx));
 
-		System.out.println(evaluateFilter(parseEntry("size.vitesse"), ctx, parseEntries("fast,slow,fastest")));
-		System.out.println(evaluateFilter(parseEntry("bool(1).eq(1)"), ctx));
-		System.out.println(evaluateFilter(parseEntry("size.vitesse(fast,slow,fastest).and(bool(1).eq(1))"), ctx));
+		System.out.println(evaluateCriteria(parseEntry("size.vitesse"), ctx, parseEntries("fast,slow,fastest")));
+		System.out.println(evaluateCriteria(parseEntry("bool(1).eq(1)"), ctx));
+		System.out.println(evaluateCriteria(parseEntry("size.vitesse(fast,slow,fastest).and(bool(1).eq(1))"), ctx));
 
-		System.out.println(evaluateFilter(parseEntry("size"), ctx, parseEntries("3")));
-		System.out.println(evaluateFilter(parseEntry("size"), ctx, parseEntries("3,2,1")));
-		System.out.println(evaluateFilter(parseEntry("size.lt(3)"), ctx));
-		System.out.println(evaluateFilter(parseEntry("size.lt"), ctx, parseEntries("3")));
+		System.out.println(evaluateCriteria(parseEntry("size"), ctx, parseEntries("3")));
+		System.out.println(evaluateCriteria(parseEntry("size"), ctx, parseEntries("3,2,1")));
+		System.out.println(evaluateCriteria(parseEntry("size.lt(3)"), ctx));
+		System.out.println(evaluateCriteria(parseEntry("size.lt"), ctx, parseEntries("3")));
 //		System.out.println(evaluateFilter(parseEntry("size.lt(3)"), ctx, parseEntries("3")));
 		System.out.println(evaluateJoin(parseEntry("leftJoin(v1).filter(v1.start.eq(ctimestamp))"), ctx));
 	}

@@ -20,6 +20,7 @@ import org.usf.jquery.core.Query;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
+import org.usf.jquery.mvc.QueryResource;
 import org.usf.jquery.mvc.StoreResource;
 import org.usf.jquery.mvc.ViewRegistry;
 
@@ -70,11 +71,12 @@ public interface DemoStore extends StoreResource {
 //				.filters()
 //				.compose();
 //	}
-	default Query subCategories() {
-		return new QueryComposer()
+	
+	default QueryResource subCategories() {
+		return new QueryResource(new QueryComposer()
 				.columns(categories().id())
 				.criteria(categories().name().startsLike("Con"))
-				.compose(this);
+				.compose(this));
 	}
 	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
