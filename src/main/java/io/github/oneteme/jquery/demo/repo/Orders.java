@@ -8,10 +8,10 @@ import static org.usf.jquery.mvc.StoreManager.getInstance;
 import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
-import org.usf.jquery.mvc.DatasetResource;
+import org.usf.jquery.mvc.DatasetCatalogue;
 import org.usf.jquery.mvc.Expose;
 
-public interface Orders extends DatasetResource {
+public interface Orders extends DatasetCatalogue {
 	
 	@Bind("ORDER_ID")
 	ViewColumn id();

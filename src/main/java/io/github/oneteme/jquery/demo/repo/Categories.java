@@ -2,9 +2,9 @@ package io.github.oneteme.jquery.demo.repo;
 
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
-import org.usf.jquery.mvc.DatasetResource;
+import org.usf.jquery.mvc.DatasetCatalogue;
 
-public interface Categories extends DatasetResource {
+public interface Categories extends DatasetCatalogue {
 	
 	@Bind("CATEGORY_ID")
 	ViewColumn id();

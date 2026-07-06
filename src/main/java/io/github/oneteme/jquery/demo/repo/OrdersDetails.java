@@ -2,10 +2,10 @@ package io.github.oneteme.jquery.demo.repo;
 
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
-import org.usf.jquery.mvc.DatasetResource;
+import org.usf.jquery.mvc.DatasetCatalogue;
 import org.usf.jquery.mvc.Expose;
 
-public interface OrdersDetails extends DatasetResource {
+public interface OrdersDetails extends DatasetCatalogue {
 
 	@Bind("ORDER_DETAIL_ID")
 	ViewColumn id();
