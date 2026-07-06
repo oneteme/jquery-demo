@@ -111,6 +111,37 @@ $(document).ready(function () {
     let example = $(e.currentTarget).attr("data-example");
     $(".jq-example[data-learn='" + example + "']").click();
   });
+  $('#examples-toggle').on('click', function (e) {
+    e.stopPropagation();
+    $('#examples-popup').toggleClass('show');
+    $(this).toggleClass('active');
+  });
+
+  $('#sql-copy-btn').on('click', function () {
+    const $btn = $(this);
+    const code = $('#sql-code').text();
+
+    navigator.clipboard.writeText(code).then(function () {
+      $btn.addClass('copied');
+
+      const $span = $btn.find('span');
+      const original = $span.text();
+
+      $span.text('Copied!');
+
+      setTimeout(function () {
+        $btn.removeClass('copied');
+        $span.text(original);
+      }, 1500);
+    });
+  });
+  // // close popup when clicking anywhere outside it
+  // $(document).on('click', function (e) {
+  //   if (!$(e.target).closest('#examples-popup, #examples-toggle').length) {
+  //     $('#examples-popup').removeClass('show');
+  //     $('#examples-toggle').removeClass('active');
+  //   }
+  // });
 });
 
 
@@ -136,7 +167,7 @@ function loadExample(exampleDiv) {
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-element").hide();
   $(".definition-toggle").hide();
-  $(".examples-sidebar").hide();
+  $(".example-title-bar").hide();
   $(".examples-numbers-container").empty();
   $(".syntax-block").hide();
   let view = exampleDiv.attr("data-view"),
@@ -214,7 +245,7 @@ function loadExample(exampleDiv) {
   if (examples.length > 0) {
     $(".definition-element.try_it").show();
     if (examples.length > 1) {
-      $(".examples-sidebar").show();
+      $(".example-title-bar").show();
     }
   }
 
@@ -225,6 +256,7 @@ function loadExample(exampleDiv) {
       $("#jq-table").val(val.view ?? "");
       $("#jq-columns").val(val.column ?? "");
       $("#jq-filters").val(val.filter ?? "");
+      $('.example-title-text').html(val.title)
       $(".example-number").removeClass("active");
       example.addClass("active");
       fetchJQData();

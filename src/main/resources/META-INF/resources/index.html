@@ -113,15 +113,30 @@
 
       <div class="settings-content d-flex-col">
         <div class="form-container card-container">
-
-          <div class="examples-sidebar" style="display: none;">
-            <div class="examples-sidebar-title">ALSO TRY</div>
-            <div class="examples-numbers-container d-flex-col gap_4">
-            </div>
-          </div>
           <form id="query-form" class="form-content" style="position: relative;">
             <div class="loader" style="display: none;position: absolute;"></div>
-            <div class="fw-semibold white_text">Build up your Query</div>
+            <div class="query-form-header">
+              <div class="fw-semibold white_text">Build up your Query</div>
+
+              <div class="example-title-bar" style="display: none;">
+                <span class="example-title-text" id="example-title-text">Join products with their category name</span>
+
+                <div class="examples-toggle" id="examples-toggle" tabindex="0" aria-label="Show examples">
+                  <i class="ti ti-dots"></i>
+                </div>
+
+                <div class="examples-popup" id="examples-popup">
+                  <div class="examples-popup-arrow"></div>
+                  <div class="examples-numbers-container d-flex-row gap_8">
+                    <div class="example-number active" tabindex="0" data-title="Join products with their category name">
+                      1</div>
+                    <div class="example-number" tabindex="0" data-title="Filter orders by customer and date range">2
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="d-flex gap_4">
               <select id="jq-table" class="form-select" style="width: fit-content;">
                 <option value="">-- Select a view --</option>
@@ -131,10 +146,9 @@
                   placeholder="Setup JQuery columns..." />
                 <label for="jq-columns" class="fw-semibold white_text">Columns
                 </label>
-                
+
               </div>
             </div>
-
 
             <div class="d-flex">
               <div class="form-floating jqfilters_input_container" style="width: 100%;position: relative;">
@@ -168,16 +182,15 @@
           </div>
         </div>
 
-        <div id="sql-display" class="card-container" style="display: none;padding: 0;">
-          <pre><code id="sql-code" class="language-sql"></code></pre>
-          <!-- <textarea
-              id="sql-display"
-              class="form-control"
-              name="showsql"
-              readonly
-              style="resize: none; max-height: 200px; height: 100%"
-              placeholder="Query in SQL"
-            ></textarea> -->
+        <div id="sql-display" class="card-container" style="padding: 0px;display: none;position: relative;">
+          <select id="dialect-select">
+            <option value="postgre">PostGre SQL</option>
+            <option value="h2">H2</option>
+            <option value="sqlite">SQLite</option>
+          </select>
+          <pre><code id="sql-code" class="language-sql hljs">
+    <!-- existing generated SQL spans -->
+  </code></pre>
         </div>
 
         <div class="results-container card-container" style="display: none;">
@@ -234,8 +247,8 @@
         <h2 class="title white_text">Try it</h2>
         <div class="description white_text">
           To see how it works you can
-          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.form-sidebar-actions" hide=".content"
-            visible=".show-docs,.show-info">Try it
+          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.form-sidebar-actions"
+            hide=".content" visible=".show-docs,.show-info">Try it
             Here</a>
         </div>
       </div>

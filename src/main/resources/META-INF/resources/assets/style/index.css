@@ -1685,6 +1685,127 @@ code:hover::before {
 }
 
 /* Examples panel */
+.query-form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+/* the pill/container that holds the example title + the "..." toggle */
+.example-title-bar {
+  position: relative;
+  /* flex: 1; */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 217, 255, 0.06);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  padding: 0.15rem 0.6rem 0.15rem 1rem;
+  transition: all 0.3s;
+}
+
+.example-title-bar:hover {
+  border-color: var(--jarvis-cyan);
+  box-shadow: 0 0 12px var(--jarvis-glow);
+}
+
+.example-title-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jarvis-cyan);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.example-title-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--jarvis-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* the "..." button, now living inside the pill */
+.examples-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--jarvis-border);
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(139, 92, 246, 0.1));
+  color: var(--jarvis-cyan);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.examples-toggle:hover {
+  border-color: var(--jarvis-cyan);
+  box-shadow: 0 0 15px var(--jarvis-glow);
+  transform: translateY(-1px);
+}
+
+.examples-toggle.active {
+  background: linear-gradient(135deg, var(--jarvis-cyan), var(--jarvis-blue));
+  color: var(--jarvis-darker);
+  box-shadow: 0 0 20px var(--jarvis-glow);
+}
+
+/* popup stays anchored to the bar, not just the button */
+.examples-popup {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--jarvis-card);
+  border: 1px solid var(--jarvis-cyan);
+  border-radius: 12px;
+  padding: 0.2rem 0.7rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px var(--jarvis-glow);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.examples-popup.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.examples-popup-arrow {
+  position: absolute;
+  top: -7px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  background: var(--jarvis-card);
+  border-left: 1px solid var(--jarvis-cyan);
+  border-top: 1px solid var(--jarvis-cyan);
+  transform: rotate(45deg);
+}
+
+.examples-popup-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--jarvis-text-dim);
+  text-transform: uppercase;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
 .examples-sidebar {
   width: 40px;
   background: var(--jarvis-darker);
@@ -1793,9 +1914,11 @@ code:hover::before {
   background: var(--jarvis-dark);
   color: var(--jarvis-text);
 }
-#jq-filters{
-  border-radius: 8px 0 0 8px!important;
+
+#jq-filters {
+  border-radius: 8px 0 0 8px !important;
 }
+
 .form-floating>label {
   /* position: absolute;
   top: 0;
@@ -2169,6 +2292,66 @@ code:hover::before {
 } */
 
 /*** TABLES ***/
+
+/* SQL card header */
+#dialect-select {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--jarvis-dark);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  color: var(--jarvis-text);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  transition: all 0.3s;
+  height: 32px !important;
+  min-height: auto !important;
+  z-index: 2;
+}
+
+#dialect-select:focus {
+  background: var(--jarvis-dark);
+}
+
+.sql-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 217, 255, 0.1);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 6px;
+  color: var(--jarvis-cyan);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sql-copy-btn:hover {
+  background: rgba(0, 217, 255, 0.2);
+  border-color: var(--jarvis-cyan);
+  box-shadow: 0 0 12px var(--jarvis-glow);
+  transform: translateY(-1px);
+}
+
+.sql-copy-btn.copied {
+  color: #22c55e;
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* the old inline "🗄️ SQL" badge is now redundant, replaced by the header */
+.language-sql::before {
+  display: none;
+}
+
+#sql-display code {
+  padding: 1rem !important;
+  display: block;
+}
 
 /*** RESPONSIVE ***/
 @media only screen and (max-width: 600px) {
