@@ -4,6 +4,7 @@ import { hideNavBar, loadNavData, showNavBar, toggleNavBar, toggleNavSubElements
 import { loadSettings } from "./settings.js";
 import { hideLoading, showError, showLoading, showSuccess } from "./status.js";
 import { clearTable, displayTableResults } from "./table.js";
+import * as dialect from "./dialect.js";
 import * as utils from "./utils.js";
 
 var inputTimeOut;
@@ -135,13 +136,6 @@ $(document).ready(function () {
       }, 1500);
     });
   });
-  // // close popup when clicking anywhere outside it
-  // $(document).on('click', function (e) {
-  //   if (!$(e.target).closest('#examples-popup, #examples-toggle').length) {
-  //     $('#examples-popup').removeClass('show');
-  //     $('#examples-toggle').removeClass('active');
-  //   }
-  // });
 });
 
 

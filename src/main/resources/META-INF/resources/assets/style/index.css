@@ -166,7 +166,7 @@ header {
 
 .header-list i {
   color: var(--jarvis-cyan);
-  font-size: 26px;
+  font-size: 22px;
 }
 
 .header-list img {
@@ -207,6 +207,128 @@ header {
   right: 12px;
 }
 
+.db-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 28px;
+  padding: 0 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.db-select-wrapper:hover,
+.db-select-wrapper.active {
+  background: rgba(0, 217, 255, 0.08);
+}
+
+.db-select-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.db-select-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--jarvis-text);
+  white-space: nowrap;
+}
+
+.db-select-chevron {
+  font-size: 11px;
+  color: var(--jarvis-text-dim);
+  transition: transform 0.2s;
+}
+
+.db-select-wrapper.active .db-select-chevron {
+  transform: rotate(180deg);
+}
+
+.db-select-popup {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 150px;
+  display: none;
+  flex-direction: column;
+  background: var(--jarvis-card);
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  padding: 0.3rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.db-select-popup.show {
+  display: flex;
+}
+
+.db-select-popup-arrow {
+  position: absolute;
+  top: -5px;
+  right: 14px;
+  width: 9px;
+  height: 9px;
+  background: var(--jarvis-card);
+  border-left: 1px solid var(--jarvis-border);
+  border-top: 1px solid var(--jarvis-border);
+  transform: rotate(45deg);
+}
+
+.db-select-icon-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.db-select-icon-slot i {
+  font-size: 20px;
+}
+
+.db-fallback-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+
+.db-option {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 5px;
+  color: var(--jarvis-text-dim);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.db-option i {
+  font-size: 15px;
+}
+
+.db-option:hover {
+  background: rgba(0, 217, 255, 0.08);
+  color: var(--jarvis-cyan);
+}
+
+.db-option.active {
+  color: var(--jarvis-cyan);
+  font-weight: 600;
+}
 
 /*** HEADER  ***/
 

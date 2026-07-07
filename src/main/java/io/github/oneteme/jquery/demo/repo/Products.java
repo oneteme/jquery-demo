@@ -18,6 +18,8 @@ import org.usf.jquery.core.Order;
 import org.usf.jquery.core.Partition;
 import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.Predicate;
+import org.usf.jquery.core.QueryComposer;
+import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
@@ -73,6 +75,16 @@ public interface Products extends DatasetCatalog {
 	
 	default Column rowProducts() {
 		return rowNumber().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+	}
+	
+
+	
+	default SingleQueryColumn single() {
+		var cat = getInstance().getStore(DemoStore.class);
+		return new QueryComposer()
+				.columns(id())
+				.criteria(name().startsLike("Con"))
+				.compose(cat).asColumn();
 	}
 	
 //	default Column percentRankProducts(ViewColumn partition, Order order) {

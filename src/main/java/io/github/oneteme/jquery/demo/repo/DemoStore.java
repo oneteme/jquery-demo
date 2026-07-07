@@ -10,15 +10,15 @@ import static org.usf.jquery.core.Parameter.required;
 import static org.usf.jquery.core.Predicate.ge;
 import static org.usf.jquery.core.Predicate.lt;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
-import org.usf.jquery.core.Dialect;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
-import org.usf.jquery.core.Query;
 import org.usf.jquery.core.QueryComposer;
+import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.QueryResource;
@@ -79,6 +79,7 @@ public interface DemoStore extends StoreCatalog {
 				.criteria(categories().name().startsLike("Con"))
 				.compose(this));
 	}
+	
 	
 	@Expose(identity="pow", description="Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {

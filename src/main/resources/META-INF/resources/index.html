@@ -48,7 +48,10 @@
 
   <!-- SQL FORMATTER -->
   <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
+
+  <!-- ICONS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <script type="module" src="./assets/script/script.js"></script>
 </head>
 
@@ -87,6 +90,39 @@
         <img id="jq-settings" class="d-flex align-items-center btn-trigger" cursor-data=".settings-modal"
           src="/assets/images/settings_icon.svg" alt="">
         <img id="jq-live" class="d-flex align-items-center" src="/assets/images/circle-question-regular-full.svg">
+        <div class="db-select-wrapper" id="db-select-wrapper" tabindex="0">
+          <span class="db-select-icon-slot" id="db-select-icon-slot">
+            <i class="devicon-postgresql-plain colored"></i>
+          </span>
+          <span class="db-select-label" id="db-select-label">PostgreSQL</span>
+          <i class="ti ti-chevron-down db-select-chevron"></i>
+
+          <div class="db-select-popup" id="db-select-popup">
+            <div class="db-select-popup-arrow"></div>
+
+            <div class="db-option active" data-value="postgresql" data-label="PostgreSQL"
+              data-icon="devicon-postgresql-plain colored">
+              <i class="devicon-postgresql-plain colored"></i> PostgreSQL
+            </div>
+            <div class="db-option d-flex" data-value="mysql" data-label="MySQL"
+              data-icon="devicon-mysql-original colored">
+              <i class="devicon-mysql-original colored"></i><span>MySQL</span>
+            </div>
+            <div class="db-option" data-value="sqlserver" data-label="SQL Server"
+              data-icon="devicon-microsoftsqlserver-plain colored">
+              <i class="devicon-microsoftsqlserver-plain colored"></i> SQL Server
+            </div>
+            <div class="db-option" data-value="oracle" data-label="Oracle" data-icon="devicon-oracle-original colored">
+              <i class="devicon-oracle-original colored"></i> Oracle
+            </div>
+            <div class="db-option" data-value="sqlite" data-label="SQLite" data-icon="devicon-sqlite-plain colored">
+              <i class="devicon-sqlite-plain colored"></i> SQLite
+            </div>
+            <div class="db-option" data-value="h2" data-label="H2" data-fallback="H2" data-color="#1c78c0">
+              <span class="db-fallback-icon" style="background:#2fc01c;">H2</span> H2
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
