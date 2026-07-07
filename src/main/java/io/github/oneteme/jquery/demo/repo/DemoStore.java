@@ -21,10 +21,10 @@ import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.QueryResource;
-import org.usf.jquery.mvc.StoreCatalogue;
+import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.ViewRegistry;
 
-public interface DemoStore extends StoreCatalogue {
+public interface DemoStore extends StoreCatalog {
 	
 	static ViewRegistry registry = new ViewRegistry().register("debug", rsp-> (qc, str)->{
 		var res = new HashMap<String, Object>();

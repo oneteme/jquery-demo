@@ -11,10 +11,10 @@ import org.usf.jquery.core.Partition;
 import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
-import org.usf.jquery.mvc.DatasetCatalogue;
+import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface Customers extends DatasetCatalogue {
+public interface Customers extends DatasetCatalog {
 
 	@Bind("CUSTOMER_ID")
 	ViewColumn id();
