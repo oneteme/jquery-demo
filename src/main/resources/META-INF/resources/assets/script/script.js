@@ -167,7 +167,7 @@ function loadExample(exampleDiv) {
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-element").hide();
   $(".definition-toggle").hide();
-  $(".example-title-bar").hide();
+  $("#example-title-text").html("Build up your query");
   $(".examples-numbers-container").empty();
   $(".syntax-block").hide();
   let view = exampleDiv.attr("data-view"),
@@ -239,34 +239,32 @@ function loadExample(exampleDiv) {
   }
   const examples = exampleDiv.attr("data-examples") ? JSON.parse(exampleDiv.attr("data-examples")) : [];
   if (view || columns || filters) {
-    examples.unshift({ "title": "BASIC " + exampleDiv.html(), "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
+    examples.unshift({ "title": exampleDiv.html(), "view": view ?? "", "filter": filters ?? "", "column": columns ?? "" })
   }
 
   if (examples.length > 0) {
     $(".definition-element.try_it").show();
-    if (examples.length > 1) {
-      $(".example-title-bar").show();
-    }
   }
 
   $.each(examples, (key, val) => {
     const index = key + 1,
-      example = $("<div>", { class: "example-number" }).html(index);
+      example = $("<div>", { class: "example-number" }).html(index),
+      exampleTitle = val.title ?? "Example " + index;
     example.on('click', () => {
       $("#jq-table").val(val.view ?? "");
       $("#jq-columns").val(val.column ?? "");
       $("#jq-filters").val(val.filter ?? "");
-      $('.example-title-text').html(val.title)
+      $('#example-title-text').html(exampleTitle)
       $(".example-number").removeClass("active");
       example.addClass("active");
       fetchJQData();
     });
 
     tippy(example[0], {
-      content: val.title ?? "Example " + index,
+      content: exampleTitle,
       animation: 'scale',
       arrow: true,
-      placement: 'right'
+      placement: 'bottom'
     });
     $(".examples-numbers-container").append(example)
   })
