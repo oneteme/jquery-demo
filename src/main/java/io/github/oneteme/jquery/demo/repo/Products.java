@@ -20,10 +20,10 @@ import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
-import org.usf.jquery.mvc.DatasetCatalogue;
+import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface Products extends DatasetCatalogue {
+public interface Products extends DatasetCatalog {
 	
 	@Bind("PRODUCT_ID")
 	ViewColumn id();

@@ -23,7 +23,6 @@ import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.QueryResource;
 import org.usf.jquery.mvc.StoreCatalog;
-import org.usf.jquery.mvc.StoreCatalogue;
 import org.usf.jquery.mvc.ViewRegistry;
 
 public interface DemoStore extends StoreCatalog {
