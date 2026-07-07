@@ -17,13 +17,13 @@
     "syntax": "column.distinct&;distinct=true",
     "examples": [
       {
-        "title": "Apply to all columns",
+        "title": "Apply DISTINCT to all columns",
         "view": "products",
         "column": "price",
         "filter": "distinct=true"
       },
       {
-        "title": "apply on a single column",
+        "title": "Apply DISTINCT on a single column",
         "view": "products",
         "column": "price.distinct"
       }
@@ -114,7 +114,7 @@
         "column": "price,when(price.lt(10),Cheap).when(price.ge(10).and(price.lt(20)),Normal).orElse(Expensive):price_lab"
       },
       {
-        "title": "CASE column created in <b>JAVA</b>",
+        "title": "Use CASE column created in <b>JAVA</b>",
         "view": "products",
         "column": "price,whenCol:price_lab"
       }
@@ -125,7 +125,14 @@
     "view": "products",
     "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))",
     "definition": "Allows using a query inside another query.<br>A subquery is executed first and its result is used by the main query.<br>This is useful for dynamic comparisons, such as filtering values based on aggregated results.<br>For example, you can retrieve products whose category starts with 'Con'",
-    "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))"
+    "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))",
+    "examples": [
+      {
+        "title": "Using SubQuery Created in JAVA",
+        "view": "products",
+        "filter": "cat_id.in=subCategories"
+      }
+    ]
   },
   {
     "title": "CTE",
@@ -136,6 +143,12 @@
     "syntax": "cte=myView.select(col1,col2,...).criteria(...criterias):cteName",
     "tooltip": "Common Table Expression",
     "examples": [
+      {
+        "title": "Use SubQuery Created in JAVA as CTE",
+        "view": "products",
+        "column": "myCte.name",
+        "filter": "cte=subCategories:myCte"
+      },
       {
         "title": "Apply join with CTE",
         "view": "products",

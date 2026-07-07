@@ -1850,27 +1850,11 @@ code:hover::before {
   position: relative;
 }
 
-.example-number::before {
-  content: '▸';
-  position: absolute;
-  left: -8px;
-  opacity: 0;
-  transition: all 0.3s;
-  color: var(--jarvis-cyan);
-  font-size: 0.9rem;
-}
-
 .example-number:hover {
   background: rgba(0, 217, 255, 0.15);
   border-color: var(--jarvis-cyan);
   color: var(--jarvis-cyan);
   box-shadow: 0 0 15px var(--jarvis-glow);
-  transform: translateX(5px);
-}
-
-.example-number:hover::before {
-  opacity: 1;
-  left: -12px;
 }
 
 .example-number.active {
