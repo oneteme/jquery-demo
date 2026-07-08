@@ -1,5 +1,22 @@
 [
     {
+        "title": "PARTITION",
+        "definition": "Divides the result set into separate groups based on the values of one or more columns.<br>The partition allows window functions to perform calculations independently within each group instead of using the entire result set.<br>For example, products can be ranked by price separately within each category.",
+        "syntax": "partition(column).order(order)",
+        "examples": [
+            {
+                "title":"Use partition in URL",
+                "view": "products",
+                "column": "price.sum.over(partition(cat_id).order(price.desc))"
+            },
+            {
+                "title":"Use partition from JAVA",
+                "view": "products",
+                "column": "price.sum.over(partitionProducts(cat_id,price.desc))"
+            }
+        ]
+    },
+    {
         "title": "RANK",
         "view": "products",
         "column": "id,name,price,rank.over(partition(id).order(price.desc)):rank",
@@ -16,7 +33,7 @@
                 "title": "Ranking products by category",
                 "view": "products",
                 "column": "cat_id,price,rankProducts:rank",
-                "filter":"order=cat_id,rank"
+                "filter": "order=cat_id,rank"
             }
         ]
     },

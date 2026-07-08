@@ -169,7 +169,7 @@ header {
   font-size: 22px;
 }
 
-.header-list img {
+.header-list>img {
   width: 24px;
   filter: brightness(0) saturate(100%) invert(63%) sepia(93%) saturate(2555%) hue-rotate(169deg) brightness(101%) contrast(105%);
   transition: all 0.3s;
@@ -177,7 +177,7 @@ header {
   border: 1px solid transparent;
 }
 
-.header-list img:hover {
+.header-list>img:hover {
   background: rgba(0, 217, 255, 0.1);
   box-shadow: 0 0 15px var(--jarvis-glow);
   transform: translateY(-2px);
@@ -301,6 +301,10 @@ header {
   font-weight: 700;
   font-family: 'Fira Code', monospace;
   flex-shrink: 0;
+}
+
+.db-select-wrapper .img-class {
+  width: 16px;
 }
 
 .db-option {

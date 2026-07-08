@@ -4,6 +4,10 @@
     "items": "setup.json"
   },
   {
+    "title": "@Annotations",
+    "items": "annotations.json"
+  },
+  {
     "title": "SELECT",
     "view": "customers",
     "column": "name,contact,postal_code",

@@ -1,21 +1,70 @@
-$(function () {
-    $('#db-select-wrapper').on('click', function (e) {
+import { loadJson } from "./utils.js";
+
+export function loadDialects() {
+    $("#db-select-popup").empty()
+    loadJson("/dialect.json").then(dialects => {
+        $("#db-select-popup").append(
+            $("<div>", { class: "db-select-popup-arrow" })
+        )
+        $.each(dialects, (key, value) => {
+            let div;
+            switch (value.type) {
+                case "div":
+                    const type = value.metadata.type,
+                        content = value.metadata.content,
+                        attributes = value.metadata.attr;
+                    div = $("<" + type + ">", attributes).html(content ?? "")
+                    break;
+                case "icon":
+                    div = $("<i>", { class: value.metadata })
+                    break;
+
+                case "img":
+                    div = $("<img>", { src: value.metadata, class: "img-class" })
+                    break;
+
+                case "svg":
+
+                    break;
+
+                case "html":
+
+                    break;
+
+                default:
+                    break;
+            }
+            $("#db-select-popup").append(
+                $("<div>", { class: "db-option", "data-value": value.value, "data-label": value.label })
+                    .append(
+                        div,
+                        $("<span>").html(value.label)
+                    )
+            )
+        })
+    })
+}
+
+$(document).on(
+    "click",
+    "#db-select-wrapper",
+    (e) => {
         e.stopPropagation();
         $('#db-select-popup').toggleClass('show');
-        $(this).toggleClass('active');
+        $(e.currentTarget).toggleClass('active');
     });
 
-    $('.db-option').on('click', function () {
-        const value = $(this).data('value'),
-            label = $(this).data('label'),
-            icon = $(this).children().first().clone();
-        console.log("icon : ",icon)
-        $('.db-option').removeClass('active');
-        $(this).addClass('active');
-        $('#db-select-label').html(label);
-        $('#db-select-icon-slot').html(icon);
+$(document).on('click', '.db-option', (e) => {
+    console.log("clicked on option : ", e)
+    const option = $(e.currentTarget),
+        value = option.data('value'),
+        label = option.data('label'),
+        icon = option.children().first().clone();
+    console.log("icon : ", icon)
+    $('.db-option').removeClass('active');
+    option.addClass('active');
+    $('#db-select-label').html(label);
+    $('#db-select-icon-slot').html(icon);
 
-        // Change SQL or database code
-    });
-
+    // Change SQL or database code
 });

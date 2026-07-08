@@ -65,16 +65,23 @@ public interface Products extends DatasetCatalog {
 	}
 
 	
+	default Partition partitionProducts() {
+		return new PartitionComposer()
+				.columns(catId())
+				.orders(price().desc())
+				.compose(getInstance().getStore(DemoStore.class));
+	}
+	
 	default Column rankProducts() {
-		return rank().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+		return rank().over(partitionProducts());
 	}
 	
 	default Column denseProducts() {
-		return denseRank().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+		return denseRank().over(partitionProducts());
 	}
 	
 	default Column rowProducts() {
-		return rowNumber().over(new PartitionComposer().columns(catId()).orders(price().desc()).compose(getInstance().getStore(DemoStore.class)));
+		return rowNumber().over(partitionProducts());
 	}
 	
 

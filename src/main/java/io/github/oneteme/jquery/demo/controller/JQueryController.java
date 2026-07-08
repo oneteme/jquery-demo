@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,8 +22,8 @@ public class JQueryController {
 
 	@GetMapping("customers")
 	@QueryTemplate(dataset= "customers", select= "id,name,contact,address,city,postal_code,country", view = "debug") 
-	public Object fetchCustomers(MvcRequest mvc) {
-		return mvc.execute();
+	public Object fetchCustomers(MvcRequest mvc, HttpServletResponse res) {
+		return mvc.execute(res);
 	}
 
 	@GetMapping("shippers")

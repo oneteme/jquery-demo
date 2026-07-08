@@ -1,5 +1,16 @@
 import { clearTable } from "./table.js";
 
+export function loadJson(path) {
+  return new Promise((res, rej) => {
+    fetch(path)
+      .then((response) => response.json())
+      .then((data) => {
+        res(data)
+      })
+      .catch(err => rej("Error loading JSON : " + err))
+  })
+}
+
 export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)

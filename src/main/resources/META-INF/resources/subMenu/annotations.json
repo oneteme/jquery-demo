@@ -1,0 +1,10 @@
+[
+    {
+        "title": "QueryTemplate",
+        "tutorial": "annotations/QueryTemplate.md"
+    },
+    {
+        "title": "QueryExtention",
+        "tutorial": "annotations/QueryExtention.md"
+    }
+]

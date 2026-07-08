@@ -12,6 +12,7 @@ var inputTimeOut;
 $(document).ready(function () {
   hljs.highlightAll();
   $(".navbar-nav").empty();
+  dialect.loadDialects();
   getAllJavaMd().then(mdFiles => loadNavData())
   loadSettings();
   loadViews();
