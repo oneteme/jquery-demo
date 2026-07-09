@@ -19,13 +19,5 @@
     "title": "Add resolvers",
     "tutorial": "setup/webmvc.md",
     "tooltip": "WebMvc configuration"
-  },
-  {
-    "title": "QueryRequest",
-    "tutorial": "setup/queryRequest.md"
-  },
-  {
-    "title": "QueryRequestFilter",
-    "tutorial": "setup/queryRequestFilter.md"
   }
 ]
