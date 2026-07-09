@@ -1,26 +1,31 @@
 [
-    {
-      "title": "Install JQuery",
-      "tutorial": "setup/setup.md"
-    },
-    {
-      "title": "Create DatasetResource",
-      "tutorial": "setup/columns.md"
-    },
-    {
-      "title": "Create StoreResource",
-      "tutorial": "setup/tables.md"
-    },
-    {
-      "title": "WebMvc configuration",
-      "tutorial": "setup/webmvc.md"
-    },
-    {
-      "title":"QueryRequest",
-      "tutorial":"setup/queryRequest.md"
-    },
-    {
-      "title":"QueryRequestFilter",
-      "tutorial":"setup/queryRequestFilter.md"
-    }
-  ]
+  {
+    "title": "Install JQuery",
+    "tutorial": "setup/setup.md"
+  },
+  {
+    "title": "Create DatasetResource",
+    "tutorial": "setup/columns.md"
+  },
+  {
+    "title": "Create StoreResource",
+    "tutorial": "setup/tables.md"
+  },
+  {
+    "title": "Create resolver",
+    "tutorial": "setup/resolvers.md"
+  },
+  {
+    "title": "Add resolvers",
+    "tutorial": "setup/webmvc.md",
+    "tooltip": "WebMvc configuration"
+  },
+  {
+    "title": "QueryRequest",
+    "tutorial": "setup/queryRequest.md"
+  },
+  {
+    "title": "QueryRequestFilter",
+    "tutorial": "setup/queryRequestFilter.md"
+  }
+]

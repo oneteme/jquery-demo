@@ -92,7 +92,7 @@ public Object fetchEmployees(MvcRequest mvc) {
 
 This template:
 
-- queries the `employees` dataset
+- queries the `employees` table
 - returns the selected columns
 - applies the `active` criteria
 - sorts the results by `lname`

@@ -65,7 +65,7 @@ public interface Products extends DatasetCatalog {
 	}
 
 	
-	default Partition partitionProducts() {
+	default Partition partitionByCategoryPrice() {
 		return new PartitionComposer()
 				.columns(catId())
 				.orders(price().desc())

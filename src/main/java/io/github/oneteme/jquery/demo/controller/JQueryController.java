@@ -1,9 +1,12 @@
 package io.github.oneteme.jquery.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.usf.jquery.core.Definition;
 import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
+import org.usf.jquery.mvc.StoreManager;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -61,4 +64,10 @@ public class JQueryController {
 	public Object fetchOrderDetails(MvcRequest mvc) {
 		return mvc.execute();
 	}
+
+	@GetMapping("dialect")
+	public Object fetchOrderDetails(@RequestParam String name) {
+		return StoreManager.getInstance().getDefaultStore().lookupDialect(name, Definition.class).invoke();
+	}
+	
 }

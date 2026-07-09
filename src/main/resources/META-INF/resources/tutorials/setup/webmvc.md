@@ -1,93 +1,72 @@
-A Resolver converts HTTP request parameters into a QueryComposer. It allows you to directly inject a query object into your controller.
+A Resolver converts HTTP request parameters into a `QueryComposer` object.  
+Once registered in Spring MVC, it allows you to inject a ready-to-use query directly into your controller methods.
 
 In this guide, you will learn how to:
 
-- Create resolvers
-- Register them in your project
-- Use them in a controller
+- Register the Query Resolver in your Spring application
+- Configure the required datasources
+- Use `MvcRequest` directly in your controllers
+- Automatically build queries from HTTP request parameters
 
-1. Create the QueryRequest Resolver
+1. Register the Resolver
 
-```java
-// CommonRequestQueryResolver.java
+Add the Query Resolver to your Spring MVC configuration.
 
-public class CommonRequestQueryResolver implements HandlerMethodArgumentResolver, QueryInterpreter {
-
-    @Override
-    public boolean supportsParameter(MethodParameter parameter) {
-        return QueryComposer.class.isAssignableFrom(parameter.getNestedParameterType())
-                && parameter.hasParameterAnnotation(QueryRequest.class);
-    }
-
-    @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-
-        var ann = parameter.getParameterAnnotation(QueryRequest.class);
-        if (ann != null) {
-            var schema = ann.store() == StoreResource.class 
-                    ? getInstance().getDefaultStore() 
-                    : getInstance().getStore(ann.store());
-
-            var mapper = schema instanceof QueryInterpreter m ? m : this;
-            return mapper.parseQuery(ann, webRequest.getParameterMap());
-        }
-        throw new IllegalStateException("missing @QueryRequest annotation");
-    }
-}
-```
-
-2. Create the QueryRequestFilter Resolver
-
-Create a second resolver using the same implementation, and replace:
-
-- QueryRequest → QueryRequestFilter
-
-3. Register the Resolvers
-
-Add both resolvers to your Spring configuration.
+The resolver needs to be registered in your `WebMvcConfig` class using `addArgumentResolvers`.
 
 ```java
 // WebMvcConfig.java
 
-public class WebmvcConfig implements WebMvcConfigurer {
+@Configuration
+@RequiredArgsConstructor
+public class WebMvcConfig implements WebMvcConfigurer {
 
     private final DataSource ds;
+    // Add other datasources for each database used in your project
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(new CommonRequestQueryResolver());
-        resolvers.add(new CommonRequestQueryFilterResolver());
     }
 
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-        StoreManager.getInstance().register(DemoStore.class, ds);
+        getInstance().register(DemoStore.class, ds);
+
+        // Register other datasources
     }
 }
+
 ```
 
-4. Quick Example
+The resolver is now available to Spring MVC and can automatically resolve MvcRequest parameters in your controllers.
 
-Once the resolvers are registered, you can use them in your controller.
+2. Use the Resolver in a Controller
+
+Once the resolver is registered, you can inject MvcRequest directly into your controller methods.
 
 ```java
-// myController.java
+// MyController.java
+
 @GetMapping("products")
-public Map<String, Object> fetchProducts(
-    @QueryRequest(dataset = "products", fields = "id,name,price") QueryComposer query) {
-    return execute(DemoStore.class, query);
+@QueryTemplate(
+    dataset = "products",
+    select = "id,name,supp_id,cat_id,price,unit",
+    view = "debug"
+)
+public Object fetchProducts(MvcRequest mvc) {
+    return mvc.execute();
 }
 ```
+
+The resolver automatically reads the HTTP request parameters, applies the `@QueryTemplate` configuration, and creates the corresponding query.
 
 <b>Result</b>
 
-The request parameters are automatically converted into a query.
+Your application can now build dynamic queries directly from HTTP requests.
 
-- Resolvers convert HTTP requests into QueryComposer
-- You need to:
-    - Create them
-    - Register them
-    - Once registered, they can be used directly in controllers
+- Resolvers handle the conversion between HTTP parameters and QueryComposer.
+- You only need to register them once.
+- After registration, they can be used in any controller.
 
-✅ Your project is now ready to use QueryRequest and QueryRequestFilter.
+✅ Your project is now ready to use MvcRequest with QueryTemplate.

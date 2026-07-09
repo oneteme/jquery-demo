@@ -6,5 +6,9 @@
     {
         "title": "QueryExtention",
         "tutorial": "annotations/QueryExtention.md"
+    },
+    {
+        "title": "QueryGuard",
+        "tutorial": "annotations/QueryGuard.md"
     }
 ]

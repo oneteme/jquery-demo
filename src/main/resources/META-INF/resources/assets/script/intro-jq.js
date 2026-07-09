@@ -90,20 +90,20 @@ const introSteps = [
     }, // step 14
     {
         title: "JQuery Examples",
-        element: ".jq-example[data-learn='select']",
-        intro: 'Choose the "SELECT" Example for starters',
+        element: ".jq-example[data-learn='case']",
+        intro: 'Choose the "CASE" Example for starters',
     }, // step 15
     {
         disableInteraction: true,
-        title: "Explanation 🤓",
-        element: ".definition-element.definition",
-        intro: "Here is the definition of the example which you chose",
+        title: "URL syntax",
+        element: ".syntax-block.url",
+        intro: "This is how to use the \"CASE WHEN\" on the URL",
     }, // step 16
     {
         disableInteraction: true,
-        title: "Explanation 🤓",
-        element: ".syntax-content",
-        intro: "And this is how it's syntax works in JQuery",
+        title: "JAVA syntax",
+        element: ".syntax-block.java",
+        intro: "This is how to use the \"CASE WHEN \" in JAVA (backend)",
     }, // step 17
     {
         title: "Try it for yourself 🤓",
@@ -118,14 +118,30 @@ const introSteps = [
             "The view,columns and filters have been automatically filled with an example to show you how your example works in JQuery",
     }, // step 19
     {
+        disableInteraction: true,
+        title: "Multiple examples",
+        element: ".examples-numbers-container",
+        intro: "Some functions may have multiple use cases that you can check in here",
+    }, // step 20
+    {
+        title: "Multiple examples",
+        element: ".examples-numbers-container > .example-number:nth-child(2)",
+        intro: "Click on the second example to see how to call the JAVA \"CASE\" on the URL",
+    }, // step 21
+    {
+        title: "Multiple examples",
+        element: ".form-content",
+        intro: "And here is the second use case 😉",
+    }, // step 22
+    {
         title: "Docs 📖",
         element: ".show-docs",
         intro: "You can click here to go back to the definition page",
-    }, // step 20
+    }, // step 23
     {
         title: "The end 👏👏",
         intro: "And the JQueryDemo tutorial ends here. Enjoy!",
-    }, // step 21
+    }, // step 24
 ];
 var intro,
     introIsCompleted = true;
@@ -181,11 +197,11 @@ function setupIntro() {
     // Disable the next button in Intro.js
     intro.onbeforechange(function (targetElement) {
         var currentStep = intro._introItems[intro._currentStep],
-            hideNextBtnSteps = [3, 8, 9, 10, 15, 13, 18];
-        console.log("intro init onbeforechange");
-        console.log("currentstep : ", currentStep);
-        console.log("currentstep num : ", intro._currentStep);
-        console.log("currentstep element : ", currentStep.element);
+            hideNextBtnSteps = [3, 8, 9, 10, 15, 13, 18, 21];
+
+
+
+
         // Check if we are on the step with the select element
         if (hideNextBtnSteps.includes(intro._currentStep)) {
             // Disable the next button

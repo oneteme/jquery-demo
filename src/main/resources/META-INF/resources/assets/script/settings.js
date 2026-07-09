@@ -4,7 +4,7 @@ export function loadSettings() {
     fetch("/grid_settings.json")
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            
             createSettings(data);
         });
 }

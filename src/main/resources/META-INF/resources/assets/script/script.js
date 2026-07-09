@@ -46,13 +46,13 @@ $(document).ready(function () {
   });
   $("#query-form").on("submit", (e) => {
     e.preventDefault(); // Prevent the default form submission
-    console.log("fetchJQ from submitting form")
+    
     fetchJQData();
   });
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
-    console.log("fetchJQ from changing table at form")
+    
     fetchJQData();
     introNextStepCondition($("#jq-table").val() === "customers");
   });
@@ -68,7 +68,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".jq-params .parent_title", (e) => {
-    console.log("clicked on a loaded menu");
+    
     if (!$(event.target).closest(".jq-column").length) {
       toggleNavSubElements(e, ".select-columns");
     }
@@ -158,7 +158,7 @@ function loadViews() {
 function loadExample(exampleDiv) {
   $(".nav-item").removeClass("active")
   exampleDiv.addClass("active")
-  console.log("loadExample")
+  
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-element").hide();
   $(".definition-toggle").hide();
@@ -214,9 +214,9 @@ function loadExample(exampleDiv) {
     if (syntax) {
       $(".syntax-block.url").empty();
       const syntaxes = syntax.split("&;");
-      console.log("syntaxes : ", syntaxes)
+      
       $.each(syntaxes, (key, val) => {
-        console.log("syntax val : ", val)
+        
         $(".syntax-block.url").append(
           $("<pre>").append($("<code>", { class: "syntax-code language-scss" }).html(val))
         )
@@ -253,6 +253,7 @@ function loadExample(exampleDiv) {
       $(".example-number").removeClass("active");
       example.addClass("active");
       fetchJQData();
+      introNextStep();
     });
 
     tippy(example[0], {
@@ -285,7 +286,7 @@ function fetchJQData() {
     $(".jq-link-display").attr("href", window.location.origin + fetchLink);
     $(".jq-link-display").html(fetchLink);
     $(".jq-link-display").css("visibility", "visible");
-    console.log("link to fetch : ", fetchLink);
+    
     fetch(fetchLink)
       .then((response) => response.json())
       .then((data) => {
@@ -293,8 +294,8 @@ function fetchJQData() {
           showSuccess(data.result.length);
           hideLoading($(".loader"), $(".query-status-btn"))
         }, 300)
-        // console.log("response : ",response);
-        console.log("data : ", data);
+        // 
+        
         $(".error_container").hide();
         $("#sql-code").html(sqlFormatter.format(data.query, { language: 'postgresql' }));
         $("#sql-display").show();
@@ -307,7 +308,7 @@ function fetchJQData() {
         }
       })
       .catch((error) => {
-        console.log("error : ", error)
+        
         let errorMessage = "Error while executing this query.";
         utils.clearData();
         showError(errorMessage);
@@ -319,7 +320,7 @@ function fetchJQData() {
 }
 
 function loadTutorial(fileName) {
-  console.log("loading Tutorial with the file : ", fileName);
+  
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
   $(".definition-element.whats_next").show();

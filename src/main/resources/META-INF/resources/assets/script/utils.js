@@ -15,7 +15,7 @@ export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)
       .done(function (data) {
-        console.log("FOUND FILE : ", path)
+        
         res(data)
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -27,7 +27,7 @@ export function checkForFile(path) {
 export function loadMarkDown(path, div) {
   return checkForFile(path).then((data) => {
     var htmlContent = marked.parse(data);
-    console.log("htmlcontent : ", htmlContent);
+    
     // Insert the HTML into the div
     div.html(htmlContent);
 
@@ -92,8 +92,8 @@ export function displayDivAtCursor(divElement, e) {
 // Place div at top
 export function placeAtTop(divElement = $(".form-container")) {
   var parentDiv = divElement.parent();
-  console.log("div to move at Top : ", divElement);
-  console.log("Parent div : ", parentDiv);
+  
+  
   divElement.prependTo(parentDiv);
 }
 

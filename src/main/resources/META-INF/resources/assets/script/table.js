@@ -1,13 +1,13 @@
 var resultTable;
 export function displayTableResults(data) {
-    console.log("display table results data : ", data)
+    
     clearTable();
     showTable();
     $(".results-container").css("width", "100%");
     $(".jq-params").show();
     let tableContainer = $(".results-container table");
     var columnsHeader = Object.keys(data[0]);
-    console.log(columnsHeader);
+    
 
     // Create table header row
     let headerRow = $("<tr>", { class: "table_header" });

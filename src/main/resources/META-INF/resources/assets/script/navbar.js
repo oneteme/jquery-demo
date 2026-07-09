@@ -64,8 +64,8 @@ function setupNavItem(navItem, divElement, next, prev) {
             "data-next": next,
             "data-prev": prev
         };
-    console.log("javapath : ", javapath)
-    console.log("javaMdFiles : ", javaMdFiles)
+    
+    
     if (javaMdFiles.includes(javapath)) {
         navFields["data-java"] = javapath;
     }
@@ -148,7 +148,7 @@ $(document).on(
     "click",
     ".navbar-container .parent_title[isloaded='false']",
     (e) => {
-        console.log("clicked on a unloaded menu");
+        
         const subMenuFile = "subMenu/" + $(e.currentTarget).attr("sub-menu"),
             title = $(e.currentTarget).find("span:first").html(),
             subNavDiv = $(".sub-nav[data-title='" + title + "']");
@@ -163,7 +163,7 @@ $(document).on(
     "click",
     ".navbar-container .parent_title[isloaded='true']",
     (e) => {
-        console.log("clicked on a loaded menu");
+        
         if (!$(event.target).closest(".jq-example").length) {
             toggleNavSubElements(e);
         }

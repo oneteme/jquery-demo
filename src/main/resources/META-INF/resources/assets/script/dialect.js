@@ -23,13 +23,13 @@ export function loadDialects() {
                     div = $("<img>", { src: value.metadata, class: "img-class" })
                     break;
 
-                case "svg":
+                // case "svg":
 
-                    break;
+                //     break;
 
-                case "html":
+                // case "html":
 
-                    break;
+                //     break;
 
                 default:
                     break;
@@ -55,12 +55,12 @@ $(document).on(
     });
 
 $(document).on('click', '.db-option', (e) => {
-    console.log("clicked on option : ", e)
+    
     const option = $(e.currentTarget),
         value = option.data('value'),
         label = option.data('label'),
         icon = option.children().first().clone();
-    console.log("icon : ", icon)
+    
     $('.db-option').removeClass('active');
     option.addClass('active');
     $('#db-select-label').html(label);
