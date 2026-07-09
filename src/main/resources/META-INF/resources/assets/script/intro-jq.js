@@ -5,8 +5,7 @@ import * as utils from "./utils.js";
 const introSteps = [
     {
         title: "Welcome to JQuery Demo👋",
-        intro:
-            "Explore Jarvis's Open Source jQuery library to discover its functions with examples. You can also create your own queries to test it out!",
+        intro: "Explore Jarvis's Open Source jQuery library to discover its functions with examples. You can also create your own queries to test it out!"
     }, // step 0
     {
         disableInteraction: true,
@@ -64,6 +63,7 @@ const introSteps = [
         intro: "Execute!",
     }, // step 10
     {
+        disableInteraction: true,
         scrollToElement: false,
         title: "Filter applied 👌👌",
         element: ".results-container",
@@ -71,6 +71,7 @@ const introSteps = [
             "And now here is your new query result from getting all customers who are in France but and we only fetched country,name,contact and id",
     }, // step 11
     {
+        disableInteraction: true,
         title: "SQL Query",
         element: "#sql-display",
         intro:
@@ -125,7 +126,7 @@ const introSteps = [
     }, // step 20
     {
         title: "Multiple examples",
-        element: ".examples-numbers-container > .example-number:nth-child(2)",
+        element: ".examples-numbers-container",
         intro: "Click on the second example to see how to call the JAVA \"CASE\" on the URL",
     }, // step 21
     {
@@ -142,7 +143,9 @@ const introSteps = [
         title: "The end 👏👏",
         intro: "And the JQueryDemo tutorial ends here. Enjoy!",
     }, // step 24
-];
+],
+    // hideNextBtnSteps = [];
+hideNextBtnSteps = [3, 8, 9, 10, 15, 13, 18, 21];
 var intro,
     introIsCompleted = true;
 export function isIntro() {
@@ -164,7 +167,7 @@ export function introNextStepCondition(condition, timeOut = 500, fn = null) {
     }
 }
 
-function setupIntro() {
+function setupIntro(startFrom = 0) {
     // *** DIVS TO SHOW/HIDE FOR TUTORIAL
     $(".jq-link-display").css("visibility", "hidden");
     $("#sql-display").hide();
@@ -191,24 +194,20 @@ function setupIntro() {
         .setOptions({
             showProgress: true,
             showBullets: false,
-            steps: introSteps,
+            steps: introSteps.slice(startFrom),
         })
         .start();
     // Disable the next button in Intro.js
     intro.onbeforechange(function (targetElement) {
-        var currentStep = intro._introItems[intro._currentStep],
-            hideNextBtnSteps = [3, 8, 9, 10, 15, 13, 18, 21];
+        var currentStep = intro._introItems[intro._currentStep];
+        console.log("intro items : ", intro._introItems)
 
-
-
-
+        applyToStep(3, () => $("#jq-table").val(""))
+        // applyToStep(9, () => { intro._introItems[21].element = $("#example-2"); refreshIntro() })
         // Check if we are on the step with the select element
         if (hideNextBtnSteps.includes(intro._currentStep)) {
             // Disable the next button
             $(".introjs-nextbutton").hide();
-            if (intro._currentStep === 3) {
-                $("#jq-table").val("");
-            }
         } else {
             // Ensure the next button is enabled for other steps
             $(".introjs-nextbutton").show();
@@ -219,6 +218,16 @@ function setupIntro() {
     intro.oncomplete(function () {
         introIsCompleted = true;
     });
+}
+
+function applyToStep(step, fn) {
+    if (intro._currentStep === step) {
+        fn()
+    }
+}
+
+export function refreshIntro() {
+    intro.refresh();
 }
 
 $("#jq-live").on("click", (e) => {

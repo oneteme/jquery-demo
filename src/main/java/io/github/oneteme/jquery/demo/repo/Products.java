@@ -73,15 +73,15 @@ public interface Products extends DatasetCatalog {
 	}
 	
 	default Column rankProducts() {
-		return rank().over(partitionProducts());
+		return rank().over(partitionByCategoryPrice());
 	}
 	
 	default Column denseProducts() {
-		return denseRank().over(partitionProducts());
+		return denseRank().over(partitionByCategoryPrice());
 	}
 	
 	default Column rowProducts() {
-		return rowNumber().over(partitionProducts());
+		return rowNumber().over(partitionByCategoryPrice());
 	}
 	
 

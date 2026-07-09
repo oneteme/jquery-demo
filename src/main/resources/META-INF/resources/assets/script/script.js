@@ -1,5 +1,5 @@
 import { getAllJavaMd } from "./files.js";
-import { introNextStep, introNextStepCondition, isIntro } from "./intro-jq.js";
+import { introNextStep, introNextStepCondition, isIntro, refreshIntro } from "./intro-jq.js";
 import { hideNavBar, loadNavData, showNavBar, toggleNavBar, toggleNavSubElements } from "./navbar.js";
 import { loadSettings } from "./settings.js";
 import { hideLoading, showError, showLoading, showSuccess } from "./status.js";
@@ -46,13 +46,13 @@ $(document).ready(function () {
   });
   $("#query-form").on("submit", (e) => {
     e.preventDefault(); // Prevent the default form submission
-    
+
     fetchJQData();
   });
   $("#jq-table").on("change", (e) => {
     $("#jq-columns").val("");
     $("#jq-filters").val("");
-    
+
     fetchJQData();
     introNextStepCondition($("#jq-table").val() === "customers");
   });
@@ -68,7 +68,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".jq-params .parent_title", (e) => {
-    
+
     if (!$(event.target).closest(".jq-column").length) {
       toggleNavSubElements(e, ".select-columns");
     }
@@ -158,7 +158,7 @@ function loadViews() {
 function loadExample(exampleDiv) {
   $(".nav-item").removeClass("active")
   exampleDiv.addClass("active")
-  
+
   $(".definition-display .example-title").html(exampleDiv.html());
   $(".definition-element").hide();
   $(".definition-toggle").hide();
@@ -214,9 +214,9 @@ function loadExample(exampleDiv) {
     if (syntax) {
       $(".syntax-block.url").empty();
       const syntaxes = syntax.split("&;");
-      
+
       $.each(syntaxes, (key, val) => {
-        
+
         $(".syntax-block.url").append(
           $("<pre>").append($("<code>", { class: "syntax-code language-scss" }).html(val))
         )
@@ -243,7 +243,7 @@ function loadExample(exampleDiv) {
 
   $.each(examples, (key, val) => {
     const index = key + 1,
-      example = $("<div>", { class: "example-number" }).html(index),
+      example = $("<div>", { class: "example-number", id: "example-" + index }).html(index),
       exampleTitle = val.title ?? "Example " + index;
     example.on('click', () => {
       $("#jq-table").val(val.view ?? "");
@@ -267,7 +267,7 @@ function loadExample(exampleDiv) {
 
   $(".content").animate({ scrollTop: 0 }, 10);
   $('.syntax-content').hide();
-  introNextStep(() => $('.syntax-content').show());
+  introNextStep(1500, () => $('.syntax-content').show());
 }
 
 function fetchJQData() {
@@ -286,7 +286,7 @@ function fetchJQData() {
     $(".jq-link-display").attr("href", window.location.origin + fetchLink);
     $(".jq-link-display").html(fetchLink);
     $(".jq-link-display").css("visibility", "visible");
-    
+
     fetch(fetchLink)
       .then((response) => response.json())
       .then((data) => {
@@ -295,7 +295,7 @@ function fetchJQData() {
           hideLoading($(".loader"), $(".query-status-btn"))
         }, 300)
         // 
-        
+
         $(".error_container").hide();
         $("#sql-code").html(sqlFormatter.format(data.query, { language: 'postgresql' }));
         $("#sql-display").show();
@@ -308,7 +308,7 @@ function fetchJQData() {
         }
       })
       .catch((error) => {
-        
+
         let errorMessage = "Error while executing this query.";
         utils.clearData();
         showError(errorMessage);
@@ -320,7 +320,7 @@ function fetchJQData() {
 }
 
 function loadTutorial(fileName) {
-  
+
   $(".definition-element").hide();
   $(".definition-element.tutorial").show();
   $(".definition-element.whats_next").show();
