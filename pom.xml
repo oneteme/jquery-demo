@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.oneteme</groupId>
-	<artifactId>demoJQuery</artifactId>
+	<artifactId>JQuery-showcase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demoJQuery</name>
-	<description>Demo for JQuery</description>
+	<name>JQuery Showcase</name>
+	<description>JQuery Showcase</description>
 	<url />
 	<licenses>
 		<license />

@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.erm;
+package org.usf.jquery.showcase.erm;
 
 import static org.usf.jquery.core.Join.leftJoin;
 import static org.usf.jquery.core.JoinGroup.joins;
@@ -7,7 +7,6 @@ import static org.usf.jquery.mvc.StoreManager.getInstance;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.Order;
-import org.usf.jquery.core.Partition;
 import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;

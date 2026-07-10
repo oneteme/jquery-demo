@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.github.oneteme.jquery.demo.controller;
+package org.usf.jquery.showcase.controller;
 
 import static java.nio.file.Files.walk;
 import static java.nio.file.Paths.get;

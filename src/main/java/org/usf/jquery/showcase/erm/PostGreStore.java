@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.erm;
+package org.usf.jquery.showcase.erm;
 
 import static org.usf.jquery.core.JDBCType.BIGINT;
 import static org.usf.jquery.core.JDBCType.DOUBLE;

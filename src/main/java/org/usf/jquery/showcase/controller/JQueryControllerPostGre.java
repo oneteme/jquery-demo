@@ -1,12 +1,12 @@
-package io.github.oneteme.jquery.demo.controller;
+package org.usf.jquery.showcase.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
+import org.usf.jquery.showcase.erm.PostGreStore;
 
-import io.github.oneteme.jquery.demo.erm.PostGreStore;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

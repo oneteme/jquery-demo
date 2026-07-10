@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.erm;
+package org.usf.jquery.showcase.erm;
 
 import static org.usf.jquery.core.Column.beginCase;
 import static org.usf.jquery.core.Column.denseRank;
@@ -14,10 +14,8 @@ import org.usf.jquery.core.CaseColumn;
 import org.usf.jquery.core.Column;
 import org.usf.jquery.core.Criteria;
 import org.usf.jquery.core.JoinGroup;
-import org.usf.jquery.core.Order;
 import org.usf.jquery.core.Partition;
 import org.usf.jquery.core.PartitionComposer;
-import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.core.ViewColumn;
