@@ -276,7 +276,7 @@ function fetchJQData() {
   let table = $("#jq-table").val() ? $("#jq-table").val() : null;
   let columns = $("#jq-columns").val();
   let filters = $("#jq-filters").val();
-  let fetchLink = "/" + table + "/" + localStorage.getItem("jarvis.demo.dialect") + "?" +
+  let fetchLink = "/" + localStorage.getItem("jarvis.demo.dialect") + "/" + table + "?" +
     (columns ? "select=" + columns : "") +
     (filters ? "&" + filters : "");
 

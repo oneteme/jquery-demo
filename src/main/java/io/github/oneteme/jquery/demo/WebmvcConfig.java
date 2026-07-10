@@ -11,10 +11,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
 import io.github.oneteme.jquery.demo.repo.stores.H2Store;
 import io.github.oneteme.jquery.demo.repo.stores.PostGreStore;
-import lombok.RequiredArgsConstructor;
 
 @Configuration
 public class WebmvcConfig implements WebMvcConfigurer {
