@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.erm;
+package org.usf.jquery.showcase.erm;
 
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;

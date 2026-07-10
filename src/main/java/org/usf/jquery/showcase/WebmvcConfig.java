@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo;
+package org.usf.jquery.showcase;
 
 import static org.usf.jquery.mvc.StoreManager.getInstance;
 
@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-
-import io.github.oneteme.jquery.demo.erm.H2Store;
+import org.usf.jquery.showcase.erm.H2Store;
 
 @Configuration
 public class WebmvcConfig {

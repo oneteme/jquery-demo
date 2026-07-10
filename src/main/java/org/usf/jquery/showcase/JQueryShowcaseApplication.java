@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo;
+package org.usf.jquery.showcase;
 
 import javax.sql.DataSource;
 
@@ -13,10 +13,10 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @SpringBootApplication
-public class DemoJQueryApplication {
+public class JQueryShowcaseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoJQueryApplication.class, args);
+		SpringApplication.run(JQueryShowcaseApplication.class, args);
 	}
 	
 	@Bean(name = "h2DataSource")

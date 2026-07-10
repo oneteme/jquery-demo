@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.controller;
+package org.usf.jquery.showcase.controller;
 
 import static org.usf.jquery.mvc.StoreManager.getInstance;
 
@@ -13,10 +13,10 @@ import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
 import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.StoreManager;
+import org.usf.jquery.showcase.erm.DemoStore;
+import org.usf.jquery.showcase.erm.H2Store;
+import org.usf.jquery.showcase.erm.PostGreStore;
 
-import io.github.oneteme.jquery.demo.erm.DemoStore;
-import io.github.oneteme.jquery.demo.erm.H2Store;
-import io.github.oneteme.jquery.demo.erm.PostGreStore;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
