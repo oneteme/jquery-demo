@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.github.oneteme.jquery.demo.repo.stores.H2Store;
@@ -30,11 +29,11 @@ public class WebmvcConfig implements WebMvcConfigurer {
 		this.postgreDs = postgreDs;
 	}
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    	registry.addResourceHandler("/resources/**")
-    	.addResourceLocations("/resources/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//    	registry.addResourceHandler("/resources/**")
+//    	.addResourceLocations("/resources/");
+//    }
     
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
