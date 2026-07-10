@@ -42,6 +42,12 @@ export function loadDialects() {
                     )
             )
         })
+        if (localStorage.getItem("jarvis.demo.dialect")) {
+            setOptionActive($(".db-option[data-value=" + localStorage.getItem("jarvis.demo.dialect") + "]"))
+        }
+        else {
+            setOptionActive($(".db-option:first"));
+        }
     })
 }
 
@@ -55,16 +61,18 @@ $(document).on(
     });
 
 $(document).on('click', '.db-option', (e) => {
-    
-    const option = $(e.currentTarget),
-        value = option.data('value'),
+    setOptionActive($(e.currentTarget));
+    // Change SQL or database code
+});
+
+function setOptionActive(option) {
+    const value = option.data('value'),
         label = option.data('label'),
         icon = option.children().first().clone();
-    
+
     $('.db-option').removeClass('active');
     option.addClass('active');
     $('#db-select-label').html(label);
     $('#db-select-icon-slot').html(icon);
-
-    // Change SQL or database code
-});
+    localStorage.setItem("jarvis.demo.dialect", value);
+}

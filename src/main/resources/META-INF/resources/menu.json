@@ -134,7 +134,7 @@
       {
         "title": "Using SubQuery Created in JAVA",
         "view": "products",
-        "filter": "cat_id.in=subCategories"
+        "filter": "cat_id.in=subCategories.select(id)"
       }
     ]
   },
@@ -150,7 +150,7 @@
       {
         "title": "Use SubQuery Created in JAVA as CTE",
         "view": "products",
-        "column": "myCte.name",
+        "column": "myCte.id",
         "filter": "cte=subCategories:myCte"
       },
       {

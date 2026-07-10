@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -13,14 +14,26 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import io.github.oneteme.jquery.demo.repo.DemoStore;
+import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
+import io.github.oneteme.jquery.demo.repo.stores.H2Store;
+import io.github.oneteme.jquery.demo.repo.stores.PostGreStore;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@RequiredArgsConstructor
 public class WebmvcConfig implements WebMvcConfigurer {
 
-    private final DataSource ds;
+    private final DataSource H2Ds;
+    private final DataSource postgreDs;
+
+
+    public WebmvcConfig(
+    		@Qualifier("h2DataSource") DataSource H2Ds,
+    		@Qualifier("postgreDataSource") DataSource postgreDs
+    		) {
+
+		this.H2Ds = H2Ds;
+		this.postgreDs = postgreDs;
+	}
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
@@ -36,6 +49,7 @@ public class WebmvcConfig implements WebMvcConfigurer {
     
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-    	getInstance().register(DemoStore.class, ds);
+    	getInstance().register(H2Store.class, H2Ds);
+    	getInstance().register(PostGreStore.class, postgreDs);
     }
 }

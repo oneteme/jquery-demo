@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.repo;
+package io.github.oneteme.jquery.demo.repo.datasets;
 
 import static org.usf.jquery.core.Column.beginCase;
 import static org.usf.jquery.core.Column.denseRank;
@@ -24,6 +24,8 @@ import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
+
+import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
 
 public interface Products extends DatasetCatalog {
 	

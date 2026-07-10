@@ -1,16 +1,12 @@
-package io.github.oneteme.jquery.demo.repo;
+package io.github.oneteme.jquery.demo.repo.stores;
 
-import static org.usf.jquery.core.JDBCType.BIGINT;
 import static org.usf.jquery.core.JDBCType.DOUBLE;
 import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.core.Operators.aggregate;
 import static org.usf.jquery.core.Operators.constant;
-import static org.usf.jquery.core.Operators.function;
-import static org.usf.jquery.core.Parameter.required;
 import static org.usf.jquery.core.Predicate.ge;
 import static org.usf.jquery.core.Predicate.lt;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 
 import org.usf.jquery.core.Chainable;
@@ -18,12 +14,20 @@ import org.usf.jquery.core.Column;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.QueryComposer;
-import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.QueryCatalog;
 import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.ViewRegistry;
+
+import io.github.oneteme.jquery.demo.repo.datasets.Categories;
+import io.github.oneteme.jquery.demo.repo.datasets.Customers;
+import io.github.oneteme.jquery.demo.repo.datasets.Employees;
+import io.github.oneteme.jquery.demo.repo.datasets.Orders;
+import io.github.oneteme.jquery.demo.repo.datasets.OrdersDetails;
+import io.github.oneteme.jquery.demo.repo.datasets.Products;
+import io.github.oneteme.jquery.demo.repo.datasets.Shippers;
+import io.github.oneteme.jquery.demo.repo.datasets.Suppliers;
 
 public interface DemoStore extends StoreCatalog {
 
@@ -76,16 +80,6 @@ public interface DemoStore extends StoreCatalog {
 	default QueryCatalog subCategories() {
 		return new QueryCatalog(new QueryComposer().columns(categories().id())
 				.criteria(categories().name().startsLike("Con")).compose(this));
-	}
-
-	@Expose(identity = "pow", description = "Raises a numeric value to a specified power")
-	default OperatorDefinition pow() {
-		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));
-	}
-
-	@Expose(identity = "factorial", description = "Raises a numeric value to a specified power")
-	default OperatorDefinition factorial() {
-		return function(DOUBLE, "factorial", required(BIGINT));
 	}
 
 	@Expose(identity = "test_mode", description = "")
