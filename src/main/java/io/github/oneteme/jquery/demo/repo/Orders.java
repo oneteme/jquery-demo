@@ -57,4 +57,5 @@ public interface Orders extends DatasetCatalog {
 	default DemoStore currentStore() {
 		return getInstance().getStore(DemoStore.class);
 	}
+	
 }

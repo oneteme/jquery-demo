@@ -21,7 +21,7 @@ import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.Expose;
-import org.usf.jquery.mvc.QueryResource;
+import org.usf.jquery.mvc.QueryCatalog;
 import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.ViewRegistry;
 
@@ -73,8 +73,8 @@ public interface DemoStore extends StoreCatalog {
 //				.compose();
 //	}
 
-	default QueryResource subCategories() {
-		return new QueryResource(new QueryComposer().columns(categories().id())
+	default QueryCatalog subCategories() {
+		return new QueryCatalog(new QueryComposer().columns(categories().id())
 				.criteria(categories().name().startsLike("Con")).compose(this));
 	}
 
