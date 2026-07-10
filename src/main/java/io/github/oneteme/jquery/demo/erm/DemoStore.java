@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.repo.stores;
+package io.github.oneteme.jquery.demo.erm;
 
 import static org.usf.jquery.core.JDBCType.DOUBLE;
 import static org.usf.jquery.core.Mappers.keyValueMapper;
@@ -19,15 +19,6 @@ import org.usf.jquery.mvc.Expose;
 import org.usf.jquery.mvc.QueryCatalog;
 import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.ViewRegistry;
-
-import io.github.oneteme.jquery.demo.repo.datasets.Categories;
-import io.github.oneteme.jquery.demo.repo.datasets.Customers;
-import io.github.oneteme.jquery.demo.repo.datasets.Employees;
-import io.github.oneteme.jquery.demo.repo.datasets.Orders;
-import io.github.oneteme.jquery.demo.repo.datasets.OrdersDetails;
-import io.github.oneteme.jquery.demo.repo.datasets.Products;
-import io.github.oneteme.jquery.demo.repo.datasets.Shippers;
-import io.github.oneteme.jquery.demo.repo.datasets.Suppliers;
 
 public interface DemoStore extends StoreCatalog {
 

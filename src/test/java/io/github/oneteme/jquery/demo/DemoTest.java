@@ -25,7 +25,7 @@ import org.usf.jquery.mvc.Entry;
 import org.usf.jquery.mvc.EntryEvaluators;
 import org.usf.jquery.mvc.RequestContext;
 
-import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
+import io.github.oneteme.jquery.demo.erm.DemoStore;
 
 class DemoTest {
 

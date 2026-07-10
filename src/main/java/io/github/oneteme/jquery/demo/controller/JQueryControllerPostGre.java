@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
 
-import io.github.oneteme.jquery.demo.repo.stores.PostGreStore;
+import io.github.oneteme.jquery.demo.erm.PostGreStore;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

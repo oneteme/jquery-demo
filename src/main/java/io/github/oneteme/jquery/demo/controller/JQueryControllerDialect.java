@@ -14,9 +14,9 @@ import org.usf.jquery.mvc.QueryTemplate;
 import org.usf.jquery.mvc.StoreCatalog;
 import org.usf.jquery.mvc.StoreManager;
 
-import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
-import io.github.oneteme.jquery.demo.repo.stores.H2Store;
-import io.github.oneteme.jquery.demo.repo.stores.PostGreStore;
+import io.github.oneteme.jquery.demo.erm.DemoStore;
+import io.github.oneteme.jquery.demo.erm.H2Store;
+import io.github.oneteme.jquery.demo.erm.PostGreStore;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

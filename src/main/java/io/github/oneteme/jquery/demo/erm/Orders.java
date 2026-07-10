@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.repo.datasets;
+package io.github.oneteme.jquery.demo.erm;
 
 import static org.usf.jquery.core.Join.innerJoin;
 import static org.usf.jquery.core.Join.rightJoin;
@@ -10,8 +10,6 @@ import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
-
-import io.github.oneteme.jquery.demo.repo.stores.DemoStore;
 
 public interface Orders extends DatasetCatalog {
 	

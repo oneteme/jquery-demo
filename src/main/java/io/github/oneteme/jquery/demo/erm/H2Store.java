@@ -1,4 +1,4 @@
-package io.github.oneteme.jquery.demo.repo.stores;
+package io.github.oneteme.jquery.demo.erm;
 
 import static org.usf.jquery.core.JDBCType.DOUBLE;
 import static org.usf.jquery.core.Operators.function;
