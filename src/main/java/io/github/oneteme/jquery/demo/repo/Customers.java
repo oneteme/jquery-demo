@@ -38,24 +38,27 @@ public interface Customers extends DatasetCatalog {
 	@Bind("COUNTRY")
 	ViewColumn country();
 	
-	
 	default JoinGroup leftOrder() {
 		var orders = getInstance().getStore(DemoStore.class).orders();
 		return joins(leftJoin(orders.getView(), id().eq(orders.customerId())));
 	}
 	
+	@Deprecated
 	default Column rankLocation() {
 		return Column.rank().over(new PartitionComposer().columns(address()).orders(city().asc()).compose(null));
 	}
-	
+
+	@Deprecated
 	default Column rowLocation() {
 		return Column.rowNumber().over(new PartitionComposer().columns(address()).orders(city().asc()).compose(null));
 	}
-	
+
+	@Deprecated
 	default Column denseLocation() {
 		return Column.denseRank().over(new PartitionComposer().columns(address()).orders(city().asc()).compose(null));
 	}
-	
+
+	@Deprecated
 	default Column percentLocation() {
 		return Column.rowNumber().over(new PartitionComposer().columns(address()).orders(city().asc()).compose(null));
 	}
