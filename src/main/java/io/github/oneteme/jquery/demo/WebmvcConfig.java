@@ -1,15 +1,12 @@
-package io.github.oneteme.jquery.demo.config;
+package io.github.oneteme.jquery.demo;
 
 import static org.usf.jquery.mvc.StoreManager.getInstance;
-
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,12 +19,6 @@ public class WebmvcConfig implements WebMvcConfigurer {
 
     private final DataSource ds;
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new CommonRequestQueryResolver());
-//        resolvers.add(new CommonRequestQueryFilterResolver());
-    }
-    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	registry.addResourceHandler("/resources/**")
