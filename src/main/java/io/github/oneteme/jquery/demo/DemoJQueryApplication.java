@@ -2,15 +2,17 @@ package io.github.oneteme.jquery.demo;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @SpringBootApplication
-@EnableTransactionManagement //TODO for what ?????
 public class DemoJQueryApplication {
 
 	public static void main(String[] args) {
@@ -21,6 +23,19 @@ public class DemoJQueryApplication {
 	@ConfigurationProperties("spring.datasource.h2db")
 	public DataSource h2DataSource() {
 		return DataSourceBuilder.create().build();
+	}
+	
+	@Bean
+	public DataSource h2InitializedDataSource(
+	        @Qualifier("h2DataSource") DataSource dataSource) {
+
+	    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+	    populator.addScript(new ClassPathResource("schema.sql"));
+	    populator.addScript(new ClassPathResource("data.sql"));
+
+	    DatabasePopulatorUtils.execute(populator, dataSource);
+
+	    return dataSource;
 	}
 	
 	@Bean(name = "postgreDataSource")

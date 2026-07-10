@@ -36,7 +36,7 @@ $(document).ready(function () {
     content: "Execute",
     animation: 'scale',
     arrow: true,
-    placement: 'left',
+    placement: 'top',
     hideOnClick: false,
     interactive: true
   });
@@ -271,16 +271,16 @@ function loadExample(exampleDiv) {
 }
 
 function fetchJQData() {
-  showLoading($(".loader"), $(".query-status-btn"));
-  utils.clearData();
-  let table = $("#jq-table").val() ? $("#jq-table").val() : null;
-  let columns = $("#jq-columns").val();
-  let filters = $("#jq-filters").val();
-  let fetchLink = "/" + localStorage.getItem("jarvis.demo.dialect") + "/" + table + "?" +
-    (columns ? "select=" + columns : "") +
-    (filters ? "&" + filters : "");
+  if ($("#jq-table").val()) {
+    showLoading($(".loader"), $(".query-status-btn"));
+    utils.clearData();
+    let table = $("#jq-table").val();
+    let columns = $("#jq-columns").val();
+    let filters = $("#jq-filters").val();
+    let fetchLink = "/db/" + localStorage.getItem("jarvis.demo.dialect") + "/" + table + "?" +
+      (columns ? "select=" + columns : "") +
+      (filters ? "&" + filters : "");
 
-  if (table) {
     $(".jq-link-display").attr("href", window.location.origin + fetchLink);
     $(".jq-link-display").html(fetchLink);
     $(".jq-link-display").css("visibility", "visible");
@@ -295,7 +295,7 @@ function fetchJQData() {
         // 
 
         $(".error_container").hide();
-        $("#sql-code").html(sqlFormatter.format(data.query, { language: 'postgresql' }));
+        $("#sql-code").html(sqlFormatter.format(data.query, { language: "postgresql" }));
         $("#sql-display").show();
 
         hljs.highlightAll();

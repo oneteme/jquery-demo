@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "postgresql")
+@RequestMapping(value = "db/postgresql")
 @RequiredArgsConstructor
 public class JQueryControllerPostGre {
 
@@ -71,7 +71,7 @@ public class JQueryControllerPostGre {
 //	}
 
 	public Object demoExecute(MvcRequest mvc) {
-		return demoExecute(mvc);
+		return demoExecute(mvc, null);
 	}
 
 	public Object demoExecute(MvcRequest mvc, HttpServletResponse res) {

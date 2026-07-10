@@ -57,6 +57,19 @@
     ]
   },
   {
+    "title": "SELF JOIN",
+    "definition": "Joins a view with itself by using different aliases.<br>This allows you to compare rows within the same table or find related records that share common values.<br>For example, you can retrieve customers who live in the same city by joining the Customers view to itself on the <b>city</b> column while excluding the same customer.",
+    "syntax": "join=Join(mySelfView:sV0).criteria(sV0.myColumn.eq(v0.myColumn)) // 'myJoin' => innerJoin/rightJoin/leftJoin/etc...",
+    "examples": [
+      {
+        "title": "Self JOIN in URL",
+        "view": "products",
+        "column": "self_prod.id,id",
+        "filter": "join=innerJoin(products:self_prod).criteria(self_prod.id.eq(id))"
+      }
+    ]
+  },
+  {
     "title": "MULTIPLE JOIN",
     "definition": "Allows combining data from more than two views by applying multiple JOIN operations in a single query.<br>Each join links the main view to another related view using its own condition.<br>This makes it possible to retrieve related data from several tables at once.",
     "examples": [

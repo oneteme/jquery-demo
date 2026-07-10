@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "h2")
+@RequestMapping(value = "db/h2")
 @RequiredArgsConstructor
 public class JQueryControllerH2 {
 
@@ -71,7 +71,7 @@ public class JQueryControllerH2 {
 //	}
 
 	public Object demoExecute(MvcRequest mvc) {
-		return demoExecute(mvc);
+		return demoExecute(mvc, null);
 	}
 
 	public Object demoExecute(MvcRequest mvc, HttpServletResponse res) {

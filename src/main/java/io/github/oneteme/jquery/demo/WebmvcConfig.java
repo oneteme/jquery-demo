@@ -38,6 +38,6 @@ public class WebmvcConfig implements WebMvcConfigurer {
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
     	getInstance().register(H2Store.class, H2Ds);
-    	getInstance().register(PostGreStore.class, postgreDs);
+//    	getInstance().register(PostGreStore.class, postgreDs);
     }
 }

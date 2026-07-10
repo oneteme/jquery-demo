@@ -6,6 +6,8 @@ export function loadDialects() {
         $("#db-select-popup").append(
             $("<div>", { class: "db-select-popup-arrow" })
         )
+        dialects = dialects.filter(dialect => dialect.show == true);
+        console.log("dialect : ", dialects)
         $.each(dialects, (key, value) => {
             let div;
             switch (value.type) {
@@ -62,6 +64,7 @@ $(document).on(
 
 $(document).on('click', '.db-option', (e) => {
     setOptionActive($(e.currentTarget));
+    $("#jq-execute").click();
     // Change SQL or database code
 });
 

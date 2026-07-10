@@ -3,7 +3,8 @@
         "label": "PostgreSQL",
         "value": "postgresql",
         "type": "icon",
-        "metadata": "devicon-postgresql-plain colored"
+        "metadata": "devicon-postgresql-plain colored",
+        "show": true
     },
     {
         "label": "MySQL",
@@ -46,6 +47,7 @@
                 "style": "background:#2fc01c;",
                 "class": "db-fallback-icon"
             }
-        }
+        },
+        "show": true
     }
 ]
