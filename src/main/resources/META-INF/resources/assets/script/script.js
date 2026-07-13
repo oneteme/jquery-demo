@@ -6,6 +6,7 @@ import { hideLoading, showError, showLoading, showSuccess } from "./status.js";
 import { clearTable, displayTableResults } from "./table.js";
 import * as dialect from "./dialect.js";
 import * as utils from "./utils.js";
+import { initCodeBlocks } from "./code-blocks.js";
 
 var inputTimeOut;
 //**************** EVENT LISTENERS ****************/
@@ -13,6 +14,7 @@ $(document).ready(function () {
   hljs.highlightAll();
   $(".navbar-nav").empty();
   dialect.loadDialects();
+  initCodeBlocks();
   getAllJavaMd().then(mdFiles => loadNavData())
   loadSettings();
   loadViews();

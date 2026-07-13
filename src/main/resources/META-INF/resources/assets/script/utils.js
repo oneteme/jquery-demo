@@ -34,7 +34,7 @@ export function loadMarkDown(path, div) {
 
     // Highlight all code blocks after inserting the HTML
     hljs.highlightAll();
-    initCodeBlocks()
+    initCodeBlocks();
     return;
   })
 }
