@@ -16,7 +16,7 @@ Criteria are defined inside a Dataset.
 
 Example
 ```java
-// In your DatasetResource
+// In your DatasetCatalogue
 default Criteria priceEqualsTen() {
     return price().eq(10);
 }
@@ -34,7 +34,7 @@ Instead of hardcoding values, you can pass parameters.
 Example: 
 
 ```java 
-// In your DatasetResource
+// In your DatasetCatalogue
 default Criteria priceRangeByName(String name, Integer v1, Integer v2) {
 	return price().between(arr).and(name().contentLike(name));
 }

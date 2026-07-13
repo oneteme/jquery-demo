@@ -8,7 +8,7 @@ The setup consists of three main steps:
 
 1. Create Dataset Interfaces
 
-For each table or view in your database, you must create a DatasetResource interface.
+For each table or view in your database, you must create a DatasetCatalogue interface.
 
 This interface represents the dataset that will be exposed through the API.
 
@@ -16,7 +16,7 @@ Example: if you have a database table called CUSTOMERS_TABLE, create a correspon
  ```java
 //Customers.java
 
-public interface Customers extends DatasetResource {
+public interface Customers extends DatasetCatalogue {
 
 }
 
@@ -50,7 +50,7 @@ Example:
  ```java
 //Customers.java
 
-public interface Customers extends DatasetResource {
+public interface Customers extends DatasetCatalogue {
 
 	@Bind("CUSTOMER_ID")
 	ViewColumn id();

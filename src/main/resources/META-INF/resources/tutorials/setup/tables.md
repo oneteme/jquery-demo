@@ -35,7 +35,7 @@ Each dataset:
 
 - represents a table or view
 - must be linked using @Bind
-- returns a previously defined DatasetResource
+- returns a previously defined DatasetCatalogue
 
 Basic Syntax : 
  ```java 

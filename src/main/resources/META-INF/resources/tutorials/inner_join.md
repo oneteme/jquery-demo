@@ -1,6 +1,6 @@
 This tutorial explains how to create and use an INNER JOIN in your dataset.
 
-1. Add the Join to Your DatasetResource
+1. Add the Join to Your DatasetCatalogue
 
 First, define the join inside your table class by creating a method that returns a JoinsClause.
 

@@ -1515,52 +1515,89 @@ pre {
   position: relative;
 }
 
-code::before {
-  position: absolute;
-  top: 0;
-  right: 4px;
-  opacity: 0.7;
-  font-weight: 600;
-  font-size: 0.55rem;
-  padding: 0.1rem;
+.code-block-wrapper {
+  border: 1px solid var(--jarvis-border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0.6rem 0;
+  background: var(--jarvis-darker);
+}
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.15rem 0.35rem;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid var(--jarvis-border);
+}
+
+.code-block-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.code-block-lang i {
+  font-size: 0.7rem;
+}
+
+.code-block-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.code-block-play-btn,
+.code-block-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
   border-radius: 4px;
-  font-family: inherit;
-  letter-spacing: 0.05em;
-  transition: all 0.3s;
-  border: 1px solid;
-  backdrop-filter: blur(5px);
-  border: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.68rem;
+  background: transparent;
+  border: none;
+  color: var(--jarvis-text-dim);
 }
 
-code:hover::before {
+.code-block-copy-btn:hover {
+  color: var(--jarvis-cyan);
+  background: rgba(0, 217, 255, 0.1);
+}
+
+.code-block-copy-btn.copied {
+  color: #22c55e;
+}
+
+.code-block-play-btn {
+  color: #22c55e;
+  opacity: 0.85;
+}
+
+.code-block-play-btn:hover {
   opacity: 1;
-  transform: translateY(-0.2px);
-  /* box-shadow: 0 0 2px currentColor; */
+  background: rgba(34, 197, 94, 0.12);
 }
 
-.language-java::before {
-  content: '☕ JAVA';
-  color: #f89820;
-  background: rgba(248, 152, 32, 0.1);
-  border-color: rgba(248, 152, 32, 0.3);
+.code-block-wrapper pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
 }
 
-.language-scss::before,
-.language-javascript::before,
-.language-js::before,
-.language-php::before {
-  content: '🌐 URL';
-  top: 8px;
-  color: var(--jarvis-cyan);
-  background: rgba(0, 217, 255, 0.1);
-  border-color: var(--jarvis-border);
-}
-
-.language-sql::before {
-  content: '🗄️ SQL';
-  color: var(--jarvis-cyan);
-  background: rgba(0, 217, 255, 0.1);
-  border-color: var(--jarvis-border);
+code::before {
+  display: none;
 }
 
 .jquery-display {

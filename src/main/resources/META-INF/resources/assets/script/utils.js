@@ -1,3 +1,4 @@
+import { initCodeBlocks } from "./code-blocks.js";
 import { clearTable } from "./table.js";
 
 export function loadJson(path) {
@@ -33,6 +34,7 @@ export function loadMarkDown(path, div) {
 
     // Highlight all code blocks after inserting the HTML
     hljs.highlightAll();
+    initCodeBlocks()
     return;
   })
 }
