@@ -16,7 +16,7 @@ export function checkForFile(path) {
   return new Promise((res, rej) => {
     $.get(path)
       .done(function (data) {
-        
+
         res(data)
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -28,7 +28,7 @@ export function checkForFile(path) {
 export function loadMarkDown(path, div) {
   return checkForFile(path).then((data) => {
     var htmlContent = marked.parse(data);
-    
+
     // Insert the HTML into the div
     div.html(htmlContent);
 
@@ -94,8 +94,8 @@ export function displayDivAtCursor(divElement, e) {
 // Place div at top
 export function placeAtTop(divElement = $(".form-container")) {
   var parentDiv = divElement.parent();
-  
-  
+
+
   divElement.prependTo(parentDiv);
 }
 
@@ -104,7 +104,7 @@ export function clearData() {
   $("#sql-display").hide();
 }
 
-$(".btn-trigger").on("click", (e) => {
+$(document).on("click", ".btn-trigger", (e) => {
   let elementToHide = $(e.currentTarget).attr("hide"),
     elementToShow = $(e.currentTarget).attr("show"),
     visibleElements = $(e.currentTarget).attr("visible"),

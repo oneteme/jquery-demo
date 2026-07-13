@@ -52,13 +52,13 @@ Each query section can use one of the following modifiers.
 
 For example, if the template defines:
 
-```text
+```java
 select = "id,name"
 ```
 
 and the request contains:
 
-```text
+```scss
 ?select=city
 ```
 

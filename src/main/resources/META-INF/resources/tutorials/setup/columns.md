@@ -119,10 +119,10 @@ This annotation allows you to:
 
 Example of using the customised columns:
 
-in API : 
-http://localhost:8080/customers?field=customer_address
+```scss
+/customers?select=customer_address
+```
 
-in Java : 
 ```java
 Customers.address();
 ```

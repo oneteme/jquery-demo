@@ -50,6 +50,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
 
   <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/dist/tabler-icons-filled.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <script type="module" src="./assets/script/script.js"></script>
@@ -98,26 +99,7 @@
           <i class="ti ti-chevron-down db-select-chevron"></i>
 
           <div class="db-select-popup" id="db-select-popup">
-            <div class="db-select-popup-arrow"></div>
 
-            <div class="db-option active" data-value="postgresql" data-label="PostgreSQL">
-              <i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span>
-            </div>
-            <div class="db-option d-flex" data-value="mysql" data-label="MySQL">
-              <i class="devicon-mysql-original colored"></i><span>MySQL</span>
-            </div>
-            <div class="db-option" data-value="sqlserver" data-label="SQL Server">
-              <i class="devicon-microsoftsqlserver-plain colored"></i> SQL Server
-            </div>
-            <div class="db-option" data-value="oracle" data-label="Oracle">
-              <i class="devicon-oracle-original colored"></i> Oracle
-            </div>
-            <div class="db-option" data-value="sqlite" data-label="SQLite">
-              <i class="devicon-sqlite-plain colored"></i> SQLite
-            </div>
-            <div class="db-option" data-value="h2" data-label="H2" data-fallback="H2" data-color="#1c78c0">
-              <span class="db-fallback-icon" style="background:#2fc01c;">H2</span> H2
-            </div>
           </div>
         </div>
       </div>
@@ -201,7 +183,7 @@
         </div>
 
         <div id="sql-display" class="card-container" style="padding: 0px;display: none;position: relative;">
-          <pre><code id="sql-code" class="language-sql hljs">
+          <pre style="height: 100%;"><code id="sql-code" class="language-sql hljs">
     <!-- existing generated SQL spans -->
   </code></pre>
         </div>

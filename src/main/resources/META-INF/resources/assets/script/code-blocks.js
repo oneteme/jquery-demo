@@ -50,16 +50,16 @@ export function initCodeBlocks(root = null) {
 
         const $actions = $('<div class="code-block-actions"></div>');
 
-        if (playData) {
-            $actions.append(
-                $('<button type="button" class="code-block-play-btn" title="Run this example"><i class="ti ti-player-play-filled"></i></button>')
-                    .attr('data-play', playData)
-            );
-        }
-
         $actions.append(
             '<button type="button" class="code-block-copy-btn" title="Copy code"><i class="ti ti-copy"></i></button>'
         );
+
+        if (playData) {
+            $actions.append(
+                $('<button type="button" class="code-block-play-btn btn-trigger" title="Run this example" show=".content.jquery-display,.form-sidebar-actions" hide=".content" visible=".show-docs,.show-info"><i class="ti ti-player-play"></i></button>')
+                    .attr('data-play', playData)
+            );
+        }
 
         $header.append($actions);
         $pre.before($wrapper);

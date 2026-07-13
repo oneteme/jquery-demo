@@ -648,9 +648,9 @@ pre {
 .highlighted_code th {
   color: var(--jarvis-cyan);
   text-align: left;
-  padding: 1rem 1.25rem;
+  padding: 0.4rem 1.65rem;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 2px solid var(--jarvis-cyan);
@@ -1519,8 +1519,16 @@ pre {
   border: 1px solid var(--jarvis-border);
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.2rem;
   background: var(--jarvis-darker);
+}
+
+#sql-display .code-block-wrapper {
+  height: 100%;
+}
+
+.highlighted_code .code-block-wrapper {
+  margin: 1rem 0;
 }
 
 .code-block-header {

@@ -107,6 +107,15 @@ $(document).ready(function () {
     $(e.currentTarget).parent().hide();
   });
 
+  $(document).on("click", ".code-block-play-btn", (e) => {
+
+    const playButton = $(e.currentTarget),
+      data = JSON.parse(playButton.attr("data-play"));
+    console.log("clicked on play button data : ", data)
+    updateExampleForm(data);
+
+  })
+
   $(".definition-element .show-demo").on("click", (e) => {
     $(".example-number:first").click();
     introNextStep();
@@ -119,25 +128,6 @@ $(document).ready(function () {
     e.stopPropagation();
     $('#examples-popup').toggleClass('show');
     $(this).toggleClass('active');
-  });
-
-  $('#sql-copy-btn').on('click', function () {
-    const $btn = $(this);
-    const code = $('#sql-code').text();
-
-    navigator.clipboard.writeText(code).then(function () {
-      $btn.addClass('copied');
-
-      const $span = $btn.find('span');
-      const original = $span.text();
-
-      $span.text('Copied!');
-
-      setTimeout(function () {
-        $btn.removeClass('copied');
-        $span.text(original);
-      }, 1500);
-    });
   });
 });
 
@@ -245,21 +235,14 @@ function loadExample(exampleDiv) {
 
   $.each(examples, (key, val) => {
     const index = key + 1,
-      example = $("<div>", { class: "example-number", id: "example-" + index }).html(index),
-      exampleTitle = val.title ?? "Example " + index;
+      example = $("<div>", { class: "example-number", id: "example-" + index }).html(index);
+    val.title = val.title ?? "Example " + index;
     example.on('click', () => {
-      $("#jq-table").val(val.view ?? "");
-      $("#jq-columns").val(val.column ?? "");
-      $("#jq-filters").val(val.filter ?? "");
-      $('#example-title-text').html(exampleTitle)
-      $(".example-number").removeClass("active");
-      example.addClass("active");
-      fetchJQData();
-      introNextStep();
+      updateExampleForm(val, example)
     });
 
     tippy(example[0], {
-      content: exampleTitle,
+      content: val.title,
       animation: 'scale',
       arrow: true,
       placement: 'bottom'
@@ -270,6 +253,20 @@ function loadExample(exampleDiv) {
   $(".content").animate({ scrollTop: 0 }, 10);
   $('.syntax-content').hide();
   introNextStep(1500, () => $('.syntax-content').show());
+}
+
+function updateExampleForm(example, div = null) {
+  console.log("updateExampleForm : ",example)
+  $("#jq-table").val(example.view ?? "");
+  $("#jq-columns").val(example.column ?? "");
+  $("#jq-filters").val(example.filter ?? "");
+  $('#example-title-text').html(example.title ?? "Example tryout")
+  $(".example-number").removeClass("active");
+  if (div) {
+    div.addClass("active");
+  }
+  fetchJQData();
+  introNextStep();
 }
 
 function fetchJQData() {

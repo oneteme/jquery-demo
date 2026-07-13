@@ -59,6 +59,7 @@ An advanced predicate can map multiple values to different conditions using <b>C
 
 <b>Example</b>
 
+<!-- playdata: {"view":"products","filter":"price.category(cheap)","column":"name"} -->
 ```java
 // In your StoreResource
 @Expose(identity="category") 
@@ -73,6 +74,8 @@ default Predicate priceCategory(String... values) {
 ```
 
 <b> Usage 1</b>
+
+<!-- playdata: {"view":"products","filter":"price.category(cheap)"} -->
 ```javascript
 select=...&price.category(cheap)
 ```
