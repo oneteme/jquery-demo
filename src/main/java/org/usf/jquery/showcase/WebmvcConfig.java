@@ -9,6 +9,7 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.usf.jquery.showcase.erm.H2Store;
+import org.usf.jquery.showcase.erm.PostGreStore;
 
 @Configuration
 public class WebmvcConfig {
@@ -27,6 +28,6 @@ public class WebmvcConfig {
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
     	getInstance().register(H2Store.class, H2Ds);
-//    	getInstance().register(PostGreStore.class, postgreDs);
+    	getInstance().register(PostGreStore.class, postgreDs);
     }
 }

@@ -11,7 +11,7 @@ import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface Orders extends DatasetCatalog {
+public interface Orders extends DatasetCatalog<DemoStore>,CommunColumns {
 	
 	@Bind("ORDER_ID")
 	ViewColumn id();
@@ -52,10 +52,6 @@ public interface Orders extends DatasetCatalog {
 		return joins(
 				innerJoin(cust.getView(), customerId().eq(cust.id())),
 				innerJoin(ship.getView(), shipperId().eq(ship.id())));
-	}
-
-	default DemoStore currentStore() {
-		return getInstance().getStore(DemoStore.class);
 	}
 	
 }

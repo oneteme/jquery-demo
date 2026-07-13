@@ -3,16 +3,14 @@ package org.usf.jquery.showcase.erm;
 import static org.usf.jquery.core.Join.leftJoin;
 import static org.usf.jquery.core.JoinGroup.joins;
 
-import org.usf.jquery.core.Column;
 import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.Order;
-import org.usf.jquery.core.PartitionComposer;
 import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface Customers extends DatasetCatalog<DemoStore> {
+public interface Customers extends DatasetCatalog<DemoStore>,CommunColumns {
 
 	@Bind("CUSTOMER_ID")
 	ViewColumn id();
@@ -37,28 +35,8 @@ public interface Customers extends DatasetCatalog<DemoStore> {
 	ViewColumn country();
 	
 	default JoinGroup leftOrder() {
-		var orders = getStore().orders();
+		var orders = currentStore().orders();
 		return joins(leftJoin(orders.getView(), id().eq(orders.customerId())));
-	}
-	
-	@Deprecated
-	default Column rankLocation() {
-		return Column.rank().over(new PartitionComposer().columns(address()).orders(city().asc()).compose());
-	}
-
-	@Deprecated
-	default Column rowLocation() {
-		return Column.rowNumber().over(new PartitionComposer().columns(address()).orders(city().asc()).compose());
-	}
-
-	@Deprecated
-	default Column denseLocation() {
-		return Column.denseRank().over(new PartitionComposer().columns(address()).orders(city().asc()).compose());
-	}
-
-	@Deprecated
-	default Column percentLocation() {
-		return Column.rowNumber().over(new PartitionComposer().columns(address()).orders(city().asc()).compose());
 	}
 	
 	default Order orderCol() {

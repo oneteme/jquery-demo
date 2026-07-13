@@ -5,7 +5,7 @@ import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface OrdersDetails extends DatasetCatalog {
+public interface OrdersDetails extends DatasetCatalog<DemoStore> {
 
 	@Bind("ORDER_DETAIL_ID")
 	ViewColumn id();

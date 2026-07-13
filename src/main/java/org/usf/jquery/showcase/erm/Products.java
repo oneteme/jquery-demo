@@ -23,7 +23,7 @@ import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 import org.usf.jquery.mvc.Expose;
 
-public interface Products extends DatasetCatalog {
+public interface Products extends DatasetCatalog<DemoStore>,CommunColumns {
 	
 	@Bind("PRODUCT_ID")
 	ViewColumn id();
@@ -58,7 +58,7 @@ public interface Products extends DatasetCatalog {
 	}
 
 	default JoinGroup innerCat() {
-		var cat = getInstance().getStore(DemoStore.class).categories();
+		var cat = currentStore().categories();
 		return joins(innerJoin(cat.getView(), catId().eq(cat.id())));
 	}
 
@@ -67,7 +67,7 @@ public interface Products extends DatasetCatalog {
 		return new PartitionComposer()
 				.columns(catId())
 				.orders(price().desc())
-				.compose(getInstance().getStore(DemoStore.class));
+				.compose(currentStore());
 	}
 	
 	default Column rankProducts() {
@@ -85,11 +85,10 @@ public interface Products extends DatasetCatalog {
 
 	
 	default SingleQueryColumn single() {
-		var cat = getInstance().getStore(DemoStore.class);
 		return new QueryComposer()
 				.columns(id())
 				.criteria(name().startsLike("Con"))
-				.compose(cat).asColumn();
+				.compose(currentStore()).asColumn();
 	}
 	
 //	default Column percentRankProducts(ViewColumn partition, Order order) {

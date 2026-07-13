@@ -1519,7 +1519,7 @@ pre {
   border: 1px solid var(--jarvis-border);
   border-radius: 8px;
   overflow: hidden;
-  margin: 0.6rem 0;
+  margin-bottom: 0.45rem;
   background: var(--jarvis-darker);
 }
 
@@ -1593,7 +1593,6 @@ pre {
 .code-block-wrapper pre {
   margin: 0;
   border: 0;
-  border-radius: 0;
 }
 
 code::before {

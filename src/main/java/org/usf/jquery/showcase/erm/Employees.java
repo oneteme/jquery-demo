@@ -4,7 +4,7 @@ import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 
-public interface Employees extends DatasetCatalog {
+public interface Employees extends DatasetCatalog<DemoStore> {
 
 	@Bind("EMPLOYEE_ID")
 	ViewColumn id();

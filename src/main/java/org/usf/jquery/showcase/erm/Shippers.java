@@ -4,7 +4,7 @@ import org.usf.jquery.core.ViewColumn;
 import org.usf.jquery.mvc.Bind;
 import org.usf.jquery.mvc.DatasetCatalog;
 
-public interface Shippers extends DatasetCatalog {
+public interface Shippers extends DatasetCatalog<DemoStore> {
 	
 	@Bind("SHIPPER_ID")
 	ViewColumn id();
