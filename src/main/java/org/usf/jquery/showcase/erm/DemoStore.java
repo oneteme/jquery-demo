@@ -1,6 +1,7 @@
 package org.usf.jquery.showcase.erm;
 
 import static org.usf.jquery.core.JDBCType.DOUBLE;
+import static org.usf.jquery.core.Join.innerJoin;
 import static org.usf.jquery.core.Mappers.keyValueMapper;
 import static org.usf.jquery.core.Operators.aggregate;
 import static org.usf.jquery.core.Operators.constant;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 
 import org.usf.jquery.core.Chainable;
 import org.usf.jquery.core.Column;
+import org.usf.jquery.core.Join;
 import org.usf.jquery.core.OperatorDefinition;
 import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.QueryComposer;
@@ -69,7 +71,8 @@ public interface DemoStore extends StoreCatalog {
 //	}
 
 	default QueryCatalog subCategories() {
-		return new QueryCatalog(new QueryComposer().columns(categories().id())
+		return new QueryCatalog(new QueryComposer()
+				.columns(categories().id())
 				.criteria(categories().name().startsLike("Con")).compose(this));
 	}
 

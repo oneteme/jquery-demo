@@ -180,7 +180,7 @@
     "column": "price",
     "filter": "price=10,20,30,40",
     "definition": "TRUE if the operand is equal to any value in a list of expressions",
-    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...&;column.in=select(...).criteria(...) //SubQuery",
+    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...&;column.in(val1,val2,val3,...)&;column.in=select(...).criteria(...) //SubQuery",
     "examples": [
       {
         "title": "JQuery IN",
@@ -202,7 +202,7 @@
     "column": "price",
     "filter": "price.notIn=10,20,30,40",
     "definition": "TRUE if the operand is not equal to any value in a list of expressions",
-    "syntax": "column.notIn=val1,val2,val3,...&;column.notIn=val1,val2,val3,...",
+    "syntax": "column.notIn=val1,val2,val3,...&;column.notIn(val1,val2,val3,...)&;column.notIn=select(...).criteria(...) //SubQuery",
      "examples": [
       {
         "title": "JQuery IN",

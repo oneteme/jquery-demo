@@ -4,7 +4,7 @@
         "value": "postgresql",
         "type": "icon",
         "metadata": "devicon-postgresql-plain colored",
-        "show": true
+        "show": false
     },
     {
         "label": "MySQL",

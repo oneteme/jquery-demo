@@ -3,17 +3,6 @@ server:
 spring:
   application:
     name: JQuery-Demo
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    username: postgres
-#    password: test
-#    driver-class-name: org.postgresql.Driver
-#    hikari:
-#      maximum-pool-size: 10       # Max number of connections in the pool
-#      minimum-idle: 2             # Minimum idle connections
-#      idle-timeout: 30000         # 30 seconds before idle connections are removed
-#      max-lifetime: 1800000       # 30 minutes max connection lifetime
-#      connection-timeout: 20000   # 20 seconds max wait for a connection
   datasource:
     h2db:
       jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE

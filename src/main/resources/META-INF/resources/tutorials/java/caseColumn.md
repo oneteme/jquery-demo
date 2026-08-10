@@ -13,7 +13,7 @@ default CaseColumn columnWhen() {
     .when(Pred1, val1).when(Pred2, val2)... .orElse(valn);
 }
 ```
-<!-- playdata: {"title":"","view":"products","column":"price,whenCol:price_lab"} -->
+<!-- playdata: {"title":"","view":"products","column":"price,whenCol:cost_case"} -->
 ```javascript
 select=columnWhen:caseCol
 ```

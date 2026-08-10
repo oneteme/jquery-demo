@@ -45,16 +45,16 @@ public interface Products extends DatasetCatalog<DemoStore>,CommunColumns {
 	@Bind("UNIT")
 	ViewColumn unit();
 	
-	default Criteria priceRangeByName(String name, Integer v1, Integer v2) {
+	default Criteria nameRangeByPrice(String name, Integer v1, Integer v2) {
 		return price().gt(v1).and(price().lt(v2)).and(name().contentLike(name));
 	}
 	
-	default CaseColumn whenCol() {
+	default CaseColumn priceToCase() {
 		return price().toCase().when(lt(10), "Cheap").when(ge(10).and(lt(20)), "Normal").orElse("Expensive");
 	}
 	
-	default CaseColumn whenColCase() {
-		return beginCase().when(price().lt(10), "cheap").orElse("Expensive");
+	default CaseColumn priceWhen() {
+		return beginCase().when(price().lt(10), "Cheap").when(price().ge(10).and(price().lt(20)), "Normal").orElse("Expensive");
 	}
 
 	default JoinGroup innerCat() {
@@ -81,8 +81,6 @@ public interface Products extends DatasetCatalog<DemoStore>,CommunColumns {
 	default Column rowProducts() {
 		return rowNumber().over(partitionByCategoryPrice());
 	}
-	
-
 	
 	default SingleQueryColumn single() {
 		return new QueryComposer()

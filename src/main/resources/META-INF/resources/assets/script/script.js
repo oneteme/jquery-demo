@@ -181,14 +181,10 @@ function loadExample(exampleDiv) {
     );
   }
 
-  if (exampleDiv.attr("data-tutorial")) {
-    loadTutorial(exampleDiv.attr("data-tutorial"));
-  } else {
+  if (exampleDiv.attr("data-definition")) {
     $(".definition-toggle").show();
-    $(".definition-element.definition").show();
-    const definition = exampleDiv.attr("data-definition"),
-      syntax = exampleDiv.attr("data-syntax");
-    const defToolTip = $(".definition-toggle")[0]._tippy;
+        const definition = exampleDiv.attr("data-definition"),
+        defToolTip = $(".definition-toggle")[0]._tippy;
     if (defToolTip) {
       defToolTip.setContent(definition);
     } else {
@@ -203,6 +199,14 @@ function loadExample(exampleDiv) {
         theme: 'jarvis'
       });
     }
+  }
+
+  if (exampleDiv.attr("data-tutorial")) {
+    loadTutorial(exampleDiv.attr("data-tutorial"));
+  } else {
+    $(".definition-element.definition").show();
+    const  syntax = exampleDiv.attr("data-syntax");
+
     if (syntax) {
       $(".syntax-block.url").empty();
       const syntaxes = syntax.split("&;");
@@ -256,7 +260,7 @@ function loadExample(exampleDiv) {
 }
 
 function updateExampleForm(example, div = null) {
-  console.log("updateExampleForm : ",example)
+  console.log("updateExampleForm : ", example)
   $("#jq-table").val(example.view ?? "");
   $("#jq-columns").val(example.column ?? "");
   $("#jq-filters").val(example.filter ?? "");

@@ -3,8 +3,12 @@ package org.usf.jquery.showcase.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.usf.jquery.core.KeyValueMapper;
+import org.usf.jquery.core.Mappers;
 import org.usf.jquery.mvc.MvcRequest;
 import org.usf.jquery.mvc.QueryTemplate;
+import org.usf.jquery.mvc.StoreManager;
+import org.usf.jquery.showcase.erm.Employees;
 import org.usf.jquery.showcase.erm.H2Store;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class JQueryControllerH2 {
 
+	@GetMapping("employees/test")
+	public Object fetchEmployeesSub() {
+		H2Store store = StoreManager.getInstance().getStore(H2Store.class);
+		Employees employees = store.employees();
+		
+		return store.execute(store.newQuery(v->v.column(employees.id())), Mappers.keyValueMapper());
+	}
+	
 	@GetMapping("employees")
 	@QueryTemplate(store = H2Store.class, dataset = "employees", select = "id,lname,fname,start,photo,notes", view = "debug")
 	public Object fetchEmployees(MvcRequest mvc) {
