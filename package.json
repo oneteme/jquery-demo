@@ -1,0 +1,27 @@
+{
+  "name": "jquery-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@highlightjs/cdn-assets": "^11.11.1",
+    "@popperjs/core": "^2.11.8",
+    "@tabler/icons-webfont": "^3.46.0",
+    "datatables.net": "^2.0.8",
+    "datatables.net-dt": "^2.0.8",
+    "devicon": "^2.17.0",
+    "highlight.js": "^11.11.1",
+    "intro.js": "^7.2.0",
+    "jquery": "^3.6.0",
+    "marked": "^4.3.0",
+    "sql-formatter": "^12.0.4",
+    "tippy.js": "^6.3.7"
+  }
+}

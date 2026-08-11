@@ -1,5 +1,5 @@
 const codeLangMap = {
-    java: { label: 'Java', icon: 'ti-coffee', color: '#f89820' },
+    java: { label: 'Java', icon: 'devicon-java-plain colored', color: '#f89820' },
     sql: { label: 'SQL', icon: 'ti-database', color: '#00d9ff' },
     json: { label: 'JSON', icon: 'ti-braces', color: '#94a3b8' },
     bash: { label: 'Shell', icon: 'ti-terminal-2', color: '#4eaa25' },

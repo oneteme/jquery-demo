@@ -1,12 +1,13 @@
 import { loadJson } from "./utils.js";
 
+const defaultDialect = "h2";
 export function loadDialects() {
     $("#db-select-popup").empty()
     loadJson("/dialect.json").then(dialects => {
         $("#db-select-popup").append(
             $("<div>", { class: "db-select-popup-arrow" })
         )
-        dialects = dialects.filter(dialect => dialect.show == true);
+        dialects = dialects.filter(dialect => !dialect.hide);
         console.log("dialect : ", dialects)
         $.each(dialects, (key, value) => {
             let div;
@@ -44,7 +45,7 @@ export function loadDialects() {
                     )
             )
         })
-        if (localStorage.getItem("jarvis.demo.dialect")) {
+        if (localStorage.getItem("jarvis.demo.dialect") ) {
             setOptionActive($(".db-option[data-value=" + localStorage.getItem("jarvis.demo.dialect") + "]"))
         }
         else {

@@ -13,7 +13,7 @@ export function loadNavData(path = "/menu.json", element = $(".navbar-nav")) {
 }
 
 function createNavbar(data, element) {
-    $.each(data, (key, nav_element) => {
+    $.each(data.filter(o => !o["dev"]), (key, nav_element) => {
         if ("items" in nav_element) {
             element.append(
                 $("<div>", {
@@ -48,8 +48,7 @@ function createNavbar(data, element) {
             tippy("li[data-tippy-content]", {
                 animation: 'scale',
                 placement: 'top',
-                arrow: true,
-                theme: 'jarvis'
+                arrow: true
 
             });
         }
@@ -64,8 +63,8 @@ function setupNavItem(navItem, divElement, next, prev) {
             "data-next": next,
             "data-prev": prev
         };
-    
-    
+
+
     if (javaMdFiles.includes(javapath)) {
         navFields["data-java"] = javapath;
     }
@@ -133,9 +132,11 @@ export function toggleNavSubElements(e, subElement = ".sub-nav") {
     if (parent.find(".accordion").hasClass("rot-accordion")) {
         parent.find(".accordion").removeClass("rot-accordion");
         parent.siblings(subElement).hide(".sub-nav");
+        parent.closest(".parent-element").removeClass("active")
     } else {
         parent.find(".accordion").addClass("rot-accordion");
         parent.siblings(subElement).show();
+        parent.closest(".parent-element").addClass("active")
         $(".navbar-container").animate({
             scrollTop: $(".navbar-container").scrollTop()
                 + parent.offset().top
@@ -148,7 +149,7 @@ $(document).on(
     "click",
     ".navbar-container .parent_title[isloaded='false']",
     (e) => {
-        
+
         const subMenuFile = "subMenu/" + $(e.currentTarget).attr("sub-menu"),
             title = $(e.currentTarget).find("span:first").html(),
             subNavDiv = $(".sub-nav[data-title='" + title + "']");
@@ -163,7 +164,7 @@ $(document).on(
     "click",
     ".navbar-container .parent_title[isloaded='true']",
     (e) => {
-        
+
         if (!$(event.target).closest(".jq-example").length) {
             toggleNavSubElements(e);
         }

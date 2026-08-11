@@ -14,7 +14,7 @@ In this guide, you will learn how to:
 
 Criteria are defined inside a Dataset.
 
-Example
+<b>Example</b>
 ```java
 // In your DatasetCatalogue
 default Criteria priceEqualsTen() {

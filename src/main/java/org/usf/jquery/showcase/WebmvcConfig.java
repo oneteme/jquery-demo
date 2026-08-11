@@ -8,26 +8,33 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.usf.jquery.showcase.erm.H2Store;
 import org.usf.jquery.showcase.erm.PostGreStore;
 
 @Configuration
-public class WebmvcConfig {
+public class WebmvcConfig implements WebMvcConfigurer {
 
     private final DataSource H2Ds;
-    private final DataSource postgreDs;
+//    private final DataSource postgreDs;
 
     public WebmvcConfig(
-    		@Qualifier("h2DataSource") DataSource H2Ds,
-    		@Qualifier("postgreDataSource") DataSource postgreDs) {
+    		@Qualifier("h2DataSource") DataSource H2Ds) {
 
 		this.H2Ds = H2Ds;
-		this.postgreDs = postgreDs;
+//		this.postgreDs = postgreDs;
 	}
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/node_modules/**")
+                .addResourceLocations("file:./node_modules/");
+    }
+    
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
     	getInstance().register(H2Store.class, H2Ds);
-    	getInstance().register(PostGreStore.class, postgreDs);
+//    	getInstance().register(PostGreStore.class, postgreDs);
     }
 }

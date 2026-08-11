@@ -9,6 +9,18 @@ import * as utils from "./utils.js";
 import { initCodeBlocks } from "./code-blocks.js";
 
 var inputTimeOut;
+
+// TEST LIB
+console.log("Application loaded");
+
+console.log("jQuery:", typeof $);
+console.log("DataTables:", typeof DataTable);
+console.log("Intro:", typeof introJs);
+console.log("Highlight.js:", typeof hljs);
+console.log("Marked:", typeof marked);
+console.log("SQL Formatter:", typeof sqlFormatter);
+console.log("Tippy:", typeof tippy);
+
 //**************** EVENT LISTENERS ****************/
 $(document).ready(function () {
   hljs.highlightAll();
@@ -183,8 +195,8 @@ function loadExample(exampleDiv) {
 
   if (exampleDiv.attr("data-definition")) {
     $(".definition-toggle").show();
-        const definition = exampleDiv.attr("data-definition"),
-        defToolTip = $(".definition-toggle")[0]._tippy;
+    const definition = exampleDiv.attr("data-definition"),
+      defToolTip = $(".definition-toggle")[0]._tippy;
     if (defToolTip) {
       defToolTip.setContent(definition);
     } else {
@@ -194,9 +206,9 @@ function loadExample(exampleDiv) {
         arrow: true,
         hideOnClick: false,
         interactive: true,
+        allowHTML: true,
         // interactiveBorder: 5,
-        interactiveDebounce: 200,
-        theme: 'jarvis'
+        interactiveDebounce: 100
       });
     }
   }
@@ -205,7 +217,7 @@ function loadExample(exampleDiv) {
     loadTutorial(exampleDiv.attr("data-tutorial"));
   } else {
     $(".definition-element.definition").show();
-    const  syntax = exampleDiv.attr("data-syntax");
+    const syntax = exampleDiv.attr("data-syntax");
 
     if (syntax) {
       $(".syntax-block.url").empty();
@@ -249,7 +261,8 @@ function loadExample(exampleDiv) {
       content: val.title,
       animation: 'scale',
       arrow: true,
-      placement: 'bottom'
+      placement: 'bottom',
+      allowHTML: true,
     });
     $(".examples-numbers-container").append(example)
   })
@@ -293,15 +306,23 @@ function fetchJQData() {
       .then((data) => {
         setTimeout(() => {
           showSuccess(data.result.length);
-          hideLoading($(".loader"), $(".query-status-btn"))
-        }, 300)
-        // 
+          hideLoading($(".loader"), $(".query-status-btn"));
+        }, 300);
 
         $(".error_container").hide();
-        $("#sql-code").html(sqlFormatter.format(data.query, { language: "postgresql" }));
+
+        const sqlCode = document.getElementById("sql-code");
+
+        sqlCode.textContent = sqlFormatter.format(data.query, {
+          language: "postgresql"
+        });
+
+        sqlCode.removeAttribute("data-highlighted");
+
+        hljs.highlightElement(sqlCode);
+
         $("#sql-display").show();
 
-        hljs.highlightAll();
         if (data.result.length > 0) {
           displayTableResults(data.result);
         } else {
