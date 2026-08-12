@@ -7,7 +7,7 @@
 
   <title>JQuery Demo</title>
   <link rel="icon" type="image/x-icon" href="/assets/images/main-icon.png">
-  
+
   <!-- FONTS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
 
@@ -129,14 +129,19 @@
         <button class="toast-close">✕</button>
         <div class="toast-bar" id="toast-bar"></div>
       </div>
-      <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
       <div class="settings-content d-flex-col">
         <div class="form-container ">
           <form id="query-form" class="form-content" style="position: relative;">
             <div class="loader" style="display: none;position: absolute;"></div>
             <div class="query-form-header">
-              <div id="example-title-text" class="fw-semibold white_text">Build up your Query</div>
+              <div class="d-flex">
+                <div id="example-title-text" class="fw-semibold white_text">Build up your Query</div>
+                <div class="btn-trigger show-docs" hide=".content" style="visibility: hidden;"
+                  show=".content.definition-display">
+                  <i class="ti ti-book" style="color: var(--jarvis-cyan);"></i>
+                </div>
+              </div>
 
               <div class="examples-numbers-container d-flex-row gap_8">
               </div>
@@ -169,22 +174,6 @@
             </a>
 
           </form>
-
-          <div class="form-sidebar-actions d-flex-col justify-content-space-between">
-
-            <div class="sidebar-upper-content d-flex-col gap_4">
-              <div class="btn-trigger show-docs" hide=".content" style="visibility: hidden;"
-                show=".content.definition-display">
-                <i class="ti ti-book"></i>
-              </div>
-              <div class="show-info" style="visibility: hidden;">
-                <i class="ti ti-info-square-rounded"></i>
-              </div>
-            </div>
-            <!-- <div class="sidebar-lower-content gap_4">
-              <div id="jq-execute" class="jq-rounded-btn align-self-end"><i class="ti ti-player-play"></i></div>
-            </div> -->
-          </div>
         </div>
 
         <div id="sql-display" class="" style="padding: 0px;display: none;position: relative;">

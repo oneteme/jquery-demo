@@ -1,4 +1,4 @@
-This guide explains how to configure a Store in JQuery.
+This guide explains how to configure a Store in `JQuery`.
 
 A Store acts as the entry point of your API, grouping:
 
@@ -14,7 +14,7 @@ The setup consists of three main steps:
 
 1. Create a Store Interface
 
-For each database, create an interface that extends StoreResource.
+For each `database`, create an interface that extends `StoreResource`.
 
  ```java
 // DemoStore.java
@@ -34,10 +34,11 @@ Inside the store, declare all datasets you want to expose.
 Each dataset:
 
 - represents a table or view
-- must be linked using @Bind
-- returns a previously defined DatasetCatalogue
+- must be linked using `@Bind`
+- returns a previously defined `DatasetCatalogue`
 
-Basic Syntax : 
+<b>Basic Syntax</b>
+
  ```java 
  //Sample
 @Bind("REAL_TABLE_NAME")
@@ -49,7 +50,8 @@ MyDataset datasetName();
 | `REAL_TABLE_NAME` | Table/view name in the database |
 | `datasetName()`   | Name used in Java and queries   |
 
-Example:
+<b>Example</b>
+
  ```java
 //Customers.java
 
@@ -82,7 +84,7 @@ These datasets are now accessible through the Store.
 
 3. Customize Dataset Exposure
 
-Like columns, datasets can be customized using @Expose.
+Like columns, datasets can be customized using `@Expose`.
 
 This allows you to:
 
@@ -109,20 +111,22 @@ Employees employees();
 
 4. Function Mapping
 
-The Store defines how JQuery functions are translated into SQL.
+The `Store` defines how JQuery functions are translated into SQL.
 
 You are not creating or overriding SQL functions.
 
 Instead, you define how a function used in a query is converted into SQL.
 
-Basic Syntax
+<b>Basic Syntax</b>
+
 ```java
 default OperatorDefinition functionName() {
 	return function(RETURN_TYPE, "SQL_NAME", parameters...);
 }
 ```
 
-Example: Default Mapping
+<b>Example: Default Mapping</b>
+
 ```java
 default OperatorDefinition pow() {
 	return function(DOUBLE, "POW", required(DOUBLE), required(DOUBLE));
@@ -136,7 +140,7 @@ This means :
 | SQL         | `POW(a, b)` |
 | Return type | `DOUBLE`    |
 
-Example: Custom Mapping (H2)
+<b>Example: Custom Mapping (H2)</b>
 
 Some databases (like H2) use POWER instead of POW.
 ```java

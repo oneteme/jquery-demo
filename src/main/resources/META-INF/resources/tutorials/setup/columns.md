@@ -8,19 +8,18 @@ The setup consists of three main steps:
 
 1. Create Dataset Interfaces
 
-For each table or view in your database, you must create a DatasetCatalogue interface.
+For each table or view in your database, you must create a `DatasetCatalogue` interface.
 
 This interface represents the dataset that will be exposed through the API.
 
-Example: if you have a database table called CUSTOMERS_TABLE, create a corresponding interface.
+Example: if you have a database table called `CUSTOMERS_TABLE`, create a corresponding interface.
+
  ```java
 //Customers.java
 
 public interface Customers extends DatasetCatalogue {
 
 }
-
-//Customers.java
  ```
 This interface will later contain all the columns that can be queried from this dataset.
 
@@ -30,10 +29,10 @@ Inside the dataset interface, define the columns that can be queried.
 
 Each column must:
 
-- Return a ViewColumn
-- Be linked to the actual database column name using @Bind
+- Return a `ViewColumn`
+- Be linked to the actual database column name using `@Bind`
 
-Basic Syntax : 
+<b>Basic Syntax </b> 
  ```java 
 	// Sample
 	@Bind("REAL COLUMN NAME")
@@ -46,7 +45,8 @@ Basic Syntax :
 | `jqueryColumnName()` | Column identifier used in Java   |
 
 
-Example:
+<b>Example</b>
+
  ```java
 //Customers.java
 
@@ -68,8 +68,6 @@ public interface Customers extends DatasetCatalogue {
 	
 	//create partition, join, criteria
 }
-
-//Customers.java
  ```
 | JQuery Column | Database Column |
 | ------------- | --------------- |
@@ -78,11 +76,11 @@ public interface Customers extends DatasetCatalogue {
 | `contact()`   | CONTACT_NAME    |
 | `address()`   | ADDRESS         |
 
-These columns can now be referenced in JQuery queries.
+These columns can now be referenced in `JQuery` queries.
 
 3. Columns refactor
 
-Columns can be customized using the @Expose annotation.
+Columns can be customized using the `@Expose` annotation.
 
 This annotation allows you to:
 

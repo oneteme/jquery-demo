@@ -34,7 +34,7 @@ $(document).ready(function () {
     content: "Documentation",
     animation: 'scale',
     arrow: true,
-    placement: 'left',
+    placement: 'top',
     hideOnClick: false,
     interactive: true
   });
@@ -83,9 +83,6 @@ $(document).ready(function () {
 
   $(document).on("click", ".jq-params .parent_title", (e) => {
 
-    if (!$(event.target).closest(".jq-column").length) {
-      toggleNavSubElements(e, ".select-columns");
-    }
   });
 
   $(document).on("click", ".jq-example", (e) => {
@@ -136,11 +133,7 @@ $(document).ready(function () {
     let example = $(e.currentTarget).attr("data-example");
     $(".jq-example[data-learn='" + example + "']").click();
   });
-  $('#examples-toggle').on('click', function (e) {
-    e.stopPropagation();
-    $('#examples-popup').toggleClass('show');
-    $(this).toggleClass('active');
-  });
+
 });
 
 
@@ -268,8 +261,7 @@ function loadExample(exampleDiv) {
   })
 
   $(".content").animate({ scrollTop: 0 }, 10);
-  $('.syntax-content').hide();
-  introNextStep(1500, () => $('.syntax-content').show());
+  introNextStep(1500);
 }
 
 function updateExampleForm(example, div = null) {
@@ -288,7 +280,7 @@ function updateExampleForm(example, div = null) {
 
 function fetchJQData() {
   if ($("#jq-table").val()) {
-    showLoading($(".loader"), $(".query-status-btn"));
+    showLoading($(".loader"));
     utils.clearData();
     let table = $("#jq-table").val();
     let columns = $("#jq-columns").val();
@@ -306,7 +298,7 @@ function fetchJQData() {
       .then((data) => {
         setTimeout(() => {
           showSuccess(data.result.length);
-          hideLoading($(".loader"), $(".query-status-btn"));
+          hideLoading($(".loader"));
         }, 300);
 
         $(".error_container").hide();

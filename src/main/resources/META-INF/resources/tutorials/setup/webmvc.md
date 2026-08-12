@@ -24,11 +24,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private final DataSource ds;
     // Add other datasources for each database used in your project
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new CommonRequestQueryResolver());
-    }
-
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
         getInstance().register(DemoStore.class, ds);

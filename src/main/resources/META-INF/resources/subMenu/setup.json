@@ -12,10 +12,6 @@
     "tutorial": "setup/tables.md"
   },
   {
-    "title": "Create resolver",
-    "tutorial": "setup/resolvers.md"
-  },
-  {
     "title": "Add resolvers",
     "tutorial": "setup/webmvc.md",
     "tooltip": "WebMvc configuration"
