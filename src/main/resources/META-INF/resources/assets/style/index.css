@@ -1,26 +1,3 @@
-/* @import '@angular/material/prebuilt-themes/indigo-pink.css'; */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
-/* * {
-  font-family: "Fira Code", monospace;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-} */
-
-/* :root {
-  --jarvis-cyan: #00d9ff;
-  --jarvis-blue: #0080ff;
-  --jarvis-purple: #8b5cf6;
-  --jarvis-dark: #0f172a;
-  --jarvis-darker: #050810;
-  --jarvis-card: #111827;
-  --jarvis-glow: rgba(0, 217, 255, 0.4);
-  --jarvis-border: rgba(0, 217, 255, 0.25);
-  --jarvis-text: #e2e8f0;
-  --jarvis-text-dim: #94a3b8;
-  --font-sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
-  --font-mono: "DM Mono", "Cascadia Code", monospace;
-} */
 :root {
   --jarvis-title: #2c3e50;
   --jarvis-cyan: #3498db;
@@ -1543,10 +1520,6 @@ code::before {
 }
 
 .form-floating>label {
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-  /* padding: 0.6rem 0.875rem; */
   top: auto;
   bottom: 8px;
   pointer-events: none;
