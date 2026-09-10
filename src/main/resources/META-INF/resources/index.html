@@ -6,43 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>JQuery Demo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/main-icon.png">
+
   <!-- FONTS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="/node_modules/@fontsource/space-grotesk/400.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/space-grotesk/500.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/space-grotesk/600.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/space-grotesk/700.css">
+
+  <link rel="stylesheet" href="/node_modules/@fontsource/dm-mono/300.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/dm-mono/400.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/dm-mono/500.css">
+  <link rel="stylesheet" href="/node_modules/@fontsource/dm-mono/300-italic.css">
+
   <!-- FONTS END -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-  <link rel="stylesheet" href="./assets/style/index.css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css" rel="stylesheet" />
-  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/intro.min.js"></script>
-  <!-- Highlight.js Theme -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" />
+  <!-- STYLE -->
+  <link rel="stylesheet" href="./assets/style/index.css">
 
-  <!-- Highlight.js Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+  <!-- JQUERY (NOT OUR JQUERY :/) -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- HIGHLIGHT -->
+  <link rel="stylesheet" href="/node_modules/@highlightjs/cdn-assets/styles/github-dark.min.css">
+  <script src="/node_modules/@highlightjs/cdn-assets/highlight.min.js"></script>
+  <script src="/node_modules/@highlightjs/cdn-assets/languages/sql.min.js"></script>
+  <!-- TABLES -->
+  <link rel="stylesheet" href="./node_modules/datatables.net-dt/css/dataTables.dataTables.css">
+  <script src="./node_modules/datatables.net/js/dataTables.min.js"></script>
+
+  <!-- INTRO -->
+  <link rel="stylesheet" href="./node_modules/intro.js/minified/introjs.min.css">
+  <script src="./node_modules/intro.js/intro.js"></script>
+
+  <!-- TIPPY -->
+  <link rel="stylesheet" href="./node_modules/tippy.js/dist/tippy.css">
+  <link rel="stylesheet" href="./node_modules/tippy.js/animations/scale.css">
+  <script src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+  <script src="./node_modules/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="./node_modules/@tabler/icons-webfont/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="./node_modules/@tabler/icons-webfont/dist/tabler-icons-filled.min.css">
+  <link rel="stylesheet" href="./node_modules/devicon/devicon.min.css">
+
+  <script src="./node_modules/marked/lib/marked.umd.js"></script>
 
   <!-- SQL FORMATTER -->
-  <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
+  <script src="./node_modules/sql-formatter/dist/sql-formatter.min.js"></script>
 
-  <!-- tippy.js -->
-  <script src="https://unpkg.com/popper.js@1"></script>
-  <script src="https://unpkg.com/tippy.js@4"></script>
-
-  <!-- SQL FORMATTER -->
-  <script src="https://cdn.jsdelivr.net/npm/sql-formatter@12.0.4/dist/sql-formatter.min.js"></script>
-
-  <script src="./assets/script/script.js"></script>
+  <script type="module" src="./assets/script/script.js"></script>
 </head>
 
 <body>
@@ -61,15 +77,17 @@
     </div>
   </div>
   <header>
-    <div class="d-flex align-items-center justify-content-between px-4" style="gap: 20px; height: 100%">
+    <div class="d-flex align-items-center justify-content-between px-2" style="gap: 20px; height: 100%">
       <div class="header-left d-flex">
         <div id="jq-show-examples" data-show="show">
           <img src="assets/images/menu_icon.svg" />
           <img src="assets/images/close_icon.svg" style="display: none" />
         </div>
-        <h2 id="main-title" class=" white_text btn-trigger" show=".content.jquery-display,.show-docs" hide=".content">J<span style="display: none;">ava</span>Query demo</h2>
+        <span id="main-title" class=" white_text btn-trigger">
+          J<span style="display: none;">ava</span>Query</span>
         <div id="version-text" class="d-flex gap_4">
-          <a href="https://mvnrepository.com/artifact/io.github.oneteme/jquery" class="white_text" style="text-decoration: auto;" target="_blank">v4.0.5</a>
+          <a href="https://mvnrepository.com/artifact/io.github.oneteme/jquery" class="white_text"
+            style="text-decoration: auto;" target="_blank">v5.0.0</a>
         </div>
 
       </div>
@@ -78,93 +96,93 @@
         <img id="jq-settings" class="d-flex align-items-center btn-trigger" cursor-data=".settings-modal"
           src="/assets/images/settings_icon.svg" alt="">
         <img id="jq-live" class="d-flex align-items-center" src="/assets/images/circle-question-regular-full.svg">
+        <div class="db-select-wrapper" id="db-select-wrapper" tabindex="0">
+          <span class="db-select-icon-slot" id="db-select-icon-slot">
+            <i class="devicon-postgresql-plain colored"></i>
+          </span>
+          <span class="db-select-label" id="db-select-label">PostgreSQL</span>
+          <i class="ti ti-chevron-down db-select-chevron"></i>
+
+          <div class="db-select-popup" id="db-select-popup">
+
+          </div>
+        </div>
       </div>
     </div>
   </header>
   <div class="page-container">
     <div class="navbar-container">
-      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-        <li class="nav-item jq-example" data-column="customer,contact,postal_code" data-table="customers">
+      <ul class="navbar-nav justify-content-end flex-grow-1">
+        <li class="nav-item jq-example" data-column="name,contact,postal_code" data-table="customers">
           SELECT TEST
         </li>
       </ul>
     </div>
 
     <div class="content jquery-display">
-      <h3 class="welcome-title">JQuery</h3>
-      <span class="white_text">a new way to write queries</span>
-      <div class="show-docs jq-rounded-btn btn-trigger" show=".content.definition-display" hide=".content"
-        style="display: none">
-        <span class="white_text">Docs</span>
+      <div class="toast" id="toast" role="alert">
+        <div class="toast-icon"><i class="ti" id="toast-icon"></i></div>
+        <div class="toast-body">
+          <p class="toast-title" id="toast-title"></p>
+          <p class="toast-msg" id="toast-msg"></p>
+        </div>
+        <button class="toast-close">✕</button>
+        <div class="toast-bar" id="toast-bar"></div>
       </div>
-      <!-- <input id="jq-live" class="jq-rounded-btn" name="livejq" type="button" value="Live demo"> -->
 
-      <div class="settings-content">
-        <div class="form-container p-3 p-md-3 rounded-3 upper-col card-container">
-          <form id="query-form" class="form-content">
-            <div class="col-sm-6 table_input_container">
-              <label for="jq-table" class="fw-semibold white_text">Select your table</label>
-              <select id="jq-table" class="form-select">
-
-              </select>
-            </div>
-
-            <div class="jqsyntax-container">
-              <div class="columns-container row" style="--bs-gutter-x:0;">
-                <div class="form-floating jqcolumns_input_container col" style="width: 100%">
-                  <input id="jq-columns" class="form-control" name="columns" type="text"
-                    placeholder="Setup JQuery columns..." />
-                  <label for="jq-columns" class="fw-semibold white_text">Columns
-                  </label>
-                </div>
-                <div class="jq-params col-sm-5" style="display: none;">
-                  <div class="parent-element">
-                    <div class="parent_title" style="font-size: 16px;padding: 0;">
-                      <span>Columns</span>
-                      <img class="nav-accordion accordion" src="/assets/images/accordion.svg">
-                    </div>
-                    <div class="select-columns flex-wrap d-flex-row gap_12" style="display: none;">
-                    </div>
-                  </div>
+      <div class="settings-content d-flex-col">
+        <div class="form-container ">
+          <form id="query-form" class="form-content" style="position: relative;">
+            <div class="loader" style="display: none;position: absolute;"></div>
+            <div class="query-form-header">
+              <div class="d-flex">
+                <div id="example-title-text" class="fw-semibold white_text">Build up your Query</div>
+                <div class="btn-trigger show-docs" hide=".content" style="visibility: hidden;"
+                  show=".content.definition-display">
+                  <i class="ti ti-book" style="color: var(--jarvis-cyan);"></i>
                 </div>
               </div>
-              <div class="form-floating jqfilters_input_container" style="width: 100%">
+
+              <div class="examples-numbers-container d-flex-row gap_8">
+              </div>
+            </div>
+
+            <div class="d-flex gap_4">
+              <select id="jq-table" class="form-select" style="width: fit-content;">
+                <option value="">-- Select a view --</option>
+              </select>
+              <div class="form-floating jqcolumns_input_container col" style="width: 100%">
+                <input id="jq-columns" class="form-control" name="columns" type="text"
+                  placeholder="Setup JQuery columns..." />
+                <label for="jq-columns" class="fw-semibold white_text">Columns
+                </label>
+
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="form-floating jqfilters_input_container" style="width: 100%;position: relative;">
                 <input id="jq-filters" class="form-control" name="filters" type="text"
                   placeholder="Setup JQuery filters..." />
-                <label for="jq-filters" class="fw-semibold white_text">Filters
+                <label for="jq-filters" class="fw-semibold white_text">Query Options
                 </label>
               </div>
+              <div id="jq-execute"><i class="ti ti-player-play"></i></div>
+              <input name="executejq" type="submit" value="Execute" style="display: none;" />
             </div>
+            <a href="" class="jq-link-display" target="_blank">
+            </a>
 
-            <input id="jq-execute" class="jq-rounded-btn align-self-end" name="executejq" type="submit"
-              value="Execute" />
-            <div class="jq-link-display" style="display: none">
-              <label for="jquery-link" class="fw-semibold white_text">JQuery link</label>
-              <a href="" target="_blank" style="text-decoration: auto;">
-                <pre><code id="jquery-link" class="language-php"></code></pre>
-              </a>
-            </div>
-            <div class="error_container" style="display: none">
-              <pre><code id="error-code" class="language-brainfuck" style="color: red;font-size: 16px;">Error Request 500</code></pre>
-            </div>
           </form>
         </div>
 
-        <div id="sql-display" class="col-sm-6 card-container" style="width: 100%; min-width: 324px; display: none">
-          <label for="sql-code" class="fw-semibold white_text">SQL Query</label>
-          <pre><code id="sql-code" class="language-sql"></code></pre>
-          <!-- <textarea
-              id="sql-display"
-              class="form-control"
-              name="showsql"
-              readonly
-              style="resize: none; max-height: 200px; height: 100%"
-              placeholder="Query in SQL"
-            ></textarea> -->
+        <div id="sql-display" class="" style="padding: 0px;display: none;position: relative;">
+          <pre style="height: 100%;"><code id="sql-code" class="language-sql hljs">
+    <!-- existing generated SQL spans -->
+  </code></pre>
         </div>
 
-        <div class="results-container card-container" style="display: none">
-          <span class="fw-semibold white_text">Result</span>
+        <div class="results-container " style="display: none;">
           <div class="table-wrapper">
             <table class="jq-table"></table>
           </div>
@@ -172,27 +190,42 @@
       </div>
     </div>
     <div class="content definition-display" style="display: none">
-      <h1 class="example-title white_text">Having</h1>
-      <div class="definition-element definition">
-        <h2 class="title white_text">Defintion</h2>
-        <div class="description white_text">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Voluptatibus quaerat eos, explicabo libero, aspernatur tenetur magni
-          cumque vero eveniet nulla reiciendis sed, veniam dignissimos tempore
-          voluptate nesciunt impedit! Architecto, minus.
+      <div class="definition-header">
+        <div class="tuto_btn_container btn-prev" style="top: 0;left: 0;">
+          <img style="width: 24px; transform: rotate(180deg)" src="assets/images/arrow-right-solid.svg" alt="" />
+          <span class="white_text">Previous</span>
+        </div>
+        <div class="example-title-section d-flex gap_8" style="align-items: center;">
+          <h1 class="example-title white_text">SELECT</h1>
+          <i class="ti ti-info-circle definition-toggle"></i>
+        </div>
+        <div class="tuto_btn_container btn-next" style="top: 0;right: 0;">
+          <span class="white_text">Next</span>
+          <img style="width: 24px" src="assets/images/arrow-right-solid.svg" alt="" />
         </div>
       </div>
-      <div class="definition-element syntax">
-        <h2 class="title white_text">Syntax</h2>
-        <div class="description white_text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Perferendis ab nisi consequuntur aperiam corporis dolore earum
-          nostrum, recusandae quam amet sapiente, veritatis vero neque
-          voluptatum ea dignissimos architecto nesciunt corrupti? Lorem ipsum,
-          dolor sit amet consectetur adipisicing elit. Voluptatibus quaerat
-          eos, explicabo libero, aspernatur tenetur magni cumque vero eveniet
-          nulla reiciendis sed, veniam dignissimos tempore voluptate nesciunt
-          impedit! Architecto, minus.
+      <div class="definition-element definition" style="position: relative;">
+        <!-- Titre avec bouton ? -->
+        <h2 class="title white_text">
+          Syntax
+        </h2>
+
+        <!-- Blocs de code côte à côte -->
+        <div class="syntax-blocks">
+
+          <!-- Bloc syntaxe courte -->
+          <div class="syntax-block url d-flex-col gap_8">
+            <pre><code class="syntax-code language-scss">column1,column2,column3, ...</code></pre>
+          </div>
+          <!-- Séparateur -->
+          <div class="separator syntax-separator"></div>
+          <!-- Bloc Java -->
+          <div class="syntax-block java d-flex-col gap_8">
+            <pre><code class="syntax-java language-java">default Column priceSquare() {
+      return price().pow(2);
+  }
+  priceSquare();</code></pre>
+          </div>
         </div>
       </div>
       <div class="definition-element tutorial">
@@ -201,21 +234,21 @@
       </div>
       <div class="definition-element try_it">
         <h2 class="title white_text">Try it</h2>
-        <div class="description white_text">
-          To see how it works you can
-          <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.show-docs" hide=".content">Try it
-            Here</a>
-        </div>
+        To see how it works you can
+        <a class="show-demo btn-class btn-trigger" show=".content.jquery-display,.form-sidebar-actions" hide=".content"
+          visible=".show-docs,.show-info">Try it
+          Here</a>
       </div>
-      <div class="definition-element move_tuto" style="position: relative">
-        <h2 class="title white_text">What's Next?</h2>
-        <div class="tuto_buttons">
-          <div class="tuto_btn_container btn-prev">
+      <div class="definition-element whats_next">
+        <h2 class="title white_text">What's Next</h2>
+        <div class="d-flex-row" style="justify-content: space-between;">
+          <div class="tuto_btn_container btn-prev" style="top: 0;left: 0;">
             <img style="width: 24px; transform: rotate(180deg)" src="assets/images/arrow-right-solid.svg" alt="" />
-            <span class="white_text">Previous</span>
+            <span>Previous</span>
           </div>
-          <div class="tuto_btn_container btn-next">
-            <span class="white_text">Next</span>
+
+          <div class="tuto_btn_container btn-next" style="top: 0;right: 0;">
+            <span>Next</span>
             <img style="width: 24px" src="assets/images/arrow-right-solid.svg" alt="" />
           </div>
         </div>

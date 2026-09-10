@@ -2,33 +2,79 @@
   {
     "title": "ADD (+)",
     "view": "products",
-    "column": "price,price.plus(20):Plus20,Plus20.plus(40):Plus60",
-    "filter": "limit=10",
+    "column": "plus(3,4):plus",
     "definition": "Adds two or more numbers",
-    "syntax": "column.plus(value1/column1).plus(value2/column2).plus(etc...)"
+    "syntax": "column.plus(val1).plus(val2).plus(valn)",
+    "examples": [
+      {
+        "title": "Column plus",
+        "view": "products",
+        "column": "price.plus(2)"
+      },
+      {
+        "title": "Column plus filter",
+        "view": "products",
+        "filter": "price.plus(2).lt(plus(2,10))"
+      }
+    ]
   },
   {
     "title": "SUBSTRACT (-)",
     "view": "products",
-    "column": "price,price.minus(10):MINUS10,MINUS10.minus(20):MINUS30",
-    "filter": "limit=10&price=30,40,50,60",
+    "column": "minus(10,2):minus",
     "definition": "Subtracts one number from another.",
-    "syntax": "column.minus(value1/column1).minus(value2/column2).minus(etc...)"
+    "syntax": "column.minus(val1).minus(val2).minus(valn)",
+    "examples": [
+      {
+        "title": "Column minus",
+        "view": "products",
+        "column": "price.minus(10)"
+      },
+      {
+        "title": "Column minus filter",
+        "view": "products",
+        "filter": "price.minus(2).le(minus(10,2))"
+      }
+    ]
   },
   {
     "title": "MULTIPLY (*)",
     "view": "products",
-    "column": "price,price.multiply(2):X2,X2.multiply(3):X6",
-    "filter": "limit=10&price=10,20,30,40,50,60",
+    "column": "multiply(2,2):X2",
     "definition": "Multiplies two numbers.",
-    "syntax": "column.multiply(value1/column1).multiply(value2/column2).multiply(etc...)"
+    "syntax": "column.multiply(val1).multiply(val2).multiply(valn)",
+    "label": "multiply",
+    "examples": [
+      {
+        "title": "Column multiply",
+        "view": "products",
+        "column": "price.multiply(2)"
+      },
+      {
+        "title": "Column multiply filter",
+        "view": "products",
+        "filter": "price.multiply(2).lt(multiply(2,10))"
+      }
+    ]
   },
   {
     "title": "DIVIDE (/)",
     "view": "products",
-    "column": "price,price.divide(2):DIVIDE_BY2,DIVIDE_BY2.divide(4):DIVIDE_BY4",
-    "filter": "limit=10&price.ge=4",
+    "column": "divide(10,2):divide",
     "definition": "Divides one number by another.",
-    "syntax": "column.divide(value1/column1).divide(value2/column2).divide(etc...)"
+    "syntax": "column.divide(val1).divide(val2).divide(valn)",
+    "label": "divide",
+    "examples": [
+      {
+        "title": "Column divide",
+        "view": "products",
+        "column": "price.divide(2)"
+      },
+      {
+        "title": "Column divide filter",
+        "view": "products",
+        "filter": "price.divide(2).gt(divide(10,2))"
+      }
+    ]
   }
 ]

@@ -1,64 +1,211 @@
 [
-    {
-      "title": "TRUNC",
-      "view": "products",
-      "column": "price:ActualPrice,price.trunc:TruncatedPrice,price.trunc(1):DecimalTruncatedPrice",
-      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-      "definition": "Truncates a number to a specified number of decimal places without rounding.",
-      "syntax": "column.trunc(optionalValue)/trunc(column,optionalValue)",
-      "tooltip":"Truncate"
-    },
-    {
-      "title": "ABS",
-      "view": "products",
-      "column": "price.abs:ABS,abs(-65):NegativeABS",
-      "filter": "limit=1",
-      "definition": "ABS(): Returns the absolute value of a number.",
-      "syntax": "column.abs",
-      "tooltip":"Absolute value"
-    },
-    {
-      "title": "CEIL",
-      "view": "products",
-      "column": "price:ActualPrice,price.ceil:CeiledPrice",
-      "filter": "",
-      "definition": "CEIL() / CEILING(): Rounds a number up to the nearest integer.",
-      "syntax": "column.ceil",
-      "tooltip":"Ceiling"
-    },
-    {
-      "title": "FLOOR",
-      "view": "products",
-      "column": "price:ActualPrice,price.floor:FlooredPrice",
-      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-      "definition": "FLOOR(): Rounds a number down to the nearest integer",
-      "syntax": "column.floor"
-    },
-    {
-      "title": "ROUND",
-      "view": "products",
-      "column": "price:ActualPrice,price.round(1):DecimalRoundedPrice,price.round:RoundedPrice",
-      "filter": "ActualPrice=21.35,23.25,17.45,62.5",
-      "definition": "ROUND(): Rounds to decimal places",
-      "syntax": "column.round(optionalValue)/round(column,optionalValue)"
-    },
-    {
-      "title": "SQRT",
-      "view": "products",
-      "column": "price:ActualPrice,price.sqrt:SqrtPrice",
-      "filter": "",
-      "definition": "SQRT(): Returns the square root of a number",
-      "syntax": "column.sqrt",
-      "tooltip":"Square root"
-    },
-
-    {
-      "title": "MOD",
-      "view": "products",
-      "column": "price,price.mod(10):MODPrice",
-      "filter": "",
-      "definition": "MOD(): Returns the remainder of a division operation",
-      "syntax": "column.mod(value)",
-      "tooltip":"Modulo"
-    }
-  ]
+  {
+    "title": "TRUNC",
+    "view": "products",
+    "column": "trunc(20.08):basic_trunc",
+    "definition": "Returns a number truncated to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, only that number of digits is kept after the decimal point (e.g. 21.35 → 21.3 with trunc(1)).<br>If no value is provided, the number is truncated to an integer (decimal part removed) without rounding.",
+    "syntax": "column.trunc(decimal_places)",
+    "tooltip": "Truncate",
+    "examples": [
+      {
+        "title": "With optional <b>decimal_places</b>",
+        "view": "products",
+        "column": "trunc(19.70,1):trunc_val"
+      },
+      {
+        "title": "Truncate a <b>column</b>",
+        "view": "products",
+        "column": "price,price.trunc(1):price_trunc"
+      },
+      {
+        "title": "Trunc inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.trunc(1).eq(23.2)"
+      }
+    ]
+  },
+  {
+    "title": "ABS",
+    "view": "products",
+    "column": "abs(-25):negative_abs",
+    "definition": "Returns the absolute value of a number.<br>The result is always non-negative: negative values become positive, while positive values remain unchanged.",
+    "syntax": "column.abs",
+    "tooltip": "Absolute value"
+  },
+  {
+    "title": "CEIL",
+    "view": "products",
+    "column": "ceil(20.08):basic_ceil",
+    "definition": "Returns the smallest integer greater than or equal to the given number.<br>This means the value is always rounded up to the next integer if it has a decimal part.",
+    "syntax": "column.ceil",
+    "tooltip": "Ceiling",
+    "examples": [
+      {
+        "title": "CEIL a <b>column</b>",
+        "view": "products",
+        "column": "price,price.ceil:price_ceil"
+      },
+      {
+        "title": "CEIL inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.ceil.eq(23.2)"
+      }
+    ]
+  },
+  {
+    "title": "FLOOR",
+    "view": "products",
+    "column": "floor(20.08):basic_floor",
+    "definition": "Returns the largest integer less than or equal to the given number.<br>This means the value is always rounded down by removing the decimal part.",
+    "syntax": "column.floor",
+    "examples": [
+      {
+        "title": "FLOOR a <b>column</b>",
+        "view": "products",
+        "column": "price,price.floor:price_floor"
+      },
+      {
+        "title": "FLOOR inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.floor.eq(23.2)"
+      }
+    ]
+  },
+  {
+    "title": "ROUND",
+    "view": "products",
+    "column": "round(20.08):basic_round",
+    "definition": "Returns a number rounded to a specified number of decimal places.<br>If <b>decimal_places</b> is provided, the number is rounded to that precision (e.g. 21.35 → 21.4 with round(1)).<br>If no value is provided, the number is rounded to the nearest integer.",
+    "syntax": "column.round(decimal_places)",
+    "examples": [
+      {
+        "title": "With optional <b>decimal_places</b>",
+        "view": "products",
+        "column": "round(19.70,1):round_val"
+      },
+      {
+        "title": "ROUND a <b>column</b>",
+        "view": "products",
+        "column": "price,price.round(1):price_round"
+      },
+      {
+        "title": "ROUND inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.round(1).eq(23.2)"
+      }
+    ]
+  },
+  {
+    "title": "SQRT",
+    "view": "products",
+    "column": "sqrt(9):basic_sqrt",
+    "definition": "Returns the square root of a numeric value.<br>The result is a number which, when multiplied by itself, equals the original value.",
+    "syntax": "column.sqrt",
+    "tooltip": "Square root",
+    "examples": [
+      {
+        "title": "SQRT on a <b>column</b>",
+        "view": "products",
+        "column": "price.sqrt"
+      },
+      {
+        "title": "SQRT inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.sqrt=5"
+      }
+    ]
+  },
+  {
+    "title": "MOD",
+    "view": "products",
+    "column": "mod(10,3):basic_mod",
+    "definition": "Returns the remainder of a division operation.<br>The function divides the column value by the given value and returns what is left after the division (e.g. 25 mod 10 = 5).",
+    "syntax": "column.mod(value)",
+    "tooltip": "Modulo",
+    "examples": [
+      {
+        "title": "MOD on a <b>column</b>",
+        "view": "products",
+        "column": "price,price.mod(10)"
+      },
+      {
+        "title": "MOD inside <b>filter</b>(Even prices)",
+        "view": "products",
+        "column": "price",
+        "filter": "price.mod(2).eq(0)"
+      }
+    ]
+  },
+  {
+    "title": "POWER",
+    "view": "products",
+    "column": "pow(3,2):basic_pow",
+    "definition": "Raises a numeric value to a specified power.<br>The parameter <b>n</b> represents the exponent (e.g. pow(2) squares the value, pow(3) cubes it).<br>The result is calculated as <b>x^n</b>.",
+    "syntax": "column.pow(n)",
+    "examples": [
+      {
+        "title": "POWER on a <b>column</b>",
+        "view": "products",
+        "column": "price.pow(2)"
+      },
+      {
+        "title": "POWER inside filter",
+        "view": "products",
+        "column": "price",
+        "filter": "price.pow(2).gt(20)"
+      }
+    ]
+  },
+  {
+    "title": "FACTORIAL",
+    "view": "products",
+    "column": "factorial(5):fact_5",
+    "definition": "Returns the factorial of a numeric value.<br>The factorial of a number is calculated by multiplying the number by all positive integers smaller than it.<br>For example: <b>5! = 5 × 4 × 3 × 2 × 1 = 120</b>.<br>This function is commonly used in mathematics, probability, and combinatorics.",
+    "syntax": "column.factorial"
+  },
+  {
+    "title": "LOG",
+    "view": "products",
+    "column": "log(3):basic_log",
+    "definition": "Returns the logarithm of a numeric value.<br>By default, the function computes the natural logarithm (base <b>e</b>).<br>If a base is provided, the logarithm is calculated using that base (e.g. log(2) = base 2).",
+    "syntax": "column.log(optionalBase)",
+    "tooltip": "Logarithm",
+    "examples": [
+      {
+        "title": "LOG with <b>base = 2</b>",
+        "view": "products",
+        "column": "log(3,2):log_base_2"
+      },
+      {
+        "title": "LOG on a <b>column (base = 2)</b>",
+        "view": "products",
+        "column": "price.log(2)"
+      },
+      {
+        "title": "LOG inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.log.ge(3)"
+      }
+    ]
+  },
+  {
+    "title": "EXP",
+    "view": "products",
+    "column": "exp(10):basic_exp",
+    "definition": "Returns the exponential value of a numeric column.<br>The function computes <b>e</b> raised to the power of the column value (<b>e^x</b>).<br>This is the inverse operation of the logarithm function.",
+    "syntax": "column.exp",
+    "tooltip": "Exponential",
+    "examples": [
+      {
+        "title": "EXP on a <b>column</b>",
+        "view": "products",
+        "column": "price.exp"
+      },
+      {
+        "title": "EXP inside a <b>filter</b>",
+        "view": "products",
+        "filter": "price.exp.lt(100)"
+      }
+    ]
+  }
+]

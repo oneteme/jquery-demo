@@ -1,52 +1,146 @@
 [
   {
-
     "title": "Equal (=)",
     "view": "products",
-    "column": "price:Equal_30",
-    "filter": "price=30&price.eq(30)",
+    "column": "price",
+    "filter": "price=30",
     "definition": "column is equal to value.",
-    "syntax": "column=value/column.eq(value)"
+    "syntax": "column=value&;column.eq(value) // Recommended for chainable filters",
+    "examples": [
+      {
+        "title": "Chainable equal (.eq)",
+        "view": "products",
+        "filter": "price.eq(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.eq(10)"
+      },
+      {
+        "title": "With logical operator",
+        "view": "products",
+        "column": "price",
+        "filter": "price.eq(10).or(price.eq(20))"
+      }
+    ]
   },
   {
     "title": "Greater Than (>)",
     "view": "products",
-    "column": "price:GreaterThan_30",
-    "filter": "price.gt=30&order=price",
+    "column": "price",
+    "filter": "price.gt=30",
     "definition": "column is greater than value",
-    "syntax": "column.gt=value"
+    "syntax": "column.gt=value&;column.gt(value) // Recommended for chainable filters",
+    "label": "greater than",
+    "examples": [
+      {
+        "title": "Chainable Greater Than",
+        "view": "products",
+        "filter": "price.gt(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.gt(30)"
+      }
+    ]
   },
   {
     "title": "Lower Than (<)",
     "view": "products",
-    "column": "price:LowerThan_30",
-    "filter": "price.lt=30&order=price",
+    "column": "price:lower_30",
+    "filter": "price.lt=30",
     "definition": "column is lower than value",
-    "syntax": "column.lt=value"
+    "syntax": "column.lt=value&;column.lt(value) // Recommended for chainable filters",
+    "label": "lower than",
+    "examples": [
+      {
+        "title": "Chainable Lower Than",
+        "view": "products",
+        "filter": "price.lt(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.lt(30)"
+      }
+    ]
   },
   {
     "title": "Greater equal (>=)",
     "view": "products",
-    "column": "price:GreaterEqual_30",
-    "filter": "price.ge=30&order=price",
+    "column": "price",
+    "filter": "price.ge=30",
     "definition": "column is greater or equal to value",
-    "syntax": "column.ge=value"
+    "syntax": "column.ge=value&;column.ge(value) // Recommended for chainable filters",
+    "label": "greater equal",
+    "examples": [
+      {
+        "title": "Chainable Greater Equal",
+        "view": "products",
+        "filter": "price.ge(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.gt(30)"
+      }
+    ]
   },
   {
     "title": "Lower equal (<=)",
     "view": "products",
-    "column": "price:LowerEqual_30",
-    "filter": "price.le=30&order=price",
+    "column": "price",
+    "filter": "price.le=30",
     "definition": "column is lower or equal to value",
-    "syntax": "column.le=value"
+    "syntax": "column.le=value&;column.le(value) // Recommended for chainable filters",
+    "label": "lower equal",
+    "examples": [
+      {
+        "title": "Chainable Lower Equal",
+        "view": "products",
+        "filter": "price.le(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.le(30)"
+      }
+    ]
   },
   {
     "title": "Not equal (<>)",
     "view": "products",
-    "column": "price:PriceNotEqualTo_30",
-    "filter": "price.ne=30&order=price",
+    "column": "price",
+    "filter": "price.ne=30",
     "definition": "column is not equal to value",
-    "syntax": "column.ne=value"
+    "syntax": "column.ne=value&;column.ne(value) // Recommended for chainable filters",
+    "label": "not equal",
+    "examples": [
+      {
+        "title": "Chainable Not equal (.ne)",
+        "view": "products",
+        "filter": "price.ne(30)",
+        "column": "price"
+      },
+      {
+        "title": "Comparator as a column",
+        "view": "products",
+        "column": "price.ne(10)"
+      },
+      {
+        "title": "With logical operator",
+        "view": "products",
+        "column": "price",
+        "filter": "price.ne(10).and(price.ne(20))"
+      }
+    ]
   },
   {
     "title": "NULL",
@@ -54,7 +148,15 @@
     "filter": "country.isNull",
     "definition": "IS NULL is used to check if a value is missing or empty (it has no value).",
     "syntax": "column.isNull",
-    "tooltip": "is NULL"
+    "tooltip": "is NULL",
+    "examples": [
+      {
+        "title": "Customers who didn't place any orders",
+        "view": "customers",
+        "column": "orders.id:orderId,customers.name",
+        "filter": "join=leftOrder&orders.customer_id.isNull"
+      }
+    ]
   },
   {
     "title": "NOT NULL",
@@ -62,62 +164,122 @@
     "filter": "country.notNull",
     "definition": "NOT NULL is used to check if a value exists (it's not missing).",
     "syntax": "column.notNull",
-    "tooltip": "is NOT NULL"
+    "tooltip": "is NOT NULL",
+    "examples": [
+      {
+        "title": "Customers who placed orders",
+        "view": "customers",
+        "column": "orders.id:orderId,customers.name",
+        "filter": "join=leftOrder&orders.customer_id.notNull"
+      }
+    ]
   },
   {
     "title": "IN",
     "view": "products",
-    "column": "price:PriceEqualTo_10_20_30_40_50",
-    "filter": "price=10,20,30,40,50&order=price",
+    "column": "price",
+    "filter": "price=10,20,30,40",
     "definition": "TRUE if the operand is equal to any value in a list of expressions",
-    "syntax": "column=val1,val2,val3,..."
+    "syntax": "column=val1,val2,val3,...&;column.in=val1,val2,val3,...&;column.in(val1,val2,val3,...)&;column.in=select(...).criteria(...) //SubQuery",
+    "examples": [
+      {
+        "title": "JQuery IN",
+        "view": "products",
+        "column": "price",
+        "filter": "price.in=10,20,30,40"
+      },
+      {
+        "title": "SubQuery",
+        "view": "products",
+        "column": "cat_id,name",
+        "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))"
+      }
+    ]
   },
   {
     "title": "Not IN",
     "view": "products",
-    "column": "price:PriceNotEqualTo_10_20_30_40_50",
-    "filter": "price.notIn=10,20,30,40,50&order=price",
+    "column": "price",
+    "filter": "price.notIn=10,20,30,40",
     "definition": "TRUE if the operand is not equal to any value in a list of expressions",
-    "syntax": "column.notIn=val1,val2,val3,..."
+    "syntax": "column.notIn=val1,val2,val3,...&;column.notIn(val1,val2,val3,...)&;column.notIn=select(...).criteria(...) //SubQuery",
+     "examples": [
+      {
+        "title": "JQuery IN",
+        "view": "products",
+        "column": "price",
+        "filter": "price.notIn(10,20,30,40)"
+      }
+    ]
   },
   {
     "title": "BETWEEN",
     "view": "products",
-    "column": "price:PriceBetween_10_20",
-    "filter": "price.between=10,20&order=price",
+    "column": "price",
+    "filter": "price.between=10,20",
     "definition": "BETWEEN is used to filter the result set within a specific range of values. It includes the boundary values.",
     "syntax": "column.between=val1,val2"
   },
   {
     "title": "LIKE (%pattern%)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.contentLike=ue",
+    "column": "name",
+    "filter": "name.contentLike=ue",
     "definition": "Matches any string that contains the specified 'pattern' anywhere within it.",
-    "syntax": "col2.contentLike=pattern"
+    "syntax": "column.contentLike=pattern",
+    "label": "Like"
+  },
+  {
+    "title": "ILIKE",
+    "view": "products",
+    "column": "name",
+    "filter": "name.iLike=ue",
+    "definition": "Performs a case-insensitive pattern match on a string column.<br>The function compares the column value with the given pattern while ignoring letter case.<br>It behaves like <b>LIKE</b> but does not distinguish between uppercase and lowercase characters (e.g. 'Chai', 'chai', 'CHAI' all match).<br>This is useful for flexible text searches.",
+    "syntax": "column.iLike=pattern"
   },
   {
     "title": "START LIKE (pattern%)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.startsLike=Qu",
+    "column": "name",
+    "filter": "name.startsLike=Qu",
     "definition": "Matches any string that starts with the specified pattern.",
-    "syntax": "col2.startsLike=pattern"
+    "syntax": "column.startsLike=pattern",
+    "label": "Start Like"
   },
   {
     "title": "ENDS LIKE (%pattern)",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.endsLike=en",
+    "column": "name",
+    "filter": "name.endsLike=en",
     "definition": "Matches any string that ends with the specified pattern.",
-    "syntax": "col2.endsLike=pattern"
+    "syntax": "column.endsLike=pattern",
+    "label": "Ends like"
   },
   {
     "title": "NOT LIKE",
     "view": "customers",
-    "column": "customer",
-    "filter": "customer.contentLike=ue",
+    "column": "name",
+    "filter": "name.notLike=ue",
     "definition": "Matches any string that does not contain the specified 'pattern' in it",
-    "syntax": "col2.notLike=pattern"
+    "syntax": "column.notLike=pattern",
+    "label": "Not Like"
+  },
+  {
+    "title": "START NOT LIKE (pattern%)",
+    "view": "customers",
+    "column": "name",
+    "filter": "name.startsNotLike=Qu",
+    "definition": "Matches any string that does not start with the specified pattern.",
+    "syntax": "column.startsNotLike=pattern",
+    "label": "Start Not Like"
+  },
+  {
+    "title": "ENDS NOT LIKE (%pattern)",
+    "view": "customers",
+    "column": "name",
+    "filter": "name.endsNotLike=en",
+    "definition": "Matches any string that does not end with the specified pattern.",
+    "syntax": "column.endsNotLike=pattern",
+    "label": "Ends Not like"
   }
 ]

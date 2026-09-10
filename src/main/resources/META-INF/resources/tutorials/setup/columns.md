@@ -1,86 +1,127 @@
-1. Create columns enum
+### Setup a Dataset Catalog
 
-Lets create our columns ENUM which is a "ColumnDecorator" and will call it "JQDemoColumn"
- ```java
-//JQDemoColumn.java
+This guide explains how to configure JQuery columns.
 
-@RequiredArgsConstructor
-public enum JQDemoColumn implements ColumnDecorator {
+The setup consists of two main steps:
+
+- Declare and bind columns
+- Configure column exposure and metadata
+
+For this guide we will be using the previously created **DatasetCatalog** called **Customers**
+
+```java
+//Customers.java
+public interface Customers extends DatasetCatalogue<DemoStore> {
 
 }
+```
 
-//JQDemoColumn.java
+1. Add the columns
+
+Inside the dataset interface, define the columns that can be queried.
+
+Each column must:
+
+- Return a `ViewColumn`
+- Be linked to the actual database column name using `@Bind`
+- **Optional :** Define the its type manually if needed using `@Typed`
+
+<b>Basic Syntax </b> 
+
+ ```java 
+	// Sample
+	@Bind("REAL COLUMN NAME")
+	@Typed(JDBCType.myType)
+	ViewColumn jquery_column_name();
  ```
 
-2. Add the columns to the enum
+| Element              | Description                      |
+| -------------------- | -------------------------------- |
+| `REAL_COLUMN_NAME`   | Column name in the database      |
+| `JDBCType`   		   | Column type in the database      |
+| `jqueryColumnName()` | Column identifier used in Java   |
 
-In this enum we are going to add the JQuery columns and these column names are gonna be used on our queries instead of the real column names
 
- ```java
-//JQDemoColumn.java
-
-@RequiredArgsConstructor
-public enum JQDemoColumn implements ColumnDecorator {
-	ID("id"),
-	NAME("name"),
-	START("start"),
-	FILTER("filter"),
-	TABLE_NAME("table_name"),
-	CUSTOMER("customer"),
-	CONTACT("contact"),
-	//... Other columns
-	;
-}
-
-//JQDemoColumn.java
- ```
-3. Setup columns constructor
-
-Then we add the constructor with 3 parameters : 
-- reference : String
-- builder : ColumnBuilder
-- crBuilder : CriteriaBuilder<ComparisonExpression> (optional : see Criteria tutorial later)
+<b>Example</b>
 
  ```java
-//JQDemoColumn.java
+//Customers.java
+public interface Customers extends DatasetCatalogue {
 
-@RequiredArgsConstructor
-public enum JQDemoColumn implements ColumnDecorator {
-//... columns
-;
-    private final String reference;
-	private final ColumnBuilder builder;
-	private final CriteriaBuilder<ComparisonExpression> crBulder;
+	@Bind("CUSTOMER_ID")
+	@Typed(JDBCType.UUID)
+	ViewColumn id();
 	
-	JQDemoColumn(@NonNull String ref)
-	{
-		this(ref, null, null);
-	}
+	@Bind("CUSTOMER_NAME")
+	@Typed(JDBCType.VARCHAR)
+	ViewColumn name();
 	
-	JQDemoColumn(@NonNull String ref, @NonNull ColumnBuilder builder) {
-        this(ref, builder, null);
-    }
-
-	@Override
-	public String identity() {
-		return this.name().toLowerCase();
-	}
-
-	@Override
-	public String reference(ViewDecorator vd) {
-		return reference;
-	}
-
-	@Override
-	public Builder<ViewDecorator, DBColumn> builder() {
-		return Objects.nonNull(builder) ? builder : ColumnDecorator.super.builder();
-	}
-
-	@Override
-	public Builder<ViewDecorator, ComparisonExpression> criteriaBuilder(String name) {
-		return "ym".equals(name) && Objects.nonNull(crBulder) ? crBulder : null;
-	}
+	@Bind("CONTACT_NAME")
+	ViewColumn contact();
+	
+	@Bind("ADDRESS")
+	ViewColumn address();
+	
+	// other columns
+	
+	//create partition, join, criteria
 }
-
-//JQDemoColumn.java
  ```
+
+| JQuery Column | Database Column | Type 				  					  |
+| ------------- | --------------- | ----------------------------------------- |
+| `id()`        | CUSTOMER_ID     | UUID 				  					  |
+| `name()`      | CUSTOMER_NAME   | VARCHAR 			  					  |
+| `contact()`   | CONTACT_NAME    | VARCHAR **(default : defined by JQuery)** |
+| `address()`   | ADDRESS         | VARCHAR **(default : defined by JQuery)** |
+
+These columns can now be referenced in `JQuery` queries.
+
+2. Columns refactor
+
+Columns can be customized using the `@Expose` annotation.
+
+This annotation allows you to:
+
+- rename the column for API queries
+- add documentation
+- hide columns from public usage
+
+| Parameter     | Description                            |
+| ------------- | -------------------------------------- |
+| `identity`    | Name used in web queries               |
+| `description` | Short description of the column        |
+| `false`       | Prevents the column from being exposed |
+
+ ```java
+//Customers.java
+
+	@Expose(identity="customer_address", description="Customer's home address")
+	@Bind("ADDRESS")
+	ViewColumn address();
+
+	// we can't use this column because it is not exposed
+	@Expose(false)
+	@Bind("CONTACT_NAME")
+	ViewColumn contact();
+
+
+//Customers.java
+ ```
+
+ | Database Column | Exposed | JQuery Column     |
+| --------------- | ------- | ------------------ |
+| `ADDRESS`       | Yes     | `customer_address` |
+| `CONTACT_NAME`  | No      | Not accessible     |
+
+Example of using the customised columns:
+
+```scss
+/customers?select=customer_address
+```
+
+```java
+Customers.address();
+```
+
+✅ After completing these steps, the dataset is ready to be used with JQuery query syntax.

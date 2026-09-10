@@ -2,19 +2,26 @@ server:
   port: 8080
 spring:
   application:
-    name: demo
+    name: JQuery-Demo
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
-#    data: classpath:data-h2.sql
-    hikari:
-      minimum-idle: 1
-      maximum-pool-size: 5
-      idle-timeout: 600000         # 10 minutes
-      max-lifetime: 1800000        # 30 minutes
-      keepalive-time: 300000       # Internal ping every 5 minutes
+    h2db:
+      jdbc-url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE
+      username: sa
+      password: 
+      driver-class-name: org.h2.Driver
+#      data: classpath:data-h2.sql
+      hikari:
+        minimum-idle: 1
+        maximum-pool-size: 5
+        idle-timeout: 600000         # 10 minutes
+        max-lifetime: 1800000        # 30 minutes
+        keepalive-time: 300000       # Internal ping every 5 minutes
+#    postgre:
+#      jdbc-url: jdbc:postgresql://localhost:5432/postgres
+#      username: postgres
+#      password: test
+#      driver-class-name: org.postgresql.Driver
+
   h2:
     console:
       enabled: true

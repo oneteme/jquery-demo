@@ -1,0 +1,58 @@
+[
+    {
+        "label": "PostgreSQL",
+        "value": "postgresql",
+        "type": "icon",
+        "metadata": "devicon-postgresql-plain colored",
+        "hide": true
+    },
+    {
+        "label": "MySQL",
+        "value": "mysql",
+        "type": "icon",
+        "metadata": "devicon-mysql-original colored",
+        "hide": true
+    },
+    {
+        "label": "SQL Server",
+        "value": "sqlserver",
+        "type": "icon",
+        "metadata": "devicon-microsoftsqlserver-plain colored",
+        "hide": true
+    },
+    {
+        "label": "Oracle",
+        "value": "oracle",
+        "type": "icon",
+        "metadata": "devicon-oracle-original colored",
+        "hide": true
+    },
+    {
+        "label": "SQLite",
+        "value": "sqlite",
+        "type": "icon",
+        "metadata": "devicon-sqlite-plain colored",
+        "hide": true
+    },
+    {
+        "label": "Teradata",
+        "value": "teradata",
+        "type": "img",
+        "metadata": "/assets/images/teradata.jpg",
+        "hide": true
+    },
+    {
+        "label": "H2",
+        "value": "h2",
+        "type": "div",
+        "metadata": {
+            "type": "span",
+            "content": "H2",
+            "attr": {
+                "style": "background:#2fc01c;",
+                "class": "db-fallback-icon"
+            }
+        },
+        "show": true
+    }
+]

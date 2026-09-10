@@ -1,42 +1,192 @@
 [
-    {
-      "title": "AVG",
-      "view": "products",
-      "column": "price.avg:avg",
-      "filter": "",
-      "definition": "The AVG() function returns the average value of a numeric column.",
-      "syntax": "column1,column2,column3,..."
-    },
-    {
-      "title": "COUNT",
-      "view": "products",
-      "column": "id.count:COUNT",
-      "filter": "",
-      "definition": "The COUNT() function returns the number of rows that matches a specified criterion.",
-      "syntax": "column.count"
-    },
-    {
-      "title": "SUM",
-      "view": "details",
-      "column": "quantity.sum:SUM",
-      "filter": "",
-      "definition": "The SUM() function returns the total sum of a numeric column.",
-      "syntax": "column.sum"
-    },
-    {
-      "title": "MIN",
-      "view": "products",
-      "column": "price.min:SmallestPrice",
-      "filter": "",
-      "definition": "The MIN() function returns the smallest value of the selected column",
-      "syntax": "column.min"
-    },
-    {
-      "title": "MAX",
-      "view": "products",
-      "column": "price.max:LargestPrice",
-      "filter": "",
-      "definition": "The MAX() function returns the largest value of the selected column.",
-      "syntax": "column.max"
-    }
-  ]
+  {
+    "title": "AVG",
+    "view": "products",
+    "column": "price.avg:avg",
+    "definition": "Returns the average value of a numeric column.<br>The function calculates the sum of all values and divides it by the number of rows.",
+    "syntax": "column.avg",
+    "examples": [
+      {
+        "title": "Average as column (GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.avg"
+      },
+      {
+        "title": "Using Average as filter (HAVING)",
+        "view": "products",
+        "column": "cat_id",
+        "filter": "price.avg.gt(10)"
+      },
+      {
+        "title": "Average Product Price per Category",
+        "column": "name,price,cat_id,price.avg.over(partition(cat_id)):categPrice",
+        "view": "products"
+      }
+    ]
+  },
+  {
+    "title": "COUNT",
+    "view": "products",
+    "column": "id.count:COUNT",
+    "filter": "",
+    "definition": "Returns the number of rows in a dataset or the number of non-null values in a column.<br>This function is commonly used to count records.",
+    "syntax": "column.count",
+    "examples": [
+      {
+        "title": "Using COUNT as a column (GROUP BY)",
+        "view": "products",
+        "column": "cat_id.count,price"
+      },
+      {
+        "title": "Using COUNT as a filter (HAVING)",
+        "view": "products",
+        "column": "cat_id",
+        "filter": "id.count.gt(5)"
+      }
+    ]
+  },
+  {
+    "title": "SUM",
+    "view": "details",
+    "column": "quantity.sum:SUM",
+    "definition": "Returns the total sum of a numeric column.<br>The function adds all values from the specified column.",
+    "syntax": "column.sum",
+    "examples": [
+      {
+        "title": "Using SUM as a column (GROUP BY)",
+        "view": "details",
+        "column": "order_id,quantity.sum"
+      },
+      {
+        "title": "Using SUM as a filter (HAVING)",
+        "view": "details",
+        "column": "order_id",
+        "filter": "quantity.sum.gt(100)"
+      }
+    ]
+  },
+  {
+    "title": "MIN",
+    "view": "products",
+    "column": "price.min:MinPrice",
+    "definition": "Returns the smallest value from a column.<br>This function is useful for finding minimum values such as the lowest price.",
+    "syntax": "column.min",
+    "examples": [
+      {
+        "title": "Cheapest price by category(GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.min:MinPrice"
+      },
+      {
+        "title": "Using MIN inside filter (HAVING)",
+        "view": "products",
+        "column": "cat_id,price.min:MinPrice",
+        "filter": "MinPrice.gt(7)"
+      }
+    ]
+  },
+  {
+    "title": "MAX",
+    "view": "products",
+    "column": "price.max:MaxPrice",
+    "filter": "",
+    "definition": "Returns the largest value from a column.<br>This function is useful for finding maximum values such as the highest price.",
+    "syntax": "column.max",
+    "examples": [
+      {
+        "title": "Highest price by category(GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.max:MaxPrice"
+      },
+      {
+        "title": "Using MAX inside filter (HAVING)",
+        "view": "products",
+        "column": "cat_id,price.max:MaxPrice",
+        "filter": "MaxPrice.gt(70)"
+      }
+    ]
+  },
+  {
+    "title": "MEDIAN",
+    "view": "products",
+    "column": "price.median:medianPrice",
+    "definition": "Returns the median value of a numeric column.<br>The median is the middle value when all values are ordered from lowest to highest.<br>If the number of values is even, the median is calculated as the average of the two middle values.<br>This is useful for understanding the central tendency of data without being affected by extreme values.",
+    "syntax": "column.median",
+    "examples": [
+      {
+        "title": "Median as column (GROUP BY)",
+        "view": "products",
+        "column": "cat_id,price.median"
+      },
+      {
+        "title": "Median inside filter(with subQuery)",
+        "view": "products",
+        "filter": "price.gt(products.select(price.median))"
+      },
+      {
+        "title": "Median VS AVG",
+        "view": "products",
+        "column": "cat_id,price.avg,price.median"
+      }
+    ]
+  },
+  {
+    "title": "PERCENTILE_CONT",
+    "view": "products",
+    "column": "cat_id,percentileCont(0.5).within(group.order(price.desc)):percentile_cont",
+    "definition": "Returns the continuous percentile value of a numeric column.<br>The percentile is calculated by ordering the values and interpolating between them when necessary.<br>The parameter must be a value between <b>0</b> and <b>1</b>, where <b>0.5</b> represents the median.<br>This function is useful for statistical analysis and distribution measurements.",
+    "syntax": "percentileCont(value).within(group.order(order))",
+    "tooltip": "Continuous percentile",
+    "examples": [
+      {
+        "title": "PERCENTILE_CONT inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(percentileCont(0.9).within(group.order(price)))"
+      },
+      {
+        "title": "AVG vs PERCENTILE_CONT",
+        "view": "products",
+        "column": "cat_id,percentileCont(0.9).within(group.order(price)):percentile_cont,price.avg"
+      }
+    ]
+  },
+  {
+    "title": "PERCENTILE_DISC",
+    "view": "products",
+    "column": "cat_id,percentileDisc(0.5).within(group.order(price.desc)):percentile_disc",
+    "definition": "Returns the discrete percentile value of a numeric column.<br>The function selects the first actual value whose position matches or exceeds the requested percentile.<br>Unlike PERCENTILE_CONT, no interpolation is performed.<br>The parameter must be a value between <b>0</b> and <b>1</b>.",
+    "syntax": "percentileDisc(value).within(group.order(order))",
+    "tooltip": "Discontinuous percentile",
+    "examples": [
+      {
+        "title": "PERCENTILE_DISC inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(percentileDisc(0.9).within(group.order(price)))"
+      },
+      {
+        "title": "AVG vs PERCENTILE_DISC",
+        "view": "products",
+        "column": "cat_id,percentileDisc(0.9).within(group.order(price)):percentile_disc,price.avg"
+      }
+    ]
+  },
+  {
+    "title": "MODE",
+    "view": "products",
+    "column": "mode.within(group.order(price)):mode",
+    "definition": "Returns the most frequently occurring value in a column.<br>The mode is the value that appears the greatest number of times in the result set.<br>Unlike AVG or MEDIAN, the mode identifies the most common value rather than the center of the distribution.<br>This is useful for finding the most frequently occurring price, quantity, or category.",
+    "syntax": "column.mode.within(group.order(order))",
+    "examples": [
+      {
+        "title": "MODE inside filter (subQuery)",
+        "view": "products",
+        "filter": "price.gt=products.select(mode.within(group.order(price)))"
+      },
+      {
+        "title": "AVG vs MODE",
+        "view": "products",
+        "column": "cat_id,mode.within(group.order(price)):mode,price.avg"
+      }
+    ]
+  }
+]

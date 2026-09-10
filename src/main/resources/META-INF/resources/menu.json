@@ -4,36 +4,65 @@
     "items": "setup.json"
   },
   {
+    "title": "@Annotations",
+    "items": "annotations.json"
+  },
+  {
     "title": "SELECT",
     "view": "customers",
-    "column": "customer,contact,postal_code",
-    "filter": "",
+    "column": "name,contact,postal_code",
     "definition": "To fetch certain columns in JQuery all you need is to write down the columns you need seperated by a ','",
-    "syntax": "column1,column2,column3,...",
-    "next":"GROUP BY"
+    "syntax": "select=column1,column2,column3,...",
+    "next": "GROUP BY"
+  },
+  {
+    "title": "DISTINCT",
+    "definition": "Removes duplicate values from the result set.<br>The DISTINCT operation ensures that only unique values are returned for the selected column(s).<br>This is useful when you want to eliminate repeated data and retrieve only unique records.",
+    "syntax": "column.distinct&;distinct=true",
+    "examples": [
+      {
+        "title": "Apply DISTINCT to all columns",
+        "view": "products",
+        "column": "price",
+        "filter": "distinct=true"
+      },
+      {
+        "title": "Apply DISTINCT on a single column",
+        "view": "products",
+        "column": "price.distinct"
+      }
+    ]
   },
   {
     "title": "GROUP BY",
     "view": "customers",
-    "column": "id.count:COUNT,country",
-    "filter": "",
+    "column": "id.count,country",
     "definition": "GROUP BY: A SQL clause that groups rows in a database table based on one or more columns, allowing for the aggregation of data (e.g., summing, counting, or averaging) within each group.\nFor example, if you have a sales database and want to find the total sales per region, you would use GROUP BY to group the sales data by region and then calculate the total for each group.",
-    "syntax": "Aggregate(ex : sum,count,avg,...),col1,col2"
+    "syntax": "select=Aggregate(ex : sum,count,avg,...),col1,col2"
   },
   {
     "title": "HAVING",
     "view": "customers",
-    "column": "id.count:COUNT,country",
-    "filter": "COUNT.gt=5",
+    "column": "country",
+    "filter": "id.count.gt=5",
     "definition": "The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.",
-    "syntax": "Aggregate(ex : sum,count,avg,...),col1,col2 WHERE(&) filter(ex: id.count>5)"
+    "syntax": "select=col1,col2 WHERE(&) filter(Aggregate(ex : sum,count,avg,...))"
   },
   {
     "title": "AS",
     "view": "customers",
-    "column": "id:ID,customer:CustomerName",
+    "column": "id:my_id,name:CustomerName",
     "definition": "Aliases are used to give a table, or a column in a table, a temporary name.",
-    "syntax": "col:new_col_name"
+    "syntax": "column:new_col_name",
+    "tooltip": "Aliases/TAG",
+    "examples": [
+      {
+        "title": "Reuse Alias inside filter",
+        "view": "customers",
+        "column": "name:CustomerNameAlias",
+        "filter": "CustomerNameAlias.length.lt(10)"
+      }
+    ]
   },
   {
     "title": "LIMIT",
@@ -43,21 +72,108 @@
     "syntax": "&limit=number"
   },
   {
+    "title": "OFFSET",
+    "view": "customers",
+    "filter": "offset=5",
+    "definition": "Skips a specified number of rows before returning the query result.<br>The parameter defines how many rows should be ignored from the beginning of the result set.<br>This is commonly used for pagination together with LIMIT.",
+    "syntax": "offset=value"
+  },
+  {
     "title": "ORDER",
-    "view": "products",
-    "filter": "order=price.asc",
-    "column": "price",
     "definition": "The ORDER BY command is used to sort the rows in a SQL query result. It is possible to sort the data on one or more columns, in ascending or descending order.",
-    "syntax": "&order=column.ASC/DESC By default it's ASC"
+    "syntax": "&order=column.ASC // default&;&order=column.DESC",
+    "examples": [
+      {
+        "title": "order without direction (ASC by default)",
+        "view": "products",
+        "filter": "order=price"
+      },
+      {
+        "title": "Descending order",
+        "view": "products",
+        "filter": "order=price.desc"
+      },
+      {
+        "title": "Ordering with more than one column",
+        "view": "products",
+        "filter": "order=price.desc,cat_id"
+      },
+      {
+        "title": "Shuffle results",
+        "view": "employees",
+        "filter": "order=random"
+      }
+    ]
+  },
+  {
+    "title": "CASE",
+    "definition": "Evaluates multiple conditions and returns a value depending on which condition is met.<br>The CASE expression works like an if-else structure in SQL. Each <b>WHEN</b> condition is evaluated in order, and the result of the first matching condition is returned.<br>If none of the conditions are satisfied, the <b>ELSE</b> value is returned.<br>This function is commonly used to categorize or transform values directly in a query.<br><br>Example use case: categorizing products based on their price (cheap, normal, expensive).",
+    "syntax": "when(criteria1,val1).when(criteria2,val2)...orElse(valn)",
+    "tooltip": "CASE...WHEN...THEN...ELSE",
+    "label": "caseColumn",
+    "examples": [
+      {
+        "title": "Use CASE column in <b>URL</b>",
+        "view": "products",
+        "column": "price,when(price.lt(10),Cheap).when(price.ge(10).and(price.lt(20)),Normal).orElse(Expensive):cost_case"
+      },
+      {
+        "title": "Use CASE column created in <b>JAVA</b>",
+        "view": "products",
+        "column": "price,priceToCase:cost_case"
+      }
+    ]
+  },
+  {
+    "title": "CASE 1",
+    "tutorial": "caseColumn.md",
+    "dev": true
+  },
+  {
+    "title": "CASE 2",
+    "definition": "Evaluates multiple conditions and returns a value depending on which condition is met.<br>The CASE expression works like an if-else structure in SQL. Each <b>WHEN</b> condition is evaluated in order, and the result of the first matching condition is returned.<br>If none of the conditions are satisfied, the <b>ELSE</b> value is returned.<br>This function is commonly used to categorize or transform values directly in a query.<br><br>Example use case: categorizing products based on their price (cheap, normal, expensive).",
+    "tutorial": "caseColumn2.md",
+    "dev": true
+  },
+  {
+    "title": "SUB QUERY",
+    "view": "products",
+    "filter": "cat_id.in=categories.select(id).criteria(startsLike(name,Con))",
+    "definition": "Allows using a query inside another query.<br>A subquery is executed first and its result is used by the main query.<br>This is useful for dynamic comparisons, such as filtering values based on aggregated results.<br>For example, you can retrieve products whose category starts with 'Con'",
+    "syntax": "v0.select(col1, col2, ...).criteria(crit1.and(crit2).or(...))",
+    "examples": [
+      {
+        "title": "Using SubQuery Created in JAVA",
+        "view": "products",
+        "filter": "cat_id.in=subCategories.select(id)"
+      }
+    ]
+  },
+  {
+    "title": "CTE",
+    "view": "products",
+    "column": "myCte.name",
+    "filter": "cte=categories.select(name).criteria(startsLike(name,Con)):myCte",
+    "definition": "Defines a Common Table Expression (CTE), which creates a temporary named result set that can be referenced within the main query.<br>A CTE helps simplify complex queries by breaking them into reusable and readable parts.<br>This is useful for organizing subqueries, recursive queries, or intermediate calculations.",
+    "syntax": "cte=myView.select(col1,col2,...).criteria(...criterias):cteName",
+    "tooltip": "Common Table Expression",
+    "examples": [
+      {
+        "title": "Use SubQuery Created in JAVA as CTE",
+        "view": "products",
+        "column": "myCte.id",
+        "filter": "cte=subCategories:myCte"
+      },
+      {
+        "title": "Apply join with CTE",
+        "view": "products",
+        "column": "name,myCTE.name:cat_name",
+        "filter": "cte=categories.select(id,name).criteria(startsLike(name,Con)):myCTE&join=innerJoin(myCTE).criteria(id.eq(myCTE.id))"
+      }
+    ]
   },
   {
     "title": "JOIN",
-    "view": "orders",
-    "column": "order.id,customer.customer,order.start",
-    "filter": "order.customer_id=customer.id",
-    "definition": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them.",
-    "syntax": "view1.col1,view1.col2,view2.col1&view1.view2ID=view2.id",
-    "tutorial": "test.md",
     "items": "join.json"
   },
   {
@@ -75,5 +191,9 @@
   {
     "title": "Comparators",
     "items": "comparators/comparators.json"
+  },
+  {
+    "title": "Advanced JQuery",
+    "items": "advanced.json"
   }
 ]

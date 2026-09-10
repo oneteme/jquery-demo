@@ -1,0 +1,121 @@
+[
+    {
+        "title": "PARTITION",
+        "definition": "Divides the result set into separate groups based on the values of one or more columns.<br>The partition allows window functions to perform calculations independently within each group instead of using the entire result set.<br>For example, products can be ranked by price separately within each category.",
+        "syntax": "partition(column).order(order)",
+        "examples": [
+            {
+                "title":"Use partition in URL",
+                "view": "products",
+                "column": "price.sum.over(partition(cat_id).order(price.desc))"
+            },
+            {
+                "title":"Use partition from JAVA",
+                "view": "products",
+                "column": "price.sum.over(partitionByCategoryPrice)"
+            }
+        ]
+    },
+    {
+        "title": "RANK",
+        "view": "products",
+        "column": "id,name,price,rank.over(partition(cat_id).order(price.desc)):rank",
+        "definition": "Assigns a ranking to each row based on a specified ordering.<br>The function ranks values within a result set according to a given column, such as price or quantity.<br>Rows with the same value receive the same rank, and the next rank is skipped.<br>This is useful for finding relative positions such as the most expensive or cheapest products.",
+        "syntax": "rank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title": "Filter with RANK",
+                "view": "products",
+                "column": "id,name,price",
+                "filter": "rank.over(partition(cat_id).order(price.desc))=1"
+            },
+            {
+                "title": "Ranking products by category",
+                "view": "products",
+                "column": "cat_id,price,rankProducts:rank",
+                "filter": "order=cat_id,rank"
+            }
+        ]
+    },
+    {
+        "title": "ROW NUMBER",
+        "view": "products",
+        "column": "id,name,price,rowNumber.over(partition(cat_id).order(price.desc)):rowNumber",
+        "definition": "Assigns a unique sequential number to each row in the result set.<br>The numbering is based on the specified ordering and starts at 1.<br>Unlike RANK, each row receives a distinct number even if values are identical.<br>This is useful for ordering rows or generating unique row positions.",
+        "syntax": "rowNumber.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title": "Filter with ROW NUMBER",
+                "view": "products",
+                "column": "id,name,price",
+                "filter": "rowNumber.over(partition(cat_id).order(price.desc))=1"
+            },
+            {
+                "title": "ROW NUMBER vs RANK",
+                "view": "products",
+                "column": "cat_id,price,rowProducts:rowNumber,rankProducts:rank",
+                "filter": "order=cat_id,rowNumber"
+            },
+            {
+                "title": "Complex : Ranking products by category",
+                "view": "products",
+                "column": "cat_id,price,rowProducts:rowNumber",
+                "filter": "order=cat_id,rowNumber"
+            }
+        ]
+    },
+    {
+        "title": "DENSE RANK",
+        "view": "products",
+        "column": "id,name,price,denseRank.over(partition(cat_id).order(price.desc)):denseRank",
+        "definition": "Assigns a ranking to each row based on a specified ordering.<br>Rows with the same value receive the same rank, and unlike RANK, no rank numbers are skipped.<br>This means the ranking remains consecutive even when there are duplicate values.<br>This is useful when you want grouped rankings without gaps.",
+        "syntax": "denseRank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title": "Filter with DENSE RANK",
+                "view": "products",
+                "column": "id,name,price",
+                "filter": "denseRank.over(partition(cat_id).order(price.desc))=1"
+            },
+            {
+                "title": "DENSE RANK vs RANK",
+                "view": "products",
+                "column": "cat_id,price,denseProducts:denseRank,rankProducts:rank",
+                "filter": "order=cat_id,denseRank"
+            },
+            {
+                "title": "Complex : Ranking products by category",
+                "view": "products",
+                "column": "cat_id,price,denseProducts:denseRank",
+                "filter": "order=cat_id,denseRank"
+            }
+        ]
+    },
+    {
+        "title": "PERCENT RANK",
+        "view": "products",
+        "column": "id,name,price,percentRank.over(partition(id).order(price.desc)):percentRank",
+        "definition": "Returns the relative rank of each row as a percentage between 0 and 1.<br>The value represents the position of the row within the result set based on the specified ordering.<br>The lowest value has a percent rank of 0, and the highest value approaches 1.<br>This is useful for understanding how a value compares proportionally to others in the dataset.",
+        "syntax": "percentRank.over(partition(column).order(orderCol))",
+        "examples": [
+            {
+                "title": "Filter with PERCENT RANK",
+                "view": "products",
+                "column": "id,name,price",
+                "filter": "percentRank.over(partition(id).order(price.desc))=1"
+            },
+            {
+                "title": "Ranking products by category",
+                "view": "products",
+                "column": "cat_id,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank",
+                "filter": "order=cat_id,percentRank"
+            },
+            {
+                "title": "PERCENT RANK vs RANK",
+                "view": "products",
+                "column": "cat_id,price,percentRank.over(partition(cat_id).order(price.desc)):percentRank,rank.over(partition(cat_id).order(price.desc)):rank",
+                "filter": "order=cat_id,percentRank"
+            }
+        ]
+    }
+]
