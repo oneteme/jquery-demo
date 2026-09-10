@@ -62,23 +62,10 @@ public interface DemoStore extends StoreCatalog {
 	@Bind("EMPLOYEES_TABLE")
 	Employees employees();
 
-//	default QueryView testView() {
-//		var v = categories().getView();
-//		return new QueryComposer()
-//				.columns(Column.allColumns(v))
-//				.filters()
-//				.compose();
-//	}
-
 	default QueryCatalog subCategories() {
 		return new QueryCatalog(new QueryComposer()
 				.columns(categories().id())
 				.criteria(categories().name().startsLike("Con")).compose(this));
-	}
-
-	@Expose(identity = "test_mode", description = "")
-	default OperatorDefinition mode() {
-		return aggregate(DOUBLE, "MODE");
 	}
 
 	@Expose(identity = "pi", description = "")

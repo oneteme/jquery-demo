@@ -173,19 +173,19 @@
   {
     "title": "MODE",
     "view": "products",
-    "column": "test_mode.within(group.order(price)):mode",
+    "column": "mode.within(group.order(price)):mode",
     "definition": "Returns the most frequently occurring value in a column.<br>The mode is the value that appears the greatest number of times in the result set.<br>Unlike AVG or MEDIAN, the mode identifies the most common value rather than the center of the distribution.<br>This is useful for finding the most frequently occurring price, quantity, or category.",
     "syntax": "column.mode.within(group.order(order))",
     "examples": [
       {
         "title": "MODE inside filter (subQuery)",
         "view": "products",
-        "filter": "price.gt=products.select(test_mode.within(group.order(price)))"
+        "filter": "price.gt=products.select(mode.within(group.order(price)))"
       },
       {
         "title": "AVG vs MODE",
         "view": "products",
-        "column": "cat_id,test_mode.within(group.order(price)):mode,price.avg"
+        "column": "cat_id,mode.within(group.order(price)):mode,price.avg"
       }
     ]
   }
