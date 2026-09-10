@@ -1,3 +1,5 @@
+### QueryExtentsion annotation guide
+
 `@QueryExtension` allows you to customize how a `@QueryTemplate` behaves when request parameters are provided.
 
 Instead of defining the query itself, `@QueryExtension` controls whether different parts of the query are **replaced**, **merged**, or **rejected**.

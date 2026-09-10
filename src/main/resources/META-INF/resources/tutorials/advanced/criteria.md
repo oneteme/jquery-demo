@@ -36,7 +36,7 @@ Example:
 ```java 
 // In your DatasetCatalogue
 default Criteria priceRangeByName(String name, Integer v1, Integer v2) {
-	return price().between(arr).and(name().contentLike(name));
+	return price().between(v1, v2).and(name().contentLike(name));
 }
 ```
 
@@ -48,8 +48,8 @@ When used in a query, this generates:
 ```sql
 WHERE
   (
-    v1.PRICE > 10
-    AND v1.PRICE < 30
+    v1.PRICE >= 10
+    AND v1.PRICE <= 30
     AND v1.PRODUCT_NAME LIKE '%ef%'
   )
 ```

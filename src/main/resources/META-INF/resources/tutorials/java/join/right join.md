@@ -1,8 +1,8 @@
 ```java	
-// v0 is the DatasetCatalogue that contains the JoinClause
-default JoinsClause myRightJoin() {
+// v0 is the DatasetCatalogue that contains the JoinGroup
+default JoinGroup myRightJoin() {
     var v1 = getInstance().getStore(myStore.class).myView();
-	return JoinsClause.joins(ViewJoin.rightJoin(v1.getView(), myColumn().eq(v1.id())));
+	return JoinGroup.joins(Join.rightJoin(v1.getView(), myColumn().eq(v1.id())));
 }
 ```
 

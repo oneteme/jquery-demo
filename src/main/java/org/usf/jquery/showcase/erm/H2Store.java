@@ -9,7 +9,6 @@ import org.usf.jquery.mvc.Expose;
 
 public interface H2Store extends DemoStore {
 
-	
 	@Expose(identity = "pow", description = "Raises a numeric value to a specified power")
 	default OperatorDefinition pow() {
 		return function(DOUBLE, "POWER", required(DOUBLE), required(DOUBLE));

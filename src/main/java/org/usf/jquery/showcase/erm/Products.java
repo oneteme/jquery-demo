@@ -16,6 +16,7 @@ import org.usf.jquery.core.Criteria;
 import org.usf.jquery.core.JoinGroup;
 import org.usf.jquery.core.Partition;
 import org.usf.jquery.core.PartitionComposer;
+import org.usf.jquery.core.Predicate;
 import org.usf.jquery.core.QueryComposer;
 import org.usf.jquery.core.SingleQueryColumn;
 import org.usf.jquery.core.ViewColumn;
@@ -46,7 +47,15 @@ public interface Products extends DatasetCatalog<DemoStore>,CommunColumns {
 	ViewColumn unit();
 	
 	default Criteria nameRangeByPrice(String name, Integer v1, Integer v2) {
-		return price().gt(v1).and(price().lt(v2)).and(name().contentLike(name));
+		return price().between(v1, v2).and(name().contentLike(name));
+	}
+	
+	default Criteria expensiveProduct() {
+		return pricePredicate(Predicate.gt(40));
+	}
+	
+	default Criteria pricePredicate(Predicate pred) {
+		return price().filter(pred);
 	}
 	
 	default CaseColumn priceToCase() {

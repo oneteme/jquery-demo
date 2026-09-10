@@ -4,12 +4,16 @@
     "tutorial": "setup/setup.md"
   },
   {
-    "title": "Create DatasetCatalogue",
-    "tutorial": "setup/columns.md"
+    "title": "Create Catalogs",
+    "tutorial": "setup/interfaces.md"
   },
   {
-    "title": "Create StoreResource",
+    "title": "Setup Store Catalogs",
     "tutorial": "setup/tables.md"
+  },
+  {
+    "title": "Setup Dataset catalogs",
+    "tutorial": "setup/columns.md"
   },
   {
     "title": "Add resolvers",

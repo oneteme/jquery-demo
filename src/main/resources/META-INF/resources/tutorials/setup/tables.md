@@ -1,3 +1,5 @@
+### Bind Dataset Catalogs
+
 This guide explains how to configure a Store in `JQuery`.
 
 A Store acts as the entry point of your API, grouping:
@@ -6,28 +8,22 @@ A Store acts as the entry point of your API, grouping:
 - custom functions
 - controlling what is exposed to the API
 
-The setup consists of three main steps:
+The setup consists of two main steps:
 
-- Create a Store interface
 - Bind datasets (views)
 - Define or override functions
 
-1. Create a Store Interface
+For this guide we will be using the previously created **StoreCatalog** called **DemoStore**.
 
-For each `database`, create an interface that extends `StoreResource`.
-
- ```java
+```java
 // DemoStore.java
 
 public interface DemoStore extends StoreResource {
 
 }
- ```
-This interface acts as the root container of your query system.
+```
 
-All datasets and custom functions will be defined here.
-
-2. Bind Datasets (Views)
+1. Bind Datasets (Views)
 
 Inside the store, declare all datasets you want to expose.
 
@@ -82,7 +78,7 @@ public interface DemoStore extends StoreResource {
 
 These datasets are now accessible through the Store.
 
-3. Customize Dataset Exposure
+2. Customize Dataset Exposure
 
 Like columns, datasets can be customized using `@Expose`.
 
@@ -109,7 +105,7 @@ Employees employees();
 | `ORDERS_DETAILS_TABLE` | Yes     | `orders_details` |
 | `EMPLOYEES_TABLE`      | No      | Not accessible   |
 
-4. Function Mapping
+3. Function Mapping
 
 The `Store` defines how JQuery functions are translated into SQL.
 

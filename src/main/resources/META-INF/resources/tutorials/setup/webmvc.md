@@ -1,3 +1,5 @@
+### WebMvcConfig guide
+
 A Resolver converts HTTP request parameters into a `QueryComposer` object.  
 Once registered in Spring MVC, it allows you to inject a ready-to-use query directly into your controller methods.
 
@@ -26,7 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @EventListener(ApplicationStartedEvent.class)
     void onReady() {
-        getInstance().register(DemoStore.class, ds);
+        getInstance().register(DemoStore.class, ds, /*Optional : Dialect*/ new H2Dialect() );
 
         // Register other datasources
     }
@@ -46,8 +48,7 @@ Once the resolver is registered, you can inject MvcRequest directly into your co
 @GetMapping("products")
 @QueryTemplate(
     dataset = "products",
-    select = "id,name,supp_id,cat_id,price,unit",
-    view = "debug"
+    select = "id,name,supp_id,cat_id,price,unit"
 )
 public Object fetchProducts(MvcRequest mvc) {
     return mvc.execute();

@@ -1,13 +1,13 @@
 ```java
 // CASE 1
-// Two seperate JoinClauses with a single join each
+// Two seperate JoinGroups with a single join each
 
-// Check previous joins for ViewJoin syntax
-default JoinsClause join1() {
+// Check previous joins for Join syntax
+default JoinGroup join1() {
 	return joins(ViewJoin);
 }
 
-default JoinsClause join2() {
+default JoinGroup join2() {
 	return joins(ViewJoin);
 }
 ```
@@ -19,11 +19,11 @@ select=...&join=join1,join2
 
 ```java
 // CASE 2
-// One JoinClause but with multiple joins
+// One JoinGroup but with multiple joins
 
-// Check previous joins for ViewJoin syntax
-default JoinsClause myMultipleJoin() {
-	return joins(ViewJoin1, ViewJoin2, ...);
+// Check previous joins for Join syntax
+default JoinGroup myMultipleJoin() {
+	return joins(Join1, Join2, ...);
 }
 ```
 

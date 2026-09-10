@@ -1,3 +1,5 @@
+### QueryGuard annotation guide
+
 `@QueryGuard` allows you to define validation rules for a query.
 
 It is used together with `@QueryTemplate` to ensure that the generated query complies with your application's requirements before it is executed.

@@ -102,6 +102,40 @@ WHERE
   )
 ```
 
+4. Use predicate as a parameter
+
+Predicates can be used as parameter for **Criterias** for example.
+
+**Example**
+
+```java
+default Criteria pricePredicate(Predicate pred) {
+	return price().filter(pred);
+}
+```
+
+This Criteria takes a predicate as a parameter and in order to turn a `Predicate` into a `Criteria` we need to use `.filter`.
+
+**Use case**
+
+<!-- playdata: {"view":"products","filter":"expensiveProduct"} -->
+```java
+default Criteria expensiveProduct() {
+	return pricePredicate(Predicate.gt(40));
+}
+```
+
+<!-- playdata: {"view":"products","filter":"expensiveProduct"} -->
+```javascript
+select=...&expensiveProduct
+```
+
+**Generated SQL**
+
+```sql
+WHERE v1.PRICE > 40
+```
+
 <b> Summary </b>
 
 - A Predicate defines how a condition is applied to a column

@@ -1,3 +1,5 @@
+### QueryTemplate annotation guide
+
 `@QueryTemplate` allows you to define a query directly on a controller method.
 
 Instead of building the query manually, you specify the dataset and the default query options through the annotation. The query is then executed automatically using `MvcRequest`.
@@ -49,6 +51,20 @@ return mvc.execute();
 ```
 
 `MvcRequest` reads the `@QueryTemplate` configuration, builds the query, applies any request parameters, and executes it.
+
+<b>Generated SQL</b>
+
+```sql
+SELECT
+  v1.EMPLOYEE_ID AS "id",
+  v1.LAST_NAME AS "lname",
+  v1.FIRST_NAME AS "fname",
+  v1.BIRTH_DATE AS "start",
+  v1.PHOTO AS "photo",
+  v1.NOTES AS "notes"
+FROM
+  EMPLOYEES_TABLE v1
+```
 
 ---
 

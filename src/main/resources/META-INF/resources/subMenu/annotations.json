@@ -1,14 +1,22 @@
 [
     {
-        "title": "QueryTemplate",
+        "title": "@QueryTemplate",
         "tutorial": "annotations/QueryTemplate.md"
     },
     {
-        "title": "QueryExtention",
+        "title": "@QueryExtention",
         "tutorial": "annotations/QueryExtention.md"
     },
     {
-        "title": "QueryGuard",
+        "title": "@QueryGuard",
         "tutorial": "annotations/QueryGuard.md"
+    },
+    {
+        "title": "@Expose",
+        "tutorial": "annotations/Expose.md"
+    },
+    {
+        "title": "@Typed",
+        "tutorial":"annotations/Typed.md"
     }
 ]

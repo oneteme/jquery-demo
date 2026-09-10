@@ -20,61 +20,53 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "db/h2")
 @RequiredArgsConstructor
 public class JQueryControllerH2 {
-
-	@GetMapping("employees/test")
-	public Object fetchEmployeesSub() {
-		H2Store store = StoreManager.getInstance().getStore(H2Store.class);
-		Employees employees = store.employees();
-		
-		return store.execute(store.newQuery(v->v.column(employees.id())), Mappers.keyValueMapper());
-	}
 	
 	@GetMapping("employees")
 	@QueryTemplate(store = H2Store.class, dataset = "employees", select = "id,lname,fname,start,photo,notes", view = "debug")
-	public Object fetchEmployees(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchEmployees(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("customers")
 	@QueryTemplate(store =  H2Store.class, dataset = "customers", select = "id,name,contact,address,city,postal_code,country", view = "debug")
 	public Object fetchCustomers(MvcRequest mvc, HttpServletResponse res) {
-		return demoExecute(mvc);
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("shippers")
 	@QueryTemplate(store =  H2Store.class, dataset = "shippers", select = "id,name,phone", view = "debug")
-	public Object fetchShippers(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchShippers(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("categories")
 	@QueryTemplate(store =  H2Store.class, dataset = "categories", select = "id,name,description", view = "debug")
-	public Object fetchCategories(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchCategories(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("suppliers")
 	@QueryTemplate(store =  H2Store.class, dataset = "suppliers", select = "id,name,contact,address,city,postal_code,country,phone", view = "debug")
-	public Object fetchSuppliers(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchSuppliers(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("orders")
 	@QueryTemplate(store =  H2Store.class, dataset = "orders", select = "id,start,customer_id,employee_id,shipper_id", view = "debug")
-	public Object fetchOrders(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchOrders(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("products")
 	@QueryTemplate(store =  H2Store.class, dataset = "products", select = "id,name,supp_id,cat_id,price,unit", view = "debug")
-	public Object fetchProducts(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchProducts(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 	@GetMapping("details")
 	@QueryTemplate(store =  H2Store.class, dataset = "orders_details", select = "id,order_id,product_id,quantity", view = "debug")
-	public Object fetchOrderDetails(MvcRequest mvc) {
-		return demoExecute(mvc);
+	public Object fetchOrderDetails(MvcRequest mvc, HttpServletResponse res) {
+		return demoExecute(mvc, res);
 	}
 
 //	@GetMapping("dialect")

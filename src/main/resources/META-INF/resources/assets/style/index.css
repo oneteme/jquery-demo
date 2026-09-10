@@ -576,23 +576,18 @@ pre {
 }
 
 .highlighted_code thead {
-  background: var(--jarvis-purple-bg);
+  background: rgba(0, 217, 255, 0.03);
 }
 
 .highlighted_code th {
-  color: var(--jarvis-purple);
+  color: var(--jarvis-cyan);
   text-align: left;
   padding: 0.4rem 1.65rem;
   font-weight: 700;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--jarvis-purple);
-}
-
-.highlighted_code tbody tr {
-  transition: all 0.3s;
-  border-bottom: 1px solid var(--jarvis-border);
+  border-bottom: 1px solid var(--jarvis-cyan);
 }
 
 .highlighted_code tbody tr:hover {

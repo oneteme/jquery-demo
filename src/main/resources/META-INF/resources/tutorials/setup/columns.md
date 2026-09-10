@@ -1,29 +1,22 @@
+### Setup a Dataset Catalog
+
 This guide explains how to configure JQuery columns.
 
-The setup consists of three main steps:
+The setup consists of two main steps:
 
-- Create a Dataset interface
 - Declare and bind columns
 - Configure column exposure and metadata
 
-1. Create Dataset Interfaces
+For this guide we will be using the previously created **DatasetCatalog** called **Customers**
 
-For each table or view in your database, you must create a `DatasetCatalogue` interface.
-
-This interface represents the dataset that will be exposed through the API.
-
-Example: if you have a database table called `CUSTOMERS_TABLE`, create a corresponding interface.
-
- ```java
+```java
 //Customers.java
-
-public interface Customers extends DatasetCatalogue {
+public interface Customers extends DatasetCatalogue<DemoStore> {
 
 }
- ```
-This interface will later contain all the columns that can be queried from this dataset.
+```
 
-2. Add the columns
+1. Add the columns
 
 Inside the dataset interface, define the columns that can be queried.
 
@@ -31,17 +24,21 @@ Each column must:
 
 - Return a `ViewColumn`
 - Be linked to the actual database column name using `@Bind`
+- **Optional :** Define the its type manually if needed using `@Typed`
 
 <b>Basic Syntax </b> 
+
  ```java 
 	// Sample
 	@Bind("REAL COLUMN NAME")
+	@Typed(JDBCType.myType)
 	ViewColumn jquery_column_name();
  ```
 
 | Element              | Description                      |
 | -------------------- | -------------------------------- |
 | `REAL_COLUMN_NAME`   | Column name in the database      |
+| `JDBCType`   		   | Column type in the database      |
 | `jqueryColumnName()` | Column identifier used in Java   |
 
 
@@ -49,13 +46,14 @@ Each column must:
 
  ```java
 //Customers.java
-
 public interface Customers extends DatasetCatalogue {
 
 	@Bind("CUSTOMER_ID")
+	@Typed(JDBCType.UUID)
 	ViewColumn id();
 	
 	@Bind("CUSTOMER_NAME")
+	@Typed(JDBCType.VARCHAR)
 	ViewColumn name();
 	
 	@Bind("CONTACT_NAME")
@@ -69,16 +67,17 @@ public interface Customers extends DatasetCatalogue {
 	//create partition, join, criteria
 }
  ```
-| JQuery Column | Database Column |
-| ------------- | --------------- |
-| `id()`        | CUSTOMER_ID     |
-| `name()`      | CUSTOMER_NAME   |
-| `contact()`   | CONTACT_NAME    |
-| `address()`   | ADDRESS         |
+
+| JQuery Column | Database Column | Type 				  					  |
+| ------------- | --------------- | ----------------------------------------- |
+| `id()`        | CUSTOMER_ID     | UUID 				  					  |
+| `name()`      | CUSTOMER_NAME   | VARCHAR 			  					  |
+| `contact()`   | CONTACT_NAME    | VARCHAR **(default : defined by JQuery)** |
+| `address()`   | ADDRESS         | VARCHAR **(default : defined by JQuery)** |
 
 These columns can now be referenced in `JQuery` queries.
 
-3. Columns refactor
+2. Columns refactor
 
 Columns can be customized using the `@Expose` annotation.
 

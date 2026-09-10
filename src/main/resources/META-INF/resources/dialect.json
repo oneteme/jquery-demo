@@ -10,7 +10,8 @@
         "label": "MySQL",
         "value": "mysql",
         "type": "icon",
-        "metadata": "devicon-mysql-original colored"
+        "metadata": "devicon-mysql-original colored",
+        "hide": true
     },
     {
         "label": "SQL Server",
