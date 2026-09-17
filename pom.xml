@@ -89,15 +89,6 @@
 			</plugin>
 
 		</plugins>
-    <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-            <include>META-INF/resources/**</include>
-        </includes>
-        <excludes>
-            <exclude>META-INF/resources/node_modules/**</exclude>
-        </excludes>
-    </resource>
 	</build>
 
 </project>

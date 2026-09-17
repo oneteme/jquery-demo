@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.usf.jquery.showcase.erm.H2Store;
@@ -25,11 +26,13 @@ public class WebmvcConfig implements WebMvcConfigurer {
 		this.H2Ds = H2Ds;
 //		this.postgreDs = postgreDs;
 	}
-
+    
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/node_modules/**")
-                .addResourceLocations("file:./node_modules/");
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*")
+                .allowedHeaders("*");
     }
     
     @EventListener(ApplicationStartedEvent.class)
